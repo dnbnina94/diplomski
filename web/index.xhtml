@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
+            <div class="stripe-line-header">
+                <div class="stripe-line-header-content">Filter pretrage</div>
+            </div>
+            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            <f:facet name="footer">
+                <b:button value="Close" dismiss="modal" />
+                <b:button value="Ok" look="primary" dismiss="modal" />
+            </f:facet>
+        </b:modal>
+
+        <!--
+        <h:form id="loginForm">
+            <b:container fluid="true" class="defaultTopMargin">
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <h:outputText value="Korisničko ime:" class="boldText" />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <b:inputText id="korisnicko_ime" value="#{korisnikBean.korisnicko_ime}" />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <h:outputText value="Lozinka:" class="boldText" />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <b:inputSecret id="lozinka" value="#{korisnikBean.lozinka}" />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <b:messages id="errorMessages"
+                                    globalOnly="true"
+                                    severity="error, fatal"
+                                    />
+                    </b:column>
+                </b:row>
+                <b:row>
+                    <b:column medium-screen="2" offset="5">
+                        <b:commandButton value="Prijava" 
+                                         look="primary" 
+                                         class="loginButton"
+                                         onclick="ajax:korisnikBean.login();"
+                                         update="@form" 
+                                         />
+                    </b:column>
+                </b:row>
+            </b:container>
+        </h:form>
+        -->
+
+        <nav id="top-nav">
+            <div class="container">
+                <div class="pull-left">
+                    Zdravo.
+                    <a href="#" class="top-nav-link">Ulogujte se</a>
+                </div>
+                <div class="pull-right">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">O nama</a>
+                        </li>
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">Pomoć</a>
+                        </li>
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav id="nav-middle">
+            <div class="container">
+                <div class="col-md-4 logo-col">
+                    <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
+                </div>
+                <h:form>
+                    <div class="col-md-4 search-col-1">
+                        <button type="button" class="filter-button" data-target="#amodal" data-toggle="modal">Filter</button>
+                    </div>
+                    <div class="col-md-4 search-col-2">
+                        <table style="width: 100%; height: 38px">
+                            <tr>
+                                <td style="width: 100%">
+                                    <b:inputText class="search-input-text" placeholder="Pretraga" />
+                                </td>
+                                <td>
+                                    <b:button icon="search" class="search-button">
+                                    </b:button>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+
+        <nav></nav>
+
+        <nav class="navbar navbar-default" role="navigation">
+
+            <div class="collapse navbar-collapse" id="navbar-categories">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">
+                            <h:graphicImage library="img" name="movie.png" class="cultural-icon" />
+                            <br/>
+                            <span>Film</span>
+                        </a></li>
+                    <li>
+                        <a href="#">
+                            <h:graphicImage library="img" name="vinyl.png" class="cultural-icon" />
+                            <br/>
+                            <span>Muzika</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h:graphicImage library="img" name="festival.png" class="cultural-icon" />
+                            <br/>
+                            <span>Festivali</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h:graphicImage library="img" name="drama.png" class="cultural-icon" />
+                            <br/>
+                            <span>Pozorište</span>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <h:graphicImage library="img" name="art.png" class="cultural-icon" />
+                            <br/>
+                            <span>Izložbe</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+
+
+
+    </h:body>
+</html>
+
