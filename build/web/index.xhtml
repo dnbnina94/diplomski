@@ -10,15 +10,96 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="customCheckbox.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
 
         <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
-            <div class="stripe-line-header">
-                <div class="stripe-line-header-content">Filter pretrage</div>
-            </div>
-            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+            <h:form>
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">vrsta događaja</div>
+                </div>
+
+                <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Koncerti
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Clubbing
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Festivali
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Projekcije
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Sajmovi
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Radionice
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Predstave
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Izložbe
+                    </div>
+                </div>
+                
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">Datum i vreme</div>
+                </div>
+                
+                <div class="custom-datepicker">
+                    <b:datepicker mode='popup-icon' styleClass='custom-datepicker-bootsfaces'
+                                  placeholder='Izaberite datum' />
+                </div>
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">mesto</div>
+                </div>
+
+                <div class="custom-select">
+                    <b:selectOneMenu value="#{selectOneMenuBean.type}" styleClass="place-select">
+                        <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
+                        <f:selectItem itemLabel="Beograd" itemValue="1" />
+                        <f:selectItem itemLabel="Novi Sad" itemValue="2" />
+                        <f:selectItem itemLabel="Niš" itemValue="3" />
+                        <f:selectItem itemLabel="Kragujevac" itemValue="4" />
+                    </b:selectOneMenu>
+                </div>
+
+            </h:form>
+
             <f:facet name="footer">
                 <b:button value="Close" dismiss="modal" />
                 <b:button value="Ok" look="primary" dismiss="modal" />

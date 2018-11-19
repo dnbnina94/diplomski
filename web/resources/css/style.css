@@ -164,3 +164,186 @@ nav {
     font-size: 22px;
     margin-top: -15px;
 }
+
+.search-type-option {
+    font-family: BebasNeueRegular;
+    font-size: 18px;
+}
+
+.event-type-option {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.search-type-checkbox {
+    margin-top: 6px !important;
+}
+
+.custom-checkbox {
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+}
+
+.custom-checkbox-unchecked {
+    background-color: #eee;
+}
+
+.custom-checkbox-unchecked:hover {
+    background-color: #ccc;
+}
+
+.custom-checkbox-checked {
+    background-image: url("#{resource['img:checked.png']}");
+    background-size: cover;
+}
+
+.custom-checkbox > div > div > label {
+    min-height: 25px;
+    min-width: 25px;
+}
+
+.custom-checkbox > div > div > label > input {
+    cursor: pointer;
+}
+
+.custom-checkbox-checked {
+    background-image: url("#{resource['img:checked.png']}");
+    background-size: contain;
+}
+
+.custom-checkbox > div > div {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.custom-checkbox > div {
+    margin-bottom: 0px !important;
+}
+
+.custom-checkbox-bootsfaces {
+    visibility: visible;
+}
+
+.place-select {
+    border-radius: 0px !important;
+    border: 1px solid #ccc !important;
+}
+
+.custom-select {
+    margin-top: 20px;
+    outline: none !important;
+    margin-bottom: 20px;
+}
+
+.custom-select > div select {
+    background: transparent;
+    padding: 5px;
+    height: 35px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.custom-select > div select:focus {
+    outline: none !important;
+}
+
+.custom-select > div select::-ms-expand {
+    display: none !important;
+}
+
+.custom-select > div {
+    background: url("#{resource['img:arrow.png']}") no-repeat right #ffffff;
+    overflow: hidden;
+    height: 35px;
+    outline: none !important;
+}
+
+select:focus {
+    outline: none !important;
+    outline-color: transparent !important;
+}
+
+.custom-datepicker {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.custom-datepicker-bootsfaces {
+    cursor: pointer;
+}
+
+.custom-datepicker-bootsfaces > input {
+    height: 35px;
+    border-radius: 0px !important;
+    border: 1px solid #ccc;
+    box-shadow: none !important;
+}
+
+.custom-datepicker-bootsfaces > span {
+    padding-left: 11px;
+    padding-right: 10px;
+    border-radius: 0px !important;
+    background-color: orangered;
+}
+
+.custom-datepicker-bootsfaces > span > span {
+    color: white !important;
+}
+
+.ui-datepicker {
+    border-radius: 0px !important;
+    border-color: #ccc !important;
+}
+
+.ui-datepicker-header {
+    border-radius: 0px !important;
+    background-color: orangered !important;
+    color: white !important;
+    font-family: BebasNeueRegular;
+    font-size: 18px !important;
+}
+
+.ui-datepicker-prev {
+    color: white !important;
+}
+
+.ui-datepicker-next {
+    color: white !important;
+}
+
+.ui-datepicker-prev:hover {
+    background-color: orangered !important;
+    border: none !important;
+    cursor: pointer;
+}
+
+.ui-datepicker-next:hover {
+    background-color: orangered !important;
+    border: none !important;
+    cursor: pointer;
+}
+
+.ui-datepicker-calendar {
+    font-family: BebasNeueRegular;
+}
+
+.ui-state-default {
+    background: #eee !important;
+    border-color: #eee !important;
+}
+
+.ui-state-highlight {
+    background-color: coral !important;
+    color: white !important;
+    border-color: coral !important;
+}
+
+.ui-state-active {
+    background-color: orangered !important;
+    color: white !important;
+}
+
