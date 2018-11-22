@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -74,11 +76,11 @@
                         Izložbe
                     </div>
                 </div>
-                
+
                 <div class="stripe-line-header">
                     <div class="stripe-line-header-content">Datum i vreme</div>
                 </div>
-                
+
                 <div class="custom-datepicker">
                     <b:datepicker mode='popup-icon' styleClass='custom-datepicker-bootsfaces'
                                   placeholder='Izaberite datum' />
@@ -101,8 +103,7 @@
             </h:form>
 
             <f:facet name="footer">
-                <b:button value="Close" dismiss="modal" />
-                <b:button value="Ok" look="primary" dismiss="modal" />
+                <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
             </f:facet>
         </b:modal>
 
@@ -245,7 +246,60 @@
 
         </nav>
 
+        <div class="container">
+            <div class="row main-content">
+                <div class="col-md-12">
 
+                    <div class="featured-news">
+                        <ui:repeat varStatus="status" value="#{aktuelneVesti.vesti}" var="vest">
+                            <c:if test="#{status.index eq 0}">
+                                
+                            </c:if>
+                        </ui:repeat>
+                        <div class="col-md-6 col-xs-12 featured-col">
+                            <div class="featured-content featured-bigger">
+                                <table class="featured-content-table" style="background: url(#{resource[aktuelneVesti.vesti.get(0).thumbnailUrl]})">
+                                    <tr>
+                                        <td>
+                                            <table class="date-table">
+                                                <tr>
+                                                    <td><span class="glyphicon glyphicon-bookmark"></span></td>
+                                                    <td>
+                                                        <h:outputText value="#{aktuelneVesti.vesti.get(0).datum}" >
+                                                            <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            
+                                            <h:outputText value="#{aktuelneVesti.vesti.get(0).naslov}" styleClass="featured-news-header" /> <br/>
+                                            <h:outputText value="#{aktuelneVesti.vesti.get(0).getTekstShort()}" styleClass="featured-news-content" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 featured-col">
+                            <div class="featured-content featured-bigger">s</div>
+                        </div>
+                        <div class="col-md-4 col-xs-6 featured-col">
+                            <div class="featured-content featured-smaller">d</div>
+                        </div>
+                        <div class="col-md-4 col-xs-6 featured-col">
+                            <div class="featured-content featured-smaller">f</div> 
+                        </div>
+                        <div class="col-md-4 col-xs-6 featured-col">
+                            <div class="featured-content featured-smaller">g</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </h:body>
 </html>
