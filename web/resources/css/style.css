@@ -167,7 +167,10 @@ nav {
 
 .search-type-option {
     font-family: BebasNeueRegular;
-    font-size: 18px;
+    font-size: 16px;
+    border: 1px solid #eee;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
 
 .event-type-option {
@@ -227,7 +230,7 @@ nav {
 
 .place-select {
     border-radius: 0px !important;
-    border: 1px solid #ccc !important;
+    border: 1px solid #eee !important;
 }
 
 .custom-select {
@@ -251,12 +254,17 @@ nav {
     outline: none !important;
 }
 
+.custom-select > span {
+    font-family: BebasNeueRegular;
+    font-size: 18px;
+}
+
 .custom-select > div select::-ms-expand {
     display: none !important;
 }
 
 .custom-select > div {
-    background: url("#{resource['img:arrow.png']}") no-repeat right #ffffff;
+    background: url("#{resource['img:arrow_down.png']}") no-repeat right #ffffff;
     overflow: hidden;
     height: 35px;
     outline: none !important;
@@ -274,6 +282,13 @@ select:focus {
 
 .custom-datepicker-bootsfaces {
     cursor: pointer;
+    margin-top: 20px;
+}
+
+.custom-datepicker-bootsfaces > div {
+    width: 100%;
+    border: 1px solid #eee !important;
+    padding: 0px;
 }
 
 .custom-datepicker-bootsfaces > input {
@@ -372,10 +387,7 @@ select:focus {
 }
 
 .main-content > div {
-    padding: 10px !important;
-}
-
-.featured-news {
+    padding: 10px;
 }
 
 .featured-col {
@@ -387,11 +399,11 @@ select:focus {
 }
 
 .featured-bigger {
-    height: 250px;
+    height: 215px !important;
 }
 
 .featured-smaller {
-    height: 215px;
+    height: 215px !important;
 }
 
 .featured-content-table {
@@ -402,7 +414,6 @@ select:focus {
 }
 
 .featured-content-table > tbody > tr > td {
-    height: 50%;
     padding: 20px !important;
 }
 
@@ -447,4 +458,42 @@ select:focus {
 .featured-news-content {
     color: white;
     font-size: 12px;
+}
+
+.news-category-header {
+    text-align: left !important;
+}
+
+.news-category-header > div {
+    display: inline-block;
+    background-color: white;
+    padding-right: 15px;
+    font-family: BebasNeueRegular;
+    font-size: 22px;
+    margin-top: -15px;
+}
+
+.events-calendar > div {
+    display: inline-block;
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: BebasNeueRegular;
+    font-size: 22px;
+    margin-top: -15px;
+}
+
+.page-content {
+    background-color: white;
+    padding-top: 20px;
+}
+
+.event-keywords {
+    border-radius: 0px !important;
+    border: 1px solid #eee !important;
+    box-shadow: none !important;
+}
+
+.form-group {
+    margin-bottom: 0px !important;
 }

@@ -15,7 +15,7 @@
             <column name="tekst" length="65535" not-null="true" />
         </property>
         <property name="datum" type="timestamp">
-            <column name="datum" length="19" not-null="false" />
+            <column name="datum" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

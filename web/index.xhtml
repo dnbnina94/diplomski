@@ -251,51 +251,135 @@
                 <div class="col-md-12">
 
                     <div class="featured-news">
-                        <ui:repeat varStatus="status" value="#{aktuelneVesti.vesti}" var="vest">
-                            <c:if test="#{status.index eq 0}">
-                                
+                        <c:forEach varStatus="status" items="#{aktuelneVesti.vesti}" var="vest">
+                            <c:if test="${status.index eq 0}">
+                                <c:set var="outerDivClass" value="${'col-md-6 col-xs-12 featured-col'}" />
+                                <c:set var="innerDivClass" value="${'featured-content featured-bigger'}" />
                             </c:if>
-                        </ui:repeat>
-                        <div class="col-md-6 col-xs-12 featured-col">
-                            <div class="featured-content featured-bigger">
-                                <table class="featured-content-table" style="background: url(#{resource[aktuelneVesti.vesti.get(0).thumbnailUrl]})">
-                                    <tr>
-                                        <td>
-                                            <table class="date-table">
-                                                <tr>
-                                                    <td><span class="glyphicon glyphicon-bookmark"></span></td>
-                                                    <td>
-                                                        <h:outputText value="#{aktuelneVesti.vesti.get(0).datum}" >
-                                                            <f:convertDateTime pattern="dd.MM.yyyy." />
-                                                        </h:outputText>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            
-                                            <h:outputText value="#{aktuelneVesti.vesti.get(0).naslov}" styleClass="featured-news-header" /> <br/>
-                                            <h:outputText value="#{aktuelneVesti.vesti.get(0).getTekstShort()}" styleClass="featured-news-content" />
-                                        </td>
-                                    </tr>
-                                </table>
+                            <c:if test="${status.index eq 1}">
+                                <c:set var="outerDivClass" value="${'col-md-6 col-xs-6 featured-col'}" />
+                                <c:set var="innerDivClass" value="${'featured-content featured-bigger'}" />
+                            </c:if>
+                            <c:if test="${(status.index eq 2) or ( status.index eq 3) or (status.index eq 4)}">
+                                <c:set var="outerDivClass" value="${'col-md-4 col-xs-6 featured-col'}" />
+                                <c:set var="innerDivClass" value="${'featured-content featured-smaller'}" />
+                            </c:if>
+                            <div class="#{outerDivClass}">
+                                <div class="#{innerDivClass}">
+                                    <table class="featured-content-table" style="background: url(#{resource[vest.thumbnailUrl]})">
+                                        <tr>
+                                            <td>
+                                                <table class="date-table">
+                                                    <tr>
+                                                        <td><span class="glyphicon glyphicon-bookmark"></span></td>
+                                                        <td>
+                                                            <h:outputText value="#{vest.datum}" >
+                                                                <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                            </h:outputText>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <h:outputText value="#{vest.naslov}" styleClass="featured-news-header" /> <br/>
+                                                <h:outputText value="#{vest.getTekstShort()}" styleClass="featured-news-content" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row page-content">
+                <div class="col-md-9">
+
+                    <div class="stripe-line-header news-category-header">
+                        <div>Muzika</div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+
+                    <div class="stripe-line-header events-calendar">
+                        <div>Događaji</div>
+                    </div>
+
+                    <h:form>
+                        <b:datepicker mode='inline' styleClass='custom-datepicker-bootsfaces' style="margin-bottom: 20px"/>
+                        <span style="font-family: BebasNeueRegular; font-size: 18px;">Kategorija:</span>
+                        <div class="row search-type-option">
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Koncerti
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Clubbing
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Festivali
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Projekcije
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Sajmovi
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Radionice
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Predstave
+                            </div>
+                            <div class="col-md-4 event-type-option">
+                                <div class="custom-checkbox custom-checkbox-unchecked">
+                                    <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                                </div><br/>
+                                Izložbe
                             </div>
                         </div>
-                        <div class="col-md-6 col-xs-6 featured-col">
-                            <div class="featured-content featured-bigger">s</div>
+                        <div class="custom-select">
+                            <span>Mesto:</span>
+                            <b:selectOneMenu value="#{selectOneMenuBean.type}" styleClass="place-select">
+                                <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
+                                <f:selectItem itemLabel="Beograd" itemValue="1" />
+                                <f:selectItem itemLabel="Novi Sad" itemValue="2" />
+                                <f:selectItem itemLabel="Niš" itemValue="3" />
+                                <f:selectItem itemLabel="Kragujevac" itemValue="4" />
+                            </b:selectOneMenu>
                         </div>
-                        <div class="col-md-4 col-xs-6 featured-col">
-                            <div class="featured-content featured-smaller">d</div>
-                        </div>
-                        <div class="col-md-4 col-xs-6 featured-col">
-                            <div class="featured-content featured-smaller">f</div> 
-                        </div>
-                        <div class="col-md-4 col-xs-6 featured-col">
-                            <div class="featured-content featured-smaller">g</div>
-                        </div>
-                    </div>
+                        <span style="font-family: BebasNeueRegular; font-size: 18px">Ključne reči:</span>
+                        <b:inputText placeholder="Unesite ključne reči" styleClass="event-keywords" />
+                        <span style="font-size: 12px">(Molimo koristite ',' za razdvajanje ključnih reči)</span>
+                        <b:button value="Pretraga" look="primary" styleClass="big-red-button" style="margin-top: 20px" />
+                    </h:form>
 
                 </div>
             </div>
