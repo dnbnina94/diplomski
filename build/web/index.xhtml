@@ -277,19 +277,18 @@
             <div class="row page-content">
                 <div class="col-md-9">
 
-                    <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
+                    <c:forEach items="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
                         <div class="stripe-line-header news-category-header">
                             <div><h:outputText value="#{kategorijaVest.naziv}" /></div>                           
                         </div>
                         <div class="row news-category-front-page">
-                            <ui:repeat value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
-                                <div class="col-md-12">
-                                    #{vest.naslov}
+                            <c:forEach varStatus="status" items="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
+                                <div class="col-md-3">
+                                    <b:image value="#{vest.getThumbnailUrlBootsfaces()}" styleClass="thumbnail-image" />
                                 </div>
-                            </ui:repeat>
+                            </c:forEach>
                         </div>
-                        
-                    </ui:repeat>
+                    </c:forEach>
 
                 </div>
                 <div class="col-md-3">

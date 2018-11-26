@@ -513,3 +513,7 @@ select:focus {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.thumbnail-image {
+    width: 100%;
+}
