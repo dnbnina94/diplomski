@@ -195,8 +195,6 @@
                                 </td>
                             </tr>
                         </table>
-
-
                     </div>
                 </h:form>
             </div>
@@ -208,39 +206,15 @@
 
             <div class="collapse navbar-collapse" id="navbar-categories">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">
-                            <h:graphicImage library="img" name="movie.png" class="cultural-icon" />
-                            <br/>
-                            <span>Film</span>
-                        </a></li>
-                    <li>
-                        <a href="#">
-                            <h:graphicImage library="img" name="vinyl.png" class="cultural-icon" />
-                            <br/>
-                            <span>Muzika</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h:graphicImage library="img" name="festival.png" class="cultural-icon" />
-                            <br/>
-                            <span>Festivali</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h:graphicImage library="img" name="drama.png" class="cultural-icon" />
-                            <br/>
-                            <span>Pozorište</span>
-                        </a>
-                    </li>
-                    <li><a href="#">
-                            <h:graphicImage library="img" name="art.png" class="cultural-icon" />
-                            <br/>
-                            <span>Izložbe</span>
-                        </a>
-                    </li>
+                    <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
+                        <li>
+                            <a href="#">
+                                <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
+                                <br/>
+                                <span>#{kategorijaVest.naziv}</span>
+                            </a>
+                        </li>
+                    </ui:repeat>
                 </ul>
             </div>
 
@@ -266,7 +240,7 @@
                             </c:if>
                             <div class="#{outerDivClass}">
                                 <div class="#{innerDivClass}">
-                                    <table class="featured-content-table" style="background: url(#{resource[vest.thumbnailUrl]})">
+                                    <table class="featured-content-table" style="background: url(#{resource[vest.getThumbnailUrl()]})">
                                         <tr>
                                             <td>
                                                 <table class="date-table">
@@ -283,8 +257,10 @@
                                         </tr>
                                         <tr>
                                             <td>
-
-                                                <h:outputText value="#{vest.naslov}" styleClass="featured-news-header" /> <br/>
+                                                <div class="featured-news-category">
+                                                    <h:outputText value="#{vest.kategorija.naziv}" />
+                                                </div><br/>
+                                                <h:outputText value="#{vest.getNaslovShort()}" styleClass="featured-news-header" /> <br/>
                                                 <h:outputText value="#{vest.getTekstShort()}" styleClass="featured-news-content" />
                                             </td>
                                         </tr>
@@ -301,9 +277,19 @@
             <div class="row page-content">
                 <div class="col-md-9">
 
-                    <div class="stripe-line-header news-category-header">
-                        <div>Muzika</div>
-                    </div>
+                    <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
+                        <div class="stripe-line-header news-category-header">
+                            <div><h:outputText value="#{kategorijaVest.naziv}" /></div>                           
+                        </div>
+                        <div class="row news-category-front-page">
+                            <ui:repeat value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
+                                <div class="col-md-12">
+                                    #{vest.naslov}
+                                </div>
+                            </ui:repeat>
+                        </div>
+                        
+                    </ui:repeat>
 
                 </div>
                 <div class="col-md-3">

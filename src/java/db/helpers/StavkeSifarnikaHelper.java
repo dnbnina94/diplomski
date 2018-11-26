@@ -6,36 +6,35 @@
 package db.helpers;
 
 import db.*;
+import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Criteria;
+import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Nina
  */
-public class VestiHelper {
+public class StavkeSifarnikaHelper {
     
     private Session session;
     
-    public VestiHelper() {
+    public StavkeSifarnikaHelper() {
     }
     
-    public List<Vesti> aktuelneVesti() {
+    public Set getStavkeByIdSifarnik(int idSifarnik) {
         session = HibernateUtil.getSessionFactory().openSession();
         
         try {
             session.getTransaction().begin();
             
-            Query q = session.createQuery("FROM Vesti");
-            q.setMaxResults(5);
-            List l = q.list();
+            Query q = session.createQuery("FROM Sifarnici AS sifarnik WHERE sifarnik.idSifarnik = " + idSifarnik);
+            List<Sifarnici> sifarnici = q.list();
+            Sifarnici sifarnik = sifarnici.get(0);
             session.getTransaction().commit();
             
-            return l;
+            return sifarnik.getStavkeSifarnikas();
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

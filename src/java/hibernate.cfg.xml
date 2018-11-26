@@ -45,6 +45,9 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/diplomski?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping resource="db/StavkeSifarnika.hbm.xml"/>
+    <mapping resource="db/Sifarnici.hbm.xml"/>
+    <mapping resource="db/Korisnici.hbm.xml"/>
     <mapping resource="db/Vesti.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

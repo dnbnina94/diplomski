@@ -1,21 +1,30 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 21, 2018 4:00:33 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 24, 2018 6:36:56 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="db.Vesti" table="vesti" catalog="diplomski" optimistic-lock="version">
-        <id name="id" type="int">
-            <column name="id" />
+        <id name="idVest" type="int">
+            <column name="id_vest" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="korisnici" class="db.Korisnici" fetch="select">
+            <column name="korisnicko_ime" length="50" not-null="true" />
+        </many-to-one>
+        <many-to-one name="kategorija" class="db.StavkeSifarnika" fetch="select">
+            <column name="kategorija" not-null="true" />
+        </many-to-one>
         <property name="naslov" type="string">
-            <column name="naslov" length="65535" not-null="true" />
+            <column name="naslov" length="256" not-null="true" />
         </property>
         <property name="tekst" type="string">
             <column name="tekst" length="65535" not-null="true" />
         </property>
         <property name="datum" type="timestamp">
             <column name="datum" length="19" not-null="true" />
+        </property>
+        <property name="thumbnail" type="string">
+            <column name="thumbnail" length="256" not-null="false" />
         </property>
     </class>
 </hibernate-mapping>
