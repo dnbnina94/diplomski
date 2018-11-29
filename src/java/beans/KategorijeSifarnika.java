@@ -48,4 +48,12 @@ public class KategorijeSifarnika implements Serializable {
         return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2));
     }
     
+    public List<StavkeSifarnika> getMesta() {
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3));
+    }
+    
+    public List<StavkeSifarnika> getUzrast() {
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4));
+    }
+    
 }
