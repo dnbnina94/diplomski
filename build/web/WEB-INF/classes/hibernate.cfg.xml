@@ -49,5 +49,6 @@ Contributor(s):
     <mapping resource="db/Sifarnici.hbm.xml"/>
     <mapping resource="db/Korisnici.hbm.xml"/>
     <mapping resource="db/Vesti.hbm.xml"/>
+    <mapping resource="db/Dogadjaji.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -23,5 +23,23 @@
             </key>
             <one-to-many class="db.Vesti" />
         </set>
+        <set name="DogadjajisKategorija" table="dogadjaji" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="kategorija" not-null="true" />
+            </key>
+            <one-to-many class="db.Dogadjaji" />
+        </set>
+        <set name="DogadjajisMesto" table="dogadjaji" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mesto" not-null="true" />
+            </key>
+            <one-to-many class="db.Dogadjaji" />
+        </set>
+        <set name="DogadjajisUzrast" table="dogadjaji" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="uzrast" not-null="true" />
+            </key>
+            <one-to-many class="db.Dogadjaji" />
+        </set>
     </class>
 </hibernate-mapping>

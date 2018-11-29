@@ -3,9 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Nov 24, 2018 6:36:56 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="db.Vesti" table="vesti" catalog="diplomski" optimistic-lock="version">
-        <id name="idVest" type="int">
-            <column name="id_vest" />
+    <class name="db.Dogadjaji" table="dogadjaji" catalog="diplomski" optimistic-lock="version">
+        <id name="idDogadjaj" type="int">
+            <column name="id_dogadjaj" />
             <generator class="assigned" />
         </id>
         <many-to-one name="korisnici" class="db.Korisnici" fetch="select">
@@ -14,20 +14,26 @@
         <many-to-one name="kategorija" class="db.StavkeSifarnika" fetch="select">
             <column name="kategorija" not-null="true" />
         </many-to-one>
+        <many-to-one name="mesto" class="db.StavkeSifarnika" fetch="select">
+            <column name="mesto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="uzrast" class="db.StavkeSifarnika" fetch="select">
+            <column name="uzrast" not-null="true" />
+        </many-to-one>
         <property name="naslov" type="string">
             <column name="naslov" length="256" not-null="true" />
         </property>
         <property name="tekst" type="string">
             <column name="tekst" length="65535" not-null="true" />
         </property>
-        <property name="datum" type="timestamp">
-            <column name="datum" length="19" not-null="true" />
+        <property name="datumDogadjaja" type="timestamp">
+            <column name="datum_dogadjaja" length="19" not-null="true" />
         </property>
-        <property name="thumbnail" type="string">
-            <column name="thumbnail" length="256" not-null="false" />
+        <property name="datumKreiranja" type="timestamp">
+            <column name="datum_kreiranja" length="19" not-null="true" />
         </property>
-        <property name="arhivirana" type="int">
-            <column name="arhivirana" not-null="true" />
+        <property name="datumIsticanja" type="timestamp">
+            <column name="datum_isticanja" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

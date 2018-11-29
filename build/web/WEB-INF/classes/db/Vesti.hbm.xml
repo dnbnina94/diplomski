@@ -26,5 +26,8 @@
         <property name="thumbnail" type="string">
             <column name="thumbnail" length="256" not-null="false" />
         </property>
+        <property name="arhivirana" type="int">
+            <column name="arhivirana" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

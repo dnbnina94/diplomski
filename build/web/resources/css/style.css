@@ -8,8 +8,79 @@ and open the template in the editor.
     Author     : Nina
 */
 
+html, body {
+    height: 100%;
+}
+
 body {
+    font-family: Arial !important;
     background-image: url("#{resource['img:bg1.jpg']}");
+
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+    margin-top: 20px;
+}
+
+.footer-top-container {
+    background-color: #ccc;
+    color: #4C4C4C;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.footer-top-container > div > div > div:nth-child(1) {
+    text-align: center;
+    /*padding-left: 0px;*/
+}
+
+.footer-top-container > div > div > div:nth-child(1) > table > tbody > tr:nth-child(1) > td {
+    padding-bottom: 10px;
+}
+
+.footer-top-container > div > div > div:nth-child(1) > table > tbody > tr:nth-child(1) > td > span {
+    font-family: BebasNeueRegular;
+    font-size: 22px;
+}
+
+.footer-top-container > div > div > div:nth-child(2) {
+    text-align: center;
+}
+
+.footer-top-container > div > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td > span {
+    font-family: BebasNeueRegular;
+    font-size: 22px;
+}
+
+.footer-top-container > div > div > div:nth-child(3) {
+    text-align: right;
+    padding-right: 0px;
+}
+
+.footer-bottom-container {
+    background-color: #4C4C4C;
+    color: white;
+    font-size: 12px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    line-height: 40px;
+}
+
+.footer-bottom-container > div > div > div:nth-child(1) {
+    text-align: left;
+    padding-left: 0px;
+}
+
+.footer-bottom-container > div > div > div:nth-child(2) {
+    text-align: right;
+    padding-right: 0px;
 }
 
 @font-face {
@@ -92,6 +163,12 @@ nav {
     height: 50px;
     -webkit-filter: brightness(0) invert(0.3);
     filter: brightness(0) invert(0.3);
+}
+
+.nav-logo-footer {
+    height: 40px;
+    -webkit-filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
 }
 
 .logo-col {
@@ -389,21 +466,39 @@ select:focus {
     padding: 10px;
 }
 
-.featured-col {
+.featured-col-container {
     padding: 5px !important;
+}
+
+.featured-col {
+    position: relative;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.featured-col-bigger {
+    padding-bottom: 50%;
+}
+
+.featured-col-smaller {
+    padding-bottom: 60%;
 }
 
 .featured-content {
     border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
 }
 
-.featured-bigger {
+/*.featured-bigger {
     height: 215px !important;
 }
 
 .featured-smaller {
     height: 215px !important;
-}
+}*/
 
 .featured-content-table {
     width: 100%;
@@ -412,6 +507,7 @@ select:focus {
     -webkit-background-size: cover !important;
     background-size: cover !important;
     -o-background-size: cover !important;
+    position: absolute;
 }
 
 .featured-content-table > tbody > tr > td {
@@ -419,6 +515,7 @@ select:focus {
 }
 
 .featured-content-table > tbody > tr:nth-child(1) > td {
+    padding-bottom: 0px !important;
     vertical-align: top;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
     background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
@@ -428,6 +525,7 @@ select:focus {
 }
 
 .featured-content-table tbody tr:nth-child(2) td {
+    padding-top: 0px !important;
     vertical-align: bottom;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
     background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
@@ -454,11 +552,18 @@ select:focus {
     color: white;
     font-size: 16px;
     font-weight: bold;
+    /*height: 23px;
+    overflow: hidden;*/
+    margin-top: 7px;
+    line-height: 19px;
 }
 
 .featured-news-content {
     color: white;
     font-size: 12px;
+    height: 35px;
+    overflow: hidden;
+    margin-top: 7px;
 }
 
 .news-category-header {
@@ -510,10 +615,52 @@ select:focus {
 }
 
 .news-category-front-page {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px !important;
+    margin-left: 0px !Important;
+    margin-right: 0px !important;
+    margin-bottom: 30px !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #e6e6e6;
+    border-bottom: 3px solid orangered;
+    -webkit-box-shadow: 0 0 10px #e6e6e6;
+    box-shadow: 0 0 10px #e6e6e6;
 }
 
-.thumbnail-image {
+.news-image-container-front-page {
+    position: relative;
     width: 100%;
+    padding-bottom: 60%;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.news-header-container-front-page {
+    margin-top: 10px;
+    font-weight: bold;
+    height: 40px;
+    overflow: hidden;
+}
+
+.news-content-container-front-page {
+    margin-top: 5px;
+    font-size: 12px;
+    height: 69px;
+    overflow: hidden;
+}
+
+.test-class {
+    width: 100%;
+    position: relative;
+    padding-bottom: 60%;
+}
+
+.news-category-icon-footer {
+    width: 20px;
+    -webkit-filter: brightness(0) invert(0.3);
+    filter: brightness(0) invert(0.3);
+}
+
+.news-category-footer {
+    font-family: BebasNeueRegular;
 }

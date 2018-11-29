@@ -5,32 +5,30 @@
  */
 package db.helpers;
 
-import db.*;
+import db.HibernateUtil;
+import db.Dogadjaji;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Nina
  */
-public class VestiHelper {
+public class DogadjajiHelper {
     
     private Session session;
     
-    public VestiHelper() {
+    public DogadjajiHelper() {
     }
     
-    public List<Vesti> aktuelneVesti() {
+    public List<Dogadjaji> dogadjaji() {
         session = HibernateUtil.getSessionFactory().openSession();
         
         try {
             session.getTransaction().begin();
             
-            Query q = session.createQuery("FROM Vesti order by date(datum) desc");
+            Query q = session.createQuery("FROM Dogadjaji");
             q.setMaxResults(5);
             List l = q.list();
             session.getTransaction().commit();
@@ -42,5 +40,4 @@ public class VestiHelper {
             throw e;
         }
     }
-    
 }

@@ -20,5 +20,11 @@
             </key>
             <one-to-many class="db.Vesti" />
         </set>
+        <set name="dogadjajis" table="vesti" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnicko_ime" length="50" not-null="true" />
+            </key>
+            <one-to-many class="db.Dogadjaji" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/beans/AktuelneVesti.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/web/index.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/db/Vesti.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/db/Sifarnici.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/beans/KategorijeSifarnika.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/db/StavkeSifarnika.hbm.xml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/db/StavkeSifarnika.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/src/java/db/Vesti.hbm.xml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/web/resources/css/style.css</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

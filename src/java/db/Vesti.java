@@ -15,11 +15,12 @@ public class Vesti implements java.io.Serializable {
     private StavkeSifarnika kategorija;
     private Date datum;
     private String thumbnail;
+    private int arhivirana;
 
     public Vesti() {
     }
 
-    public Vesti(int idVest, Korisnici korisnici, String naslov, String tekst, StavkeSifarnika kategorija, Date datum, String thumbnail) {
+    public Vesti(int idVest, Korisnici korisnici, String naslov, String tekst, StavkeSifarnika kategorija, Date datum, String thumbnail, int arhivirana) {
         this.idVest = idVest;
         this.korisnici = korisnici;
         this.naslov = naslov;
@@ -28,6 +29,7 @@ public class Vesti implements java.io.Serializable {
         this.datum = datum;
         
         this.thumbnail = thumbnail;
+        this.arhivirana = arhivirana;
     }
 
     public int getIdVest() {
@@ -103,6 +105,14 @@ public class Vesti implements java.io.Serializable {
     
     public String getThumbnailUrlBootsfaces() {
         return "resources/img/thumbnails/" + thumbnail;
+    }
+    
+    public int getArhivirana() {
+        return arhivirana;
+    }
+    
+    public void setArhivirana(int arhivirana) {
+        this.arhivirana = arhivirana;
     }
 
 }

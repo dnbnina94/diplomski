@@ -25,11 +25,11 @@ public class AktuelneVesti implements Serializable {
     private VestiHelper vestiHelper = new VestiHelper();
     private String greska = "greska";
     
-    class SortVestiByDatum implements Comparator<Vesti> {
+    class SortVestiByDatumDescending implements Comparator<Vesti> {
         
         @Override
         public int compare (Vesti a, Vesti b) {
-            return a.getDatum().compareTo(b.getDatum());
+            return b.getDatum().compareTo(a.getDatum());
         }
         
     }
@@ -52,14 +52,12 @@ public class AktuelneVesti implements Serializable {
     
     public AktuelneVesti() {
         vesti = vestiHelper.aktuelneVesti();
-        Collections.sort(vesti, new AktuelneVesti.SortVestiByDatum());
-        if (vesti.size() > 4)
-            vesti = vesti.subList(0, 5);
+        Collections.sort(vesti, new AktuelneVesti.SortVestiByDatumDescending());
     }
     
     public List<Vesti> setToListVesti(Set set) {
         List<Vesti> vestiKategorije = new ArrayList<Vesti>(set);
-        Collections.sort(vestiKategorije, new AktuelneVesti.SortVestiByDatum());
+        Collections.sort(vestiKategorije, new AktuelneVesti.SortVestiByDatumDescending());
         if (vestiKategorije.size() > 3)
             return vestiKategorije.subList(0, 4);
         return vestiKategorije;

@@ -19,16 +19,22 @@ public class StavkeSifarnika  implements java.io.Serializable {
     private String ikonica;
      
     private Set vestis = new HashSet(0);
+    private Set dogadjajisKategorija = new HashSet(0);
+    private Set dogadjajisMesto = new HashSet(0);
+    private Set dogadjajisUzrast = new HashSet(0);
 
     public StavkeSifarnika() {
     }
 
-    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis) {
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast) {
        this.idStavka = idStavka;
        this.sifarnici = sifarnici;
        this.naziv = naziv;
        this.ikonica = ikonica;
        this.vestis = vestis;
+       this.dogadjajisKategorija = dogadjajisKategorija;
+       this.dogadjajisMesto = dogadjajisMesto;
+       this.dogadjajisUzrast = dogadjajisUzrast;
     }
    
     public int getIdStavka() {
@@ -71,6 +77,30 @@ public class StavkeSifarnika  implements java.io.Serializable {
     
     private List<Vesti> setToListVesti() {
         return null;
+    }
+    
+    public Set getDogadjajisKategorija() {
+        return dogadjajisKategorija;
+    }
+    
+    public void setDogadjajisKategorija(Set dogadjajisKategorija) {
+        this.dogadjajisKategorija = dogadjajisKategorija;
+    }
+    
+    public Set getDogadjajisMesto() {
+        return dogadjajisMesto;
+    }
+    
+    public void setDogadjajisMesto(Set dogadjajisMesto) {
+        this.dogadjajisMesto = dogadjajisMesto;
+    }
+    
+    public Set getDogadjajisUzrast() {
+        return dogadjajisKategorija;
+    }
+    
+    public void setDogadjajisUzrast(Set dogadjajisUzrast) {
+        this.dogadjajisUzrast = dogadjajisUzrast;
     }
 
 }

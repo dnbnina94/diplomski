@@ -15,6 +15,7 @@ public class Korisnici  implements java.io.Serializable {
      private String lozinka;
      private int tip;
      private Set vestis = new HashSet(0);
+     private Set dogadjajis = new HashSet(0);
 
     public Korisnici() {
     }
@@ -25,11 +26,12 @@ public class Korisnici  implements java.io.Serializable {
         this.lozinka = lozinka;
         this.tip = tip;
     }
-    public Korisnici(String korisnickoIme, String lozinka, int tip, Set vestis) {
+    public Korisnici(String korisnickoIme, String lozinka, int tip, Set vestis, Set dogadjajis) {
        this.korisnickoIme = korisnickoIme;
        this.lozinka = lozinka;
        this.tip = tip;
        this.vestis = vestis;
+       this.dogadjajis = dogadjajis;
     }
    
     public String getKorisnickoIme() {
@@ -61,7 +63,13 @@ public class Korisnici  implements java.io.Serializable {
         this.vestis = vestis;
     }
 
-
+    public Set getDogadjajis() {
+        return dogadjajis;
+    }
+    
+    public void setDogadjajis(Set dogadjajis) {
+        this.dogadjajis = dogadjajis;
+    }
 
 
 }

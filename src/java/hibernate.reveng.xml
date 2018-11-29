@@ -45,4 +45,5 @@ Contributor(s):
   <table-filter match-name="korisnici"/>
   <table-filter match-name="vesti"/>
   <table-filter match-name="sifarnici"/>
+  <table-filter match-name="dogadjaji"/>
 </hibernate-reverse-engineering>
