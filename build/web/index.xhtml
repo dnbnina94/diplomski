@@ -20,208 +20,12 @@
     </h:head>
     <h:body>
 
-        <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
-
-            <h:form>
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">vrsta događaja</div>
-                </div>
-
-                <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Koncerti
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Clubbing
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Festivali
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Projekcije
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Sajmovi
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Radionice
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Predstave
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Izložbe
-                    </div>
-                </div>
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">Datum i vreme</div>
-                </div>
-
-                <div class="custom-datepicker">
-                    <b:datepicker mode='popup-icon' styleClass='custom-datepicker-bootsfaces'
-                                  placeholder='Izaberite datum' />
-                </div>
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">mesto</div>
-                </div>
-
-                <div class="custom-select">
-                    <b:selectOneMenu value="#{selectOneMenuBean.type}" styleClass="place-select">
-                        <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
-                        <f:selectItem itemLabel="Beograd" itemValue="1" />
-                        <f:selectItem itemLabel="Novi Sad" itemValue="2" />
-                        <f:selectItem itemLabel="Niš" itemValue="3" />
-                        <f:selectItem itemLabel="Kragujevac" itemValue="4" />
-                    </b:selectOneMenu>
-                </div>
-
-            </h:form>
-
-            <f:facet name="footer">
-                <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
-            </f:facet>
-        </b:modal>
-
         <div class="content">
+            
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
 
-            <!--
-            <h:form id="loginForm">
-                <b:container fluid="true" class="defaultTopMargin">
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <h:outputText value="Korisničko ime:" class="boldText" />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <b:inputText id="korisnicko_ime" value="#{korisnikBean.korisnicko_ime}" />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <h:outputText value="Lozinka:" class="boldText" />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <b:inputSecret id="lozinka" value="#{korisnikBean.lozinka}" />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <b:messages id="errorMessages"
-                                        globalOnly="true"
-                                        severity="error, fatal"
-                                        />
-                        </b:column>
-                    </b:row>
-                    <b:row>
-                        <b:column medium-screen="2" offset="5">
-                            <b:commandButton value="Prijava" 
-                                             look="primary" 
-                                             class="loginButton"
-                                             onclick="ajax:korisnikBean.login();"
-                                             update="@form" 
-                                             />
-                        </b:column>
-                    </b:row>
-                </b:container>
-            </h:form>
-            -->
-
-            <nav id="top-nav">
-                <div class="container">
-                    <div class="pull-left">
-                        Zdravo.
-                        <a href="#" class="top-nav-link">Ulogujte se</a>
-                    </div>
-                    <div class="pull-right">
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="top-nav-link" style="font-weight: normal">O nama</a>
-                            </li>
-                            <li>
-                                <a href="#" class="top-nav-link" style="font-weight: normal">Pomoć</a>
-                            </li>
-                            <li>
-                                <a href="#" class="top-nav-link" style="font-weight: normal">Kontakt</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <nav id="nav-middle">
-                <div class="container">
-                    <div class="col-md-4 logo-col">
-                        <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
-                    </div>
-                    <h:form>
-                        <div class="col-md-4 search-col-1">
-                            <button type="button" class="filter-button" data-target="#amodal" data-toggle="modal">Filter</button>
-                        </div>
-                        <div class="col-md-4 search-col-2">
-                            <table style="width: 100%; height: 38px">
-                                <tr>
-                                    <td style="width: 100%">
-                                        <b:inputText class="search-input-text" placeholder="Pretraga" />
-                                    </td>
-                                    <td>
-                                        <b:button icon="search" class="search-button">
-                                        </b:button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </h:form>
-                </div>
-            </nav>
-
-            <nav></nav>
-
-            <nav class="navbar navbar-default" role="navigation">
-
-                <div class="collapse navbar-collapse" id="navbar-categories">
-                    <ul class="nav navbar-nav">
-                        <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
-                            <li>
-                                <a href="#">
-                                    <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
-                                    <br/>
-                                    <span>#{kategorijaVest.naziv}</span>
-                                </a>
-                            </li>
-                        </ui:repeat>
-                    </ul>
-                </div>
-
-            </nav>
             <div class="container">
                 <div class="row main-content">
                     <div class="col-md-12">
@@ -311,102 +115,20 @@
 
                     </div>
                     <div class="col-md-3">
-
-                        <div class="stripe-line-header events-calendar">
-                            <div>Događaji</div>
-                        </div>
-
-                        <h:form>
-                            <b:datepicker mode='inline' styleClass='custom-datepicker-bootsfaces' style="margin-bottom: 20px"/>
-                            <span style="font-family: BebasNeueRegular; font-size: 18px;">Kategorija:</span>
-                            <div class="row search-type-option">
-                                <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj">
-                                    <div class="col-md-4 event-type-option">
-                                        <div class="custom-checkbox custom-checkbox-unchecked">
-                                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                                        </div><br/>
-                                        #{kategorijaDogadjaj.naziv}
-                                    </div>
-                                </ui:repeat>
-                            </div>
-                            <div class="custom-select">
-                                <span>Mesto:</span>
-                                <b:selectOneMenu value="#{pretragaDogadjaja.mesto}" styleClass="place-select">
-                                    <f:selectItem itemLabel="Sva mesta" itemValue="" />
-                                    <f:selectItems value="#{pretragaDogadjaja.mesta}" var="mesto" itemLabel="#{mesto.naziv}" itemValue="#{mesto.naziv}" />
-                                </b:selectOneMenu>
-                            </div>
-                            <div class="custom-select">
-                                <span>Uzrast:</span>
-                                <b:selectOneMenu value="#{pretragaDogadjaja.uzrast}" styleClass="place-select">
-                                    <f:selectItem itemLabel="Svi uzrasti" itemValue="" />
-                                    <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast.naziv}" />
-                                </b:selectOneMenu>
-                            </div>
-                            <span style="font-family: BebasNeueRegular; font-size: 18px">Ključne reči:</span>
-                            <b:inputText placeholder="Unesite ključne reči" styleClass="event-keywords" value="#{pretragaDogadjaja.kljucneReci}" />
-                            <span style="font-size: 12px">(Molimo koristite ',' za razdvajanje ključnih reči)</span>
-                            <b:button value="Pretraga" look="primary" styleClass="big-red-button" style="margin-top: 20px" />
-                        </h:form>
-
+                        
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/left_content.xhtml" />
+                        </ui:insert>
+                        
                     </div>
                 </div>
             </div>
 
         </div>
-
-        <footer class="footer">
-            <div class="footer-top-container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <table style="margin: auto; text-align: left">
-                                <tr><td><span>
-                                    Kategorije vesti
-                                </span></td></tr>
-                                <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
-                                    <tr><td style="vertical-align: middle">
-                                        <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
-                                        &nbsp;
-                                        <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
-                                    </td></tr>
-                                </ui:repeat>
-                            </table>
-                        </div>
-                        <div class="col-md-4">
-                            <table style="margin: auto; text-align: left">
-                                <tr><td><span>
-                                    Kategorije događaja
-                                </span></td></tr>
-                                <ui:repeat value="#{kategorijeSifarnika.dogadjajiKategorije}" var="kategorijaDogadjaj" >
-                                    <tr><td style="vertical-align: middle">
-                                        &bull;
-                                        &nbsp;
-                                        <h:outputText value="#{kategorijaDogadjaj.naziv}" styleClass="news-category-footer" />
-                                    </td></tr>
-                                </ui:repeat>
-                            </table>
-                        </div>
-                        <div class="col-md-4">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom-container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <b:image library="img" name="logo3.png" class="nav-logo-footer" />
-                        </div>
-                        <div class="col-md-6">
-                            © 2018 Nina Grujić 177/13
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </footer>
+        
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+         </ui:insert>
 
     </h:body>
 </html>

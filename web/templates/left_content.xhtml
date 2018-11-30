@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <h:body>
+        <div class="stripe-line-header events-calendar">
+            <div>Događaji</div>
+        </div>
+
+        <h:form>
+            <b:datepicker mode='inline' styleClass='custom-datepicker-bootsfaces' style="margin-bottom: 20px"/>
+            <span style="font-family: BebasNeueRegular; font-size: 18px;">Kategorija:</span>
+            <div class="row search-type-option">
+                <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj">
+                    <div class="col-md-4 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        #{kategorijaDogadjaj.naziv}
+                    </div>
+                </ui:repeat>
+            </div>
+            <div class="custom-select">
+                <span>Mesto:</span>
+                <b:selectOneMenu value="#{pretragaDogadjaja.mesto}" styleClass="place-select">
+                    <f:selectItem itemLabel="Sva mesta" itemValue="" />
+                    <f:selectItems value="#{pretragaDogadjaja.mesta}" var="mesto" itemLabel="#{mesto.naziv}" itemValue="#{mesto.naziv}" />
+                </b:selectOneMenu>
+            </div>
+            <div class="custom-select">
+                <span>Uzrast:</span>
+                <b:selectOneMenu value="#{pretragaDogadjaja.uzrast}" styleClass="place-select">
+                    <f:selectItem itemLabel="Svi uzrasti" itemValue="" />
+                    <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast.naziv}" />
+                </b:selectOneMenu>
+            </div>
+            <span style="font-family: BebasNeueRegular; font-size: 18px">Ključne reči:</span>
+            <b:inputText placeholder="Unesite ključne reči" styleClass="event-keywords" value="#{pretragaDogadjaja.kljucneReci}" />
+            <span style="font-size: 12px">(Molimo koristite ',' za razdvajanje ključnih reči)</span>
+            <b:button value="Pretraga" look="primary" styleClass="big-red-button" style="margin-top: 20px" />
+        </h:form>
+    </h:body>
+</html>

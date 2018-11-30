@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:body>
+        <ui:composition>
+            <footer class="footer">
+            <div class="footer-top-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <table style="margin: auto; text-align: left">
+                                <tr><td><span>
+                                    Kategorije vesti
+                                </span></td></tr>
+                                <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
+                                    <tr><td style="vertical-align: middle">
+                                        <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
+                                        &#xA0;
+                                        <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
+                                    </td></tr>
+                                </ui:repeat>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <table style="margin: auto; text-align: left">
+                                <tr><td><span>
+                                    Kategorije događaja
+                                </span></td></tr>
+                                <ui:repeat value="#{kategorijeSifarnika.dogadjajiKategorije}" var="kategorijaDogadjaj" >
+                                    <tr><td style="vertical-align: middle">
+                                        &#x2022;
+                                        &#xA0;
+                                        <h:outputText value="#{kategorijaDogadjaj.naziv}" styleClass="news-category-footer" />
+                                    </td></tr>
+                                </ui:repeat>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <b:image library="img" name="logo3.png" class="nav-logo-footer" />
+                        </div>
+                        <div class="col-md-6">
+                            © 2018 Nina Grujić 177/13
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        </ui:composition>
+    </h:body>
+</html>

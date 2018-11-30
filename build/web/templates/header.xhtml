@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <h:body>
+        <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
+
+            <h:form>
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">vrsta događaja</div>
+                </div>
+
+                <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Koncerti
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Clubbing
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Festivali
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Projekcije
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Sajmovi
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Radionice
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Predstave
+                    </div>
+                    <div class="col-md-3 event-type-option">
+                        <div class="custom-checkbox custom-checkbox-unchecked">
+                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                        </div><br/>
+                        Izložbe
+                    </div>
+                </div>
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">Datum i vreme</div>
+                </div>
+
+                <div class="custom-datepicker">
+                    <b:datepicker mode='popup-icon' styleClass='custom-datepicker-bootsfaces'
+                                  placeholder='Izaberite datum' />
+                </div>
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">mesto</div>
+                </div>
+
+                <div class="custom-select">
+                    <b:selectOneMenu value="#{selectOneMenuBean.type}" styleClass="place-select">
+                        <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
+                        <f:selectItem itemLabel="Beograd" itemValue="1" />
+                        <f:selectItem itemLabel="Novi Sad" itemValue="2" />
+                        <f:selectItem itemLabel="Niš" itemValue="3" />
+                        <f:selectItem itemLabel="Kragujevac" itemValue="4" />
+                    </b:selectOneMenu>
+                </div>
+
+            </h:form>
+
+            <f:facet name="footer">
+                <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
+            </f:facet>
+        </b:modal>
+
+        <nav id="top-nav">
+            <div class="container">
+                <div class="pull-left">
+                    Zdravo.
+                    <a href="#" class="top-nav-link">Ulogujte se</a>
+                </div>
+                <div class="pull-right">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">O nama</a>
+                        </li>
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">Pomoć</a>
+                        </li>
+                        <li>
+                            <a href="#" class="top-nav-link" style="font-weight: normal">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav id="nav-middle">
+            <div class="container">
+                <div class="col-md-4 logo-col">
+                    <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
+                </div>
+                <h:form>
+                    <div class="col-md-4 search-col-1">
+                        <button type="button" class="filter-button" data-target="#amodal" data-toggle="modal">Filter</button>
+                    </div>
+                    <div class="col-md-4 search-col-2">
+                        <table style="width: 100%; height: 38px">
+                            <tr>
+                                <td style="width: 100%">
+                                    <b:inputText class="search-input-text" placeholder="Pretraga" />
+                                </td>
+                                <td>
+                                    <b:button icon="search" class="search-button">
+                                    </b:button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+
+        <nav></nav>
+
+        <nav class="navbar navbar-default" role="navigation">
+
+            <div class="collapse navbar-collapse" id="navbar-categories">
+                <ul class="nav navbar-nav">
+                    <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
+                        <li>
+                            <a href="#">
+                                <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
+                                <br/>
+                                <span>#{kategorijaVest.naziv}</span>
+                            </a>
+                        </li>
+                    </ui:repeat>
+                </ul>
+            </div>
+
+        </nav>
+    </h:body>
+</html>
