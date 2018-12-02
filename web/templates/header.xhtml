@@ -155,11 +155,14 @@ and open the template in the editor.
                 <ul class="nav navbar-nav">
                     <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
                         <li>
-                            <a href="#">
+                            <h:form>
+                            <b:commandLink action="vesti">
                                 <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
                                 <br/>
                                 <span>#{kategorijaVest.naziv}</span>
-                            </a>
+                                <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                            </b:commandLink>
+                            </h:form>
                         </li>
                     </ui:repeat>
                 </ul>

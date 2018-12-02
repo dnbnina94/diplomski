@@ -16,6 +16,10 @@ public class Vesti implements java.io.Serializable {
     private Date datum;
     private String thumbnail;
     private int arhivirana;
+    
+    private String outerDivClass="col-md-6 col-xs-12 featured-col-container";
+    private String innerDivClassRelative="featured-col featured-col-bigger";
+    private String innerDivClassAbsolute="featured-content featured-bigger";
 
     public Vesti() {
     }
@@ -84,6 +88,10 @@ public class Vesti implements java.io.Serializable {
         return tekst.substring(0, Math.min(tekst.length(), 100))+"...";
     }
     
+    public String getTekstShortRezultatPretrage() {
+        return tekst.substring(0, Math.min(tekst.length(), 256))+"...";
+    }
+    
     public String getNaslovShort() {
         if (naslov.length() <= 40)
             return naslov;
@@ -113,6 +121,30 @@ public class Vesti implements java.io.Serializable {
     
     public void setArhivirana(int arhivirana) {
         this.arhivirana = arhivirana;
+    }
+
+    public String getOuterDivClass() {
+        return outerDivClass;
+    }
+
+    public void setOuterDivClass(String outerDivClass) {
+        this.outerDivClass = outerDivClass;
+    }
+
+    public String getInnerDivClassRelative() {
+        return innerDivClassRelative;
+    }
+
+    public void setInnerDivClassRelative(String innerDivClassRelative) {
+        this.innerDivClassRelative = innerDivClassRelative;
+    }
+
+    public String getInnerDivClassAbsolute() {
+        return innerDivClassAbsolute;
+    }
+
+    public void setInnerDivClassAbsolute(String innerDivClassAbsolute) {
+        this.innerDivClassAbsolute = innerDivClassAbsolute;
     }
 
 }

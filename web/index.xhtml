@@ -21,7 +21,7 @@
     <h:body>
 
         <div class="content">
-            
+
             <ui:insert name="header">
                 <ui:include src="templates/header.xhtml" />
             </ui:insert>
@@ -30,62 +30,9 @@
                 <div class="row main-content">
                     <div class="col-md-12">
 
-                        <div class="featured-news">
-                            <c:forEach varStatus="status" items="#{aktuelneVesti.vesti}" var="vest">
-                                <c:if test="${status.index eq 0}">
-                                    <c:set var="outerDivClass" value="${'col-md-6 col-xs-12 featured-col-container'}" />
-                                    <c:set var="innerDivClassRelative" value="${'featured-col featured-col-bigger'}" />
-                                    <c:set var="innerDivClassAbsolute" value="${'featured-content featured-bigger'}" />
-                                </c:if>
-                                <c:if test="${status.index eq 1}">
-                                    <c:set var="outerDivClass" value="${'col-md-6 col-xs-6 featured-col-container'}" />
-                                    <c:set var="innerDivClassRelative" value="${'featured-col featured-col-bigger featured-col-second'}" />
-                                    <c:set var="innerDivClassAbsolute" value="${'featured-content featured-bigger'}" />
-                                </c:if>
-                                <c:if test="${(status.index eq 2) or ( status.index eq 3) or (status.index eq 4)}">
-                                    <c:set var="outerDivClass" value="${'col-md-4 col-xs-6 featured-col-container'}" />
-                                    <c:set var="innerDivClassRelative" value="${'featured-col featured-col-smaller'}" />
-                                    <c:set var="innerDivClassAbsolute" value="${'featured-content featured-smaller'}" />
-                                </c:if>
-                                <div class="#{outerDivClass}">
-                                    <div class="#{innerDivClassRelative}" style="background: url(#{resource[vest.getThumbnailUrl()]})">
-
-                                        <div class="#{innerDivClassAbsolute}">
-                                            <table class="featured-content-table" style="background: url(#{resource[vest.getThumbnailUrl()]})">
-                                                <tr>
-                                                    <td>
-                                                        <table class="date-table">
-                                                            <tr>
-                                                                <td><span class="glyphicon glyphicon-bookmark"></span></td>
-                                                                <td>
-                                                                    <h:outputText value="#{vest.datum}" >
-                                                                        <f:convertDateTime pattern="dd.MM.yyyy." />
-                                                                    </h:outputText>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="featured-news-category">
-                                                            <h:outputText value="#{vest.kategorija.naziv}" />
-                                                        </div><br/>
-                                                        <div class="featured-news-header">
-                                                            <h:outputText value="#{vest.naslov}" />
-                                                        </div>
-                                                        <div class="featured-news-content">
-                                                            <h:outputText value="#{vest.tekst}" />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-
-                        </div>
+                        <ui:insert name="featured_news">
+                            <ui:include src="templates/featured_news.xhtml" />
+                        </ui:insert>
 
                     </div>
                 </div>
@@ -93,12 +40,12 @@
                 <div class="row page-content">
                     <div class="col-md-9">
 
-                        <c:forEach items="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
+                        <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
                             <div class="stripe-line-header news-category-header">
                                 <div><h:outputText value="#{kategorijaVest.naziv}" /></div>                           
                             </div>
                             <div class="row news-category-front-page">
-                                <c:forEach varStatus="status" items="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
+                                <ui:repeat varStatus="status" value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
                                     <div class="col-md-3 col-sm-6 col-xs-12">
                                         <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
                                         </div>
@@ -109,26 +56,26 @@
                                             #{vest.tekstShort}
                                         </div>
                                     </div>
-                                </c:forEach>
+                                </ui:repeat>
                             </div>
-                        </c:forEach>
+                        </ui:repeat>
 
                     </div>
                     <div class="col-md-3">
-                        
+
                         <ui:insert name="left_content">
                             <ui:include src="templates/right_content.xhtml" />
                         </ui:insert>
-                        
+
                     </div>
                 </div>
             </div>
 
         </div>
-        
+
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
-         </ui:insert>
+        </ui:insert>
 
     </h:body>
 </html>

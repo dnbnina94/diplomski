@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition>
+            <div class="featured-news">
+                <ui:repeat varStatus="status" value="#{aktuelneVesti.vesti}" var="vest">
+                    <c:if test="${status.index eq 0}">
+                        <c:set var="outerDivClass" value="${'col-md-6 col-xs-12 featured-col-container'}" />
+                        <c:set var="innerDivClassRelative" value="${'featured-col featured-col-bigger'}" />
+                        <c:set var="innerDivClassAbsolute" value="${'featured-content featured-bigger'}" />
+                    </c:if>
+                    <c:if test="${status.index eq 1}">
+                        <c:set var="outerDivClass" value="${'col-md-6 col-xs-6 featured-col-container'}" />
+                        <c:set var="innerDivClassRelative" value="${'featured-col featured-col-bigger featured-col-second'}" />
+                        <c:set var="innerDivClassAbsolute" value="${'featured-content featured-bigger'}" />
+                    </c:if>
+                    <c:if test="${(status.index eq 2) or ( status.index eq 3) or (status.index eq 4)}">
+                        <c:set var="outerDivClass" value="${'col-md-4 col-xs-6 featured-col-container'}" />
+                        <c:set var="innerDivClassRelative" value="${'featured-col featured-col-smaller'}" />
+                        <c:set var="innerDivClassAbsolute" value="${'featured-content featured-smaller'}" />
+                    </c:if>
+                    <div class="#{vest.outerDivClass}">
+                        <div class="#{vest.innerDivClassRelative}" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+
+                            <div class="#{vest.innerDivClassAbsolute}">
+                                <table class="featured-content-table" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                    <tr>
+                                        <td>
+                                            <table class="date-table">
+                                                <tr>
+                                                    <td><span class="glyphicon glyphicon-bookmark"></span></td>
+                                                    <td>
+                                                        <h:outputText value="#{vest.datum}" >
+                                                            <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                        </h:outputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="featured-news-category">
+                                                <h:outputText value="#{vest.kategorija.naziv}" />
+                                            </div><br/>
+                                            <div class="featured-news-header">
+                                                <h:outputText value="#{vest.naslov}" />
+                                            </div>
+                                            <div class="featured-news-content">
+                                                <h:outputText value="#{vest.tekst}" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </ui:repeat>
+
+            </div>
+        </ui:composition>
+    </h:body>
+</html>

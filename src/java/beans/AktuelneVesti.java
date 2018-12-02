@@ -45,6 +45,27 @@ public class AktuelneVesti implements Serializable {
     public List<Vesti> getVesti() {
         vesti = vestiHelper.aktuelneVesti();
         Collections.sort(vesti, new AktuelneVesti.SortVestiByDatumDescending());
+        
+        for (int i=0; i<vesti.size(); i++) {
+            Vesti vest = vesti.get(i);
+            if (i==0) {
+                vest.setOuterDivClass("col-md-6 col-xs-12 featured-col-container");
+                vest.setInnerDivClassRelative("featured-col featured-col-bigger");
+                vest.setInnerDivClassAbsolute("featured-content featured-bigger");
+            }
+            if (i==1) {
+                vest.setOuterDivClass("col-md-6 col-xs-6 featured-col-container");
+                vest.setInnerDivClassRelative("featured-col featured-col-bigger featured-col-second");
+                vest.setInnerDivClassAbsolute("featured-content featured-bigger");
+            }
+            if (i != 0 && i != 1) {
+                vest.setOuterDivClass("col-md-4 col-xs-6 featured-col-container");
+                vest.setInnerDivClassRelative("featured-col featured-col-smaller");
+                vest.setInnerDivClassAbsolute("featured-content featured-smaller");
+            }
+            vesti.set(i, vest);
+        }
+        
         return vesti;
     }
     
