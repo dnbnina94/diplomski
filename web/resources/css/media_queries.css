@@ -16,3 +16,15 @@ and open the template in the editor.
     
 }
 
+@media only screen and (max-width: 1200px) {
+    
+    .news-content-sm-devices {
+        display: block;
+    }
+    
+    .news-data-table > tbody > tr > td:nth-child(2) {
+        display: none;
+    }
+    
+}
+

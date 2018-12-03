@@ -26,7 +26,7 @@ body {
 
 .footer {
     flex-shrink: 0;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .footer-top-container {
@@ -107,6 +107,10 @@ body {
 
 nav {
     border: none !important;
+}
+
+.navbar {
+    margin-bottom: 40px !important;
 }
 
 .navbar-nav {
@@ -609,6 +613,7 @@ select:focus {
 .page-content {
     background-color: white;
     padding-top: 20px;
+    padding-bottom: 15px;
 }
 
 .event-keywords {
@@ -801,5 +806,59 @@ table.dataTable {
     margin-top: -7px;
     margin-left: -13px;
     visibility: visible;
+}
+
+.dataTables_wrapper > div:nth-child(1) > div:nth-child(1) {
+    display: none;
+}
+
+.dataTables_wrapper > div:nth-child(1) > div:nth-child(2) {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.dataTables_filter {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.dataTables_filter > label {
+    margin-right: 0px !important;
+}
+
+.dataTables_filter > label > input {
+    margin-right: 0px !important;
+    height: 40px !important;
+    border-radius: 0px !important;
+    border-color: #ddd;
+    padding: 6px 12px !important;
+    box-shadow: none !important;
+}
+
+.dataTables_filter > label:before {
+    content: 'Pretraga';
+    position: absolute;
+    background-color: #4C4C4C;
+    color: white;
+    font-family: BebasNeueRegular;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
+    margin-left: -25px;
+}
+
+.dataTables_wrapper {
+    margin-top: 20px;
+}
+
+.dataTables_paginate {
+    padding-top: 10px;
+}
+
+.news-content-sm-devices {
+    padding-top: 5px;
+    display: none;
 }
 

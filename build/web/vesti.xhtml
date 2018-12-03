@@ -36,7 +36,7 @@
                         </div>
 
                         <h:form>
-                            <b:dataTable value="#{pretragaVesti.vestiKatgorije}" var="vest" styleClass="news-data-table" info="false">
+                            <b:dataTable value="#{pretragaVesti.vestiKatgorije}" var="vest" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
                                 <b:dataTableColumn>
                                     <div class="news-date">
                                         <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
@@ -55,6 +55,11 @@
                                         </h:outputText>
                                     </div>
                                     <div class="news-thumbnail-container" style="background: url(#{resource[vest.getThumbnailUrl()]})"></div>
+                                    <div class="news-content-sm-devices">
+                                        <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
+                                        <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
+                                        <b:button styleClass="read-more-button" value="Pročitaj još"/>
+                                    </div>
                                 </b:dataTableColumn>
                                 <b:dataTableColumn>
                                     <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
