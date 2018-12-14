@@ -103,7 +103,7 @@ and open the template in the editor.
             <div class="container">
                 <div class="pull-left">
                     Zdravo.
-                    <a href="#" class="top-nav-link">Ulogujte se</a>
+                    <b:link outcome="prijava" styleClass="top-nav-link">Ulogujte se</b:link>
                 </div>
                 <div class="pull-right">
                     <ul class="list-inline">
@@ -153,10 +153,10 @@ and open the template in the editor.
 
             <div class="collapse navbar-collapse" id="navbar-categories">
                 <ul class="nav navbar-nav">
-                    <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
+                    <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
                         <li>
                             <h:form>
-                            <b:commandLink action="vesti">
+                            <b:commandLink action="vesti?faces-redirect=true">
                                 <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
                                 <br/>
                                 <span>#{kategorijaVest.naziv}</span>

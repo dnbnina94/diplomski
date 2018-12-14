@@ -29,6 +29,8 @@ public class PretragaDogadjaja {
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
 
     public PretragaDogadjaja() {
+        kategorijeDogadjaja = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
+        Collections.sort(kategorijeDogadjaja, new PretragaDogadjaja.SortByIdSifarnik());
     }
     
     class SortByIdSifarnik implements Comparator<StavkeSifarnika> {
@@ -63,7 +65,6 @@ public class PretragaDogadjaja {
     }
     
     public List<StavkeSifarnika> getKategorijeDogadjaja() {
-        kategorijeDogadjaja = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2));
         return kategorijeDogadjaja;
     }
     
@@ -72,7 +73,7 @@ public class PretragaDogadjaja {
     }
     
     public List<StavkeSifarnika> getMesta() {
-        mesta = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3));
+        mesta = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
         return mesta;
     }
     
@@ -81,7 +82,7 @@ public class PretragaDogadjaja {
     }
     
     public List<StavkeSifarnika> getUzrasti() {
-        uzrasti = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4));
+        uzrasti = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
         return uzrasti;
     }
     

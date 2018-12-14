@@ -30,14 +30,14 @@ and open the template in the editor.
             </div>
             <div class="custom-select">
                 <span>Mesto:</span>
-                <b:selectOneMenu value="#{pretragaDogadjaja.mesto}" styleClass="place-select">
+                <b:selectOneMenu value="#{pretragaDogadjaja.mesto}" styleClass="place-select" select2="true">
                     <f:selectItem itemLabel="Sva mesta" itemValue="" />
                     <f:selectItems value="#{pretragaDogadjaja.mesta}" var="mesto" itemLabel="#{mesto.naziv}" itemValue="#{mesto.naziv}" />
                 </b:selectOneMenu>
             </div>
             <div class="custom-select">
                 <span>Uzrast:</span>
-                <b:selectOneMenu value="#{pretragaDogadjaja.uzrast}" styleClass="place-select">
+                <b:selectOneMenu value="#{pretragaDogadjaja.uzrast}" styleClass="place-select" select2="true">
                     <f:selectItem itemLabel="Svi uzrasti" itemValue="" />
                     <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast.naziv}" />
                 </b:selectOneMenu>

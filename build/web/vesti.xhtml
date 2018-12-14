@@ -49,22 +49,35 @@
                                             <f:convertDateTime pattern=" HH:mm" />
                                         </h:outputText>
                                         &nbsp;
+                                        <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
                                         <b:image library="img" name="ikonice/#{vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
                                         <h:outputText value=" #{vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
                                             <f:convertDateTime pattern="dd.MM.yyyy." />
                                         </h:outputText>
+                                        <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{vest.kategorija}" />
+                                        </b:commandLink>
                                     </div>
+                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                     <div class="news-thumbnail-container" style="background: url(#{resource[vest.getThumbnailUrl()]})"></div>
+                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                    </b:commandLink>
                                     <div class="news-content-sm-devices">
+                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                         <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
                                         <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
                                         <b:button styleClass="read-more-button" value="Pročitaj još"/>
+                                        <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                        </b:commandLink>
                                     </div>
+                                    
                                 </b:dataTableColumn>
                                 <b:dataTableColumn>
-                                    <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
-                                    <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
-                                    <b:button styleClass="read-more-button" value="Pročitaj još"/>
+                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                        <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
+                                        <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
+                                        <b:button styleClass="read-more-button" value="Pročitaj još"/>
+                                        <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                    </b:commandLink>
                                 </b:dataTableColumn>
                             </b:dataTable>
                         </h:form>

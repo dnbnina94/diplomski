@@ -20,7 +20,7 @@ and open the template in the editor.
                                 <tr><td><span>
                                     Kategorije vesti
                                 </span></td></tr>
-                                <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest" >
+                                <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
                                     <tr><td style="vertical-align: middle">
                                         <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
                                         &#xA0;
@@ -34,7 +34,7 @@ and open the template in the editor.
                                 <tr><td><span>
                                     Kategorije događaja
                                 </span></td></tr>
-                                <ui:repeat value="#{kategorijeSifarnika.dogadjajiKategorije}" var="kategorijaDogadjaj" >
+                                <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj" >
                                     <tr><td style="vertical-align: middle">
                                         &#x2022;
                                         &#xA0;

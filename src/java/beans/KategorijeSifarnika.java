@@ -41,19 +41,19 @@ public class KategorijeSifarnika implements Serializable {
     }
     
     public List<StavkeSifarnika> getVestiKategorije() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1));
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
     }
     
     public List<StavkeSifarnika> getDogadjajiKategorije() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2));
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
     }
     
     public List<StavkeSifarnika> getMesta() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3));
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
     }
     
     public List<StavkeSifarnika> getUzrast() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4));
+        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
     }
     
 }

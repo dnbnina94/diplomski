@@ -23,9 +23,8 @@ public class StavkeSifarnikaHelper {
     public StavkeSifarnikaHelper() {
     }
     
-    public Set getStavkeByIdSifarnik(int idSifarnik) {
+    public Sifarnici getStavkeByIdSifarnik(int idSifarnik) {
         session = HibernateUtil.getSessionFactory().openSession();
-        
         try {
             session.getTransaction().begin();
             
@@ -34,7 +33,7 @@ public class StavkeSifarnikaHelper {
             Sifarnici sifarnik = sifarnici.get(0);
             session.getTransaction().commit();
             
-            return sifarnik.getStavkeSifarnikas();
+            return sifarnik;
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

@@ -26,7 +26,6 @@ public class VestiHelper {
     
     public List<Vesti> aktuelneVesti() {
         session = HibernateUtil.getSessionFactory().openSession();
-        
         try {
             session.getTransaction().begin();
             
@@ -36,6 +35,25 @@ public class VestiHelper {
             session.getTransaction().commit();
             
             return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public Vesti getVestById(int idVest) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Query q = session.createQuery("FROM Vesti AS vest WHERE vest.idVest = " + idVest);
+            List<Vesti> l =  (List<Vesti>) q.list();
+            session.getTransaction().commit();
+            
+            if (l.isEmpty())
+                return null;
+            return l.get(0);
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

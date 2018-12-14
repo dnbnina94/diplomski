@@ -24,7 +24,6 @@ public class DogadjajiHelper {
     
     public List<Dogadjaji> dogadjaji() {
         session = HibernateUtil.getSessionFactory().openSession();
-        
         try {
             session.getTransaction().begin();
             
