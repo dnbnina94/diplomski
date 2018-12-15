@@ -16,6 +16,8 @@ import javax.faces.event.ActionEvent;
 public class Registracija {
 
     private List<String> telefoni;
+    private String dodatoMesto;
+    private String dodataUlica;
     
     public Registracija() {
         telefoni = new ArrayList<String>();
@@ -35,6 +37,38 @@ public class Registracija {
     
     public void removeTelefon(int status) {
         telefoni.remove(status);
+    }
+    
+    public String getDodatoMesto() {
+        return dodatoMesto;
+    }
+    
+    public void setDodatoMesto(String dodatoMesto) {
+        this.dodatoMesto = dodatoMesto;
+    }
+    
+    public void addDodatoMesto() {
+        dodatoMesto = "";
+    } 
+    
+    public void removeDodatoMesto() {
+        dodatoMesto = null;
+    }
+    
+    public String getDodataUlica() {
+        return dodataUlica;
+    }
+    
+    public void setDodataUlica(String dodataUlica) {
+        this.dodataUlica = dodataUlica;
+    }
+    
+    public void addDodataUlica() {
+        dodataUlica = "";
+    }
+    
+    public void removeDodataUlica() {
+        dodataUlica = null;
     }
     
 }
