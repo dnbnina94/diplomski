@@ -1036,7 +1036,8 @@ table.dataTable {
 }
 
 .input-group-addon {
-    background-color: orangered !important;
+    background-color: #aaa !important;
+    border-color: #AAA !important;
     border-radius: 0px !important;
     padding: 6px 9px !important;
     border: none !important;
@@ -1053,25 +1054,29 @@ table.dataTable {
 }
 
 .remove-field-button {
-    width: 35px !important;
-    height: 35px !important;
-    background-color: #7a7a7a !important;
+    background-color: #aaa !important;
     color: white !important;
     border-radius: 0px !important;
+    border: none !important;
     padding: 0px !important;
-    border: 1px solid #7a7a7a !important;
+    height: 100% !important;
+    padding: 0px 6px !important;
+    font-size: 12px !important;
+    padding-bottom: 0.5px !important;
 }
 
 .custom-tooltip {
     background-color: transparent !important;
     color: #aaa !important;
     border: 1px solid #aaa;
-    padding: 1px 4px !important;
+    padding: 0px 4px !important;
     border-radius: 0px !important;
     font-size: 12px; 
     display: inline-block;
     font-weight: bold;
     cursor: pointer;
+    height: 16px !important;
+    line-height: 16px !important;
 }
 
 .tooltip-inner {
@@ -1086,6 +1091,59 @@ table.dataTable {
     background-color: rgba(255, 255, 255, 0.9);
     display: none;
     top: 0px;
+}
+
+.tt-open {
+    border-radius: 0px !important;
+    margin-top: 0px !important;
+    border-top: none !important;
+}
+
+.custom-tag {
+    display: inline-block;
+    background-color: #aaa;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 3px 6px;
+    padding-right: 0px;
+}
+
+.panel-title-link, .panel-title-link:hover, .panel-title-link:active, .panel-title-link:visited, .panel-title-link:focus  {
+    text-decoration: none !important;
+}
+
+.form-step-button {
+    border: none !important;
+    background: #aaa !important;
+    color: white !important;
+    font-family: BebasNeueRegular;
+    font-size: 20px !important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    height: 40px;
+}
+
+.form-step-buttons-row {
+    margin-left: 0px !important;
+}
+
+.form-step-buttons-row > div:nth-child(1) {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.form-step-buttons-row > div:nth-child(2) {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    text-align: right !important;
+}
+
+.input-error-message {
+    color: #DC3545;
 }
 
 

@@ -8,6 +8,7 @@ package beans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.event.ActionEvent;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -16,11 +17,16 @@ import javax.faces.event.ActionEvent;
 public class Registracija {
 
     private List<String> telefoni;
-    private String dodatoMesto;
-    private String dodataUlica;
+    private String telefon;
+    private int nextIndex = 0;
+    private String script = "";
+    
+    private String nazivOrg;
+    private String nazivOrgGreska = "";
     
     public Registracija() {
         telefoni = new ArrayList<String>();
+        nextIndex = 0;
     }
     
     public List<String> getTelefoni() {
@@ -32,43 +38,90 @@ public class Registracija {
     }
     
     public void addTelefon() {
-        telefoni.add("");
+        telefoni.add(telefon);
+        telefon="";
     }
     
     public void removeTelefon(int status) {
         telefoni.remove(status);
     }
     
-    public String getDodatoMesto() {
-        return dodatoMesto;
+    public String getTelefon() {
+        return telefon;
     }
     
-    public void setDodatoMesto(String dodatoMesto) {
-        this.dodatoMesto = dodatoMesto;
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
     
-    public void addDodatoMesto() {
-        dodatoMesto = "";
-    } 
-    
-    public void removeDodatoMesto() {
-        dodatoMesto = null;
+    public int getNextIndex() {
+        return nextIndex;
     }
     
-    public String getDodataUlica() {
-        return dodataUlica;
+    public void setNextIndex(int nextIndex) {
+        this.nextIndex = nextIndex;
     }
     
-    public void setDodataUlica(String dodataUlica) {
-        this.dodataUlica = dodataUlica;
+    public void prethodnaStavka() {
+        if (nextIndex > 0) {
+            nextIndex--;
+            script = "$('.wizardPseudoClass').carousel("+nextIndex+");$('.wizardPseudoClass').carousel('pause');";
+        }
     }
     
-    public void addDodataUlica() {
-        dodataUlica = "";
+    private boolean nazivOrgValidacija() {
+        if (nazivOrg.isEmpty()) {
+            nazivOrgGreska = "Polje 'Naziv organizacije' ne sme ostati prazno.";
+            return false;
+        }
+        
+        nazivOrgGreska = "";
+        return true;
     }
     
-    public void removeDodataUlica() {
-        dodataUlica = null;
+    public void narednaStavka() {
+        boolean valid = true;
+                
+        if (nextIndex < 2) {
+            if (nextIndex == 0) { 
+                if (!nazivOrgValidacija()) valid = false;
+            }
+            if (nextIndex == 1) {
+                
+            }
+            if (nextIndex == 2) {
+                
+            }
+            
+            if (valid) {
+                nextIndex++;
+                script = "$('.wizardPseudoClass').carousel("+nextIndex+");$('.wizardPseudoClass').carousel('pause');";
+            }
+        }
+    }
+    
+    public String getScript() {
+        return script;
+    }
+    
+    public void setScript(String script) {
+        this.script = script;
+    }
+    
+    public String getNazivOrg() {
+        return nazivOrg;
+    }
+    
+    public void setNazivOrg(String nazivOrg) {
+        this.nazivOrg = nazivOrg;
+    }
+
+    public String getNazivOrgGreska() {
+        return nazivOrgGreska;
+    }
+
+    public void setNazivOrgGreska(String nazivOrgGreska) {
+        this.nazivOrgGreska = nazivOrgGreska;
     }
     
 }

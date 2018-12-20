@@ -21,8 +21,16 @@ import java.util.Set;
 public class KategorijeSifarnika implements Serializable {
 
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
+    private List<StavkeSifarnika> mesta;
+    private List<StavkeSifarnika> vestiKategorije;
+    private List<StavkeSifarnika> dogadjajiKategorije;
+    private List<StavkeSifarnika> uzrast;
     
     public KategorijeSifarnika() {
+        mesta = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
+        vestiKategorije = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
+        dogadjajiKategorije = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
+        uzrast = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
     }
     
     class SortByIdSifarnik implements Comparator<StavkeSifarnika> {
@@ -34,26 +42,61 @@ public class KategorijeSifarnika implements Serializable {
         
     }
     
-    public List<StavkeSifarnika> setToList(Set set) {
+    private List<StavkeSifarnika> setToList(Set set) {
         List<StavkeSifarnika> stavkeSifarnika = new ArrayList<StavkeSifarnika>(set);
         Collections.sort(stavkeSifarnika, new SortByIdSifarnik());
         return stavkeSifarnika;
     }
     
+    private List<String> StringList(List<StavkeSifarnika> list) {
+        List<String> stringList = new ArrayList<String>();
+        
+        for (int i=0; i<list.size(); i++) {
+            stringList.add(list.get(i).getNaziv());
+        }
+        
+        return stringList;
+    }
+    
     public List<StavkeSifarnika> getVestiKategorije() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
+        return vestiKategorije;
+    }
+    
+    public void setVestiKategorije(List<StavkeSifarnika> vestiKategorije) {
+        this.vestiKategorije = vestiKategorije;
     }
     
     public List<StavkeSifarnika> getDogadjajiKategorije() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
+        return dogadjajiKategorije;
+    }
+    
+    public void setDogadjajiKategorije(List<StavkeSifarnika> dogadjajiKategorije) {
+        this.dogadjajiKategorije = dogadjajiKategorije;
     }
     
     public List<StavkeSifarnika> getMesta() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
+        mesta = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
+        return mesta;
+    }
+    
+    public void setMesta(List<StavkeSifarnika> mesta) {
+        this.mesta = mesta;
+    }
+    
+    public List<String> getMestaString() {
+        return StringList(mesta);
     }
     
     public List<StavkeSifarnika> getUzrast() {
-        return setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
+        return uzrast;
+    }
+    
+    public void setUzrast(List<StavkeSifarnika> uzrast) {
+        this.uzrast = uzrast;
+    }
+    
+    public List<String> getUzrastString() {
+        return StringList(uzrast);
     }
     
 }

@@ -36,142 +36,150 @@
                                 <div class="stripe-line-header news-category-header">
                                     <div>Registracija</div>                           
                                 </div>
-                                <div class="row login-form-wrapper">
+                                <div class="row login-form-wrapper" style="padding-right: 7.5px">
                                     <div class="col-md-12">
                                         <b:form id="registracija">
-                                            
-                                            <div class="login-form-container" style="margin-right: 7.5px">
-                                                <div class="login-form-header">
-                                                    Opis organizacije
-                                                </div>
-                                                <div class="login-form-content">
-                                                    <h:outputText value="Naziv organizacije:" styleClass="login-form-label" />
-                                                    <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
-                                                    <h:outputText value="Opis organizacije:" styleClass="login-form-label" />
-                                                    <div style="height: 5px"></div>
-                                                    <b:inputTextarea placeholder="Type something here..." styleClass="custom-textarea" />
-                                                    <div style="height: 5px"></div>
-                                                    <h:outputText value="Oblast delovanja:" styleClass="login-form-label" />
-                                                    <div style="height: 5px"></div>
-                                                </div>
-                                            </div>
-                                                
-                                            <div class="login-form-container" style="margin-top: 30px; margin-right: 7.5px">
-                                                <div class="login-form-header">
-                                                    Kontakt podaci
-                                                </div>
-                                                <div class="login-form-content">
-                                                    <div class="row" style="margin-bottom: 5px;">
-                                                        <div class="col-md-6">
-                                                            <h:outputText value="Mesto: " styleClass="login-form-label" />
-                                                            <span data-toggle="tooltip" 
-                                                                  data-html="true" 
-                                                                  title="U slučaju da u padajućoj listi ne pronađete mesto u kojem se nalazi Vaša organizacija, klikom na ''+'' dobijate mogućnost ručnog unošenja istog." 
-                                                                  class="custom-tooltip"
-                                                                  style="margin-top: -3px">
-                                                                ?
-                                                            </span>
-                                                            <div style="height: 5px"></div>
-                                                            <table style="width: 100%; position: relative">
-                                                                <tr>
-                                                                    <td>
-                                                                        <b:commandButton icon="plus" styleClass="add-field-button" style="border: 1px solid #4c4c4c" ajax="true" update="registracija"
-                                                                                         onclick="ajax:registracija.addDodatoMesto();" />
-                                                                    </td>
-                                                                    <td style="width: 100%">
-                                                                        <b:selectOneMenu styleClass="place-select" select2="true">
-                                                                            <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
-                                                                        </b:selectOneMenu>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="absolute-row" id="absolute-row1">
-                                                                    <td colspan="2"></td>
-                                                                </tr>
-                                                            </table>
-
-                                                            <c:if test="#{!(registracija.dodatoMesto eq null)}">
-                                                                
-                                                                <script>
-                                                                    document.getElementById("absolute-row1").style.display = "block";
-                                                                </script>
-                                                               
-                                                                <div style="height: 5px"></div>
-                                                                <b:inputText placeholder="Mesto organizacije" value="#{registracija.dodatoMesto}" styleClass="login-form-input" style="margin-bottom: 5px;">
-                                                                    <f:facet name="append">
-                                                                        <b:commandButton icon="minus" styleClass="remove-field-button" ajax="true" update="registracija" actionListener="#{registracija.removeDodatoMesto()}" />
-                                                                    </f:facet>
-                                                                </b:inputText>
-                                                            </c:if>
-
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <h:outputText value="Ulica: " styleClass="login-form-label" />
-                                                            <span data-toggle="tooltip" 
-                                                                  data-html="true" 
-                                                                  title="U slučaju da u padajućoj listi ne pronađete ulicu u kojoj se nalazi Vaša organizacija, klikom na ''+'' dobijate mogućnost ručnog unošenja iste." 
-                                                                  class="custom-tooltip"
-                                                                  style="margin-top: -3px">
-                                                                ?
-                                                            </span>
-                                                            <div style="height: 5px"></div>
-                                                            <table style="width: 100%; position: relative">
-                                                                <tr>
-                                                                    <td>
-                                                                        <b:commandButton id="plus-button2" icon="plus" styleClass="add-field-button" style="border: 1px solid #4c4c4c" ajax="true" update="registracija" 
-                                                                                         onclick="ajax:registracija.addDodataUlica()" />
-                                                                    </td>
-                                                                    <td style="width: 100%">
-                                                                        <b:selectOneMenu styleClass="place-select" select2="true" style="display: block">
-                                                                            <f:selectItem itemLabel="Izaberite ulicu" itemValue="" />
-                                                                        </b:selectOneMenu>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="absolute-row" id="absolute-row2">
-                                                                    <td colspan="2"></td>
-                                                                </tr>
-                                                            </table>
-
-                                                            <c:if test="#{!(registracija.dodataUlica eq null)}">
-                                                                <script>
-                                                                    document.getElementById("absolute-row2").style.display = "block";
-                                                                </script>
-                                                                
-                                                                <div style="height: 5px"></div>
-                                                                <b:inputText placeholder="Ulica organizacije" value="#{registracija.dodataUlica}" styleClass="login-form-input" style="margin-bottom: 5px;">
-                                                                    <f:facet name="append">
-                                                                        <b:commandButton icon="minus" styleClass="remove-field-button" ajax="true" update="registracija" actionListener="#{registracija.removeDodataUlica()}" />
-                                                                    </f:facet>
-                                                                </b:inputText>
-                                                            </c:if>
-                                                        </div>
-                                                    </div>
-                                                    <h:outputText value="Kontakt osoba:" styleClass="login-form-label" />
-                                                    <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
-                                                    <h:outputText value="Kontakt telefoni:" styleClass="login-form-label" />
-                                                    <b:inputText styleClass="login-form-input" style="margin-bottom: 5px;" >
-                                                        <f:facet name="append">
-                                                            <b:commandButton icon="plus" styleClass="add-field-button" ajax="true" update="registracija" actionListener="#{registracija.addTelefon()}" style="border: 1px solid #4c4c4c"/>
-                                                        </f:facet>
-                                                    </b:inputText>
-                                                    <ui:repeat value="#{registracija.telefoni}" var="tel" varStatus="status">
-                                                        <b:inputText styleClass="login-form-input" value="#{tel}" style="margin-bottom: 5px;" >
-                                                            <f:facet name="append">
-                                                                <b:commandButton icon="minus" styleClass="remove-field-button" ajax="true" update="registracija" actionListener="#{registracija.removeTelefon(status.index)}" />
+                                            <b:carousel id="wizard" styleClass="wizardPseudoClass"
+                                                        style="width:100%"
+                                                        startAnimation="false"
+                                                        showIndicators="false"
+                                                        wrap="false">
+                                                <b:carouselItem>
+                                                    <b:panel title="Opis organizacije">
+                                                        <h:outputText value="Naziv organizacije:" styleClass="login-form-label" />
+                                                        <b:inputText styleClass="login-form-input" value="#{registracija.nazivOrg}" style="#{registracija.nazivOrgGreska == '' ? 'margin-bottom: 5px' : 'border-color: #DC3545 !important; margin-bottom: 5px'}" />
+                                                        <h:outputText value="#{registracija.nazivOrgGreska}" styleClass="input-error-message" />
+                                                        <c:if test="#{not empty registracija.nazivOrgGreska}">
+                                                            <div style="height: 10px"></div>
+                                                        </c:if>
+                                                        <h:outputText value="Opis organizacije:" styleClass="login-form-label" />
+                                                        <div style="height: 5px"></div>
+                                                        <b:inputTextarea placeholder="Type something here..." styleClass="custom-textarea" />
+                                                        <div style="height: 5px"></div>
+                                                        <h:outputText value="Oblast delovanja:" styleClass="login-form-label" />
+                                                        <b:inputText styleClass="login-form-input" placeholder="Unesite oblast delovanja" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" style="margin-bottom: 5px" />
+                                                        <div style="height: 5px"></div>
+                                                        <h:outputText value="Web stranica organizacije:" styleClass="login-form-label" />
+                                                        <div style="height: 5px"></div>
+                                                        <b:inputText styleClass="login-form-input" style="margin-top: 0px !important" >
+                                                            <f:facet name="prepend">
+                                                                http://
                                                             </f:facet>
                                                         </b:inputText>
-                                                    </ui:repeat>
-                                                    <h:outputText value="Email adresa:" styleClass="login-form-label" />
-                                                    <div style="height: 5px"></div>
-                                                    <b:inputText styleClass="login-form-input" style="margin-top: 0px !important" >
-                                                        <f:facet name="prepend">
-                                                            <b:icon value="envelope" style="padding-left: 1.5px; padding-right: 1.5px;" />
-                                                        </f:facet>
-                                                    </b:inputText>
+                                                    </b:panel>
+                                                </b:carouselItem>
+                                                <b:carouselItem>
+                                                    <b:panel title="Kontakt podaci">
+                                                        <div class="row" style="margin-bottom: 5px;">
+                                                            <div class="col-md-6">
+                                                                <h:outputText value="Mesto: " styleClass="login-form-label" />
+
+                                                                <b:inputText styleClass="login-form-input" placeholder="npr. Beograd" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" />
+
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h:outputText value="Ulica: " styleClass="login-form-label" />
+
+                                                                <b:inputText styleClass="login-form-input" placeholder="npr. Bulevar Kralja Aleksandra 73" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" />
+
+                                                            </div>
+                                                        </div>
+                                                        <h:outputText value="Kontakt osoba:" styleClass="login-form-label" />
+                                                        <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <h:outputText value="Kontakt telefoni:" styleClass="login-form-label" />
+                                                        <span data-toggle="tooltip" 
+                                                              data-html="true" 
+                                                              title="Nakon što unesete željeni broj telefona, kliknite na znak ''+''. Možete navesti maksimalno 5 brojeva telefona." 
+                                                              class="custom-tooltip">
+                                                            ?
+                                                        </span>
+                                                        <br/>
+                                                        <ui:repeat value="#{registracija.telefoni}" var="telefon" varStatus="status">
+                                                            <div class="custom-tag">
+                                                                <h:outputText value="#{telefon}" />
+
+                                                                <b:commandButton icon="remove" 
+                                                                                 styleClass="remove-field-button" 
+                                                                                 ajax="true" 
+                                                                                 update="registracija" 
+                                                                                 onclick="ajax:registracija.removeTelefon(status.index)"
+                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);" />
+                                                            </div>
+                                                        </ui:repeat>
+
+                                                        <b:inputText value="#{registracija.telefon}" styleClass="login-form-input" style="margin-bottom: 5px;" >
+                                                            <f:facet name="append">
+                                                                <b:commandButton icon="plus" 
+                                                                                 styleClass="add-field-button" 
+                                                                                 ajax="true" update="registracija" 
+                                                                                 onclick="ajax:registracija.addTelefon();" 
+                                                                                 style="border: 1px solid #4c4c4c"
+                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);" />
+                                                            </f:facet>
+                                                        </b:inputText>
+
+                                                        <h:outputText value="Email adresa:" styleClass="login-form-label" />
+                                                        <div style="height: 5px"></div>
+                                                        <b:inputText styleClass="login-form-input" style="margin-top: 0px !important" >
+                                                            <f:facet name="prepend">
+                                                                <b:icon value="envelope" style="padding-left: 1.5px; padding-right: 1.5px;" />
+                                                            </f:facet>
+                                                        </b:inputText>
+                                                    </b:panel>
+                                                </b:carouselItem>
+                                                <b:carouselItem>
+                                                    <b:panel title="Kredencijali">
+                                                        <h:outputText value="Korisničko ime:" styleClass="login-form-label" />
+                                                        <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <h:outputText value="Lozinka:" styleClass="login-form-label" />
+                                                        <b:inputSecret styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <h:outputText value="Ponovljena lozinka: " styleClass="login-form-label" />
+                                                        <b:inputSecret styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                    </b:panel>
+                                                </b:carouselItem>
+                                                <div class="row form-step-buttons-row">
+                                                    <div class="col-md-6">
+                                                        <b:carouselControl >
+                                                            <b:commandButton value="Prethodna stavka"
+                                                                             onclick="ajax:registracija.prethodnaStavka();"
+                                                                             update="registracija"
+                                                                             styleClass="form-step-button" />
+                                                        </b:carouselControl>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <b:carouselControl >
+                                                            <b:commandButton value="Naredna stavka"
+                                                                             styleClass="form-step-button"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             onclick="ajax:registracija.narednaStavka();"
+                                                                             update="registracija"
+                                                                             />
+                                                        </b:carouselControl>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </b:carousel>
+
                                             <script>
                                                 $('[data-toggle="tooltip"]').tooltip();
+
+                                                $('#registracija').on('keyup keypress', function (e) {
+                                                    var keyCode = e.keyCode || e.which;
+                                                    if (keyCode === 13) {
+                                                        e.preventDefault();
+                                                        return false;
+                                                    }
+                                                });
+
+                                                $('.wizardPseudoClass').removeClass('slide');
+
+                                                $('.panel-title-link').click(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                });
                                             </script>
+                                            
+                                            <h:outputScript>
+                                                #{registracija.script}
+                                            </h:outputScript>
                                         </b:form>
                                     </div>
                                 </div>
