@@ -47,17 +47,33 @@
                                                 <b:carouselItem>
                                                     <b:panel title="Opis organizacije">
                                                         <h:outputText value="Naziv organizacije:" styleClass="login-form-label" />
-                                                        <b:inputText styleClass="login-form-input" value="#{registracija.nazivOrg}" style="#{registracija.nazivOrgGreska == '' ? 'margin-bottom: 5px' : 'border-color: #DC3545 !important; margin-bottom: 5px'}" />
-                                                        <h:outputText value="#{registracija.nazivOrgGreska}" styleClass="input-error-message" />
-                                                        <c:if test="#{not empty registracija.nazivOrgGreska}">
-                                                            <div style="height: 10px"></div>
-                                                        </c:if>
+                                                        <b:inputText id="nazivOrg"
+                                                                     styleClass="#{registracija.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                     value="#{registracija.nazivOrg}" />
+                                                        <div id="nazivOrgGreska" class="#{registracija.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.nazivOrgGreska}" />
+                                                        </div>
+
                                                         <h:outputText value="Opis organizacije:" styleClass="login-form-label" />
-                                                        <div style="height: 5px"></div>
-                                                        <b:inputTextarea placeholder="Type something here..." styleClass="custom-textarea" />
-                                                        <div style="height: 5px"></div>
+                                                        <b:inputTextarea id="opisOrg"
+                                                                         placeholder="Type something here..." 
+                                                                         styleClass="#{registracija.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
+                                                                         value="#{registracija.opisOrg}" />
+                                                        <div id="opisOrgGreska" class="#{registracija.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.opisOrgGreska}" />
+                                                        </div>
+
                                                         <h:outputText value="Oblast delovanja:" styleClass="login-form-label" />
-                                                        <b:inputText styleClass="login-form-input" placeholder="Unesite oblast delovanja" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" style="margin-bottom: 5px" />
+                                                        <b:inputText id="oblastDelovanja"
+                                                                     styleClass="#{registracija.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     placeholder="Unesite oblast delovanja" 
+                                                                     typeahead="true" 
+                                                                     typeahead-values="#{kategorijeSifarnika.mestaString}" 
+                                                                     value="#{registracija.oblastDelovanja}" />
+                                                        <div id="oblastDelovanjaGreska" class="#{registracija.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.oblastDelovanjaGreska}" />
+                                                        </div>
+
                                                         <div style="height: 5px"></div>
                                                         <h:outputText value="Web stranica organizacije:" styleClass="login-form-label" />
                                                         <div style="height: 5px"></div>
@@ -175,8 +191,63 @@
                                                 $('.panel-title-link').click(function (event) {
                                                     event.stopImmediatePropagation();
                                                 });
+
+                                                $("#input_registracija\\:nazivOrg").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    var val = $("#input_registracija\\:nazivOrg").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Naziv organizacije' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:nazivOrg").addClass("login-form-input-error");
+                                                        $("#nazivOrgGreska").removeClass("input-error-message-hidden");
+                                                        $("#nazivOrgGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:nazivOrg").removeClass("login-form-input-error");
+                                                        $("#nazivOrgGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+
+                                                $("#input_registracija\\:opisOrg").keyup(function (event) {
+                                                    var val = $("#input_registracija\\:opisOrg").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Opis organizacije' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:opisOrg").addClass("custom-textarea-error");
+                                                        $("#opisOrgGreska").removeClass("input-error-message-hidden");
+                                                        $("#opisOrgGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:opisOrg").removeClass("custom-textarea-error");
+                                                        $("#opisOrgGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+
+                                                $("#input_registracija\\:oblastDelovanja").keyup(function (event) {
+                                                    var val = $("#input_registracija\\:oblastDelovanja").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Oblast delovanja' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:oblastDelovanja").addClass("login-form-input-error");
+                                                        $("#oblastDelovanjaGreska").removeClass("input-error-message-hidden");
+                                                        $("#oblastDelovanjaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:oblastDelovanja").removeClass("login-form-input-error");
+                                                        $("#oblastDelovanjaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
                                             </script>
-                                            
+
                                             <h:outputScript>
                                                 #{registracija.script}
                                             </h:outputScript>

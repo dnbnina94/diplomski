@@ -931,11 +931,21 @@ table.dataTable {
     height: 35px !important;
     margin-top: 5px;
     box-shadow: none !important;
+    margin-bottom: 5px !important;
 }
 
 .login-form-input:focus {
     border-color: #ccc !important;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(170, 170, 170, 0.6) !important;
+}
+
+.login-form-input-error {
+    border: 1px solid #DC3545 !important;
+}
+
+.login-form-input-error:focus {
+    border-color: red !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 204, 204, 0.6) !important;
 }
 
 .login-form-submit {
@@ -1033,6 +1043,12 @@ table.dataTable {
     resize: vertical !important;
     min-height: 35px !important;
     height: 150px !important;
+    margin-bottom: 5px !important;
+    margin-top: 5px;
+}
+
+.custom-textarea-error {
+    border: 1px solid #DC3545 !important;
 }
 
 .input-group-addon {
@@ -1143,7 +1159,12 @@ table.dataTable {
 }
 
 .input-error-message {
-    color: #DC3545;
+    color: #DC3545 !important;
+    margin-bottom: 10px;
+}
+
+.input-error-message-hidden {
+    display: none;
 }
 
 
