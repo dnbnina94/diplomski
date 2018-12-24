@@ -46,17 +46,19 @@
                                                         wrap="false">
                                                 <b:carouselItem>
                                                     <b:panel title="Opis organizacije">
+                                                        
                                                         <h:outputText value="Naziv organizacije:" styleClass="login-form-label" />
                                                         <b:inputText id="nazivOrg"
                                                                      styleClass="#{registracija.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                                     value="#{registracija.nazivOrg}" />
+                                                                     value="#{registracija.nazivOrg}"
+                                                                     placeholder="Unesite naziv svoje organizacije" />
                                                         <div id="nazivOrgGreska" class="#{registracija.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                             <h:outputText value="#{registracija.nazivOrgGreska}" />
                                                         </div>
 
                                                         <h:outputText value="Opis organizacije:" styleClass="login-form-label" />
                                                         <b:inputTextarea id="opisOrg"
-                                                                         placeholder="Type something here..." 
+                                                                         placeholder="Kratko opišite svoju organizaciju" 
                                                                          styleClass="#{registracija.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
                                                                          value="#{registracija.opisOrg}" />
                                                         <div id="opisOrgGreska" class="#{registracija.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
@@ -66,42 +68,73 @@
                                                         <h:outputText value="Oblast delovanja:" styleClass="login-form-label" />
                                                         <b:inputText id="oblastDelovanja"
                                                                      styleClass="#{registracija.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     placeholder="Unesite oblast delovanja" 
+                                                                     placeholder="Npr. zaštita životne sredine" 
                                                                      typeahead="true" 
                                                                      typeahead-values="#{kategorijeSifarnika.mestaString}" 
                                                                      value="#{registracija.oblastDelovanja}" />
                                                         <div id="oblastDelovanjaGreska" class="#{registracija.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                             <h:outputText value="#{registracija.oblastDelovanjaGreska}" />
                                                         </div>
-
-                                                        <div style="height: 5px"></div>
+                                                        
                                                         <h:outputText value="Web stranica organizacije:" styleClass="login-form-label" />
                                                         <div style="height: 5px"></div>
-                                                        <b:inputText styleClass="login-form-input" style="margin-top: 0px !important" >
+                                                        <b:inputText id="webStranica"
+                                                                     styleClass="#{registracija.webStranicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                     value="#{registracija.webStranica}"
+                                                                     placeholder="Npr. www.mojaorg.com">
                                                             <f:facet name="prepend">
-                                                                http://
+                                                                <h:graphicImage library="img" name="world.png" style="height: 18px" />
                                                             </f:facet>
                                                         </b:inputText>
+                                                        <div id="webStranicaGreska" class="#{registracija.webStranicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                             style="margin-top: 5px">
+                                                            <h:outputText value="#{registracija.webStranicaGreska}" />
+                                                        </div>
+                                                        
                                                     </b:panel>
                                                 </b:carouselItem>
                                                 <b:carouselItem>
                                                     <b:panel title="Kontakt podaci">
                                                         <div class="row" style="margin-bottom: 5px;">
+                                                            
                                                             <div class="col-md-6">
                                                                 <h:outputText value="Mesto: " styleClass="login-form-label" />
-
-                                                                <b:inputText styleClass="login-form-input" placeholder="npr. Beograd" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" />
-
+                                                                <b:inputText id="mestoOrg"
+                                                                             styleClass="#{registracija.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                             placeholder="npr. Beograd" 
+                                                                             typeahead="true" 
+                                                                             typeahead-values="#{kategorijeSifarnika.mestaString}" 
+                                                                             value="#{registracija.mestoOrg}" />
+                                                                <div id="mestoGreska" class="#{registracija.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{registracija.mestoGreska}" />
+                                                                </div>
                                                             </div>
+                                                            
                                                             <div class="col-md-6">
                                                                 <h:outputText value="Ulica: " styleClass="login-form-label" />
-
-                                                                <b:inputText styleClass="login-form-input" placeholder="npr. Bulevar Kralja Aleksandra 73" typeahead="true" typeahead-values="#{kategorijeSifarnika.mestaString}" />
-
+                                                                <b:inputText id="ulicaOrg"
+                                                                             styleClass="#{registracija.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                             placeholder="npr. Bulevar Kralja Aleksandra 73" 
+                                                                             typeahead="true" 
+                                                                             typeahead-values="#{kategorijeSifarnika.mestaString}"
+                                                                             value="#{registracija.ulicaOrg}" />
+                                                                <div id="ulicaGreska" class="#{registracija.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{registracija.ulicaGreska}" />
+                                                                </div>
                                                             </div>
+                                                            
                                                         </div>
+                                                        
                                                         <h:outputText value="Kontakt osoba:" styleClass="login-form-label" />
-                                                        <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <b:inputText id="kontaktOsoba"
+                                                                     styleClass="#{registracija.kontaktOsobaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                     style="margin-bottom: 5px"
+                                                                     value="#{registracija.kontaktOsoba}" />
+                                                        <div id="kontaktOsobaGreska" class="#{registracija.kontaktOsobaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.kontaktOsobaGreska}" />
+                                                        </div>
+                                                        
                                                         <h:outputText value="Kontakt telefoni:" styleClass="login-form-label" />
                                                         <span data-toggle="tooltip" 
                                                               data-html="true" 
@@ -110,7 +143,7 @@
                                                             ?
                                                         </span>
                                                         <br/>
-                                                        <ui:repeat value="#{registracija.telefoni}" var="telefon" varStatus="status">
+                                                        <ui:repeat id="telefoni" value="#{registracija.telefoni}" var="telefon" varStatus="status">
                                                             <div class="custom-tag">
                                                                 <h:outputText value="#{telefon}" />
 
@@ -119,38 +152,70 @@
                                                                                  ajax="true" 
                                                                                  update="registracija" 
                                                                                  onclick="ajax:registracija.removeTelefon(status.index)"
-                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);" />
+                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);$('.wizardPseudoClass').carousel('pause');" />
                                                             </div>
                                                         </ui:repeat>
 
-                                                        <b:inputText value="#{registracija.telefon}" styleClass="login-form-input" style="margin-bottom: 5px;" >
+                                                        <b:inputText value="#{registracija.telefon}" 
+                                                                     styleClass="#{registracija.telefonGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" >
                                                             <f:facet name="append">
                                                                 <b:commandButton icon="plus" 
                                                                                  styleClass="add-field-button" 
-                                                                                 ajax="true" update="registracija" 
+                                                                                 ajax="true" 
+                                                                                 update="registracija" 
                                                                                  onclick="ajax:registracija.addTelefon();" 
-                                                                                 style="border: 1px solid #4c4c4c"
-                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);" />
+                                                                                 style="border: 1px solid #4c4c4c; #{registracija.telefonGreska == '' ? 'margin-bottom: 5px' : ''}"
+                                                                                 oncomplete="$('.wizardPseudoClass').carousel(1);$('.wizardPseudoClass').carousel('pause');" />
                                                             </f:facet>
                                                         </b:inputText>
+                                                        <div id="telefonGreska" class="#{registracija.telefonGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.telefonGreska}" />
+                                                        </div>
 
                                                         <h:outputText value="Email adresa:" styleClass="login-form-label" />
                                                         <div style="height: 5px"></div>
-                                                        <b:inputText styleClass="login-form-input" style="margin-top: 0px !important" >
+                                                        <b:inputText id="email"
+                                                                     styleClass="#{registracija.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                     value="#{registracija.email}" >
                                                             <f:facet name="prepend">
                                                                 <b:icon value="envelope" style="padding-left: 1.5px; padding-right: 1.5px;" />
                                                             </f:facet>
                                                         </b:inputText>
+                                                        <div id="emailGreska" class="#{registracija.emailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" style="margin-top: 5px;">
+                                                            <h:outputText value="#{registracija.emailGreska}" />
+                                                        </div>
+                                                        
                                                     </b:panel>
                                                 </b:carouselItem>
                                                 <b:carouselItem>
                                                     <b:panel title="Kredencijali">
                                                         <h:outputText value="Korisničko ime:" styleClass="login-form-label" />
-                                                        <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <b:inputText id="korIme"
+                                                                     styleClass="#{registracija.korImeGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     style="margin-bottom: 5px"
+                                                                     value="#{registracija.korIme}" />
+                                                        <div id="korImeGreska" class="#{registracija.korImeGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.korImeGreska}" />
+                                                        </div>
+                                                        
                                                         <h:outputText value="Lozinka:" styleClass="login-form-label" />
-                                                        <b:inputSecret styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <b:inputSecret id="lozinka"
+                                                                       styleClass="#{registracija.lozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                       style="margin-bottom: 5px"
+                                                                       value="#{registracija.lozinka}" />
+                                                        <div id="lozinkaGreska" class="#{registracija.lozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.lozinkaGreska}" />
+                                                        </div>
+                                                        
                                                         <h:outputText value="Ponovljena lozinka: " styleClass="login-form-label" />
-                                                        <b:inputSecret styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                        <b:inputSecret id="ponovljenaLozinka"
+                                                                       styleClass="#{registracija.ponovljenaLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                       style=""
+                                                                       value="#{registracija.ponovljenaLozinka}" />
+                                                        <div id="ponovljenaLozinkaGreska" class="#{registracija.ponovljenaLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{registracija.ponovljenaLozinkaGreska}" />
+                                                        </div>
                                                     </b:panel>
                                                 </b:carouselItem>
                                                 <div class="row form-step-buttons-row">
@@ -194,6 +259,7 @@
 
                                                 $("#input_registracija\\:nazivOrg").keyup(function (event) {
                                                     event.stopImmediatePropagation();
+                                                    
                                                     var val = $("#input_registracija\\:nazivOrg").val();
                                                     var greska = "";
 
@@ -212,6 +278,8 @@
                                                 });
 
                                                 $("#input_registracija\\:opisOrg").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
                                                     var val = $("#input_registracija\\:opisOrg").val();
                                                     var greska = "";
 
@@ -230,6 +298,8 @@
                                                 });
 
                                                 $("#input_registracija\\:oblastDelovanja").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
                                                     var val = $("#input_registracija\\:oblastDelovanja").val();
                                                     var greska = "";
 
@@ -244,6 +314,166 @@
                                                     } else {
                                                         $("#input_registracija\\:oblastDelovanja").removeClass("login-form-input-error");
                                                         $("#oblastDelovanjaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:webStranica").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:webStranica").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Web stranica organizacije' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:webStranica").addClass("login-form-input-error");
+                                                        $("#webStranicaGreska").removeClass("input-error-message-hidden");
+                                                        $("#webStranicaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:webStranica").removeClass("login-form-input-error");
+                                                        $("#webStranicaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:mestoOrg").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:mestoOrg").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Mesto' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:mestoOrg").addClass("login-form-input-error");
+                                                        $("#mestoGreska").removeClass("input-error-message-hidden");
+                                                        $("#mestoGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:mestoOrg").removeClass("login-form-input-error");
+                                                        $("#mestoGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:ulicaOrg").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:ulicaOrg").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Ulica' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:ulicaOrg").addClass("login-form-input-error");
+                                                        $("#ulicaGreska").removeClass("input-error-message-hidden");
+                                                        $("#ulicaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:ulicaOrg").removeClass("login-form-input-error");
+                                                        $("#ulicaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:kontaktOsoba").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:kontaktOsoba").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Kontakt osoba' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:kontaktOsoba").addClass("login-form-input-error");
+                                                        $("#kontaktOsobaGreska").removeClass("input-error-message-hidden");
+                                                        $("#kontaktOsobaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:kontaktOsoba").removeClass("login-form-input-error");
+                                                        $("#kontaktOsobaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:email").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:email").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Email adresa' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:email").addClass("login-form-input-error");
+                                                        $("#emailGreska").removeClass("input-error-message-hidden");
+                                                        $("#emailGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:email").removeClass("login-form-input-error");
+                                                        $("#emailGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:korIme").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:korIme").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Korisničko ime' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:korIme").addClass("login-form-input-error");
+                                                        $("#korImeGreska").removeClass("input-error-message-hidden");
+                                                        $("#korImeGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:korIme").removeClass("login-form-input-error");
+                                                        $("#korImeGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:lozinka").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:lozinka").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Lozinka' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:lozinka").addClass("login-form-input-error");
+                                                        $("#lozinkaGreska").removeClass("input-error-message-hidden");
+                                                        $("#lozinkaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:lozinka").removeClass("login-form-input-error");
+                                                        $("#lozinkaGreska").addClass("input-error-message-hidden");
+                                                    }
+                                                });
+                                                
+                                                $("#input_registracija\\:ponovljenaLozinka").keyup(function (event) {
+                                                    event.stopImmediatePropagation();
+                                                    
+                                                    var val = $("#input_registracija\\:ponovljenaLozinka").val();
+                                                    var greska = "";
+
+                                                    if (val === "") {
+                                                        greska = "Polje 'Ponovljena lozinka' ne sme ostati prazno.";
+                                                    }
+
+                                                    if (greska !== "") {
+                                                        $("#input_registracija\\:ponovljenaLozinka").addClass("login-form-input-error");
+                                                        $("#ponovljenaLozinkaGreska").removeClass("input-error-message-hidden");
+                                                        $("#ponovljenaLozinkaGreska").html(greska);
+                                                    } else {
+                                                        $("#input_registracija\\:ponovljenaLozinka").removeClass("login-form-input-error");
+                                                        $("#ponovljenaLozinkaGreska").addClass("input-error-message-hidden");
                                                     }
                                                 });
                                             </script>
