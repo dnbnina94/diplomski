@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="db.Organizacije" table="organizacije" catalog="diplomski" optimistic-lock="version">
+        <id name="korisnickoIme" type="string">
+            <column name="korisnicko_ime" length="50" />
+            <generator class="foreign">
+                <param name="property">korisnici</param>
+            </generator>
+        </id>
+        <one-to-one name="korisnici" class="db.Korisnici" constrained="true"></one-to-one>
+        <many-to-one name="oblastDelovanja" class="db.StavkeSifarnika" fetch="select">
+            <column name="oblast_delovanja" not-null="true" />
+        </many-to-one>
+        <property name="naziv" type="string">
+            <column name="naziv" length="50" not-null="true" />
+        </property>
+        <property name="kontaktOsoba" type="string">
+            <column name="kontakt_osoba" length="50" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true" />
+        </property>
+        <property name="tekst" type="string">
+            <column name="tekst" length="65535" not-null="true" />
+        </property>
+        <property name="webAdresa" type="string">
+            <column name="web_adresa" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

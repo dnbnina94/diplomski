@@ -5,9 +5,16 @@
  */
 package beans;
 
+import db.helpers.KorisniciHelper;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.faces.event.ActionEvent;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -15,6 +22,8 @@ import javax.validation.constraints.NotNull;
  * @author Nina
  */
 public class Registracija {
+    
+    private KorisniciHelper korHelper = new KorisniciHelper();
 
     private List<String> telefoni;
     private String telefon;
@@ -71,23 +80,28 @@ public class Registracija {
 
     public void addTelefon() {
         boolean valid = telefonValidacija(telefon);
-
+        
+        for (int i=0; i<telefoni.size(); i++) {
+            if (telefoni.get(i).equals(telefon)) {
+                telefonGreska = "Već ste uneli zadati telefon.";
+                valid = false;
+                break;
+            }
+        }
+        
         if (valid) {
             telefoni.add(telefon);
             telefon = "";
         }
-
-        mestoValidacija();
-        ulicaValidacija();
-        kontaktOsobaValidacija();
+        
     }
 
     public void removeTelefon(int status) {
         telefoni.remove(status);
-
-        mestoValidacija();
-        ulicaValidacija();
-        kontaktOsobaValidacija();
+        
+        if (!telefon.matches("[0-9]+") && !telefon.isEmpty()) {
+            telefonGreska = "Telefon mora sadržati između 7 i 15 numeričkih karaktera.";
+        }
     }
 
     public String getTelefon() {
@@ -139,6 +153,11 @@ public class Registracija {
             return false;
         }
 
+        if (!oblastDelovanja.matches("[a-zA-ZčćšđžČĆŠĐŽ ]+")) {
+            oblastDelovanjaGreska = "Polje 'Oblast delovanja' ne sme sadržati numerike i specijalne karaktere.";
+            return false;
+        }
+
         oblastDelovanjaGreska = "";
         return true;
     }
@@ -146,6 +165,17 @@ public class Registracija {
     public boolean webStranicaValidacija() {
         if (webStranica.isEmpty()) {
             webStranicaGreska = "Polje 'Web stranica organizacije' ne sme ostati prazno.";
+            return false;
+        }
+
+        try {
+            if (!webStranica.toLowerCase().startsWith("http://") && !webStranica.toLowerCase().startsWith("https://") && !webStranica.toLowerCase().startsWith("ftp://")) {
+                webStranica = "http://" + webStranica;
+            }
+            URL url = new URL(webStranica);
+        }
+        catch (MalformedURLException e) {
+            webStranicaGreska = "Web stranica koju ste uneli ne odgovara URL formatu.";
             return false;
         }
 
@@ -158,6 +188,11 @@ public class Registracija {
             mestoGreska = "Polje 'Mesto' ne sme ostati prazno.";
             return false;
         }
+        
+        if (!mestoOrg.matches("[a-zA-ZčćšđžČĆŠĐŽ ]+")) {
+            mestoGreska = "Polje 'Mesto' ne sme sadržati numerike i specijalne karaktere.";
+            return false;
+        }
 
         mestoGreska = "";
         return true;
@@ -168,6 +203,11 @@ public class Registracija {
             ulicaGreska = "Polje 'Ulica' ne sme ostati prazno.";
             return false;
         }
+        
+        if (!ulicaOrg.matches("[a-zA-ZčćšđžČĆŠĐŽ0-9 ]+")) {
+            ulicaGreska = "Polje 'Ulica' sme sadržati samo slova i numeričke karaktere.";
+            return false;
+        }
 
         ulicaGreska = "";
         return true;
@@ -176,6 +216,11 @@ public class Registracija {
     public boolean kontaktOsobaValidacija() {
         if (kontaktOsoba.isEmpty()) {
             kontaktOsobaGreska = "Polje 'Kontakt osoba' ne sme ostati prazno.";
+            return false;
+        }
+        
+        if (!kontaktOsoba.matches("[a-zA-ZčćšđžČĆŠĐŽ ]+")) {
+            kontaktOsobaGreska = "Polje 'Kontakt osoba' ne sme sadržati numerike i specijalne karaktere.";
             return false;
         }
 
@@ -208,6 +253,16 @@ public class Registracija {
             emailGreska = "Polje 'Email adresa' ne sme ostati prazno.";
             return false;
         }
+        
+        if (!email.matches("\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+")) {
+            emailGreska = "Email adresa koju ste uneli ne odgovara email formatu.";
+            return false;
+        }
+        
+        if (korHelper.getOrganizacijaByEmail(email) != null) {
+            emailGreska = "Email adresa koju ste uneli je već navedena od strane druge organizacije.";
+            return false;
+        }
 
         emailGreska = "";
         return true;
@@ -216,6 +271,18 @@ public class Registracija {
     public boolean korImeValidacija() {
         if (korIme.isEmpty()) {
             korImeGreska = "Polje 'Korisničko ime' ne sme ostati prazno.";
+            return false;
+        }
+        
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(korIme);
+        if(matcher.find()) {
+            korImeGreska = "Korisničko ime ne sme sadržati blanko karaktere.";
+            return false;
+        }
+        
+        if (korHelper.getKorisnikByKorisnickoIme(korIme) != null) {
+            korImeGreska = "Korisničko ime koje ste uneli je zauzeto.";
             return false;
         }
 
@@ -228,6 +295,23 @@ public class Registracija {
             lozinkaGreska = "Polje 'Lozinka' ne sme ostati prazno.";
             return false;
         }
+        
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(lozinka);
+        if(matcher.find()) {
+            lozinkaGreska = "Lozinka ne sme sadržati blanko karaktere.";
+            return false;
+        }
+        
+        if (lozinka.length() < 8) {
+            lozinkaGreska = "Lozinka mora biti minimalne dužine od 8 karaktera.";
+            return false;
+        }
+        
+        if (!lozinka.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|[^\\w])).+$")) {
+            lozinkaGreska = "Lozinka mora sadržati makar jedno veliko slovo, makar 1 malo slovo, makar jedan numerik i makar jedan specijalan karakter.";
+            return false;
+        }
 
         lozinkaGreska = "";
         return true;
@@ -238,6 +322,11 @@ public class Registracija {
             ponovljenaLozinkaGreska = "Polje 'Ponovljena lozinka' ne sme ostati prazno.";
             return false;
         }
+        
+        if (!lozinka.equals(ponovljenaLozinka)) {
+            ponovljenaLozinkaGreska = "Lozinka i ponovljena lozinka se ne poklapaju.";
+            return false;
+        }
 
         ponovljenaLozinkaGreska = "";
         return true;
@@ -245,18 +334,18 @@ public class Registracija {
 
     public void narednaStavka() {
         boolean valid = true;
-        
+
         nazivOrgGreska = "";
         opisOrgGreska = "";
         oblastDelovanjaGreska = "";
         webStranicaGreska = "";
-        
+
         mestoGreska = "";
         ulicaGreska = "";
         telefonGreska = "";
         kontaktOsobaGreska = "";
         emailGreska = "";
-        
+
         korImeGreska = "";
         lozinkaGreska = "";
         ponovljenaLozinkaGreska = "";

@@ -16,6 +16,7 @@ public class Korisnici  implements java.io.Serializable {
      private int tip;
      private Set vestis = new HashSet(0);
      private Set dogadjajis = new HashSet(0);
+     private Organizacije organizacije;
 
     public Korisnici() {
     }
@@ -70,7 +71,14 @@ public class Korisnici  implements java.io.Serializable {
     public void setDogadjajis(Set dogadjajis) {
         this.dogadjajis = dogadjajis;
     }
-
+    
+    public Organizacije getOrganizacije() {
+        return organizacije;
+    }
+    
+    public void setOrganizacije(Organizacije organizacije) {
+        this.organizacije = organizacije;
+    }
 
 }
 

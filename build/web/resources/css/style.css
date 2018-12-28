@@ -1110,6 +1110,7 @@ table.dataTable {
 .tooltip-inner {
     text-align: left !important;
     padding: 10px !important;
+    z-index: 999 !important;
 }
 
 .absolute-row {

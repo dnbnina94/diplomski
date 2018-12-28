@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2018 at 03:45 PM
+-- Generation Time: Dec 28, 2018 at 06:46 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -68,6 +68,29 @@ INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `tip`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `organizacije`
+--
+
+CREATE TABLE `organizacije` (
+  `korisnicko_ime` varchar(50) NOT NULL,
+  `naziv` varchar(50) NOT NULL,
+  `kontakt_osoba` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `tekst` text NOT NULL,
+  `oblast_delovanja` int(11) NOT NULL,
+  `web_adresa` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `organizacije`
+--
+
+INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`) VALUES
+('nina_grujic', 'Organizacija za zaštitu životne sredine', 'Nina Grujić', 'nina.grujic.94@gmail.com', 'orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lobortis ligula, at feugiat augue. Nullam iaculis commodo odio nec tristique. Sed nec finibus eros, at cursus ante. Sed quis fringilla arcu, a convallis metus. Donec dignissim, augue non blandit feugiat, urna purus ullamcorper erat, in congue nisi massa non dolor. Nam turpis quam, auctor a hendrerit placerat, molestie euismod elit. Pellentesque dignissim rutrum mi, vitae cursus elit auctor non. Fusce eu nulla eu nunc semper mollis. ', 17, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sifarnici`
 --
 
@@ -85,7 +108,8 @@ INSERT INTO `sifarnici` (`id_sifarnik`, `naziv`) VALUES
 (2, 'dogadjaji'),
 (3, 'mesta'),
 (4, 'uzrast'),
-(5, 'ulice');
+(5, 'ulice'),
+(6, 'oblasti_delovanja');
 
 -- --------------------------------------------------------
 
@@ -120,7 +144,20 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (13, 2, 'radionica', NULL),
 (14, 2, 'predstava', NULL),
 (15, 2, 'izložba', NULL),
-(16, 3, 'Novi Sad', NULL);
+(16, 3, 'Novi Sad', NULL),
+(17, 6, 'Zaštita životne sredine', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `telefoni`
+--
+
+CREATE TABLE `telefoni` (
+  `id_telefon` int(11) NOT NULL,
+  `korisnicko_ime` varchar(50) NOT NULL,
+  `telefon` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -180,6 +217,13 @@ ALTER TABLE `korisnici`
   ADD PRIMARY KEY (`korisnicko_ime`);
 
 --
+-- Indexes for table `organizacije`
+--
+ALTER TABLE `organizacije`
+  ADD PRIMARY KEY (`korisnicko_ime`),
+  ADD KEY `oblast_delovanja` (`oblast_delovanja`);
+
+--
 -- Indexes for table `sifarnici`
 --
 ALTER TABLE `sifarnici`
@@ -191,6 +235,13 @@ ALTER TABLE `sifarnici`
 ALTER TABLE `stavke_sifarnika`
   ADD PRIMARY KEY (`id_stavka`),
   ADD KEY `id_sifarnik` (`id_sifarnik`);
+
+--
+-- Indexes for table `telefoni`
+--
+ALTER TABLE `telefoni`
+  ADD PRIMARY KEY (`id_telefon`),
+  ADD KEY `korisnicko_ime` (`korisnicko_ime`);
 
 --
 -- Indexes for table `vesti`
@@ -214,10 +265,23 @@ ALTER TABLE `dogadjaji`
   ADD CONSTRAINT `FK_uzrast_dogadjaj` FOREIGN KEY (`uzrast`) REFERENCES `stavke_sifarnika` (`id_stavka`);
 
 --
+-- Constraints for table `organizacije`
+--
+ALTER TABLE `organizacije`
+  ADD CONSTRAINT `FK_korisnik_organizacija` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`),
+  ADD CONSTRAINT `FK_oblast_organizacija` FOREIGN KEY (`oblast_delovanja`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+
+--
 -- Constraints for table `stavke_sifarnika`
 --
 ALTER TABLE `stavke_sifarnika`
   ADD CONSTRAINT `FK_sifarnik_stavka` FOREIGN KEY (`id_sifarnik`) REFERENCES `sifarnici` (`id_sifarnik`);
+
+--
+-- Constraints for table `telefoni`
+--
+ALTER TABLE `telefoni`
+  ADD CONSTRAINT `FK_organizacija_telefon` FOREIGN KEY (`korisnicko_ime`) REFERENCES `organizacije` (`korisnicko_ime`);
 
 --
 -- Constraints for table `vesti`

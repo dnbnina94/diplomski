@@ -26,5 +26,6 @@
             </key>
             <one-to-many class="db.Dogadjaji" />
         </set>
+        <one-to-one name="organizacije" class="db.Organizacije"></one-to-one>
     </class>
 </hibernate-mapping>
