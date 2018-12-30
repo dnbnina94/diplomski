@@ -22,11 +22,15 @@ public class StavkeSifarnika  implements java.io.Serializable {
     private Set dogadjajisKategorija = new HashSet(0);
     private Set dogadjajisMesto = new HashSet(0);
     private Set dogadjajisUzrast = new HashSet(0);
+    
+    private Set organizacijesMesto = new HashSet(0);
+    private Set organizacijesUlica = new HashSet(0);
+    private Set organizacijesOblastDelovanja = new HashSet(0);
 
     public StavkeSifarnika() {
     }
 
-    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast) {
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja) {
        this.idStavka = idStavka;
        this.sifarnici = sifarnici;
        this.naziv = naziv;
@@ -35,6 +39,16 @@ public class StavkeSifarnika  implements java.io.Serializable {
        this.dogadjajisKategorija = dogadjajisKategorija;
        this.dogadjajisMesto = dogadjajisMesto;
        this.dogadjajisUzrast = dogadjajisUzrast;
+       this.organizacijesMesto = organizacijesMesto;
+       this.organizacijesUlica = organizacijesUlica;
+       this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
+    }
+    
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica) {
+        this.idStavka = idStavka;
+        this.sifarnici = sifarnici;
+        this.naziv = naziv;
+        this.ikonica = ikonica;
     }
    
     public int getIdStavka() {
@@ -96,11 +110,35 @@ public class StavkeSifarnika  implements java.io.Serializable {
     }
     
     public Set getDogadjajisUzrast() {
-        return dogadjajisKategorija;
+        return dogadjajisUzrast;
     }
     
     public void setDogadjajisUzrast(Set dogadjajisUzrast) {
         this.dogadjajisUzrast = dogadjajisUzrast;
+    }
+    
+    public Set getOrganizacijesMesto() {
+        return organizacijesMesto;
+    }  
+    
+    public void setOrganizacijesMesto(Set organizacijesMesto) {
+        this.organizacijesMesto = organizacijesMesto;
+    }
+    
+    public Set getOrganizacijesUlica() {
+        return organizacijesUlica;
+    }
+    
+    public void setOrganizacijesUlica(Set organizacijesUlica) {
+        this.organizacijesUlica = organizacijesUlica;
+    }
+    
+    public Set getOrganizacijesOblastDelovanja() {
+        return organizacijesOblastDelovanja;
+    }
+    
+    public void setOrganizacijesOblastDelovanja(Set organizacijesOblastDelovanja) {
+        this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
     }
 
 }

@@ -60,4 +60,9 @@ public class KorisniciHelper {
         }
         
     }
+    
+    public boolean registrujKorisnika(Korisnici korisnik) {
+        return true;
+    }
+    
 }

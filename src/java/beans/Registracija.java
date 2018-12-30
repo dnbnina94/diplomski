@@ -5,7 +5,10 @@
  */
 package beans;
 
+import db.Korisnici;
+import db.StavkeSifarnika;
 import db.helpers.KorisniciHelper;
+import db.helpers.StavkeSifarnikaHelper;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import javax.validation.constraints.NotNull;
 public class Registracija {
     
     private KorisniciHelper korHelper = new KorisniciHelper();
+    private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
 
     private List<String> telefoni;
     private String telefon;
@@ -402,6 +406,27 @@ public class Registracija {
 
             if (!valid) {
                 script = "$('.wizardPseudoClass').carousel(2);$('.wizardPseudoClass').carousel('pause');";
+            } else {
+                //Korisnici noviKorisnik = new Korisnici(korIme, lozinka, 2);
+                
+                StavkeSifarnika oblDelovanja = stavkeHelper.getStavkaByNaziv(oblastDelovanja);
+                if (oblDelovanja == null) {
+                    oblDelovanja = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(6), oblastDelovanja, null);
+                    stavkeHelper.insertStavka(oblDelovanja);
+                }
+                
+                StavkeSifarnika mesto = stavkeHelper.getStavkaByNaziv(mestoOrg);
+                if (mesto == null) {
+                    mesto = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(3), mestoOrg, null);
+                    stavkeHelper.insertStavka(mesto);
+                }
+                
+                StavkeSifarnika ulica = stavkeHelper.getStavkaByNaziv(ulicaOrg);
+                if (ulica == null) {
+                    ulica = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(5), ulicaOrg, null);
+                    stavkeHelper.insertStavka(ulica);
+                }
+                
             }
         }
 

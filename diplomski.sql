@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2018 at 06:46 PM
+-- Generation Time: Dec 30, 2018 at 03:24 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -78,15 +78,10 @@ CREATE TABLE `organizacije` (
   `email` varchar(50) NOT NULL,
   `tekst` text NOT NULL,
   `oblast_delovanja` int(11) NOT NULL,
-  `web_adresa` varchar(50) DEFAULT NULL
+  `web_adresa` varchar(50) DEFAULT NULL,
+  `mesto` int(11) NOT NULL,
+  `ulica` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `organizacije`
---
-
-INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`) VALUES
-('nina_grujic', 'Organizacija za zaštitu životne sredine', 'Nina Grujić', 'nina.grujic.94@gmail.com', 'orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lobortis ligula, at feugiat augue. Nullam iaculis commodo odio nec tristique. Sed nec finibus eros, at cursus ante. Sed quis fringilla arcu, a convallis metus. Donec dignissim, augue non blandit feugiat, urna purus ullamcorper erat, in congue nisi massa non dolor. Nam turpis quam, auctor a hendrerit placerat, molestie euismod elit. Pellentesque dignissim rutrum mi, vitae cursus elit auctor non. Fusce eu nulla eu nunc semper mollis. ', 17, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,7 +140,10 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (14, 2, 'predstava', NULL),
 (15, 2, 'izložba', NULL),
 (16, 3, 'Novi Sad', NULL),
-(17, 6, 'Zaštita životne sredine', NULL);
+(17, 6, 'Zaštita životne sredine', NULL),
+(18, 6, 'Nau?na istraživanja', NULL),
+(19, 3, 'Kragujevac', NULL),
+(20, 5, 'Cviji?eva 36', NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +219,9 @@ ALTER TABLE `korisnici`
 --
 ALTER TABLE `organizacije`
   ADD PRIMARY KEY (`korisnicko_ime`),
-  ADD KEY `oblast_delovanja` (`oblast_delovanja`);
+  ADD KEY `oblast_delovanja` (`oblast_delovanja`),
+  ADD KEY `mesto` (`mesto`),
+  ADD KEY `ulica` (`ulica`);
 
 --
 -- Indexes for table `sifarnici`
@@ -269,7 +269,9 @@ ALTER TABLE `dogadjaji`
 --
 ALTER TABLE `organizacije`
   ADD CONSTRAINT `FK_korisnik_organizacija` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`),
-  ADD CONSTRAINT `FK_oblast_organizacija` FOREIGN KEY (`oblast_delovanja`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+  ADD CONSTRAINT `FK_mesto_organizacija` FOREIGN KEY (`mesto`) REFERENCES `stavke_sifarnika` (`id_stavka`),
+  ADD CONSTRAINT `FK_oblast_organizacija` FOREIGN KEY (`oblast_delovanja`) REFERENCES `stavke_sifarnika` (`id_stavka`),
+  ADD CONSTRAINT `FK_ulica_organizacija` FOREIGN KEY (`ulica`) REFERENCES `stavke_sifarnika` (`id_stavka`);
 
 --
 -- Constraints for table `stavke_sifarnika`

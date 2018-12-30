@@ -41,4 +41,59 @@ public class StavkeSifarnikaHelper {
         }
     }
     
+    public StavkeSifarnika getStavkaByNaziv(String naziv) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Query q = session.createQuery("FROM StavkeSifarnika AS stavka WHERE stavka.naziv = '" + naziv + "'");
+            List<StavkeSifarnika> stavkeSifarnika = q.list();
+            session.getTransaction().commit();
+            
+            if (!stavkeSifarnika.isEmpty())
+                return stavkeSifarnika.get(0);
+            return null;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void insertStavka(StavkeSifarnika stavkaSifarnika) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            session.save(stavkaSifarnika);
+            
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public int getMaxId() {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Query q = session.createQuery("FROM StavkeSifarnika AS stavka");
+            List<StavkeSifarnika> stavkeSifarnika = (List<StavkeSifarnika>) q.list();
+            
+            session.getTransaction().commit();
+            
+            if (stavkeSifarnika.isEmpty())
+                return 0;
+            else
+                return stavkeSifarnika.get(stavkeSifarnika.size()-1).getIdStavka();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
 }

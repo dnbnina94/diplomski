@@ -23,21 +23,25 @@ public class Organizacije implements java.io.Serializable {
     private String webAdresa;
     private StavkeSifarnika oblastDelovanja;
     private Set telefonis = new HashSet(0);
+    private StavkeSifarnika mesto;
+    private StavkeSifarnika ulica;
     
     public Organizacije() {
         
     }
     
-    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst) {
+    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, StavkeSifarnika mesto, StavkeSifarnika ulica) {
         this.korisnici = korisnici;
         this.oblastDelovanja = oblastDelovanja;
         this.naziv = naziv;
         this.kontaktOsoba = kontaktOsoba;
         this.email = email;
         this.tekst = tekst;
+        this.mesto = mesto;
+        this.ulica = ulica;
     }
     
-    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, String webAdresa, Set telefonis) {
+    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, String webAdresa, Set telefonis, StavkeSifarnika mesto, StavkeSifarnika ulica) {
         this.korisnici = korisnici;
         this.oblastDelovanja = oblastDelovanja;
         this.naziv = naziv;
@@ -46,6 +50,8 @@ public class Organizacije implements java.io.Serializable {
         this.tekst = tekst;
         this.webAdresa = webAdresa;
         this.telefonis = telefonis;
+        this.mesto = mesto;
+        this.ulica = ulica;
     }
     
     public String getKorisnickoIme() {
@@ -118,5 +124,21 @@ public class Organizacije implements java.io.Serializable {
     
     public void setTelefonis(Set telefonis) {
         this.telefonis = telefonis;
+    }
+    
+    public StavkeSifarnika getMesto() {
+        return mesto;
+    }
+    
+    public void setMesto(StavkeSifarnika mesto) {
+        this.mesto = mesto;
+    }
+    
+    public StavkeSifarnika getUlica() {
+        return ulica;
+    }
+    
+    public void setUlica(StavkeSifarnika ulica) {
+        this.ulica = ulica;
     }
 }

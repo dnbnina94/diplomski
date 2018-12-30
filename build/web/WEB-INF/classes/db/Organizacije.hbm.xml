@@ -28,5 +28,11 @@
         <property name="webAdresa" type="string">
             <column name="web_adresa" length="50" />
         </property>
+        <many-to-one name="mesto" class="db.StavkeSifarnika" fetch="select">
+            <column name="mesto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ulica" class="db.StavkeSifarnika" fetch="select">
+            <column name="ulica" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>
