@@ -70,7 +70,7 @@
                                                                      styleClass="#{registracija.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
                                                                      placeholder="Npr. zaštita životne sredine" 
                                                                      typeahead="true" 
-                                                                     typeahead-values="#{kategorijeSifarnika.mestaString}" 
+                                                                     typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.oblastiDelovanja)}" 
                                                                      value="#{registracija.oblastDelovanja}" />
                                                         <div id="oblastDelovanjaGreska" class="#{registracija.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                             <h:outputText value="#{registracija.oblastDelovanjaGreska}" />
@@ -104,7 +104,7 @@
                                                                              styleClass="#{registracija.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
                                                                              placeholder="Npr. Beograd" 
                                                                              typeahead="true" 
-                                                                             typeahead-values="#{kategorijeSifarnika.mestaString}" 
+                                                                             typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
                                                                              value="#{registracija.mestoOrg}" />
                                                                 <div id="mestoGreska" class="#{registracija.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                                     <h:outputText value="#{registracija.mestoGreska}" />
@@ -117,7 +117,7 @@
                                                                              styleClass="#{registracija.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
                                                                              placeholder="Npr. Bulevar Kralja Aleksandra 73" 
                                                                              typeahead="true" 
-                                                                             typeahead-values="#{kategorijeSifarnika.mestaString}"
+                                                                             typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
                                                                              value="#{registracija.ulicaOrg}" />
                                                                 <div id="ulicaGreska" class="#{registracija.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                                     <h:outputText value="#{registracija.ulicaGreska}" />

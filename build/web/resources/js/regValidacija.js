@@ -68,7 +68,7 @@ $("#input_registracija\\:oblastDelovanja").keyup(function (event) {
     }
 });
 
-$("#input_registracija\\:webStranica").keyup(function (event) {
+/*$("#input_registracija\\:webStranica").keyup(function (event) {
     event.stopImmediatePropagation();
 
     var val = $("#input_registracija\\:webStranica").val();
@@ -86,7 +86,7 @@ $("#input_registracija\\:webStranica").keyup(function (event) {
         $("#input_registracija\\:webStranica").removeClass("login-form-input-error");
         $("#webStranicaGreska").addClass("input-error-message-hidden");
     }
-});
+});*/
 
 $("#input_registracija\\:mestoOrg").keyup(function (event) {
     event.stopImmediatePropagation();

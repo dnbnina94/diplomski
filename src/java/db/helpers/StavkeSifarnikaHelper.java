@@ -68,7 +68,6 @@ public class StavkeSifarnikaHelper {
             session.save(stavkaSifarnika);
             
             session.getTransaction().commit();
-            
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
