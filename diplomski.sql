@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2018 at 03:24 PM
+-- Generation Time: Dec 31, 2018 at 07:58 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -63,6 +63,7 @@ CREATE TABLE `korisnici` (
 --
 
 INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `tip`) VALUES
+('etf_org', 'Etforg123!', 2),
 ('nina_grujic', 'debd3328', 2);
 
 -- --------------------------------------------------------
@@ -82,6 +83,13 @@ CREATE TABLE `organizacije` (
   `mesto` int(11) NOT NULL,
   `ulica` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `organizacije`
+--
+
+INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`, `mesto`, `ulica`) VALUES
+('etf_org', 'ETF', 'Nina Gruji?', 'email@email.com', 'etf', 17, 'http://www.mojaorg.com', 8, 22);
 
 -- --------------------------------------------------------
 
@@ -143,7 +151,15 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (17, 6, 'Zaštita životne sredine', NULL),
 (18, 6, 'Nau?na istraživanja', NULL),
 (19, 3, 'Kragujevac', NULL),
-(20, 5, 'Cviji?eva 36', NULL);
+(20, 5, 'Cviji?eva 36', NULL),
+(21, 3, 'Kraljevo', NULL),
+(22, 5, 'Bulevar Kralja Aleksandra 73', NULL),
+(23, 3, 'Subotica', NULL),
+(24, 3, 'Valjevo', NULL),
+(25, 5, 'Brace Srnic 51', NULL),
+(26, 3, 'Negotin', NULL),
+(27, 5, 'Batutova 13', NULL),
+(28, 3, 'Indjija', NULL);
 
 -- --------------------------------------------------------
 
@@ -156,6 +172,14 @@ CREATE TABLE `telefoni` (
   `korisnicko_ime` varchar(50) NOT NULL,
   `telefon` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `telefoni`
+--
+
+INSERT INTO `telefoni` (`id_telefon`, `korisnicko_ime`, `telefon`) VALUES
+(1, 'etf_org', '381601844595'),
+(2, 'etf_org', '381601844596');
 
 -- --------------------------------------------------------
 
