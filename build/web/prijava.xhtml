@@ -44,7 +44,8 @@
                                                 Novi korisnici
                                             </div>
                                             <div class="login-form-content">
-                                                <h:form>
+                                                <h:form id="neregistrovani-korisnici">
+                                                    <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
                                                     <h:outputText value="Registracija:" styleClass="login-form-label" />
                                                     <div style="height: 5px"></div>
                                                     <h:outputText  value="Kreiranjem naloga i konfirmacijom istog od strane administratora, dobijate mogućnost postavljanja vesti, događaja, oglasa i anketa." style="font-size: 12px;" />
@@ -59,12 +60,31 @@
                                                 Registrovani korisnici
                                             </div>
                                             <div class="login-form-content">
-                                                <h:form>
+                                                <h:form id="prijava">
+                                                    <b:messages id="growl-error" severity="error" styleClass="custom-messages" />
                                                     <h:outputText value="Korisničko ime:" styleClass="login-form-label" />
-                                                    <b:inputText styleClass="login-form-input" style="margin-bottom: 5px" />
+                                                    <b:inputText id="korIme" 
+                                                                 value="#{prijava.korIme}"
+                                                                 styleClass="#{prijava.korImeGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                 style="margin-bottom: 5px" />
+                                                    <div id="korImeGreska" class="#{prijava.korImeGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                        <h:outputText value="#{prijava.korImeGreska}" />
+                                                    </div>
                                                     <h:outputText value="Lozinka:" styleClass="login-form-label" />
-                                                    <b:inputSecret styleClass="login-form-input" />
-                                                    <b:commandButton styleClass="login-form-submit" value="Prijava" />
+                                                    <b:inputSecret id="lozinka"
+                                                                   value="#{prijava.lozinka}"
+                                                                   styleClass="#{prijava.lozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" />
+                                                    <div id="lozinkaGreska" class="#{prijava.lozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                         style="margin-bottom: 0px">
+                                                        <h:outputText value="#{prijava.lozinkaGreska}" />
+                                                    </div>
+                                                    <b:commandButton styleClass="login-form-submit" value="Prijava"
+                                                                     onclick="ajax:prijava.login();"
+                                                                     update="prijava" />
+                                                    
+                                                    <h:panelGroup id="prijavaValidacija">
+                                                        <h:outputScript library="js" name="prijavaValidacija.js" />
+                                                    </h:panelGroup>
                                                 </h:form>
                                             </div>
                                         </div>

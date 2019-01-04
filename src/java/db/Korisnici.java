@@ -13,19 +13,23 @@ public class Korisnici  implements java.io.Serializable {
 
      private String korisnickoIme;
      private String lozinka;
+     private String salt;
      private int tip;
      private Set vestis = new HashSet(0);
      private Set dogadjajis = new HashSet(0);
      private Organizacije organizacije;
+     private boolean odobren;
 
     public Korisnici() {
     }
 
 	
-    public Korisnici(String korisnickoIme, String lozinka, int tip) {
+    public Korisnici(String korisnickoIme, String lozinka, String salt, int tip, boolean odobren) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
+        this.salt = salt;
         this.tip = tip;
+        this.odobren = odobren;
     }
     public Korisnici(String korisnickoIme, String lozinka, int tip, Set vestis, Set dogadjajis) {
        this.korisnickoIme = korisnickoIme;
@@ -78,6 +82,22 @@ public class Korisnici  implements java.io.Serializable {
     
     public void setOrganizacije(Organizacije organizacije) {
         this.organizacije = organizacije;
+    }
+    
+    public void setOdobren(boolean odobren) {
+        this.odobren = odobren;
+    }
+
+    public boolean isOdobren() {
+        return odobren;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+    
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
 }

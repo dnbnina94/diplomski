@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class DBConnection {
     
     private static String dbDriver = "com.mysql.jdbc.Driver";
-    private static String dbName = "jdbc:mysql://localhost:3306/diplomski";
+    private static String dbName = "jdbc:mysql://localhost:3306/diplomski?useUnicode=true&characterEncoding=UTF-8";
     private static String dbUsername = "root";
     private static String dbPassword = "";
     

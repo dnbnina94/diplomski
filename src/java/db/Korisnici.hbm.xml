@@ -9,10 +9,16 @@
             <generator class="assigned" />
         </id>
         <property name="lozinka" type="string">
-            <column name="lozinka" length="50" not-null="true" />
+            <column name="lozinka" length="64" not-null="true" />
+        </property>
+        <property name="salt" type="string">
+            <column name="salt" length="16" not-null="true" />
         </property>
         <property name="tip" type="int">
             <column name="tip" not-null="true" />
+        </property>
+        <property name="odobren" type="boolean">
+            <column name="odobren" not-null="true" />
         </property>
         <set name="vestis" table="vesti" inverse="true" lazy="true" fetch="select">
             <key>

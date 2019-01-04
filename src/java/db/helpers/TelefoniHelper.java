@@ -6,7 +6,7 @@
 package db.helpers;
 
 import db.HibernateUtil;
-import db.StavkeSifarnika;
+import db.Telefoni;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -28,14 +28,14 @@ public class TelefoniHelper {
             session.getTransaction().begin();
             
             Query q = session.createQuery("FROM Telefoni AS telefon");
-            List<StavkeSifarnika> stavkeSifarnika = (List<StavkeSifarnika>) q.list();
+            List<Telefoni> telefoni = (List<Telefoni>) q.list();
             
             session.getTransaction().commit();
             
-            if (stavkeSifarnika.isEmpty())
+            if (telefoni.isEmpty())
                 return 0;
             else
-                return stavkeSifarnika.get(stavkeSifarnika.size()-1).getIdStavka();
+                return telefoni.get(telefoni.size()-1).getIdTelefon();
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

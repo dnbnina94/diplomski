@@ -1180,4 +1180,24 @@ table.dataTable {
     display: none;
 }
 
+#javax_faces_developmentstage_messages {
+    display: none !important;
+}
+
+.custom-messages {
+    margin-top: 0px !important;
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+    border-radius: 0px !important;
+}
+
+.bf-message-icon {
+    position: absolute !important;
+    padding-top: 3px !important;
+}
+
+.bf-message-detail {
+    padding-left: 24px !important;
+}
+
 
