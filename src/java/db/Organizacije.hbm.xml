@@ -34,5 +34,11 @@
         <many-to-one name="ulica" class="db.StavkeSifarnika" fetch="select">
             <column name="ulica" not-null="true" />
         </many-to-one>
+        <set name="telefonis" table="telefoni" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnicko_ime" length="50" not-null="true" />
+            </key>
+            <one-to-many class="db.Telefoni" />
+        </set>
     </class>
 </hibernate-mapping>

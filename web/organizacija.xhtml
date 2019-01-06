@@ -30,39 +30,75 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
-                        <div class="stripe-line-header news-category-header">                        
+                        <div class="stripe-line-header news-category-header"></div>
+                        <div class="organizacija-naziv-header">
+                            <h:outputText value="#{organizacijaBean.organizacija.naziv}" />
                         </div>
-                        <h:form>
-                        <b:image library="img" name="thumbnails/#{pretragaVesti.vest.thumbnail}" styleClass="news-thumbnail-header"/>
-                        <div style="height: 10px"></div>
-                        <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
-
-                        <div class="news-parameters-news-page">
-                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                            <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
-                            &nbsp;
-                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                            <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                <f:convertDateTime pattern=" dd.MM.yyyy." />
-                            </h:outputText>
-                            &nbsp;
-                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                            <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                <f:convertDateTime pattern=" HH:mm" />
-                            </h:outputText>
-                            &nbsp;
-                            <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
-                                <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                    <f:convertDateTime pattern="dd.MM.yyyy." />
-                                </h:outputText>
-                                <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
-                            </b:commandLink>
+                        <span class="glyphicon glyphicon-user" style="font-size: 10px; color: #707070"></span>
+                        <h:outputText style="color: #707070;" value="#{organizacijaBean.organizacija.korisnickoIme}" />
+                        <div class="row bordered-container-red-bottom" >
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Opis:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.tekst}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Oblast delovanja:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.oblastDelovanja.naziv}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Web stranica:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{(organizacijaBean.organizacija.webAdresa == null) ? '/' : organizacijaBean.organizacija.webAdresa}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Mesto:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.ulica.naziv}" />
+                                    <span>, </span>
+                                    <h:outputText value="#{organizacijaBean.organizacija.mesto.naziv}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Kontakt osoba:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.kontaktOsoba}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Kontakt telefoni:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.telefoniToString()}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Email:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.email}" />
+                                </div>
+                            </div>
                         </div>
-                        
-                        <h:outputText value="#{pretragaVesti.vest.tekst}" />
-                        
-                        </h:form>
+                        <div class="row news-category-front-page">
+                            
+                        </div>
                     </div>
                     <div class="col-md-3">
 

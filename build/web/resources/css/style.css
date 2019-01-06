@@ -1200,4 +1200,43 @@ table.dataTable {
     padding-left: 24px !important;
 }
 
+.organizacija-naziv-header {
+    font-family: BebasNeueRegular;
+    font-size: 26px;
+    padding-top: 10px;
+}
+
+.organizacija-details-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.organizacija-detail-header {
+    font-weight: bold;
+    width: 150px;
+    float: left;
+    
+}
+
+.organizacija-detail-content {
+    width: auto;
+    overflow: hidden;
+}
+
+.bordered-container-red-bottom {
+    margin-top: 15px !important;
+    margin-left: 0px !Important;
+    margin-right: 0px !important;
+    margin-bottom: 30px !important;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #e6e6e6;
+    border-bottom: 3px solid orangered;
+    -webkit-box-shadow: 0 0 10px #e6e6e6;
+    box-shadow: 0 0 10px #e6e6e6;
+}
+
 
