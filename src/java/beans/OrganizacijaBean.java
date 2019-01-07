@@ -76,4 +76,11 @@ public class OrganizacijaBean {
         return vesti;
     }
     
+    public List<Vesti> setVestiToListFeatured() {
+        List<Vesti> vesti = this.setVestiToList();
+        if (vesti.size() > 7)
+            return vesti.subList(0, 8);
+        return vesti;
+    }
+    
 }
