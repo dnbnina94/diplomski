@@ -161,6 +161,7 @@ and open the template in the editor.
                                 <br/>
                                 <span>#{kategorijaVest.naziv}</span>
                                 <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                                <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
                             </b:commandLink>
                             </h:form>
                         </li>

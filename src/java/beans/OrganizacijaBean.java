@@ -8,6 +8,7 @@ package beans;
 import db.Korisnici;
 import db.Organizacije;
 import db.Telefoni;
+import db.Vesti;
 import db.helpers.KorisniciHelper;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,15 @@ public class OrganizacijaBean {
         @Override
         public int compare (Telefoni a, Telefoni b) {
             return a.getIdTelefon()- b.getIdTelefon();
+        }
+        
+    }
+    
+    class SortVestiByDatumDescending implements Comparator<Vesti> {
+        
+        @Override
+        public int compare (Vesti a, Vesti b) {
+            return b.getDatum().compareTo(a.getDatum());
         }
         
     }
@@ -58,6 +68,12 @@ public class OrganizacijaBean {
     
     public void setOrganizacija(Organizacije organizacija) {
         this.organizacija = organizacija;
+    }
+    
+    public List<Vesti> setVestiToList() {
+        List<Vesti> vesti = new ArrayList<Vesti>(organizacija.getKorisnici().getVestis());
+        Collections.sort(vesti, new OrganizacijaBean.SortVestiByDatumDescending());
+        return vesti;
     }
     
 }

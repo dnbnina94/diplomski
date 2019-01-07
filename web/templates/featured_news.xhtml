@@ -51,15 +51,25 @@ and open the template in the editor.
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="featured-news-category">
-                                                <h:outputText value="#{vest.kategorija.naziv}" />
-                                            </div><br/>
-                                            <div class="featured-news-header">
-                                                <h:outputText value="#{vest.naslov}" />
-                                            </div>
-                                            <div class="featured-news-content">
-                                                <h:outputText value="#{vest.tekst}" />
-                                            </div>
+                                            <h:form>
+                                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                                    <div class="featured-news-category">
+                                                        <h:outputText value="#{vest.kategorija.naziv}" />
+                                                    </div><br/>
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{vest.kategorija}" />
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                                </b:commandLink>
+
+                                                <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                                    <div class="featured-news-header">
+                                                        <h:outputText value="#{vest.naslov}" />
+                                                    </div>
+                                                    <div class="featured-news-content">
+                                                        <h:outputText value="#{vest.tekst}" />
+                                                    </div>
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                                </b:commandLink>
+                                            </h:form>
                                         </td>
                                     </tr>
                                 </table>

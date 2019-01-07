@@ -591,7 +591,7 @@ select:focus {
     text-align: left !important;
 }
 
-.news-category-header > div:nth-child(1) {
+.news-category-header > div:nth-child(1), .stripe-line-header-link {
     display: inline-block;
     background-color: white;
     padding-right: 15px;
@@ -898,11 +898,11 @@ table.dataTable {
     padding-left: 7.5px !important;
 }
 
-.login-form-container {
+.container-w-red-header {
 
 }
 
-.login-form-header {
+.container-w-red-header-header {
     background-color: orangered;
     font-family: BebasNeueRegular;
     font-size: 24px;
@@ -911,7 +911,7 @@ table.dataTable {
     padding: 10px;
 }
 
-.login-form-content {
+.container-w-red-header-content {
     border: 1px solid #e6e6e6;
     border-bottom: 3px solid orangered;
     box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
@@ -1235,8 +1235,10 @@ table.dataTable {
     padding-right: 15px;
     border: 1px solid #e6e6e6;
     border-bottom: 3px solid orangered;
-    -webkit-box-shadow: 0 0 10px #e6e6e6;
-    box-shadow: 0 0 10px #e6e6e6;
+    box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
+    -moz-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
+    -webkit-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
+    -khtml-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
 }
 
 

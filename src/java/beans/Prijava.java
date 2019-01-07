@@ -115,6 +115,11 @@ public class Prijava {
                     OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
                     organizacijaBean.setOrganizacija(korisnik.getOrganizacije());
                     elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
+                    
+                    KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+                    korisnikBean.setKorisnik(korisnik);
+                    elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+                    
                     FacesContext.getCurrentInstance().getExternalContext().redirect("organizacija.xhtml");
                     FacesContext.getCurrentInstance().responseComplete();
                 }

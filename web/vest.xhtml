@@ -29,42 +29,46 @@
             <div class="container">
 
                 <div class="row page-content">
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="stripe-line-header news-category-header">                        
                         </div>
                         <h:form>
-                        <b:image library="img" name="thumbnails/#{pretragaVesti.vest.thumbnail}" styleClass="news-thumbnail-header"/>
-                        <div style="height: 10px"></div>
-                        <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
+                            <b:image library="img" name="thumbnails/#{pretragaVesti.vest.thumbnail}" styleClass="news-thumbnail-header"/>
+                            <div style="height: 10px"></div>
+                            <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
 
-                        <div class="news-parameters-news-page">
-                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                            <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
-                            &nbsp;
-                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                            <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                <f:convertDateTime pattern=" dd.MM.yyyy." />
-                            </h:outputText>
-                            &nbsp;
-                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                            <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                <f:convertDateTime pattern=" HH:mm" />
-                            </h:outputText>
-                            &nbsp;
-                            <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
-                                <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                    <f:convertDateTime pattern="dd.MM.yyyy." />
+                            <div class="news-parameters-news-page">
+                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                    <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
+                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaVesti.vest.korisnici.organizacije}" />
+                                </b:commandLink>
+                                &nbsp;
+                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
                                 </h:outputText>
-                                <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
-                            </b:commandLink>
-                        </div>
-                        
-                        <h:outputText value="#{pretragaVesti.vest.tekst}" />
-                        
+                                &nbsp;
+                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                    <f:convertDateTime pattern=" HH:mm" />
+                                </h:outputText>
+                                &nbsp;
+                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                    <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
+                                    <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                        <f:convertDateTime pattern="dd.MM.yyyy." />
+                                    </h:outputText>
+                                    <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                </b:commandLink>
+                            </div>
+
+                            <h:outputText value="#{pretragaVesti.vest.tekst}" />
+
                         </h:form>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
                         <ui:insert name="left_content">
                             <ui:include src="templates/right_content.xhtml" />

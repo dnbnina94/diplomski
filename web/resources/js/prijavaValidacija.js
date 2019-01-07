@@ -19,7 +19,7 @@ $("#input_prijava\\:korIme").keyup(function (event) {
         $("#korImeGreska").removeClass("input-error-message-hidden");
         $("#korImeGreska").html(greska);
     } else {
-        $("#input_login\\:korIme").removeClass("login-form-input-error");
+        $("#input_prijava\\:korIme").removeClass("login-form-input-error");
         $("#korImeGreska").addClass("input-error-message-hidden");
     }
 });

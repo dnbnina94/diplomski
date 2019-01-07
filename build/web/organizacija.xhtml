@@ -30,16 +30,25 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
-                        <div class="stripe-line-header news-category-header"></div>
-                        <div class="organizacija-naziv-header">
-                            <h:outputText value="#{organizacijaBean.organizacija.naziv}" />
+                        <div class="stripe-line-header news-category-header">
+                            <div><h:outputText value="#{organizacijaBean.organizacija.korisnickoIme}" /></div>     
                         </div>
-                        <span class="glyphicon glyphicon-user" style="font-size: 10px; color: #707070"></span>
-                        <h:outputText style="color: #707070;" value="#{organizacijaBean.organizacija.korisnickoIme}" />
-                        <div class="row bordered-container-red-bottom" >
+
+                        <div class="container-w-red-header-header" style="margin-top: 20px">
+                            Detalji organizacije
+                        </div>
+                        <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 5px" >
                             <div class="organizacija-details-wrapper">
                                 <div class="organizacija-detail-header">
-                                    Opis:
+                                    Naziv organizacije:
+                                </div>
+                                <div class="organizacija-detail-content">
+                                    <h:outputText value="#{organizacijaBean.organizacija.naziv}" />
+                                </div>
+                            </div>
+                            <div class="organizacija-details-wrapper">
+                                <div class="organizacija-detail-header">
+                                    Opis organizacije:
                                 </div>
                                 <div class="organizacija-detail-content">
                                     <h:outputText value="#{organizacijaBean.organizacija.tekst}" />
@@ -96,8 +105,34 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="stripe-line-header news-category-header">
+                            <h:form>
+                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                    <div class="stripe-line-header-link"><h:outputText value="Vesti" /></div>
+                                    <f:setPropertyActionListener target="#{pretragaVesti.organizacija}" value="#{organizacijaBean.organizacija}" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="2" />
+                                </b:commandLink>
+                            </h:form>
+                        </div>
                         <div class="row news-category-front-page">
-                            
+                            <h:form>
+                            <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToList()}" var="vest">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                    <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                    </div>
+                                    <div class="news-header-container-front-page">
+                                        #{vest.naslovShort}
+                                    </div>
+                                    <div class="news-content-container-front-page">
+                                        #{vest.tekstShort}
+                                    </div>
+                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                    </b:commandLink>
+                                </div>
+                            </ui:repeat>
+                            </h:form>
                         </div>
                     </div>
                     <div class="col-md-3">

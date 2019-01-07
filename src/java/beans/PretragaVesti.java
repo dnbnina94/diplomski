@@ -5,6 +5,7 @@
  */
 package beans;
 
+import db.Organizacije;
 import db.StavkeSifarnika;
 import db.Vesti;
 import db.helpers.StavkeSifarnikaHelper;
@@ -28,11 +29,15 @@ import javax.faces.event.ActionEvent;
 public class PretragaVesti {
 
     private StavkeSifarnika kategorijaVesti;
-    private List<Vesti> vestiKategorije;
+    private List<Vesti> vesti;
     private List<StavkeSifarnika> kategorijeVesti;
+    private Organizacije organizacija;
     private Vesti vest;
     private VestiHelper vestiHelper = new VestiHelper();
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
+    
+    // 1 - vesti kategorije, 2 - vesti korisnika
+    private int tipPretrage;
     
     public PretragaVesti() {
         kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
@@ -66,17 +71,21 @@ public class PretragaVesti {
     }
     
     private List<Vesti> setToList(Set set) {
-        vestiKategorije = new ArrayList<Vesti>(set);
-        Collections.sort(vestiKategorije, new PretragaVesti.SortVestiByDatumDescending());
-        return vestiKategorije;
+        vesti = new ArrayList<Vesti>(set);
+        Collections.sort(vesti, new PretragaVesti.SortVestiByDatumDescending());
+        return vesti;
     }
     
-    public List<Vesti> getVestiKatgorije() {
-        return setToList(kategorijaVesti.getVestis()); 
+    public List<Vesti> getVesti() {
+        if (tipPretrage == 1) {
+            return setToList(kategorijaVesti.getVestis()); 
+        } else {
+            return setToList(organizacija.getKorisnici().getVestis()); 
+        }
     }
     
-    public void setVestiKategorije(List<Vesti> vestiKategorije) {
-        this.vestiKategorije = vestiKategorije;
+    public void setVesti(List<Vesti> vesti) {
+        this.vesti = vesti;
     }
     
     public String prikazVestiKategorije(StavkeSifarnika kategorijaVesti) {
@@ -98,6 +107,22 @@ public class PretragaVesti {
     
     public void setKategorijeVesti(List<StavkeSifarnika> kategorijeVesti) {
         this.kategorijeVesti = kategorijeVesti;
+    }
+    
+    public Organizacije getOrganizacija() {
+        return organizacija;
+    }
+    
+    public void setOrganizacija(Organizacije organizacija) {
+        this.organizacija = organizacija;
+    }
+
+    public int getTipPretrage() {
+        return tipPretrage;
+    }
+
+    public void setTipPretrage(int tipPretrage) {
+        this.tipPretrage = tipPretrage;
     }
     
 }

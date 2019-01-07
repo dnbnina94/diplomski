@@ -39,26 +39,35 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
+                        <h:form>
+                            <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
+                                <div class="stripe-line-header news-category-header">
+                                    <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                        <div class="stripe-line-header-link"><h:outputText value="#{kategorijaVest.naziv}" /></div>
+                                        <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                                        <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                    </b:commandLink>
+                                </div>
+                                <div class="row news-category-front-page">
 
-                        <ui:repeat value="#{kategorijeSifarnika.vestiKategorije}" var="kategorijaVest">
-                            <div class="stripe-line-header news-category-header">
-                                <div><h:outputText value="#{kategorijaVest.naziv}" /></div>                           
-                            </div>
-                            <div class="row news-category-front-page">
-                                <ui:repeat varStatus="status" value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
-                                    <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                    <ui:repeat varStatus="status" value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
+                                        <div class="col-md-3 col-sm-6 col-xs-12">
+                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                                <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                                </div>
+                                                <div class="news-header-container-front-page">
+                                                    #{vest.naslovShort}
+                                                </div>
+                                                <div class="news-content-container-front-page">
+                                                    #{vest.tekstShort}
+                                                </div>
+                                                <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                            </b:commandLink>
                                         </div>
-                                        <div class="news-header-container-front-page">
-                                            #{vest.naslovShort}
-                                        </div>
-                                        <div class="news-content-container-front-page">
-                                            #{vest.tekstShort}
-                                        </div>
-                                    </div>
-                                </ui:repeat>
-                            </div>
-                        </ui:repeat>
+                                    </ui:repeat>
+                                </div>
+                            </ui:repeat>
+                        </h:form>
 
                     </div>
                     <div class="col-md-3">
