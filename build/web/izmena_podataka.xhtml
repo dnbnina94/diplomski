@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="customCheckbox.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 page-content">
+
+                                <div class="stripe-line-header news-category-header">
+                                    <div>Izmena podataka</div>                           
+                                </div>
+                                <div class="row login-form-wrapper" style="padding-right: 7.5px">
+                                    <div class="col-md-12">
+                                        <div class="container-w-red-header">
+                                            <div class="container-w-red-header-header">
+                                                Novi korisnici
+                                            </div>
+                                            <div class="container-w-red-header-content">
+                                                <h:form id="izmena_podataka">
+                                                    <h:outputText value="Naziv organizacije:" styleClass="login-form-label" />
+                                                    <b:inputText id="nazivOrg"
+                                                                 styleClass="#{izmenaPodataka.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                 value="#{izmenaPodataka.korisnik.organizacije.naziv}"
+                                                                 placeholder="Unesite naziv svoje organizacije" />
+                                                    <div id="nazivOrgGreska" class="#{izmenaPodataka.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                        <h:outputText value="#{izmenaPodataka.nazivOrgGreska}" />
+                                                    </div>
+
+                                                    <h:outputText value="Opis organizacije:" styleClass="login-form-label" />
+                                                    <b:inputTextarea id="opisOrg"
+                                                                     placeholder="Kratko opišite svoju organizaciju" 
+                                                                     styleClass="#{izmenaPodataka.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
+                                                                     value="#{izmenaPodataka.korisnik.organizacije.tekst}" />
+                                                    <div id="opisOrgGreska" class="#{izmenaPodataka.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                        <h:outputText value="#{izmenaPodataka.opisOrgGreska}" />
+                                                    </div>
+
+                                                    <h:outputText value="Oblast delovanja:" styleClass="login-form-label" />
+                                                    <b:inputText id="oblastDelovanja"
+                                                                 styleClass="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                 placeholder="Npr. zaštita životne sredine" 
+                                                                 typeahead="true" 
+                                                                 typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.oblastiDelovanja)}" 
+                                                                 value="#{izmenaPodataka.korisnik.organizacije.oblastDelovanja.naziv}" />
+                                                    <div id="oblastDelovanjaGreska" class="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                        <h:outputText value="#{izmenaPodataka.oblastDelovanjaGreska}" />
+                                                    </div>
+
+                                                    <h:outputText value="Web stranica organizacije:" styleClass="login-form-label" />
+                                                    <div style="height: 5px"></div>
+                                                    <b:inputText id="webStranica"
+                                                                 styleClass="#{izmenaPodataka.webStranicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                 style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                 value="#{izmenaPodataka.korisnik.organizacije.webAdresa}"
+                                                                 placeholder="Npr. www.mojaorg.com">
+                                                        <f:facet name="prepend">
+                                                            <h:graphicImage library="img" name="world.png" style="height: 18px" />
+                                                        </f:facet>
+                                                    </b:inputText>
+                                                    <div id="webStranicaGreska" class="#{izmenaPodataka.webStranicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                         style="margin-top: 5px">
+                                                        <h:outputText value="#{izmenaPodataka.webStranicaGreska}" />
+                                                    </div>
+
+                                                    <div class="row" style="margin-bottom: 5px; margin-top: 10px">
+
+                                                        <div class="col-md-6">
+                                                            <h:outputText value="Mesto: " styleClass="login-form-label" />
+                                                            <b:inputText id="mestoOrg"
+                                                                         styleClass="#{izmenaPodataka.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         placeholder="Npr. Beograd" 
+                                                                         typeahead="true" 
+                                                                         typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
+                                                                         value="#{izmenaPodataka.korisnik.organizacije.mesto.naziv}" />
+                                                            <div id="mestoGreska" class="#{izmenaPodataka.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.mestoGreska}" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <h:outputText value="Ulica: " styleClass="login-form-label" />
+                                                            <b:inputText id="ulicaOrg"
+                                                                         styleClass="#{izmenaPodataka.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         placeholder="Npr. Bulevar Kralja Aleksandra 73" 
+                                                                         typeahead="true" 
+                                                                         typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
+                                                                         value="#{izmenaPodataka.korisnik.organizacije.ulica.naziv}" />
+                                                            <div id="ulicaGreska" class="#{izmenaPodataka.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.ulicaGreska}" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </h:form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

@@ -109,10 +109,22 @@ and open the template in the editor.
                     </c:if>
                     <c:if test="#{korisnikBean.korisnik != null}">
                         <h:form>
-                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
-                                <h:outputText value="Moj profil" />
-                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
-                            </b:commandLink>
+                            <div class="pull-left">
+                                <ul class="list-inline">
+                                    <li>
+                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                            <h:outputText value="Profil" />
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                        </b:commandLink>
+                                    </li>
+                                    <li>
+                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                            <h:outputText value="Izlogujte se" style="font-weight: bold" />
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                        </b:commandLink>
+                                    </li>
+                                </ul>
+                            </div>
                         </h:form>
                     </c:if>
                 </div>
