@@ -31,17 +31,4 @@ public class KorisnikBean {
         this.korisnik = korisnik;
     }
 
-    public void izmenaPodataka() {
-        try {
-            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-            IzmenaPodataka izmenaPodataka = new IzmenaPodataka();
-            izmenaPodataka.setKorisnik(korisnik);
-            elContext.getELResolver().setValue(elContext, null, "izmenaPodataka", izmenaPodataka);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("izmena_podataka.xhtml");
-            FacesContext.getCurrentInstance().responseComplete();
-        } catch (IOException ex) {
-            Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 }

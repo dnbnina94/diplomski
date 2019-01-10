@@ -41,6 +41,19 @@ public class Organizacije implements java.io.Serializable {
         this.ulica = ulica;
     }
     
+    public Organizacije(Organizacije organizacija) {
+        this.korisnici = organizacija.getKorisnici();
+        this.oblastDelovanja = organizacija.getOblastDelovanja();
+        this.naziv = organizacija.getNaziv();
+        this.kontaktOsoba = organizacija.getKontaktOsoba();
+        this.email = organizacija.getEmail();
+        this.tekst = organizacija.getTekst();
+        this.webAdresa = organizacija.getWebAdresa();
+        this.telefonis = organizacija.getTelefonis();
+        this.mesto = organizacija.getMesto();
+        this.ulica = organizacija.getUlica();
+    }
+    
     public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, String webAdresa, Set telefonis, StavkeSifarnika mesto, StavkeSifarnika ulica) {
         this.korisnici = korisnici;
         this.oblastDelovanja = oblastDelovanja;

@@ -6,6 +6,18 @@
 package beans;
 
 import db.Korisnici;
+import db.Organizacije;
+import db.Telefoni;
+import db.helpers.KorisniciHelper;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.el.ELContext;
+import javax.faces.context.FacesContext;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -13,74 +25,8 @@ import db.Korisnici;
  */
 public class IzmenaPodataka {
     
-    private Korisnici korisnik;
-    
-    private String nazivOrgGreska = "";
-    private String opisOrgGreska = "";
-    private String oblastDelovanjaGreska = "";
-    private String webStranicaGreska = "";
-    private String mestoGreska = "";
-    private String ulicaGreska = "";
-    
     public IzmenaPodataka() {
+        
     }
-    
-    public Korisnici getKorisnik() {
-        return korisnik;
-    }
-    
-    public void setKorisnik(Korisnici korisnik) {
-        this.korisnik = korisnik;
-    }
-
-    public String getNazivOrgGreska() {
-        return nazivOrgGreska;
-    }
-
-    public void setNazivOrgGreska(String nazivOrgGreska) {
-        this.nazivOrgGreska = nazivOrgGreska;
-    }
-
-    public String getOpisOrgGreska() {
-        return opisOrgGreska;
-    }
-
-    public void setOpisOrgGreska(String opisOrgGreska) {
-        this.opisOrgGreska = opisOrgGreska;
-    }
-
-    public String getOblastDelovanjaGreska() {
-        return oblastDelovanjaGreska;
-    }
-
-    public void setOblastDelovanjaGreska(String oblastDelovanjaGreska) {
-        this.oblastDelovanjaGreska = oblastDelovanjaGreska;
-    }
-
-    public String getWebStranicaGreska() {
-        return webStranicaGreska;
-    }
-
-    public void setWebStranicaGreska(String webStranicaGreska) {
-        this.webStranicaGreska = webStranicaGreska;
-    }
-
-    public String getMestoGreska() {
-        return mestoGreska;
-    }
-
-    public void setMestoGreska(String mestoGreska) {
-        this.mestoGreska = mestoGreska;
-    }
-
-    public String getUlicaGreska() {
-        return ulicaGreska;
-    }
-
-    public void setUlicaGreska(String ulicaGreska) {
-        this.ulicaGreska = ulicaGreska;
-    }
-    
-    
     
 }
