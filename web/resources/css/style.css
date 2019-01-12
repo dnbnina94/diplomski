@@ -1081,6 +1081,20 @@ table.dataTable {
     padding: 0px !important;
 }
 
+.save-field-button {
+    width: 35px !important;
+    height: 35px !important;
+    background-color: #4C4C4C !important;
+    color: white !important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+    font-size: 18px !important;
+    padding-top: 5px !important;
+    padding-left: 1px !important;
+    border-color: #4c4c4c !important;
+    margin-left: 0px !important;
+}
+
 .remove-field-button {
     background-color: #aaa !important;
     color: white !important;
@@ -1156,6 +1170,19 @@ table.dataTable {
     height: 40px;
 }
 
+.form-step-button-sm {
+    border: none !important;
+    background: #aaa !important;
+    color: white !important;
+    font-family: BebasNeueRegular;
+    font-size: 18px !important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    height: 32px;
+}
+
 .form-step-buttons-row {
     margin-left: 0px !important;
 }
@@ -1206,22 +1233,19 @@ table.dataTable {
     padding-top: 10px;
 }
 
-.organizacija-details-wrapper {
-    width: 100%;
-    overflow: hidden;
-    margin-top: 10px;
+.organizacija-detail-wrapper {
+    margin-top: 15px;
 }
 
 .organizacija-detail-header {
     font-weight: bold;
-    width: 150px;
-    float: left;
-    color: #4C4C4C;
+    height: 28px;
+    line-height: 28px;
 }
 
 .organizacija-detail-content {
-    width: auto;
-    overflow: hidden;
+    padding: 0px !important;
+    padding-right: 15px !important;
 }
 
 .bordered-container-red-bottom {
@@ -1239,6 +1263,54 @@ table.dataTable {
     -moz-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
     -webkit-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
     -khtml-box-shadow:0 3px 6px 0 rgba(230, 230, 230, 0.7) ;
+}
+
+.edit-info-button {
+    border-radius: 0px !important;
+    border-color: orangered !important;
+    background-color: orangered !important;
+    color: white !important;
+    font-size: 14px !important;
+    padding: 3px 6px !important;
+}
+
+.remove-edit-info-button {
+    border-radius: 0px !important;
+    border-color: #ddd !important;
+    background-color: #ddd !important;
+    color: #4C4C4C !important;
+    font-size: 14px !important;
+    padding: 3px 6px !important;
+    padding-top: 4px !important;
+    padding-bottom: 2px !important;
+}
+
+.organizacija-detail-content > table > tbody > tr > td:nth-child(2) {
+    vertical-align: top !important;
+}
+
+.organizacija-detail-content > table > tbody > tr > td:nth-child(1) {
+    padding-right: 15px;
+}
+
+.custom-div-separator {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #ddd;
+}
+
+.edit-form-input {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    height: 28px !important;
+}
+
+.field-wrapper {
+    display: none;
+}
+
+.field-wrapper > td {
+    padding-bottom: 5px;
 }
 
 

@@ -34,78 +34,302 @@
                             <div><h:outputText value="#{organizacijaBean.organizacija.korisnickoIme}" /></div>     
                         </div>
 
-                        <div class="container-w-red-header-header" style="margin-top: 20px">
-                            Detalji organizacije
-                        </div>
-                        <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 5px" >
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Naziv organizacije:
+                        <h:form id="izmena_podataka">
+
+                            <div class="container-w-red-header-header" style="margin-top: 20px">
+                                Detalji organizacije
+                            </div>
+                            <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px" >
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Naziv organizacije:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr id="infoWrapperNazivOrg">
+                                                <td style="width: 100%">
+                                                    <h:outputText value="#{organizacijaBean.organizacija.naziv}" />
+                                                </td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" id="editButtonNazivOrg" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                <tr class="field-wrapper" id="fieldWrapperNazivOrg"><td colspan="2" style="padding-right: 0px;">
+                                                        <b:inputText id="nazivOrg"
+                                                                     value="#{izmenaPodataka.nazivOrg}" 
+                                                                     styleClass="#{izmenaPodataka.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     placeholder="Unesite naziv svoje organizacije">
+                                                        </b:inputText>
+                                                        <h:panelGroup id="nazivOrgGreskaWrapper" >
+                                                            <div id="nazivOrgGreska" class="#{izmenaPodataka.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.nazivOrgGreska}" />
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <b:commandButton id="saveEditButtonNazivOrg"
+                                                                         value="Sačuvaj"
+                                                                         styleClass="form-step-button-sm"
+                                                                         style="background-color: #4c4c4c !important"
+                                                                         />
+                                                        <b:button id="cancelEditButtonNazivOrg"
+                                                                  value="Odustani"
+                                                                  styleClass="form-step-button-sm" style="margin-left: 5px" />
+                                                    </td></tr> 
+                                            </c:if>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.naziv}" />
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Opis organizacije:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr id="infoWrapperOpisOrg">
+                                                <td style="width: 100%"><h:outputText value="#{organizacijaBean.organizacija.tekst}" /></td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" id="editButtonOpisOrg" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <tr class="field-wrapper" id="fieldWrapperOpisOrg"><td colspan="2" style="padding-right: 0px;">
+                                                        <b:inputTextarea id="opisOrg"
+                                                                         placeholder="Kratko opišite svoju organizaciju" 
+                                                                         styleClass="#{izmenaPodataka.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
+                                                                         value="#{izmenaPodataka.opisOrg}" />
+                                                        <h:panelGroup id="opisOrgGreskaWrapper" >
+                                                            <div id="opisOrgGreska" class="#{izmenaPodataka.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.opisOrgGreska}" />
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <b:commandButton id="saveEditButtonOpisOrg"
+                                                                         value="Sačuvaj"
+                                                                         styleClass="form-step-button-sm"
+                                                                         style="background-color: #4c4c4c !important"
+                                                                         />
+                                                        <b:button id="cancelEditButtonOpisOrg"
+                                                                  value="Odustani"
+                                                                  styleClass="form-step-button-sm" style="margin-left: 5px" />
+                                                    </td></tr> 
+                                            </c:if>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Oblast delovanja:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr id="infoWrapperOblastDelovanja">
+                                                <td style="width: 100%">
+                                                    <h:outputText value="#{organizacijaBean.organizacija.oblastDelovanja.naziv}" />
+                                                </td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" id="editButtonOblastDelovanja" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                <tr class="field-wrapper" id="fieldWrapperOblastDelovanja"><td colspan="2" style="padding-right: 0px;">
+                                                        <b:inputText id="oblastDelovanja"
+                                                                     styleClass="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     placeholder="Npr. zaštita životne sredine" 
+                                                                     typeahead="true" 
+                                                                     typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.oblastiDelovanja)}" 
+                                                                     value="#{izmenaPodataka.oblastDelovanja}" />
+                                                        <h:panelGroup id="oblastDelovanjaGreskaWrapper" >
+                                                            <div id="oblastDelovanjaGreska" class="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.oblastDelovanjaGreska}" />
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <b:commandButton id="saveEditButtonOblastDelovanja"
+                                                                         value="Sačuvaj"
+                                                                         styleClass="form-step-button-sm"
+                                                                         style="background-color: #4c4c4c !important"
+                                                                         />
+                                                        <b:button id="cancelEditButtonOblastDelovanja"
+                                                                  value="Odustani"
+                                                                  styleClass="form-step-button-sm" style="margin-left: 5px" />
+                                                    </td></tr> 
+                                            </c:if>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Web adresa:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr id="infoWrapperWebAdresa">
+                                                <td style="width: 100%"><h:outputText value="#{organizacijaBean.organizacija.webAdresa}" /></td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" id="editButtonWebAdresa" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <tr class="field-wrapper" id="fieldWrapperWebAdresa"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
+                                                        <b:inputText id="webAdresa"
+                                                                     styleClass="#{izmenaPodataka.webAdresaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                     style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                     value="#{izmenaPodataka.webAdresa}"
+                                                                     placeholder="Npr. www.mojaorg.com">
+                                                            <f:facet name="prepend">
+                                                                <h:graphicImage library="img" name="world.png" style="height: 18px" />
+                                                            </f:facet>
+                                                        </b:inputText>
+                                                        <h:panelGroup id="webAdresaGreskaWrapper">
+                                                            <div id="webAdresaGreska" class="#{izmenaPodataka.webAdresaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                                 style="margin-top: 5px; margin-bottom: 0px">
+                                                                <h:outputText value="#{izmenaPodataka.webAdresaGreska}" />
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <b:commandButton id="saveEditButtonWebAdresa"
+                                                                         value="Sačuvaj"
+                                                                         styleClass="form-step-button-sm"
+                                                                         style="background-color: #4c4c4c !important; margin-top: 10px"
+                                                                         />
+                                                        <b:button id="cancelEditButtonWebAdresa"
+                                                                  value="Odustani"
+                                                                  styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px" />
+                                                    </td></tr> 
+                                            </c:if>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header" >
+                                        Mesto i ulica:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 100%">
+                                                    <h:outputText value="#{organizacijaBean.organizacija.mesto.naziv}" />
+                                                    <h:outputText value=", " />
+                                                    <h:outputText value="#{organizacijaBean.organizacija.ulica.naziv}" />
+                                                </td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Kontakt osoba:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr id="infoWrapperKontaktOsoba">
+                                                <td style="width: 100%">
+                                                    <h:outputText value="#{organizacijaBean.organizacija.kontaktOsoba}" />
+                                                </td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" id="editButtonKontaktOsoba" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                <tr class="field-wrapper" id="fieldWrapperKontaktOsoba"><td colspan="2" style="padding-right: 0px;">
+                                                        <b:inputText id="kontaktOsoba"
+                                                                     styleClass="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                     style="margin-bottom: 5px"
+                                                                     value="#{izmenaPodataka.kontaktOsoba}"
+                                                                     placeholder="Unesite ime i prezime kontakt osobe" />
+                                                        <h:panelGroup id="kontaktOsobaGreskaWrapper" >
+                                                            <div id="kontaktOsobaGreska" class="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                <h:outputText value="#{izmenaPodataka.kontaktOsobaGreska}" />
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <b:commandButton id="saveEditButtonKontaktOsoba"
+                                                                         value="Sačuvaj"
+                                                                         styleClass="form-step-button-sm"
+                                                                         style="background-color: #4c4c4c !important"
+                                                                         />
+                                                        <b:button id="cancelEditButtonKontaktOsoba"
+                                                                  value="Odustani"
+                                                                  styleClass="form-step-button-sm" style="margin-left: 5px" />
+                                                    </td></tr> 
+                                            </c:if>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Kontakt telefoni:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 100%"><h:outputText value="#{organizacijaBean.telefoniToString()}" /></td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="custom-div-separator"></div>
+
+                                <div class="row">
+                                    <div class="col-md-3 organizacija-detail-header">
+                                        Email:
+                                    </div>
+                                    <div class="col-md-9 organizacija-detail-content">
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 100%"><h:outputText value="#{organizacijaBean.organizacija.email}" /></td>
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <td>
+                                                        <b:button icon="pencil" styleClass="edit-info-button" />
+                                                    </td>     
+                                                </c:if>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Opis organizacije:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.tekst}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Oblast delovanja:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.oblastDelovanja.naziv}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Web stranica:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{(organizacijaBean.organizacija.webAdresa == null) ? '/' : organizacijaBean.organizacija.webAdresa}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Mesto:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.ulica.naziv}" />
-                                    <span>, </span>
-                                    <h:outputText value="#{organizacijaBean.organizacija.mesto.naziv}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Kontakt osoba:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.kontaktOsoba}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Kontakt telefoni:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.telefoniToString()}" />
-                                </div>
-                            </div>
-                            <div class="organizacija-details-wrapper">
-                                <div class="organizacija-detail-header">
-                                    Email:
-                                </div>
-                                <div class="organizacija-detail-content">
-                                    <h:outputText value="#{organizacijaBean.organizacija.email}" />
-                                </div>
-                            </div>
-                        </div>
-                        
+
+                            <h:panelGroup id="izmenaPodatakaValidacija">
+                                <h:outputScript library="js" name="izmenaPodatakaValidacija.js" />
+                            </h:panelGroup>
+
+                        </h:form>
+
                         <div class="stripe-line-header news-category-header">
                             <h:form>
                                 <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
@@ -117,21 +341,21 @@
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                            <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
-                                <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
-                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                    <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
+                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                            <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                            </div>
+                                            <div class="news-header-container-front-page">
+                                                #{vest.naslovShort}
+                                            </div>
+                                            <div class="news-content-container-front-page">
+                                                #{vest.tekstShort}
+                                            </div>
+                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                        </b:commandLink>
                                     </div>
-                                    <div class="news-header-container-front-page">
-                                        #{vest.naslovShort}
-                                    </div>
-                                    <div class="news-content-container-front-page">
-                                        #{vest.tekstShort}
-                                    </div>
-                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
-                                    </b:commandLink>
-                                </div>
-                            </ui:repeat>
+                                </ui:repeat>
                             </h:form>
                         </div>
                     </div>

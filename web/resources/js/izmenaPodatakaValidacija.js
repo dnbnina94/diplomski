@@ -20,9 +20,11 @@ $("#input_izmena_podataka\\:nazivOrg").keyup(function (event) {
         $("#input_izmena_podataka\\:nazivOrg").addClass("login-form-input-error");
         $("#nazivOrgGreska").removeClass("input-error-message-hidden");
         $("#nazivOrgGreska").html(greska);
+        $("#izmena_podataka\\:saveButtonNazivOrg").css("margin-top", "0px");
     } else {
         $("#input_izmena_podataka\\:nazivOrg").removeClass("login-form-input-error");
         $("#nazivOrgGreska").addClass("input-error-message-hidden");
+        $("#izmena_podataka\\:saveButtonNazivOrg").css("margin-top", "-5px");
     }
 });
 
@@ -299,4 +301,103 @@ $("#input_izmena_podataka\\:telefon").keyup(function (event) {
         $("#izmena_podataka\\:plusButton").css("margin-top", "-5px");
     }
 });
+
+$("#izmena_podataka\\:editButtonNazivOrg").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    $("#fieldWrapperNazivOrg").css("display", "table-row");
+    $("#infoWrapperNazivOrg").css("display", "none");
+    
+});
+
+$("#izmena_podataka\\:cancelEditButtonNazivOrg").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperNazivOrg").css("display", "table-row");
+    $("#fieldWrapperNazivOrg").css("display", "none");
+});
+
+$("#izmena_podataka\\:editButtonOpisOrg").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    $("#fieldWrapperOpisOrg").css("display", "table-row");
+    $("#infoWrapperOpisOrg").css("display", "none");
+    
+});
+
+$("#izmena_podataka\\:cancelEditButtonOpisOrg").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperOpisOrg").css("display", "table-row");
+    $("#fieldWrapperOpisOrg").css("display", "none");
+});
+
+$("#izmena_podataka\\:editButtonOblastDelovanja").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    $("#fieldWrapperOblastDelovanja").css("display", "table-row");
+    $("#infoWrapperOblastDelovanja").css("display", "none");
+    
+});
+
+$("#izmena_podataka\\:cancelEditButtonOblastDelovanja").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperOblastDelovanja").css("display", "table-row");
+    $("#fieldWrapperOblastDelovanja").css("display", "none");
+});
+
+$("#izmena_podataka\\:editButtonWebAdresa").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    $("#fieldWrapperWebAdresa").css("display", "table-row");
+    $("#infoWrapperWebAdresa").css("display", "none");
+    
+});
+
+$("#izmena_podataka\\:cancelEditButtonWebAdresa").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperWebAdresa").css("display", "table-row");
+    $("#fieldWrapperWebAdresa").css("display", "none");
+});
+
+$("#izmena_podataka\\:editButtonKontaktOsoba").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    $("#fieldWrapperKontaktOsoba").css("display", "table-row");
+    $("#infoWrapperKontaktOsoba").css("display", "none");
+    
+});
+
+$("#izmena_podataka\\:cancelEditButtonKontaktOsoba").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperKontaktOsoba").css("display", "table-row");
+    $("#fieldWrapperKontaktOsoba").css("display", "none");
+});
+
+/*$("#izmena_podataka\\:editButtonOpisOrg").click(function (event) {
+    event.stopImmediatePropagation();
+    
+    var button = $("#izmena_podataka\\:editButtonOpisOrg");
+    var icon = $("#izmena_podataka\\:editButtonOpisOrg").find("i");
+    var fieldWrapper = $("#fieldWrapperOpisOrg");
+    
+    if (icon.hasClass("glyphicon-pencil")) {
+        fieldWrapper.css("display", "table-row");
+        button.removeClass("edit-info-button");
+        button.addClass("remove-edit-info-button");
+        icon.removeClass("glyphicon-pencil");
+        icon.addClass("glyphicon-remove");
+    } else {
+        if (icon.hasClass("glyphicon-remove")) {
+            fieldWrapper.css("display", "none");
+            button.removeClass("remove-edit-info-button");
+            button.addClass("edit-info-button");
+            icon.removeClass("glyphicon-remove");
+            icon.addClass("glyphicon-pencil");
+        }
+    }
+});*/
 
