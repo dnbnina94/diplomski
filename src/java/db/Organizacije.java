@@ -22,15 +22,15 @@ public class Organizacije implements java.io.Serializable {
     private String tekst;
     private String webAdresa;
     private StavkeSifarnika oblastDelovanja;
-    private Set telefonis = new HashSet(0);
     private StavkeSifarnika mesto;
     private StavkeSifarnika ulica;
+    private String telefoni;
     
     public Organizacije() {
         
     }
     
-    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, StavkeSifarnika mesto, StavkeSifarnika ulica) {
+    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, StavkeSifarnika mesto, StavkeSifarnika ulica, String telefoni) {
         this.korisnici = korisnici;
         this.oblastDelovanja = oblastDelovanja;
         this.naziv = naziv;
@@ -39,6 +39,7 @@ public class Organizacije implements java.io.Serializable {
         this.tekst = tekst;
         this.mesto = mesto;
         this.ulica = ulica;
+        this.telefoni = telefoni;
     }
     
     public Organizacije(Organizacije organizacija) {
@@ -49,12 +50,12 @@ public class Organizacije implements java.io.Serializable {
         this.email = organizacija.getEmail();
         this.tekst = organizacija.getTekst();
         this.webAdresa = organizacija.getWebAdresa();
-        this.telefonis = organizacija.getTelefonis();
         this.mesto = organizacija.getMesto();
         this.ulica = organizacija.getUlica();
+        this.telefoni = organizacija.getTelefoni();
     }
     
-    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, String webAdresa, Set telefonis, StavkeSifarnika mesto, StavkeSifarnika ulica) {
+    public Organizacije(Korisnici korisnici, StavkeSifarnika oblastDelovanja, String naziv, String kontaktOsoba, String email, String tekst, String webAdresa, StavkeSifarnika mesto, StavkeSifarnika ulica, String telefoni) {
         this.korisnici = korisnici;
         this.oblastDelovanja = oblastDelovanja;
         this.naziv = naziv;
@@ -62,9 +63,9 @@ public class Organizacije implements java.io.Serializable {
         this.email = email;
         this.tekst = tekst;
         this.webAdresa = webAdresa;
-        this.telefonis = telefonis;
         this.mesto = mesto;
         this.ulica = ulica;
+        this.telefoni = telefoni;
     }
     
     public String getKorisnickoIme() {
@@ -131,14 +132,6 @@ public class Organizacije implements java.io.Serializable {
         this.oblastDelovanja = oblastDelovanja;
     }
     
-    public Set getTelefonis() {
-        return telefonis;
-    }
-    
-    public void setTelefonis(Set telefonis) {
-        this.telefonis = telefonis;
-    }
-    
     public StavkeSifarnika getMesto() {
         return mesto;
     }
@@ -154,4 +147,13 @@ public class Organizacije implements java.io.Serializable {
     public void setUlica(StavkeSifarnika ulica) {
         this.ulica = ulica;
     }
+
+    public String getTelefoni() {
+        return telefoni;
+    }
+
+    public void setTelefoni(String telefoni) {
+        this.telefoni = telefoni;
+    }
+    
 }

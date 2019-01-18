@@ -118,9 +118,8 @@ and open the template in the editor.
                                         </b:commandLink>
                                     </li>
                                     <li>
-                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                        <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
                                             <h:outputText value="Izlogujte se" style="font-weight: bold" />
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
                                         </b:commandLink>
                                     </li>
                                 </ul>

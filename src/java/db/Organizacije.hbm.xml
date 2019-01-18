@@ -22,6 +22,9 @@
         <property name="email" type="string">
             <column name="email" length="50" not-null="true" />
         </property>
+        <property name="telefoni" type="string">
+            <column name="telefoni" length="100" not-null="true" />
+        </property>
         <property name="tekst" type="string">
             <column name="tekst" length="65535" not-null="true" />
         </property>
@@ -34,11 +37,5 @@
         <many-to-one name="ulica" class="db.StavkeSifarnika" fetch="select">
             <column name="ulica" not-null="true" />
         </many-to-one>
-        <set name="telefonis" table="telefoni" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="korisnicko_ime" length="50" not-null="true" />
-            </key>
-            <one-to-many class="db.Telefoni" />
-        </set>
     </class>
 </hibernate-mapping>

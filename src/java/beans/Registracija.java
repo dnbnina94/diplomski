@@ -8,10 +8,8 @@ package beans;
 import db.Korisnici;
 import db.Organizacije;
 import db.StavkeSifarnika;
-import db.Telefoni;
 import db.helpers.KorisniciHelper;
 import db.helpers.StavkeSifarnikaHelper;
-import db.helpers.TelefoniHelper;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,7 +37,6 @@ public class Registracija {
     
     private KorisniciHelper korHelper = new KorisniciHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
-    private TelefoniHelper telefoniHelper = new TelefoniHelper();
 
     private List<String> telefoni;
     private String telefon;
@@ -427,6 +424,8 @@ public class Registracija {
             }
 
             if (!valid) {
+                lozinka = "";
+                ponovljenaLozinka = "";
                 script = "$('.wizardPseudoClass').carousel(2);$('.wizardPseudoClass').carousel('pause');";
             } else {
                 try {
@@ -471,13 +470,21 @@ public class Registracija {
                     organizacije.setMesto(mesto);
                     organizacije.setUlica(ulica);
                     
-                    Set<Telefoni> telefoniOrganizacije = new HashSet<Telefoni>(0);
+                    /*Set<Telefoni> telefoniOrganizacije = new HashSet<Telefoni>(0);
                     int id = telefoniHelper.getMaxId()+1;
                     for (String telefon : telefoni) {
                         Telefoni noviTelefon = new Telefoni(id++, organizacije, telefon);
                         telefoniOrganizacije.add(noviTelefon);
                     }
-                    organizacije.setTelefonis(telefoniOrganizacije);
+                    organizacije.setTelefonis(telefoniOrganizacije);*/
+                    
+                    String telefoniOrg = "";
+                    for (int i=0; i<telefoni.size(); i++) {
+                        telefoniOrg += telefoni.get(i);
+                        if (i != (telefoni.size()-1))
+                            telefoniOrg += ", ";
+                    }
+                    organizacije.setTelefoni(telefoniOrg);
                     
                     noviKorisnik.setOrganizacije(organizacije);
                     

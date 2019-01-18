@@ -7,7 +7,6 @@ package beans;
 
 import db.Korisnici;
 import db.Organizacije;
-import db.Telefoni;
 import db.Vesti;
 import db.helpers.KorisniciHelper;
 import java.util.ArrayList;
@@ -26,14 +25,14 @@ public class OrganizacijaBean {
     public OrganizacijaBean() {
     }
     
-    class SortByIdTelefon implements Comparator<Telefoni> {
+    /*class SortByIdTelefon implements Comparator<Telefoni> {
         
         @Override
         public int compare (Telefoni a, Telefoni b) {
             return a.getIdTelefon()- b.getIdTelefon();
         }
         
-    }
+    }*/
     
     class SortVestiByDatumDescending implements Comparator<Vesti> {
         
@@ -44,13 +43,13 @@ public class OrganizacijaBean {
         
     }
     
-    private List<Telefoni> setTelefoniToList() {
+    /*public List<Telefoni> setTelefoniToList() {
         List<Telefoni> telefoni = new ArrayList<Telefoni>(organizacija.getTelefonis());
         Collections.sort(telefoni, new OrganizacijaBean.SortByIdTelefon());
         return telefoni;
-    }
+    }*/
     
-    public String telefoniToString() {
+    /*public String telefoniToString() {
         String telefoniString = "";
         List<Telefoni> telefoni = this.setTelefoniToList();
         for (int i=0; i < telefoni.size(); i++) {
@@ -60,7 +59,7 @@ public class OrganizacijaBean {
         }
         
         return telefoniString;
-    }
+    }*/
     
     public Organizacije getOrganizacija() {
         return organizacija;

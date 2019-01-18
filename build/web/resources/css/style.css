@@ -1296,7 +1296,7 @@ table.dataTable {
 .custom-div-separator {
     margin-top: 5px;
     margin-bottom: 5px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #eee;
 }
 
 .edit-form-input {
@@ -1313,4 +1313,56 @@ table.dataTable {
     padding-bottom: 5px;
 }
 
+.edit-place-fields-container > div:nth-child(1) {
+    padding-right: 7.5px;
+}
 
+.edit-place-fields-container > div:nth-child(2) {
+    padding-left: 7.5px;
+}
+
+.no-content {
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 25px;
+        /*font-family: BebasNeueRegular;
+        font-size: 18px;*/
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.custom-file-input-btn {
+    border: none !important;
+    color: white;
+    font-family: BebasNeueRegular;
+    background-color: orangered;
+    padding: 6px 12px;
+    border-radius: 0px;
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer !important;
+}
+
+.remove-file-btn {
+    border-radius: 0px !important;
+    background-color: #ccc !important;
+    border: none !important;
+    color: white !important;
+    margin-top: -25px !important;
+    margin-left: 5px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+    display: inline-block !important;
+}

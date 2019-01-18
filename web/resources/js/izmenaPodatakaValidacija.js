@@ -213,32 +213,52 @@ $("#input_izmena_podataka\\:korIme").keyup(function (event) {
     }
 });
 
-$("#input_izmena_podataka\\:lozinka").keyup(function (event) {
+$("#input_izmena_podataka\\:staraLozinka").keyup(function (event) {
+    event.stopImmediatePropagation();
+    
+    var val = $("#input_izmena_podataka\\:staraLozinka").val();
+    var greska = "";
+    
+    if (val === "") {
+        greska = "Polje 'Stara lozinka' ne sme ostati prazno.";
+    }
+    
+    if (greska !== "") {
+        $("#input_izmena_podataka\\:staraLozinka").addClass("login-form-input-error");
+        $("#staraLozinkaGreska").removeClass("input-error-message-hidden");
+        $("#staraLozinkaGreska").html(greska);
+    } else {
+        $("#input_izmena_podataka\\:staraLozinka").removeClass("login-form-input-error");
+        $("#staraLozinkaGreska").addClass("input-error-message-hidden");
+    }
+});
+
+$("#input_izmena_podataka\\:novaLozinka").keyup(function (event) {
     event.stopImmediatePropagation();
 
-    var val = $("#input_izmena_podataka\\:lozinka").val();
+    var val = $("#input_izmena_podataka\\:novaLozinka").val();
     var greska = "";
 
     if (val === "") {
-        greska = "Polje 'Lozinka' ne sme ostati prazno.";
+        greska = "Polje 'Nova lozinka' ne sme ostati prazno.";
     } else {
         if (/\s/.test(val)) {
-            greska = "Lozinka ne sme sadržati blanko karaktere.";
+            greska = "Nova lozinka ne sme sadržati blanko karaktere.";
         } else {
             if (val.length < 8) {
-                greska = "Lozinka mora biti minimalne dužine od 8 karaktera.";
+                greska = "Nova lozinka mora biti minimalne dužine od 8 karaktera.";
             } else {
                 if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/.test(val)) {
-                    greska = "Lozinka mora sadržati makar jedno veliko slovo, makar 1 malo slovo, makar jedan numerik i makar jedan specijalan karakter.";
+                    greska = "Nova lozinka mora sadržati makar jedno veliko slovo, makar 1 malo slovo, makar jedan numerik i makar jedan specijalan karakter.";
                 } else {
-                    var ponovljenaLozinka = $("#input_izmena_podataka\\:ponovljenaLozinka").val();
+                    var ponovljenaLozinka = $("#input_izmena_podataka\\:ponovljenaNovaLozinka").val();
                     if (ponovljenaLozinka !== val) {
-                        $("#input_izmena_podataka\\:ponovljenaLozinka").addClass("login-form-input-error");
-                        $("#ponovljenaLozinkaGreska").removeClass("input-error-message-hidden");
-                        $("#ponovljenaLozinkaGreska").html("Lozinka i ponovljena lozinka se ne poklapaju.");
+                        $("#input_izmena_podataka\\:ponovljenaNovaLozinka").addClass("login-form-input-error");
+                        $("#ponovljenaNovaLozinkaGreska").removeClass("input-error-message-hidden");
+                        $("#ponovljenaNovaLozinkaGreska").html("Lozinka i ponovljena lozinka se ne poklapaju.");
                     } else {
-                        $("#input_izmena_podataka\\:ponovljenaLozinka").removeClass("login-form-input-error");
-                        $("#ponovljenaLozinkaGreska").addClass("input-error-message-hidden");
+                        $("#input_izmena_podataka\\:ponovljenaNovaLozinka").removeClass("login-form-input-error");
+                        $("#ponovljenaNovaLozinkaGreska").addClass("input-error-message-hidden");
                     }
                 }
             }
@@ -246,37 +266,37 @@ $("#input_izmena_podataka\\:lozinka").keyup(function (event) {
     }
 
     if (greska !== "") {
-        $("#input_izmena_podataka\\:lozinka").addClass("login-form-input-error");
-        $("#lozinkaGreska").removeClass("input-error-message-hidden");
-        $("#lozinkaGreska").html(greska);
+        $("#input_izmena_podataka\\:novaLozinka").addClass("login-form-input-error");
+        $("#novaLozinkaGreska").removeClass("input-error-message-hidden");
+        $("#novaLozinkaGreska").html(greska);
     } else {
-        $("#input_izmena_podataka\\:lozinka").removeClass("login-form-input-error");
-        $("#lozinkaGreska").addClass("input-error-message-hidden");
+        $("#input_izmena_podataka\\:novaLozinka").removeClass("login-form-input-error");
+        $("#novaLozinkaGreska").addClass("input-error-message-hidden");
     }
 });
 
-$("#input_izmena_podataka\\:ponovljenaLozinka").keyup(function (event) {
+$("#input_izmena_podataka\\:ponovljenaNovaLozinka").keyup(function (event) {
     event.stopImmediatePropagation();
 
-    var val = $("#input_izmena_podataka\\:ponovljenaLozinka").val();
+    var val = $("#input_izmena_podataka\\:ponovljenaNovaLozinka").val();
     var greska = "";
 
     if (val === "") {
-        greska = "Polje 'Ponovljena lozinka' ne sme ostati prazno.";
+        greska = "Polje 'Ponovljena nova lozinka' ne sme ostati prazno.";
     } else {
-        var lozinka = $("#input_izmena_podataka\\:lozinka").val();
+        var lozinka = $("#input_izmena_podataka\\:novaLozinka").val();
         if (lozinka !== val) {
-            greska = "Lozinka i ponovljena lozinka se ne poklapaju.";
+            greska = "Nova lozinka i ponovljena nova lozinka se ne poklapaju.";
         }
     }
 
     if (greska !== "") {
-        $("#input_izmena_podataka\\:ponovljenaLozinka").addClass("login-form-input-error");
-        $("#ponovljenaLozinkaGreska").removeClass("input-error-message-hidden");
-        $("#ponovljenaLozinkaGreska").html(greska);
+        $("#input_izmena_podataka\\:ponovljenaNovaLozinka").addClass("login-form-input-error");
+        $("#ponovljenaNovaLozinkaGreska").removeClass("input-error-message-hidden");
+        $("#ponovljenaNovaLozinkaGreska").html(greska);
     } else {
-        $("#input_izmena_podataka\\:ponovljenaLozinka").removeClass("login-form-input-error");
-        $("#ponovljenaLozinkaGreska").addClass("input-error-message-hidden");
+        $("#input_izmena_podataka\\:ponovljenaNovaLozinka").removeClass("login-form-input-error");
+        $("#ponovljenaNovaLozinkaGreska").addClass("input-error-message-hidden");
     }
 });
 
@@ -302,42 +322,32 @@ $("#input_izmena_podataka\\:telefon").keyup(function (event) {
     }
 });
 
-$("#izmena_podataka\\:editButtonNazivOrg").click(function (event) {
-    event.stopImmediatePropagation();
+function editField(fieldToEdit) {
+    var fieldWrapper = "#fieldWrapper" + fieldToEdit;
+    var infoWrapper = "#infoWrapper" + fieldToEdit;
     
-    $("#fieldWrapperNazivOrg").css("display", "table-row");
-    $("#infoWrapperNazivOrg").css("display", "none");
-    
-});
+    $(fieldWrapper).css("display", "table-row");
+    $(infoWrapper).css("display", "none");
+}
 
-$("#izmena_podataka\\:cancelEditButtonNazivOrg").click(function(event) {
-    event.stopImmediatePropagation();
+function closeField(fieldToEdit) {
+    var infoWrapper = "#infoWrapper" + fieldToEdit;
+    var fieldWrapper = "#fieldWrapper" + fieldToEdit;
     
-    $("#infoWrapperNazivOrg").css("display", "table-row");
-    $("#fieldWrapperNazivOrg").css("display", "none");
-});
+    $(infoWrapper).css("display", "table-row");
+    $(fieldWrapper).css("display", "none");
+}
 
-$("#izmena_podataka\\:editButtonOpisOrg").click(function (event) {
-    event.stopImmediatePropagation();
-    
-    $("#fieldWrapperOpisOrg").css("display", "table-row");
-    $("#infoWrapperOpisOrg").css("display", "none");
-    
-});
+function saveField(fieldToEdit) {
+    var greska = $("#izmena_podataka\\:nazivOrgGreskaVal").val();
+    alert(greska);
+}
 
-$("#izmena_podataka\\:cancelEditButtonOpisOrg").click(function(event) {
+/*$("#izmena_podataka\\:cancelEditButtonOpisOrg").click(function(event) {
     event.stopImmediatePropagation();
     
     $("#infoWrapperOpisOrg").css("display", "table-row");
     $("#fieldWrapperOpisOrg").css("display", "none");
-});
-
-$("#izmena_podataka\\:editButtonOblastDelovanja").click(function (event) {
-    event.stopImmediatePropagation();
-    
-    $("#fieldWrapperOblastDelovanja").css("display", "table-row");
-    $("#infoWrapperOblastDelovanja").css("display", "none");
-    
 });
 
 $("#izmena_podataka\\:cancelEditButtonOblastDelovanja").click(function(event) {
@@ -347,27 +357,11 @@ $("#izmena_podataka\\:cancelEditButtonOblastDelovanja").click(function(event) {
     $("#fieldWrapperOblastDelovanja").css("display", "none");
 });
 
-$("#izmena_podataka\\:editButtonWebAdresa").click(function (event) {
-    event.stopImmediatePropagation();
-    
-    $("#fieldWrapperWebAdresa").css("display", "table-row");
-    $("#infoWrapperWebAdresa").css("display", "none");
-    
-});
-
 $("#izmena_podataka\\:cancelEditButtonWebAdresa").click(function(event) {
     event.stopImmediatePropagation();
     
     $("#infoWrapperWebAdresa").css("display", "table-row");
     $("#fieldWrapperWebAdresa").css("display", "none");
-});
-
-$("#izmena_podataka\\:editButtonKontaktOsoba").click(function (event) {
-    event.stopImmediatePropagation();
-    
-    $("#fieldWrapperKontaktOsoba").css("display", "table-row");
-    $("#infoWrapperKontaktOsoba").css("display", "none");
-    
 });
 
 $("#izmena_podataka\\:cancelEditButtonKontaktOsoba").click(function(event) {
@@ -377,27 +371,25 @@ $("#izmena_podataka\\:cancelEditButtonKontaktOsoba").click(function(event) {
     $("#fieldWrapperKontaktOsoba").css("display", "none");
 });
 
-/*$("#izmena_podataka\\:editButtonOpisOrg").click(function (event) {
+$("#izmena_podataka\\:cancelEditButtonEmail").click(function(event) {
     event.stopImmediatePropagation();
     
-    var button = $("#izmena_podataka\\:editButtonOpisOrg");
-    var icon = $("#izmena_podataka\\:editButtonOpisOrg").find("i");
-    var fieldWrapper = $("#fieldWrapperOpisOrg");
+    $("#infoWrapperEmail").css("display", "table-row");
+    $("#fieldWrapperEmail").css("display", "none");
+});
+
+$("#izmena_podataka\\:cancelEditButtonMestoUlica").click(function(event) {
+    event.stopImmediatePropagation();
     
-    if (icon.hasClass("glyphicon-pencil")) {
-        fieldWrapper.css("display", "table-row");
-        button.removeClass("edit-info-button");
-        button.addClass("remove-edit-info-button");
-        icon.removeClass("glyphicon-pencil");
-        icon.addClass("glyphicon-remove");
-    } else {
-        if (icon.hasClass("glyphicon-remove")) {
-            fieldWrapper.css("display", "none");
-            button.removeClass("remove-edit-info-button");
-            button.addClass("edit-info-button");
-            icon.removeClass("glyphicon-remove");
-            icon.addClass("glyphicon-pencil");
-        }
-    }
+    $("#infoWrapperMestoUlica").css("display", "table-row");
+    $("#fieldWrapperMestoUlica").css("display", "none");
+});
+
+$("#izmena_podataka\\:cancelEditButtonTelefoni").click(function(event) {
+    event.stopImmediatePropagation();
+    
+    $("#infoWrapperTelefoni").css("display", "table-row");
+    $("#fieldWrapperTelefoni").css("display", "none");
 });*/
+
 

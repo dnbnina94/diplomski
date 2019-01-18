@@ -51,6 +51,5 @@ Contributor(s):
     <mapping resource="db/Vesti.hbm.xml"/>
     <mapping resource="db/Dogadjaji.hbm.xml"/>
     <mapping resource="db/Organizacije.hbm.xml"/>
-    <mapping resource="db/Telefoni.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

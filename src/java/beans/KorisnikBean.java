@@ -30,5 +30,16 @@ public class KorisnikBean {
     public void setKorisnik(Korisnici korisnik) {
         this.korisnik = korisnik;
     }
+    
+    public void logout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect("index.xhtml");
+            context.responseComplete();
+        } catch (IOException ex) {
+            Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

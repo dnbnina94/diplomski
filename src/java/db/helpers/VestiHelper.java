@@ -61,4 +61,39 @@ public class VestiHelper {
         }
     }
     
+    public int getMaxId() {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Query q = session.createQuery("FROM Vesti AS vest");
+            List<Vesti> vesti = (List<Vesti>) q.list();
+            
+            session.getTransaction().commit();
+            
+            if (vesti.isEmpty())
+                return 0;
+            else
+                return vesti.get(vesti.size()-1).getIdVest();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void insertVest(Vesti vest) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+
+            session.save(vest);
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
 }

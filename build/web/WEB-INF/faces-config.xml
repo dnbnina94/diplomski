@@ -53,4 +53,9 @@
         <managed-bean-class>beans.IzmenaPodataka</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>novaVest</managed-bean-name>
+        <managed-bean-class>beans.NovaVest</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>
