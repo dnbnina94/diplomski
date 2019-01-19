@@ -642,7 +642,7 @@
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-image-container-front-page" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                            <div class="news-image-container-front-page" style="background: url(/vesti/#{vest.thumbnail})">
                                             </div>
                                             <div class="news-header-container-front-page">
                                                 #{vest.naslovShort}

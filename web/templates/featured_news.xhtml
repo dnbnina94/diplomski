@@ -31,10 +31,10 @@ and open the template in the editor.
                         <c:set var="innerDivClassAbsolute" value="${'featured-content featured-smaller'}" />
                     </c:if>
                     <div class="#{vest.outerDivClass}">
-                        <div class="#{vest.innerDivClassRelative}" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                        <div class="#{vest.innerDivClassRelative}" style="background: url(/vesti/#{vest.thumbnail})">
 
                             <div class="#{vest.innerDivClassAbsolute}">
-                                <table class="featured-content-table" style="background: url(#{resource[vest.getThumbnailUrl()]})">
+                                <table class="featured-content-table" style="background: url(/vesti/#{vest.thumbnail})">
                                     <tr>
                                         <td>
                                             <table class="date-table">

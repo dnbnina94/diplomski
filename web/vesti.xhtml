@@ -72,7 +72,7 @@
                                         </b:commandLink>
                                     </div>
                                     <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                        <div class="news-thumbnail-container" style="background: url(#{resource[vest.getThumbnailUrl()]})"></div>
+                                        <div class="news-thumbnail-container" style="background: url(/vesti/#{vest.thumbnail})"></div>
                                         <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                     </b:commandLink>
                                     <div class="news-content-sm-devices">

@@ -10,7 +10,7 @@
     </context-param>
     <context-param>
         <param-name>thumbnailsVesti</param-name>
-        <param-value>/var/diplomski/thumbnails/vesti</param-value>
+        <param-value>/diplomski/vesti</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

@@ -55,17 +55,12 @@
                                         <f:selectItem itemLabel="Izaberite kategoriju vesti" itemValue="#{null}" />
                                         <f:selectItems value="#{pretragaVesti.kategorijeVesti}" var="kategorija" itemLabel="#{kategorija.naziv}" itemValue="#{kategorija}" />
                                     </b:selectOneMenu>
-                                    <div id="kategorijaGreska" class="#{novaVest.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                         style="margin-top: 5px">
-                                        <h:outputText value="#{novaVest.kategorijaGreska}" />
-                                    </div>
-                                    <c:if test="#{novaVest.kategorijaGreska != ''}">
-                                        <style>
-                                            .select2-selection {
-                                                border-color: #DC3545 !important;
-                                            }
-                                        </style>
-                                    </c:if>
+                                    <h:panelGroup id="kategorijaGreskaWrapper">
+                                        <div id="kategorijaGreska" class="#{novaVest.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px;">
+                                            <h:outputText value="#{novaVest.kategorijaGreska}" />
+                                        </div>
+                                    </h:panelGroup>
 
                                     <c:if test="#{novaVest.kategorijaGreska == ''}">
                                         <div style="height: 10px"></div>
@@ -110,12 +105,12 @@
                                             </button>
                                             <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{novaVest.thumbnail}">
                                                 <f:ajax listener="#{novaVest.uploadThumbnail}"
-                                                        render="thumbnailWrapper thumbnailGreskaWrapper thumbnail" />
+                                                        render="thumbnailWrapper thumbnailGreskaWrapper thumbnail novaVestValidacija" />
                                             </h:inputFile>
                                         </div>
                                         <b:commandButton styleClass="remove-file-btn" disabled="#{novaVest.thumbnail == null ? 'true' : 'false'}"
                                                          ajax="true"
-                                                         update="thumbnailWrapper thumbnailGreskaWrapper thumbnail"
+                                                         update="thumbnailWrapper thumbnailGreskaWrapper thumbnail novaVestValidacija"
                                                          onclick="ajax:novaVest.removeThumbnail();">
                                             <b:icon value="remove" />
                                         </b:commandButton>
@@ -172,6 +167,10 @@
                                     </script>
                                 </div>
                             </div>
+
+                            <h:panelGroup id="novaVestValidacija">
+                                <h:outputScript library="js" name="novaVestValidacija.js" />
+                            </h:panelGroup>
                         </h:form>
 
                     </div>
