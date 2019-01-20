@@ -61,6 +61,13 @@
                                             <h:outputText value="#{novaVest.kategorijaGreska}" />
                                         </div>
                                     </h:panelGroup>
+                                    <c:if test="#{novaVest.kategorijaGreska != ''}">
+                                        <style>
+                                            #nova_vest:kategorija {
+                                                border-color: #DC3545 !important;
+                                            }
+                                        </style>
+                                    </c:if>
 
                                     <c:if test="#{novaVest.kategorijaGreska == ''}">
                                         <div style="height: 10px"></div>

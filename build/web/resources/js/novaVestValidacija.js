@@ -34,11 +34,11 @@ $("#nova_vest\\:kategorijaInner").change(function () {
     }
 
     if (greska !== "") {
-        $(".select2-selection").css("border", "#1px solid DC3545");
+        $(".select2-selection").css({'border-color' : '#DC3545 !important'});
         $("#kategorijaGreska").removeClass("input-error-message-hidden");
         $("#kategorijaGreska").html(greska);
     } else {
-        $(".select2-selection").css("border", "1px solid #ddd");
+        $(".select2-selection").css("border","#ddd solid 1px !important");
         $("#kategorijaGreska").addClass("input-error-message-hidden");
     }
 });
