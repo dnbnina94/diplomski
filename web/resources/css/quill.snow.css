@@ -958,8 +958,13 @@
 
 #tekstWrapper {
     min-height: 200px;
+    border: 1px solid #ddd;
 }
 
 .ql-preview {
     font-weight: bold !important;
+}
+
+.ql-toolbar {
+    border-bottom: none !important;
 }

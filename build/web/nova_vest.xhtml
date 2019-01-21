@@ -35,6 +35,7 @@
                         </div>
 
                         <h:form id="nova_vest" enctype="multipart/form-data">
+
                             <div class="container-w-red-header-header" style="margin-top: 20px">
                                 Kreirajte novu vest
                             </div>
@@ -57,45 +58,34 @@
                                     </b:selectOneMenu>
                                     <h:panelGroup id="kategorijaGreskaWrapper">
                                         <div id="kategorijaGreska" class="#{novaVest.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                             style="margin-top: 5px;">
+                                             style="margin-top: 5px; margin-bottom: 0px">
                                             <h:outputText value="#{novaVest.kategorijaGreska}" />
                                         </div>
                                     </h:panelGroup>
                                     <c:if test="#{novaVest.kategorijaGreska != ''}">
                                         <style>
-                                            #nova_vest:kategorija {
-                                                border-color: #DC3545 !important;
+                                            #nova_vest\:kategorija {
+                                                border: 1px solid #DC3545;
                                             }
                                         </style>
                                     </c:if>
 
-                                    <c:if test="#{novaVest.kategorijaGreska == ''}">
-                                        <div style="height: 10px"></div>
-                                    </c:if>
+                                    <div style="height: 10px"></div>
                                     <h:outputText value="Tekst vesti:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
                                     <h:panelGroup id="tekstWrapperPanelGroup">
-                                        <div id="tekstWrapper">
+                                        <div id="tekstWrapper" style="#{novaVest.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
                                         </div>
                                     </h:panelGroup>
                                     <b:inputTextarea style="display: none" id="tekst" value="#{novaVest.tekst}" />
                                     <h:panelGroup>
                                         <div id="tekstGreska" class="#{novaVest.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                             style="margin-top: 5px" >
+                                             style="margin-top: 5px; margin-bottom: 0px" >
                                             <h:outputText value="#{novaVest.tekstGreska}" />
                                         </div>
                                     </h:panelGroup>
-                                    <c:if test="#{novaVest.tekstGreska != ''}">
-                                        <style>
-                                            .ql-container, .ql-snow {
-                                                border-color: #DC3545 !important;
-                                            }
-                                        </style>
-                                    </c:if>
 
-                                    <c:if test="#{novaVest.tekstGreska == ''}">
-                                        <div style="height: 10px"></div>
-                                    </c:if>
+                                    <div style="height: 10px"></div>
                                     <h:outputText value="Thumbnail:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
                                     <h:panelGroup id="thumbnailWrapper">
@@ -123,7 +113,8 @@
                                         </b:commandButton>
                                     </h:panelGroup> 
                                     <h:panelGroup id="thumbnailGreskaWrapper">
-                                        <div id="thumbnailGreska" class="#{novaVest.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <div id="thumbnailGreska" class="#{novaVest.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-bottom: 0px">
                                             <h:outputText value="#{novaVest.thumbnailGreska}" />
                                         </div>
                                     </h:panelGroup>

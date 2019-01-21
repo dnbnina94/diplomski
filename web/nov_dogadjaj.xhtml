@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="customCheckbox.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <div class="stripe-line-header news-category-header">
+                            <div>Nov događaj</div>     
+                        </div>
+
+                        <h:form id="nov_dogadjaj" enctype="multipart/form-data">
+
+                            <div class="container-w-red-header-header" style="margin-top: 20px">
+                                Kreirajte nov događaj
+                            </div>
+                            <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; margin-bottom: 15px !important" >
+                                <div class="col-md-12" style="padding: 0px !important">
+                                    <h:outputText value="Naslov događaja:" styleClass="login-form-label" />
+                                    <b:inputText id="naslov"
+                                                 styleClass="#{novDogadjaj.naslovGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                 value="#{novDogadjaj.naslov }"
+                                                 placeholder="Unesite naslov događaja" />
+                                    <div id="naslovGreska" class="#{novDogadjaj.naslovGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <h:outputText value="#{novDogadjaj.naslovGreska}" />
+                                    </div>
+
+                                    <h:outputText value="Kategorija događaja:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <b:selectOneMenu id="kategorija" value="#{novDogadjaj.kategorija}" styleClass="place-select" select2="true">
+                                        <f:selectItem itemLabel="Izaberite kategoriju događaja" itemValue="#{null}" />
+                                        <f:selectItems value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorija" itemLabel="#{kategorija.naziv}" itemValue="#{kategorija}" />
+                                    </b:selectOneMenu>
+                                    <h:panelGroup id="kategorijaGreskaWrapper">
+                                        <div id="kategorijaGreska" class="#{novDogadjaj.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{novDogadjaj.kategorijaGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+                                    <c:if test="#{novDogadjaj.kategorijaGreska != ''}">
+                                        <style>
+                                            #nov_dogadjaj\:kategorija {
+                                                border: 1px solid #DC3545;
+                                            }
+                                        </style>
+                                    </c:if>
+
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="Tekst događaja:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <h:panelGroup id="tekstWrapperPanelGroup">
+                                        <div id="tekstWrapper" style="#{novDogadjaj.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
+                                        </div>
+                                    </h:panelGroup>
+                                    <b:inputTextarea style="display: none" id="tekst" value="#{novDogadjaj.tekst}" />
+                                    <h:panelGroup>
+                                        <div id="tekstGreska" class="#{novDogadjaj.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px" >
+                                            <h:outputText value="#{novDogadjaj.tekstGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <h:outputScript library="js" name="quill.js" />
+                                    <script>
+                                        var quill = new Quill('#tekstWrapper', {
+                                            placeholder: 'Napišite tekst događaja...',
+                                            theme: 'snow'
+                                        });
+
+                                        quill.clipboard.dangerouslyPasteHTML('#{novDogadjaj.tekst}');
+                                    </script>
+
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="Thumbnail:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <h:panelGroup id="thumbnailWrapper">
+                                        <div class="upload-btn-wrapper">
+                                            <button class="custom-file-input-btn">
+                                                <b:icon value="upload" style="font-size: 12px" />
+                                                &nbsp;
+                                                <c:if test="#{novDogadjaj.thumbnail == null}">
+                                                    <h:outputText value="Odaberite sliku" />
+                                                </c:if>
+                                                <c:if test="#{novDogadjaj.thumbnail != null}">
+                                                    <h:outputText value="#{novDogadjaj.thumbnail.submittedFileName}" />
+                                                </c:if>
+                                            </button>
+                                            <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{novDogadjaj.thumbnail}">
+                                                <f:ajax listener="#{novDogadjaj.uploadThumbnail}"
+                                                        render="thumbnailWrapper thumbnailGreskaWrapper thumbnail novDogadjajValidacija" />
+                                            </h:inputFile>
+                                        </div>
+                                        <b:commandButton styleClass="remove-file-btn" disabled="#{novDogadjaj.thumbnail == null ? 'true' : 'false'}"
+                                                         ajax="true"
+                                                         update="thumbnailWrapper thumbnailGreskaWrapper thumbnail novDogadjajValidacija"
+                                                         onclick="ajax:novDogadjaj.removeThumbnail();">
+                                            <b:icon value="remove" />
+                                        </b:commandButton>
+                                    </h:panelGroup> 
+                                    <h:panelGroup id="thumbnailGreskaWrapper">
+                                        <div id="thumbnailGreska" class="#{novDogadjaj.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-bottom: 0px">
+                                            <h:outputText value="#{novDogadjaj.thumbnailGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <div class="row edit-place-fields-container" style="margin-top: 6px">
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Mesto: " styleClass="login-form-label" />
+                                            <b:inputText id="mesto"
+                                                         styleClass="#{novDogadjaj.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                         placeholder="Npr. Beograd" 
+                                                         typeahead="true" 
+                                                         typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
+                                                         value="#{novDogadjaj.mesto}" />
+                                            <div id="mestoGreska" class="#{novDogadjaj.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{novDogadjaj.mestoGreska}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Ulica: " styleClass="login-form-label" />
+                                            <b:inputText id="ulica"
+                                                         styleClass="#{novDogadjaj.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                         placeholder="Npr. Bulevar Kralja Aleksandra 73" 
+                                                         typeahead="true" 
+                                                         typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
+                                                         value="#{novDogadjaj.ulica}" />
+                                            <div id="ulicaGreska" class="#{novDogadjaj.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{novDogadjaj.ulicaGreska}" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row edit-place-fields-container">
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Datum početka: " styleClass="login-form-label" />
+                                            <div style="height: 5px"></div>
+                                            <b:datepicker id="datumPocetka"
+                                                          mode='popup-icon' 
+                                                          styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                          placeholder='Izaberite datum i vreme početka događaja' />
+                                            <div id="datumPocetkaGreska" class="#{novDogadjaj.datumPocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px; margin-bottom: 0px">
+                                                <h:outputText value="#{novDogadjaj.datumPocetkaGreska}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Vreme početka: " styleClass="login-form-label" />
+                                            <div style="height: 5px"></div>
+                                            <b:dateTimePicker id="vremePocetka"
+                                                              mode='popup-icon' 
+                                                              show-date="false"
+                                                              styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                              placeholder='Izaberite datum i vreme početka događaja'
+                                                              iconAwesome="clock-o" />
+                                            <div id="vremePocetkaGreska" class="#{novDogadjaj.vremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px">
+                                                <h:outputText value="#{novDogadjaj.vremePocetkaGreska}" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row edit-place-fields-container" style="margin-top: 10px">
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Datum kraja: " styleClass="login-form-label" />
+                                            <div style="height: 5px"></div>
+                                            <b:datepicker id="datumKraja"
+                                                          mode='popup-icon' 
+                                                          styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                          placeholder='Izaberite datum i vreme kraja događaja' />
+                                            <div id="datumKrajaGreska" class="#{novDogadjaj.datumKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px; margin-bottom: 0px">
+                                                <h:outputText value="#{novDogadjaj.datumKrajaGreska}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h:outputText value="Vreme kraja: " styleClass="login-form-label" />
+                                            <div style="height: 5px"></div>
+                                            <b:dateTimePicker id="vremeKraja"
+                                                              mode='popup-icon' 
+                                                              show-date="false"
+                                                              styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                              placeholder='Izaberite datum i vreme kraja događaja'
+                                                              iconAwesome="clock-o" />
+                                            <div id="vremeKrajaGreska" class="#{novDogadjaj.vremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px">
+                                                <h:outputText value="#{novDogadjaj.vremeKrajaGreska}" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row form-step-buttons-row">
+                                <div class="col-md-6">
+                                    <b:carouselControl >
+                                        <b:commandButton value="Nazad na profil"
+                                                         styleClass="form-step-button"
+                                                         action="organizacija?faces-redirect=true">
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                        </b:commandButton>
+                                    </b:carouselControl>
+                                </div>
+                                <div class="col-md-6">
+                                    <b:carouselControl >
+                                        <b:commandButton value="Kreirajte vest"
+                                                         styleClass="form-step-button"
+                                                         style="background-color: #4c4c4c !important; margin-right: 15px"
+                                                         ajax="true"
+                                                         update="nov_dogadjaj"
+                                                         onclick="javascript:editorToTextarea(); ajax:novDogadjaj.kreirajDogadjaj();"
+                                                         />
+                                    </b:carouselControl>
+
+                                    <script>
+                                        function editorToTextarea() {
+                                            if (quill.getText().trim().length === 0) {
+                                                $("#input_nov_dogadjaj\\:tekst").val("");
+                                            } else {
+                                                var editorVal = $(".ql-editor").html();
+                                                $("#input_nov_dogadjaj\\:tekst").val(editorVal);
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+
+                            <h:panelGroup id="novDogadjajValidacija">
+                                <h:outputScript library="js" name="novDogadjajValidacija.js" />
+                            </h:panelGroup>
+                        </h:form>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

@@ -656,6 +656,47 @@
                                 </ui:repeat>
                             </h:form>
                         </div>
+                        
+                        <div class="stripe-line-header news-category-header">
+                            <h:form>
+                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                    <div class="stripe-line-header-link"><h:outputText value="Događaji" /></div>
+                                    <f:setPropertyActionListener target="#{pretragaVesti.organizacija}" value="#{organizacijaBean.organizacija}" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="2" />
+                                </b:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="row news-category-front-page" style="padding-bottom: 0px !important">
+                            <h:form>
+                                <c:if test="#{organizacijaBean.setVestiToList().size() == 0}">
+                                    <div class="col-md-12 no-content">
+                                        Nisu pronađeni događaji korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
+                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                            <br/>
+                                            <b:commandButton action="nov_dogadjaj?faces-redirect=true"
+                                                           value="Kreirajte događaj" 
+                                                           styleClass="form-step-button-sm"
+                                                           style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                        </c:if>
+                                    </div>
+                                </c:if>
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
+                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                            <div class="news-image-container-front-page" style="background: url(/vesti/#{vest.thumbnail})">
+                                            </div>
+                                            <div class="news-header-container-front-page">
+                                                #{vest.naslovShort}
+                                            </div>
+                                            <div class="news-content-container-front-page">
+                                                #{vest.tekstShort}
+                                            </div>
+                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                        </b:commandLink>
+                                    </div>
+                                </ui:repeat>
+                            </h:form>
+                        </div>
                     </div>
                     <div class="col-md-3">
 

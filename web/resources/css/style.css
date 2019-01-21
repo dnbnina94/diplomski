@@ -192,6 +192,15 @@ nav {
     filter: brightness(0) invert(1);
 }
 
+.input-group-addon {
+    background-color: #aaa !important;
+    border-color: #aaa !important;
+    border-radius: 0px !important;
+    padding: 6px 9px !important;
+    border: none !important;
+    color: white !important;
+}
+
 .logo-col {
     padding-left: 0px !important;
 }
@@ -391,8 +400,13 @@ select:focus {
 .custom-datepicker-bootsfaces > input {
     height: 35px;
     border-radius: 0px !important;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     box-shadow: none !important;
+}
+
+.custom-datepicker-bootsfaces > input:focus {
+    border-color: #ccc !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(170, 170, 170, 0.6) !important;
 }
 
 .custom-datepicker-bootsfaces > span {
@@ -406,6 +420,20 @@ select:focus {
     color: white !important;
 }
 
+.custom-datepicker-bootsfaces > .input-group-addon {
+    background-color: orangered !important;
+    border-color: orangered !important;
+    padding: 6px 10px !important;
+}
+
+.custom-datetimepicker-bootsfaces {
+    margin-top: 0px !important;
+}
+
+.custom-datetimepicker-bootsfaces > input {
+    margin-top: 0px !important;
+}
+
 .ui-datepicker {
     border-radius: 0px !important;
     border-color: #ccc !important;
@@ -417,6 +445,7 @@ select:focus {
     color: white !important;
     font-family: BebasNeueRegular;
     font-size: 18px !important;
+    border-color: orangered !important;
 }
 
 .ui-datepicker-prev {
@@ -1063,15 +1092,6 @@ table.dataTable {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 204, 204, 0.6) !important;
 }
 
-.input-group-addon {
-    background-color: #aaa !important;
-    border-color: #AAA !important;
-    border-radius: 0px !important;
-    padding: 6px 9px !important;
-    border: none !important;
-    color: white !important;
-}
-
 .add-field-button {
     width: 35px !important;
     height: 35px !important;
@@ -1365,4 +1385,151 @@ table.dataTable {
     padding-left: 9px !important;
     padding-right: 9px !important;
     display: inline-block !important;
+}
+
+.datepicker-days > table > thead > tr:nth-child(1) {
+    background-color: orangered !important;
+}
+
+.datepicker-days > table > thead > tr:nth-child(1) > th {
+    color: white !important;
+    font-family: BebasNeueRegular;
+    font-size: 18px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.datepicker-days > table > thead > tr:nth-child(1) > th:hover {
+    background-color: orangered !important;
+}
+
+/*
+.datepicker-days > table > thead > tr:nth-child(1) > th:nth-child(1) {
+    padding-left: 10px !important;
+}
+
+.datepicker-days > table > thead > tr:nth-child(1) > th:nth-child(3) {
+    padding-right: 10px !important;
+}
+*/
+
+.datepicker-days > table > thead > tr:nth-child(2) > th {
+    padding-top: 7.5px !important;
+    padding-bottom: 7.5px !important;
+}
+
+.datepicker-days > table {
+    font-size: .9em;
+    font-family: BebasNeueRegular;
+}
+
+.datepicker-days > table > tbody > tr > td {
+    text-align: right !important;
+    padding: 2px !important;
+    border-radius: 0px !important;
+}
+
+.datepicker-days > table > tbody > tr > .today {
+    color: white !important;
+    border-radius: 0px !Important;
+    background-color: #FF7F50 !important;
+}
+
+.datepicker-days > table > tbody > tr > .active {
+    background-color: orangered !important;
+    color: white !important;
+    border-radius: 0px !important;
+}
+
+.datepicker-days > table > tbody > tr > .today:before {
+    display: none !important;
+}
+
+#nov_dogadjaj\:vremePocetka > .input-group-addon {
+    padding-left: 11px !important;
+    padding-right: 11px !important;
+}
+
+#nov_dogadjaj\:vremeKraja > .input-group-addon {
+    padding-left: 11px !important;
+    padding-right: 11px !important;
+}
+
+.timepicker-picker > .table-condensed {
+    width: 180px !important;
+    height: 100px !important;
+    margin-left: 5px;
+    margin-right: 23px;
+}
+
+.timepicker-picker > .table-condensed > tr > td > a > span {
+    color: orangered !important;
+}
+
+.timepicker-picker > .table-condensed > tr > td > button {
+    background-color: orangered !important;
+    color: white !important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+    font-family: BebasNeueRegular !important;
+    border: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    line-height: 30px !important;
+    text-align: center !important;
+    padding: 0px !important;
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+
+.timepicker-hour, .timepicker-minute, .timepicker-second {
+    font-family: BebasNeueRegular !important;
+    font-size: 18px !important;
+}
+
+.timepicker-picker > .table-condensed > tr > .separator {
+    font-family: BebasNeueRegular !important;
+    font-size: 18px !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    border: 1px solid #ccc !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    top: 35px !Important;
+    padding: 0px !important;
+    width: auto !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu:before,
+.bootstrap-datetimepicker-widget.dropdown-menu:after {
+    display: none !important;
+}
+
+.bootstrap-datetimepicker-widget table td span {
+    line-height: 30px !important;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0px !important;
+}
+
+.bootstrap-datetimepicker-widget table td a {
+    padding: 0px !important;
+}
+
+.bootstrap-datetimepicker-widget table td {
+    line-height: 30px !important;
+    height: 30px !important;
+    width: 30px !important;
+}
+
+.timepicker-hours > table > tr > td,
+.timepicker-minutes > table > tr > td,
+.timepicker-seconds > table > tr > td {
+    font-family: BebasNeueRegular;
+    font-size: 16px !important;
+}
+
+.timepicker-hours, .timepicker-minutes, .timepicker-seconds {
+    margin: 5px !important;
 }

@@ -34,12 +34,23 @@ $("#nova_vest\\:kategorijaInner").change(function () {
     }
 
     if (greska !== "") {
-        $(".select2-selection").css({'border-color' : '#DC3545 !important'});
+        $("#nova_vest\\:kategorija").css({'border' : '1px solid #DC3545'});
         $("#kategorijaGreska").removeClass("input-error-message-hidden");
         $("#kategorijaGreska").html(greska);
     } else {
-        $(".select2-selection").css("border","#ddd solid 1px !important");
+        $("#nova_vest\\:kategorija").css({'border' : 'none'});
         $("#kategorijaGreska").addClass("input-error-message-hidden");
+    }
+});
+
+quill.on('text-change', function() {
+    if (quill.getText().trim().length === 0) {
+        $(".ql-container").css({'border-color' : '#DC3545'});
+        $("#tekstGreska").removeClass("input-error-message-hidden");
+        $("#tekstGreska").html("Polje 'Tekst vesti' ne sme ostati prazno.");
+    } else {
+        $(".ql-container").css({'border-color' : '#ddd'});
+        $("#tekstGreska").addClass("input-error-message-hidden");
     }
 });
 
