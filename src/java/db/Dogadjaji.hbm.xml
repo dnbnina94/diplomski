@@ -17,6 +17,9 @@
         <many-to-one name="mesto" class="db.StavkeSifarnika" fetch="select">
             <column name="mesto" not-null="true" />
         </many-to-one>
+        <many-to-one name="ulica" class="db.StavkeSifarnika" fetch="select">
+            <column name="ulica" not-null="true" />
+        </many-to-one>
         <many-to-one name="uzrast" class="db.StavkeSifarnika" fetch="select">
             <column name="uzrast" not-null="true" />
         </many-to-one>
@@ -35,5 +38,16 @@
         <property name="datumIsticanja" type="timestamp">
             <column name="datum_isticanja" not-null="true" />
         </property>
+        <property name="thumbnail" type="string">
+            <column name="thumbnail" length="256" />
+        </property>
+        <set name="karakteristikeProstora" table="karakteristike_prostora" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_dogadjaj" not-null="true" />
+            </key>
+            <many-to-many entity-name="db.StavkeSifarnika">
+                <column name="id_stavka" not-null="true" />
+            </many-to-many>
+        </set>
     </class>
 </hibernate-mapping>

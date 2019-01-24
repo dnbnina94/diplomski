@@ -63,4 +63,9 @@
         <managed-bean-class>beans.NovDogadjaj</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>novOglas</managed-bean-name>
+        <managed-bean-class>beans.NovOglas</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

@@ -53,13 +53,13 @@
                                     <ui:repeat varStatus="status" value="#{aktuelneVesti.setToListVesti(kategorijaVest.vestis)}" var="vest">
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                                <div class="news-image-container-front-page" style="background: url(/vesti/#{vest.thumbnail})">
+                                                <div class="news-image-container-front-page" style="background: #{vest.getThumbnailUrl()}">
                                                 </div>
                                                 <div class="news-header-container-front-page">
                                                     #{vest.naslovShort}
                                                 </div>
                                                 <div class="news-content-container-front-page">
-                                                    #{vest.tekstShort}
+                                                    <h:outputText value="#{vest.tekstShort}" escape="false" />
                                                 </div>
                                                 <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                             </b:commandLink>

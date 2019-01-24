@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 22, 2019 5:01:44 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Oglasi" table="oglasi" catalog="diplomski" optimistic-lock="version">
+        <id name="idOglas" type="int">
+            <column name="id_oglas" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="korisnici" class="db.Korisnici" fetch="select">
+            <column name="korisnicko_ime" length="50" not-null="true" />
+        </many-to-one>
+        <property name="naslov" type="string">
+            <column name="naslov" length="256" not-null="true" />
+        </property>
+        <property name="tekst" type="string">
+            <column name="tekst" length="65535" not-null="true" />
+        </property>
+        <property name="datumKreiranja" type="timestamp">
+            <column name="datum_kreiranja" length="19" not-null="true" />
+        </property>
+        <property name="datumIsticanja" type="timestamp">
+            <column name="datum_isticanja" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

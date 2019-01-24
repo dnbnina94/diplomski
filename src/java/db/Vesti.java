@@ -108,7 +108,15 @@ public class Vesti implements java.io.Serializable {
     }
     
     public String getThumbnailUrl() {
-        return "img:thumbnails/" + thumbnail;
+        String thumbnailUrl;
+        
+        if (thumbnail == null) {
+            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+        } else {
+            thumbnailUrl = "url(/vesti/" + thumbnail + ")";
+        }
+        
+        return thumbnailUrl;
     }
     
     public String getThumbnailUrlBootsfaces() {

@@ -72,13 +72,13 @@
                                         </b:commandLink>
                                     </div>
                                     <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                        <div class="news-thumbnail-container" style="background: url(/vesti/#{vest.thumbnail})"></div>
+                                        <div class="news-thumbnail-container" style="background: #{vest.getThumbnailUrl()}"></div>
                                         <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                     </b:commandLink>
                                     <div class="news-content-sm-devices">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                             <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
-                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
+                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" escape="false" /> <br/><br/>
                                             <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                             <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                         </b:commandLink>
@@ -87,8 +87,10 @@
                                 </b:dataTableColumn>
                                 <b:dataTableColumn>
                                     <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                        <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
-                                        <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" /> <br/><br/>
+                                        <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/>
+                                        <div class="news-text">
+                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" escape="false" />
+                                        </div> <br/>
                                         <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                         <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                     </b:commandLink>

@@ -39,7 +39,7 @@
                             <div class="container-w-red-header-header" style="margin-top: 20px">
                                 Kreirajte nov događaj
                             </div>
-                            <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; margin-bottom: 15px !important" >
+                            <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; padding-bottom: 20px; margin-bottom: 15px !important" >
                                 <div class="col-md-12" style="padding: 0px !important">
                                     <h:outputText value="Naslov događaja:" styleClass="login-form-label" />
                                     <b:inputText id="naslov"
@@ -166,8 +166,10 @@
                                             <div style="height: 5px"></div>
                                             <b:datepicker id="datumPocetka"
                                                           mode='popup-icon' 
-                                                          styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
-                                                          placeholder='Izaberite datum i vreme početka događaja' />
+                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.datumPocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                          #{novDogadjaj.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                          placeholder='Izaberite datum i vreme početka događaja'
+                                                          value="#{novDogadjaj.datumPocetka}" />
                                             <div id="datumPocetkaGreska" class="#{novDogadjaj.datumPocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
                                                 <h:outputText value="#{novDogadjaj.datumPocetkaGreska}" />
@@ -180,13 +182,20 @@
                                             <b:dateTimePicker id="vremePocetka"
                                                               mode='popup-icon' 
                                                               show-date="false"
-                                                              styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.vremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{novDogadjaj.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                               placeholder='Izaberite datum i vreme početka događaja'
-                                                              iconAwesome="clock-o" />
+                                                              iconAwesome="clock-o"
+                                                              value="#{novDogadjaj.vremePocetka}" />
                                             <div id="vremePocetkaGreska" class="#{novDogadjaj.vremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                                 style="margin-top: 5px">
+                                                 style="margin-top: 5px; margin-bottom: 0px">
                                                 <h:outputText value="#{novDogadjaj.vremePocetkaGreska}" />
                                             </div>
+                                        </div>
+
+                                        <div id="datumIVremePocetkaGreska" class="col-md-12 #{novDogadjaj.datumIVremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{novDogadjaj.datumIVremePocetkaGreska}" />
                                         </div>
 
                                     </div>
@@ -198,8 +207,10 @@
                                             <div style="height: 5px"></div>
                                             <b:datepicker id="datumKraja"
                                                           mode='popup-icon' 
-                                                          styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
-                                                          placeholder='Izaberite datum i vreme kraja događaja' />
+                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.datumKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'} 
+                                                          #{novDogadjaj.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                          placeholder='Izaberite datum i vreme kraja događaja'
+                                                          value="#{novDogadjaj.datumKraja}" />
                                             <div id="datumKrajaGreska" class="#{novDogadjaj.datumKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
                                                 <h:outputText value="#{novDogadjaj.datumKrajaGreska}" />
@@ -212,16 +223,96 @@
                                             <b:dateTimePicker id="vremeKraja"
                                                               mode='popup-icon' 
                                                               show-date="false"
-                                                              styleClass='custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces'
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.vremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{novDogadjaj.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                               placeholder='Izaberite datum i vreme kraja događaja'
-                                                              iconAwesome="clock-o" />
+                                                              iconAwesome="clock-o"
+                                                              value="#{novDogadjaj.vremeKraja}" />
                                             <div id="vremeKrajaGreska" class="#{novDogadjaj.vremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                                 style="margin-top: 5px">
+                                                 style="margin-top: 5px; margin-bottom: 0px">
                                                 <h:outputText value="#{novDogadjaj.vremeKrajaGreska}" />
                                             </div>
                                         </div>
 
+                                        <div id="datumIVremeKrajaGreska" class="col-md-12 #{novDogadjaj.datumIVremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{novDogadjaj.datumIVremeKrajaGreska}" />
+                                        </div>
+
                                     </div>
+
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="Uzrast:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <b:selectOneMenu id="uzrast" value="#{novDogadjaj.uzrast}" styleClass="place-select" select2="true">
+                                        <f:selectItem itemLabel="Izaberite uzrast kome je događaj namenjen" itemValue="#{null}" />
+                                        <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast}" />
+                                    </b:selectOneMenu>
+                                    <h:panelGroup id="uzrastGreskaWrapper">
+                                        <div id="uzrastGreska" class="#{novDogadjaj.uzrastGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{novDogadjaj.uzrastGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+                                    <c:if test="#{novDogadjaj.uzrastGreska != ''}">
+                                        <style>
+                                            #nov_dogadjaj\:uzrast {
+                                                border: 1px solid #DC3545;
+                                            }
+                                        </style>
+                                    </c:if>
+
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="Karakteristike prostora:" styleClass="login-form-label" />
+                                    <span data-toggle="tooltip" 
+                                          data-html="true" 
+                                          title="Nakon što unesete karakteristiku prostora, kliknite na znak ''+''." 
+                                          class="custom-tooltip">
+                                        ?
+                                    </span>
+                                    <br/>
+                                    <h:panelGroup id="karakteristikeProstoraWrapper">
+                                        <ui:repeat id="karakteristikeProstora" value="#{novDogadjaj.karakteristikeProstora}" var="karakteristikaProstora" varStatus="status">
+                                            <div class="custom-tag">
+                                                <h:outputText value="#{karakteristikaProstora.naziv}" />
+
+                                                <b:commandButton id="removeButton"
+                                                                 icon="remove" 
+                                                                 styleClass="remove-field-button" 
+                                                                 ajax="true"
+                                                                 update="@form:karakteristikaProstora @form:karakteristikeProstoraWrapper @form:novDogadjajValidacija @form:karakteristikeProstoraGreskaWrapper"
+                                                                 onclick="ajax:novDogadjaj.removeKarakteristika(status.index)" />
+                                            </div>
+                                        </ui:repeat>
+                                    </h:panelGroup>
+                                    <div style="height: 5px"></div>
+                                    <b:selectOneMenu id="karakteristikaProstora" value="#{novDogadjaj.karakteristikaProstora}" styleClass="place-select" select2="true">
+                                        <f:selectItem itemLabel="Izaberite karakteristike prostora" itemValue="#{null}" />
+                                        <f:selectItems value="#{kategorijeSifarnika.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
+                                        <f:facet name="append">
+                                            <b:commandButton id="plusButton"
+                                                             icon="plus" 
+                                                             styleClass="add-field-button" 
+                                                             ajax="true" 
+                                                             update="karakteristikaProstora karakteristikeProstoraGreskaWrapper novDogadjajValidacija karakteristikeProstoraWrapper" 
+                                                             onclick="ajax:novDogadjaj.addKarakteristika();" 
+                                                             style="border: 1px solid #4c4c4c; #{novDogadjaj.karakteristikeProstoraGreska == '' ? 'margin-top: 0px' : ''}" />
+                                        </f:facet>
+                                    </b:selectOneMenu>
+                                    <h:panelGroup id="karakteristikeProstoraGreskaWrapper" >
+                                        <div id="karakteristikeProstoraGreska" class="#{novDogadjaj.karakteristikeProstoraGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px !important">
+                                            <h:outputText value="#{novDogadjaj.karakteristikeProstoraGreska}" />
+                                        </div>
+
+                                        <c:if test="#{novDogadjaj.karakteristikeProstoraGreska != ''}">
+                                            <style>
+                                                #nov_dogadjaj\:karakteristikaProstora {
+                                                    border: 1px solid #DC3545;
+                                                }
+                                            </style>
+                                        </c:if>
+                                    </h:panelGroup>
 
                                 </div>
                             </div>
@@ -248,6 +339,8 @@
                                     </b:carouselControl>
 
                                     <script>
+                                        $('[data-toggle="tooltip"]').tooltip();
+                                        
                                         function editorToTextarea() {
                                             if (quill.getText().trim().length === 0) {
                                                 $("#input_nov_dogadjaj\\:tekst").val("");
@@ -263,6 +356,8 @@
                             <h:panelGroup id="novDogadjajValidacija">
                                 <h:outputScript library="js" name="novDogadjajValidacija.js" />
                             </h:panelGroup>
+
+                            <h:outputScript library="js" name="datepickerMonths.js" />
                         </h:form>
 
                     </div>

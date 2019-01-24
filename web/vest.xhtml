@@ -29,11 +29,11 @@
             <div class="container">
 
                 <div class="row page-content">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="stripe-line-header news-category-header">                        
                         </div>
                         <h:form>
-                            <img src="/vesti/#{pretragaVesti.vest.thumbnail}" class="news-thumbnail-header"/>
+                            <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaVesti.vest.getThumbnailUrl()}"></div>
                             <div style="height: 10px"></div>
                             <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
 
@@ -64,11 +64,11 @@
                                 </b:commandLink>
                             </div>
 
-                            <h:outputText value="#{pretragaVesti.vest.tekst}" />
+                            <h:outputText id="tekst" value="#{pretragaVesti.vest.tekst}" escape="false" />
 
                         </h:form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
 
                         <ui:insert name="left_content">
                             <ui:include src="templates/right_content.xhtml" />

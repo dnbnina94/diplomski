@@ -8,61 +8,69 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition>
-            <footer class="footer">
-            <div class="footer-top-container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <table style="margin: auto; text-align: left">
-                                <tr><td><span>
-                                    Kategorije vesti
-                                </span></td></tr>
-                                <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
-                                    <tr><td style="vertical-align: middle">
-                                        <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
-                                        &#xA0;
-                                        <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
-                                    </td></tr>
-                                </ui:repeat>
-                            </table>
-                        </div>
-                        <div class="col-md-4">
-                            <table style="margin: auto; text-align: left">
-                                <tr><td><span>
-                                    Kategorije događaja
-                                </span></td></tr>
-                                <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj" >
-                                    <tr><td style="vertical-align: middle">
-                                        &#x2022;
-                                        &#xA0;
-                                        <h:outputText value="#{kategorijaDogadjaj.naziv}" styleClass="news-category-footer" />
-                                    </td></tr>
-                                </ui:repeat>
-                            </table>
-                        </div>
-                        <div class="col-md-4">
+            <h:form>
+                <footer class="footer">
+                    <div class="footer-top-container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <table style="margin: auto; text-align: left">
+                                        <tr><td><span>
+                                                    Kategorije vesti
+                                                </span></td></tr>
+                                        <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
+                                            <tr><td style="vertical-align: middle">
+                                                    <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
+                                                    &#xA0;
+                                                    <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
+                                                </td></tr>
+                                        </ui:repeat>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <table style="margin: auto; text-align: left">
+                                        <tr><td><span>
+                                                    Kategorije događaja
+                                                </span></td></tr>
+                                        <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaja" >
+                                            <tr><td style="vertical-align: middle">
+                                                    &#x2022;
+                                                    &#xA0;
+                                                    <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
+                                                        <h:outputText value="#{kategorijaDogadjaja.naziv}" styleClass="news-category-footer" />
+                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{kategorijaDogadjaja}" />
+                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
+                                                    </b:commandLink>
+                                                </td></tr>
+                                        </ui:repeat>
+                                    </table>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="footer-bottom-container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <b:image library="img" name="logo3.png" class="nav-logo-footer" />
-                        </div>
-                        <div class="col-md-6">
-                            © 2018 Nina Grujić 177/13
+                    <div class="footer-bottom-container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b:image library="img" name="logo3.png" class="nav-logo-footer" />
+                                </div>
+                                <div class="col-md-6">
+                                    © 2018 Nina Grujić 177/13
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-        </footer>
+                </footer>
+            </h:form>
         </ui:composition>
     </h:body>
 </html>

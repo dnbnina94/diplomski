@@ -26,11 +26,13 @@ public class StavkeSifarnika  implements java.io.Serializable {
     private Set organizacijesMesto = new HashSet(0);
     private Set organizacijesUlica = new HashSet(0);
     private Set organizacijesOblastDelovanja = new HashSet(0);
+    
+    private Set dogadjajisKarakteristike = new HashSet(0);
 
     public StavkeSifarnika() {
     }
 
-    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja) {
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja, Set dogadjajisKarakteristike) {
        this.idStavka = idStavka;
        this.sifarnici = sifarnici;
        this.naziv = naziv;
@@ -42,6 +44,7 @@ public class StavkeSifarnika  implements java.io.Serializable {
        this.organizacijesMesto = organizacijesMesto;
        this.organizacijesUlica = organizacijesUlica;
        this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
+       this.dogadjajisKarakteristike = dogadjajisKarakteristike;
     }
     
     public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica) {
@@ -141,6 +144,14 @@ public class StavkeSifarnika  implements java.io.Serializable {
         this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
     }
 
+    public Set getDogadjajisKarakteristike() {
+        return dogadjajisKarakteristike;
+    }
+
+    public void setDogadjajisKarakteristike(Set dogadjajisKarakteristike) {
+        this.dogadjajisKarakteristike = dogadjajisKarakteristike;
+    }
+    
 }
 
 

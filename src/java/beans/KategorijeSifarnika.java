@@ -27,6 +27,7 @@ public class KategorijeSifarnika implements Serializable {
     private List<StavkeSifarnika> vestiKategorije;
     private List<StavkeSifarnika> dogadjajiKategorije;
     private List<StavkeSifarnika> uzrast;
+    private List<StavkeSifarnika> karakteristikeProstora;
 
     public KategorijeSifarnika() {
         mesta = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
@@ -35,6 +36,7 @@ public class KategorijeSifarnika implements Serializable {
         vestiKategorije = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
         dogadjajiKategorije = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
         uzrast = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
+        karakteristikeProstora = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(7).getStavkeSifarnikas());
     }
 
     class SortByIdSifarnik implements Comparator<StavkeSifarnika> {
@@ -119,6 +121,14 @@ public class KategorijeSifarnika implements Serializable {
 
     public void setOblastiDelovanja(List<StavkeSifarnika> oblastiDelovanja) {
         this.oblastiDelovanja = oblastiDelovanja;
+    }
+
+    public List<StavkeSifarnika> getKarakteristikeProstora() {
+        return karakteristikeProstora;
+    }
+
+    public void setKarakteristikeProstora(List<StavkeSifarnika> karakteristikeProstora) {
+        this.karakteristikeProstora = karakteristikeProstora;
     }
 
 }

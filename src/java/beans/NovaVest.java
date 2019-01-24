@@ -200,7 +200,7 @@ public class NovaVest {
                     Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
                     return;
                 }
-                
+
                 novaVest.setThumbnail(thumbnailName);
             } else {
                 novaVest.setThumbnail(null);
@@ -217,8 +217,20 @@ public class NovaVest {
             novaVest.setTekst(tekst);
             novaVest.setDatum(new Date());
             novaVest.setArhivirana(0);
-            
+
             vestiHelper.insertVest(novaVest);
+
+            PretragaVesti pretragaVestiBean = (PretragaVesti) elContext.getELResolver().getValue(elContext, null, "pretragaVesti");
+            pretragaVestiBean.setVest(novaVest);
+            elContext.getELResolver().setValue(elContext, null, "pretragaVesti", pretragaVestiBean);
+
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("vest.xhtml");
+                FacesContext.getCurrentInstance().responseComplete();
+            } catch (IOException ex) {
+                Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
             thumbnail = submittedThumbnail;
         }
@@ -231,4 +243,9 @@ public class NovaVest {
         submittedThumbnail = null;
     }
 
+    public void reset() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        NovaVest novaVestBean = new NovaVest();
+        elContext.getELResolver().setValue(elContext, null, "novaVest", novaVestBean);
+    }
 }

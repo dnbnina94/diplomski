@@ -614,6 +614,18 @@ select:focus {
     height: 35px;
     overflow: hidden;
     margin-top: 7px;
+    word-break: break-all !important;
+}
+
+.featured-news-content * {
+    display: inline !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    color: white !important;
+    font-style: normal !important;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 .news-category-header {
@@ -700,6 +712,17 @@ select:focus {
     overflow: hidden;
 }
 
+.news-content-container-front-page * {
+    display: inline !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    color: #4C4C4C !important;
+    font-style: normal !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
 .test-class {
     width: 100%;
     position: relative;
@@ -763,7 +786,19 @@ table.dataTable {
 }
 
 .news-text {
-    font-size: 14px;
+    padding-top: 10px;
+    word-break: break-all !important;
+}
+
+.news-text * {
+    display: inline !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+    color: #4C4C4C !important;
+    font-style: normal !important;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 .read-more-button {
@@ -1345,8 +1380,8 @@ table.dataTable {
     text-align: center;
     padding-bottom: 40px;
     padding-top: 25px;
-        /*font-family: BebasNeueRegular;
-        font-size: 18px;*/
+    /*font-family: BebasNeueRegular;
+    font-size: 18px;*/
 }
 
 .upload-btn-wrapper {
@@ -1460,6 +1495,7 @@ table.dataTable {
     height: 100px !important;
     margin-left: 5px;
     margin-right: 23px;
+    background-color: white !important;
 }
 
 .timepicker-picker > .table-condensed > tr > td > a > span {
@@ -1532,4 +1568,42 @@ table.dataTable {
 
 .timepicker-hours, .timepicker-minutes, .timepicker-seconds {
     margin: 5px !important;
+}
+
+.custom-datetimepicker-bootsfaces-error > input {
+    border-color: #DC3545 !important;
+}
+
+.custom-datetimepicker-bootsfaces-error > input:focus {
+    border-color: red !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 204, 204, 0.6) !important;
+}
+
+.bootstrap-timepicker-widget.dropdown-menu { 
+    z-index: 1050!important; 
+}
+
+.event-dates-container {
+    margin: auto !important;
+    border: 1px solid #ddd;
+}
+
+.event-dates-container > div {
+    padding: 5px 6px;
+    text-align: center;
+    font-family: BebasNeueRegular;
+    font-size: 16px;
+}
+
+.event-dates-container > div:nth-child(1) {
+    text-align: right;
+}
+
+.event-dates-container > div:nth-child(3) {
+    text-align: left;
+}
+
+.event-mesto-container {
+    margin-top: 10px;
+    margin-bottom: 5px;
 }

@@ -47,4 +47,6 @@ Contributor(s):
   <table-filter match-name="sifarnici"/>
   <table-filter match-name="dogadjaji"/>
   <table-filter match-name="organizacije"/>
+  <table-filter match-name="oglasi"/>
+  <table-filter match-name="karakteristike_prostora"/>
 </hibernate-reverse-engineering>

@@ -32,6 +32,12 @@
             </key>
             <one-to-many class="db.Dogadjaji" />
         </set>
+        <set name="oglasis" table="oglasi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnicko_ime" length="50" not-null="true" />
+            </key>
+            <one-to-many class="db.Oglasi" />
+        </set>
         <one-to-one name="organizacije" class="db.Organizacije"></one-to-one>
     </class>
 </hibernate-mapping>

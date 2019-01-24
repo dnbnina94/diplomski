@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2019 at 06:20 PM
+-- Generation Time: Jan 24, 2019 at 09:10 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -32,11 +32,31 @@ CREATE TABLE `dogadjaji` (
   `tekst` text NOT NULL,
   `kategorija` int(11) NOT NULL,
   `mesto` int(11) NOT NULL,
+  `ulica` int(11) NOT NULL,
   `uzrast` int(11) NOT NULL,
   `datum_dogadjaja` datetime NOT NULL,
   `datum_kreiranja` datetime NOT NULL,
   `korisnicko_ime` varchar(50) NOT NULL,
-  `datum_isticanja` datetime NOT NULL
+  `datum_isticanja` datetime NOT NULL,
+  `thumbnail` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dogadjaji`
+--
+
+INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`, `ulica`, `uzrast`, `datum_dogadjaja`, `datum_kreiranja`, `korisnicko_ime`, `datum_isticanja`, `thumbnail`) VALUES
+(1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:00', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:00', '1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `karakteristike_prostora`
+--
+
+CREATE TABLE `karakteristike_prostora` (
+  `id_dogadjaj` int(11) NOT NULL,
+  `id_stavka` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -61,6 +81,21 @@ INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) 
 ('etf_org', '6‚ćk`�·)Ťô×řX<c/B“ĂĄ;”·zÁĺš˛?™¬Ň^`ÎZÉrŐmÎ>ő„ŰŔs‡ÜCéŽÖmfş\'wo¤ý‡š', '›,i‘nřl5wüŽ©é¦', 2, 1),
 ('nina_org', 'ÂX7ßTśě$ZŘ‰&Ú@¬ĐµţĆL+>ŃÖ—´ţNÚ�?\0łě‹fŐBY"|XlUŢkMĘszżę	ŇÜB�', 'w»čPoW\r\\+®ŁŘěY·', 2, 1),
 ('ORCA', 'oB5h7/g)3�ţoÉ”ˇü“Ś2ü›ËbŘ5?u°ă«¬stě÷XŹćG!Ţ�ŮCŐ€Š~¤�˘úžľě\'.ů', '¨Ř­WŻLÔ;i¤ŚOG§', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oglasi`
+--
+
+CREATE TABLE `oglasi` (
+  `id_oglas` int(11) NOT NULL,
+  `naslov` varchar(256) NOT NULL,
+  `tekst` text NOT NULL,
+  `datum_kreiranja` datetime NOT NULL,
+  `datum_isticanja` datetime NOT NULL,
+  `korisnicko_ime` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,7 +146,8 @@ INSERT INTO `sifarnici` (`id_sifarnik`, `naziv`) VALUES
 (3, 'mesta'),
 (4, 'uzrast'),
 (5, 'ulice'),
-(6, 'oblasti_delovanja');
+(6, 'oblasti_delovanja'),
+(7, 'karakteristike_prostora');
 
 -- --------------------------------------------------------
 
@@ -162,7 +198,12 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (29, 3, 'Smederevo', NULL),
 (30, 5, 'Topolska 18', NULL),
 (31, 6, 'Zaštita životinja', NULL),
-(32, 5, 'Stjepana Filipovića 29', NULL);
+(32, 5, 'Stjepana Filipovića 29', NULL),
+(33, 7, 'Pet friendly', NULL),
+(34, 7, 'Besplatan parking', NULL),
+(35, 3, 'Paraćin', NULL),
+(36, 5, 'Cvijićeva 29', NULL),
+(37, 5, 'Mitropolita Petra 8', NULL);
 
 -- --------------------------------------------------------
 
@@ -200,7 +241,9 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (12, 'nina_org', 1, 'Jesenji Odjeci Beogradskog Šopen festa: U slavu Poljske', 'Tradicionalni kulturni program Jesenji Odjeci 7. Beogradskog Šopen festa biće održan u ponedeljak, 26. novembra od 18.00, u sali Jevrejske opštine (Kralja Petra 71a).\r\n\r\nŠopen fest i Ambasada Poljske organizuju muzičko-poetsko veče sa pratećom istorijskom izložbom „Očevi nezavisnosti“.\r\n\r\nDela Betovena, Lista, Šopena i Paderevskog, izvešće pijanističke zvezde u usponu Lazar Torbica i Dragana Teparić.\r\n\r\nDevetnaestogodišnji pijanista iz Šapca, Lazar Torbica, student je druge godine Akademije umetnosti u Novom Sadu, u klasi renomirane pijanistkinje i prof. Rite Kinke. Dobitnik je više od 40 nagrada na domaćim i međunarodnim takmičenjima.\r\n\r\nPijanistkinja sa karijerom u usponu, Dragana Teparić diplomirala je i završila master studije na FMU. Dobitnici je najznačajnijih nagrada i laureat je takmičenja u zemlji i inostranstvu.\r\n\r\nKao gosti večeri, nastupiće studenti Departmana drame FSU, Đorđe Jovičić, Nađa Ristić i Lazar Tešić i govoriće poeziju poljskih pesnika. Koordinator poetskog programa je prof. Biljana Đurović.', '2018-12-02 00:15:00', '12.jpg', 0),
 (13, 'nina_org', 1, 'SKC: Oleg Kirejev i džez 1960-tih', 'U petak, 30. novembra od 20.00, u Studentskom kulturnom centru nastupiće saksofonista Oleg Kirejev koji će predstaviti džez šezdesetih.\r\n\r\nTo je zlatni period super zvezda o kojima i do danas kruže legende. Velikani Čarli Parker i Džon Koltrejn su već izveli svoje muzičke revolucije i inicirali nove stilove; Majls Dejvis je već proglašen za velikog muzičara, a budući titani Kit Džeret i Čik Korija su započeli svoj uspon.\r\n\r\nNa desetine ogranaka, eksperimenti, eksplozija novih ideja… Šezdesete godine su ispunjene inspiracijom, slobodom i novim mislima. Kul džez, bosa-nova i, naravno, tradicionalni džez – sve to ćete moći da čujete na koncertu Olega Kirejeva i njegovog ansambla.\r\n\r\nOleg Kirejev je priznati saksofonista koji je izvanredno upoznat sa tom epohom i ne samo na rečima. Oleg je bio učenik samog Bada Šenka, poznatog predstavnika „west coast“ džeza.', '2018-12-02 05:00:00', '13.jpg', 0),
 (14, 'nina_org', 1, 'Koncert: Neno Belan & Fiumens sviraju pesme Đavola', 'U četvrtak, 22. novembra od 21.00, u sali Amerikana Doma omladine Beograda Neno Belan & Fiumens sviraće pesme legendarne splitske grupe Đavoli.\r\n\r\n– To je poseban koncert koji ću posvetiti opusu moje nekadašnje grupe Đavoli. Taj format zovemo double retro show jer nas vraća u slatki zvuk šezdesetih. Neće to biti običan koncert nego pravi muzičko-scenski događaj – najavljuje Neno Belan.\r\n\r\nKoncert „Neno Belan & Fuimens sviraju pesme grupe Đavoli“ posvećen je jednoj od najvažnijih rok grupa na prostoru bivše Jugoslavije, jedinstvenoj i prepoznatljivoj po mešavini ranog rokenrola i tvista uz specifičan mediteranski ‘začin’ i razrađen imidž.\r\n\r\nNeno Belan & Fiumens uživo će proći kroz sva četiri studijska albuma Đavola objavljena od 1986. do 1998. godine: „Ljubav i moda“, „Halo Lulu 22“, „Ostani uz mene“ i „Space Twist“.', '2018-12-01 13:06:00', '14.jpg', 0),
-(15, 'etf_org', 1, 'asdf', '<p><strong><em><u>asdf</u></em></strong></p>', '2019-01-18 19:18:41', '15.jpg', 0);
+(15, 'etf_org', 1, 'ASD', '<p><strong>dasdasdsa </strong>dasdasdasd fdasfdf asdafsdasfda sdasdasfdasfdgasfdgasfdagsdas das dga fagsd as dag df asgda fshgdf asgdaf dgha fgas fdag dasgd fagsdf asgdf asghd agd ag fasghd fasgd asghda sfdghs dfsaghd fasghd</p>', '2019-01-24 19:09:18', NULL, 0),
+(16, 'etf_org', 1, 'dasdas', '<p>&lt;script&gt;</p><p>alert("HALLOOO");</p><p>&lt;/script&gt;</p>', '2019-01-24 19:21:15', NULL, 0),
+(17, 'etf_org', 1, 'dasdas', '<p><em>&lt;script&gt;</em></p><p><em>alert("HALLOOO");</em></p><p><em>&lt;/script&gt;</em></p>', '2019-01-24 19:21:27', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -214,13 +257,28 @@ ALTER TABLE `dogadjaji`
   ADD KEY `mesto` (`mesto`),
   ADD KEY `kategorija` (`kategorija`),
   ADD KEY `uzrast` (`uzrast`),
-  ADD KEY `korisnicko_ime` (`korisnicko_ime`);
+  ADD KEY `korisnicko_ime` (`korisnicko_ime`),
+  ADD KEY `ulica` (`ulica`);
+
+--
+-- Indexes for table `karakteristike_prostora`
+--
+ALTER TABLE `karakteristike_prostora`
+  ADD PRIMARY KEY (`id_dogadjaj`,`id_stavka`),
+  ADD KEY `FK_karakteristika_stavka` (`id_stavka`);
 
 --
 -- Indexes for table `korisnici`
 --
 ALTER TABLE `korisnici`
   ADD PRIMARY KEY (`korisnicko_ime`);
+
+--
+-- Indexes for table `oglasi`
+--
+ALTER TABLE `oglasi`
+  ADD PRIMARY KEY (`id_oglas`),
+  ADD KEY `korisnicko_ime` (`korisnicko_ime`);
 
 --
 -- Indexes for table `organizacije`
@@ -263,7 +321,21 @@ ALTER TABLE `dogadjaji`
   ADD CONSTRAINT `FK_autor_dogadjaj` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`),
   ADD CONSTRAINT `FK_kategorija_dogadjaj` FOREIGN KEY (`kategorija`) REFERENCES `stavke_sifarnika` (`id_stavka`),
   ADD CONSTRAINT `FK_mesto_dogadjaj` FOREIGN KEY (`mesto`) REFERENCES `stavke_sifarnika` (`id_stavka`),
+  ADD CONSTRAINT `FK_ulica_dogadjaj` FOREIGN KEY (`ulica`) REFERENCES `stavke_sifarnika` (`id_stavka`),
   ADD CONSTRAINT `FK_uzrast_dogadjaj` FOREIGN KEY (`uzrast`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+
+--
+-- Constraints for table `karakteristike_prostora`
+--
+ALTER TABLE `karakteristike_prostora`
+  ADD CONSTRAINT `FK_karakteristika_dogadjaj` FOREIGN KEY (`id_dogadjaj`) REFERENCES `dogadjaji` (`id_dogadjaj`),
+  ADD CONSTRAINT `FK_karakteristika_stavka` FOREIGN KEY (`id_stavka`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+
+--
+-- Constraints for table `oglasi`
+--
+ALTER TABLE `oglasi`
+  ADD CONSTRAINT `FK_autor_oglas` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`);
 
 --
 -- Constraints for table `organizacije`

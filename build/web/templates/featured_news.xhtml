@@ -31,10 +31,10 @@ and open the template in the editor.
                         <c:set var="innerDivClassAbsolute" value="${'featured-content featured-smaller'}" />
                     </c:if>
                     <div class="#{vest.outerDivClass}">
-                        <div class="#{vest.innerDivClassRelative}" style="background: url(/vesti/#{vest.thumbnail})">
+                        <div class="#{vest.innerDivClassRelative}" style="background: #{vest.getThumbnailUrl()}">
 
                             <div class="#{vest.innerDivClassAbsolute}">
-                                <table class="featured-content-table" style="background: url(/vesti/#{vest.thumbnail})">
+                                <table class="featured-content-table" style="background: #{vest.getThumbnailUrl()}">
                                     <tr>
                                         <td>
                                             <table class="date-table">
@@ -65,7 +65,7 @@ and open the template in the editor.
                                                         <h:outputText value="#{vest.naslov}" />
                                                     </div>
                                                     <div class="featured-news-content">
-                                                        <h:outputText value="#{vest.tekst}" />
+                                                        <h:outputText value="#{vest.tekst}" escape="false" />
                                                     </div>
                                                     <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                                 </b:commandLink>
