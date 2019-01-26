@@ -78,7 +78,7 @@
                                     <div class="news-content-sm-devices">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                             <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
-                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" escape="false" /> <br/><br/>
+                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" /> <br/><br/>
                                             <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                             <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                         </b:commandLink>
@@ -89,7 +89,7 @@
                                     <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                         <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/>
                                         <div class="news-text">
-                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" escape="false" />
+                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" />
                                         </div> <br/>
                                         <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                         <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />

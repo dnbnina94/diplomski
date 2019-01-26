@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -29,9 +30,13 @@ public class VestiHelper {
         try {
             session.getTransaction().begin();
             
-            Query q = session.createQuery("FROM Vesti order by date(datum) desc");
-            q.setMaxResults(5);
-            List l = q.list();
+            Criteria c = session.createCriteria(Vesti.class);
+            c.addOrder(Order.desc("datum"));
+            c.setMaxResults(5);
+            List l = c.list();
+            //Query q = session.createQuery("FROM Vesti order by date(datum) desc");
+            //q.setMaxResults(5);
+            //List l = q.list();
             session.getTransaction().commit();
             
             return l;

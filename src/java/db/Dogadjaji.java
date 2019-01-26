@@ -8,6 +8,7 @@ package db;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import org.jsoup.Jsoup;
 
 /**
  *
@@ -153,11 +154,13 @@ public class Dogadjaji implements java.io.Serializable {
     }
     
     public String getTekstShort() {
-        return tekst.substring(0, Math.min(tekst.length(), 150))+"...";
+        String tekstShort = Jsoup.parse(tekst).text();
+        return tekstShort.substring(0, Math.min(tekstShort.length(), 150))+"...";
     }
     
     public String getTekstShortRezultatPretrage() {
-        return tekst.substring(0, Math.min(tekst.length(), 256))+"...";
+        String tekstShort = Jsoup.parse(tekst).text();
+        return tekstShort.substring(0, Math.min(tekstShort.length(), 256))+"...";
     }
     
     public String getNaslovShort() {
@@ -171,7 +174,7 @@ public class Dogadjaji implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            thumbnailUrl = "url('/Diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/dogadjaji/" + thumbnail + ")";
         }

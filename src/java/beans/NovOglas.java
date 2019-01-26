@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.el.ELContext;
 import javax.faces.context.FacesContext;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  *
@@ -142,7 +144,7 @@ public class NovOglas {
 
             oglas.setIdOglas(oglasiHelper.getMaxId() + 1);
             oglas.setNaslov(naslov);
-            oglas.setTekst(tekst);
+            oglas.setTekst(Jsoup.clean(tekst, Whitelist.basic().addTags("h1", "h2", "h3")));
             oglas.setDatumKreiranja(new Date());
             oglas.setDatumIsticanja(datumIsticanja);
 

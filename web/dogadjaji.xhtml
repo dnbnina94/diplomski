@@ -36,6 +36,13 @@
                                     <h:outputText value="#{pretragaDogadjaja.kategorijaDogadjaja.naziv}" />
                                 </c:if>
                                 <c:if test="#{pretragaDogadjaja.tipPretrage eq 2}">
+                                    <h:form>
+                                        <h:outputText value="Događaji &nbsp;korisnika &nbsp;" />
+                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                            <h:outputText value="#{pretragaDogadjaja.organizacija.korisnickoIme}" style="color: orangered" />
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaDogadjaja.organizacija}" />
+                                        </b:commandLink>
+                                    </h:form>
                                 </c:if>
                             </div>                           
                         </div>
@@ -69,12 +76,11 @@
                                     <div class="news-content-sm-devices">
                                         <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
                                             <h:outputText value="#{dogadjaj.naslov}" styleClass="news-heading" /> <br/><br/>
-                                            <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" escape="false" /> <br/><br/>
+                                            <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" /> <br/><br/>
                                             <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                             <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
                                         </b:commandLink>
                                     </div>
-
                                 </b:dataTableColumn>
                                 <b:dataTableColumn>
                                     <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
@@ -112,7 +118,7 @@
                                             &nbsp;
                                             <h:outputText value="#{dogadjaj.mesto.naziv}" />
                                         </div>
-                                        <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" escape="false" /> <br/><br/>
+                                        <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" /> <br/><br/>
                                         <b:button styleClass="read-more-button" value="Pročitaj još"/>
                                         <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
                                     </b:commandLink>

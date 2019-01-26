@@ -567,20 +567,21 @@ select:focus {
 .featured-content-table > tbody > tr:nth-child(1) > td {
     padding-bottom: 0px !important;
     vertical-align: top;
+    height: 50%;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 80%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.35) 0%,rgba(0,0,0,0,0) 80%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%,rgba(0,0,0,0) 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a2000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 
 .featured-content-table tbody tr:nth-child(2) td {
     padding-top: 0px !important;
     vertical-align: bottom;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100 */
-    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 80%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.35) 80%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.35) 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a2000000',GradientType=0 ); /* IE6-9 */
 }
 
@@ -700,9 +701,11 @@ select:focus {
 
 .news-header-container-front-page {
     margin-top: 10px;
-    font-weight: bold;
-    height: 40px;
+    height: 44px;
     overflow: hidden;
+    font-size: 16px;
+    line-height: 18px;
+    font-family: BebasNeueRegular;
 }
 
 .news-content-container-front-page {
@@ -940,6 +943,7 @@ table.dataTable {
     padding-top: 20px;
     font-family: BebasNeueRegular;
     font-size: 26px;
+    line-height: 24px;
 }
 
 .news-parameters-news-page {
@@ -1606,4 +1610,14 @@ table.dataTable {
 .event-mesto-container {
     margin-top: 10px;
     margin-bottom: 5px;
+}
+
+.date-container {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 6px;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: BebasNeueRegular;
 }

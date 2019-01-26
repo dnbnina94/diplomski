@@ -5,7 +5,9 @@
  */
 package beans;
 
+import db.Dogadjaji;
 import db.Korisnici;
+import db.Oglasi;
 import db.Organizacije;
 import db.Vesti;
 import db.helpers.KorisniciHelper;
@@ -43,6 +45,22 @@ public class OrganizacijaBean {
         
     }
     
+    class SortDogadjajiByDatumDescending implements Comparator<Dogadjaji> {
+        
+        @Override
+        public int compare (Dogadjaji a, Dogadjaji b) {
+            return b.getDatumKreiranja().compareTo(a.getDatumKreiranja());
+        }
+    }
+    
+    class SortOglasiByDatumDescending implements Comparator<Oglasi> {
+        
+        @Override
+        public int compare (Oglasi a, Oglasi b) {
+            return b.getDatumKreiranja().compareTo(a.getDatumKreiranja());
+        }
+    }
+    
     /*public List<Telefoni> setTelefoniToList() {
         List<Telefoni> telefoni = new ArrayList<Telefoni>(organizacija.getTelefonis());
         Collections.sort(telefoni, new OrganizacijaBean.SortByIdTelefon());
@@ -75,11 +93,37 @@ public class OrganizacijaBean {
         return vesti;
     }
     
+    public List<Dogadjaji> setDogadjajiToList() {
+        List<Dogadjaji> dogadjaji = new ArrayList<Dogadjaji>(organizacija.getKorisnici().getDogadjajis());
+        Collections.sort(dogadjaji, new OrganizacijaBean.SortDogadjajiByDatumDescending());
+        return dogadjaji;
+    }
+    
+    public List<Oglasi> setOglasiToList() {
+        List<Oglasi> oglasi = new ArrayList<Oglasi>(organizacija.getKorisnici().getOglasis());
+        Collections.sort(oglasi, new OrganizacijaBean.SortOglasiByDatumDescending());
+        return oglasi;
+    }
+    
     public List<Vesti> setVestiToListFeatured() {
         List<Vesti> vesti = this.setVestiToList();
         if (vesti.size() > 7)
             return vesti.subList(0, 8);
         return vesti;
+    }
+    
+    public List<Dogadjaji> setDogadjajiToListFeatured() {
+        List<Dogadjaji> dogadjaji = this.setDogadjajiToList();
+        if (dogadjaji.size() > 7)
+            return dogadjaji.subList(0, 8);
+        return dogadjaji;
+    }
+    
+    public List<Oglasi> setOglasiToListFeatured() {
+        List<Oglasi> oglasi = this.setOglasiToList();
+        if (oglasi.size() > 7)
+            return oglasi.subList(0, 8);
+        return oglasi;
     }
     
 }

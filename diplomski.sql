@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2019 at 09:10 PM
+-- Generation Time: Jan 26, 2019 at 09:14 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -96,6 +96,13 @@ CREATE TABLE `oglasi` (
   `datum_isticanja` datetime NOT NULL,
   `korisnicko_ime` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `oglasi`
+--
+
+INSERT INTO `oglasi` (`id_oglas`, `naslov`, `tekst`, `datum_kreiranja`, `datum_isticanja`, `korisnicko_ime`) VALUES
+(1, 'Java Junior Developer dasgfdsg fasg sgdas fgdhas fghdsa fghas fdghsfd asghd fasghd asgd fasgd fasghdfasghd fasghd fasgd fasghdas fh', '<p>dasdasdas dasd asgdasgd asgdasfgdasfdasg dasgf asgd asgdfasgdas fda ghsd fas gdas fdagsd asd gasdasddasd gas gda ghsd ghasdasdasdasd as das d asdas fgdasd asdas d gas gdd gasd fgasdsdasdasdas fhasdasdas das d adas</p>', '2019-01-26 01:59:05', '2019-01-31 23:59:59', 'etf_org');
 
 -- --------------------------------------------------------
 
@@ -241,9 +248,12 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (12, 'nina_org', 1, 'Jesenji Odjeci Beogradskog Šopen festa: U slavu Poljske', 'Tradicionalni kulturni program Jesenji Odjeci 7. Beogradskog Šopen festa biće održan u ponedeljak, 26. novembra od 18.00, u sali Jevrejske opštine (Kralja Petra 71a).\r\n\r\nŠopen fest i Ambasada Poljske organizuju muzičko-poetsko veče sa pratećom istorijskom izložbom „Očevi nezavisnosti“.\r\n\r\nDela Betovena, Lista, Šopena i Paderevskog, izvešće pijanističke zvezde u usponu Lazar Torbica i Dragana Teparić.\r\n\r\nDevetnaestogodišnji pijanista iz Šapca, Lazar Torbica, student je druge godine Akademije umetnosti u Novom Sadu, u klasi renomirane pijanistkinje i prof. Rite Kinke. Dobitnik je više od 40 nagrada na domaćim i međunarodnim takmičenjima.\r\n\r\nPijanistkinja sa karijerom u usponu, Dragana Teparić diplomirala je i završila master studije na FMU. Dobitnici je najznačajnijih nagrada i laureat je takmičenja u zemlji i inostranstvu.\r\n\r\nKao gosti večeri, nastupiće studenti Departmana drame FSU, Đorđe Jovičić, Nađa Ristić i Lazar Tešić i govoriće poeziju poljskih pesnika. Koordinator poetskog programa je prof. Biljana Đurović.', '2018-12-02 00:15:00', '12.jpg', 0),
 (13, 'nina_org', 1, 'SKC: Oleg Kirejev i džez 1960-tih', 'U petak, 30. novembra od 20.00, u Studentskom kulturnom centru nastupiće saksofonista Oleg Kirejev koji će predstaviti džez šezdesetih.\r\n\r\nTo je zlatni period super zvezda o kojima i do danas kruže legende. Velikani Čarli Parker i Džon Koltrejn su već izveli svoje muzičke revolucije i inicirali nove stilove; Majls Dejvis je već proglašen za velikog muzičara, a budući titani Kit Džeret i Čik Korija su započeli svoj uspon.\r\n\r\nNa desetine ogranaka, eksperimenti, eksplozija novih ideja… Šezdesete godine su ispunjene inspiracijom, slobodom i novim mislima. Kul džez, bosa-nova i, naravno, tradicionalni džez – sve to ćete moći da čujete na koncertu Olega Kirejeva i njegovog ansambla.\r\n\r\nOleg Kirejev je priznati saksofonista koji je izvanredno upoznat sa tom epohom i ne samo na rečima. Oleg je bio učenik samog Bada Šenka, poznatog predstavnika „west coast“ džeza.', '2018-12-02 05:00:00', '13.jpg', 0),
 (14, 'nina_org', 1, 'Koncert: Neno Belan & Fiumens sviraju pesme Đavola', 'U četvrtak, 22. novembra od 21.00, u sali Amerikana Doma omladine Beograda Neno Belan & Fiumens sviraće pesme legendarne splitske grupe Đavoli.\r\n\r\n– To je poseban koncert koji ću posvetiti opusu moje nekadašnje grupe Đavoli. Taj format zovemo double retro show jer nas vraća u slatki zvuk šezdesetih. Neće to biti običan koncert nego pravi muzičko-scenski događaj – najavljuje Neno Belan.\r\n\r\nKoncert „Neno Belan & Fuimens sviraju pesme grupe Đavoli“ posvećen je jednoj od najvažnijih rok grupa na prostoru bivše Jugoslavije, jedinstvenoj i prepoznatljivoj po mešavini ranog rokenrola i tvista uz specifičan mediteranski ‘začin’ i razrađen imidž.\r\n\r\nNeno Belan & Fiumens uživo će proći kroz sva četiri studijska albuma Đavola objavljena od 1986. do 1998. godine: „Ljubav i moda“, „Halo Lulu 22“, „Ostani uz mene“ i „Space Twist“.', '2018-12-01 13:06:00', '14.jpg', 0),
-(15, 'etf_org', 1, 'ASD', '<p><strong>dasdasdsa </strong>dasdasdasd fdasfdf asdafsdasfda sdasdasfdasfdgasfdgasfdagsdas das dga fagsd as dag df asgda fshgdf asgdaf dgha fgas fdag dasgd fagsdf asgdf asghd agd ag fasghd fasgd asghda sfdghs dfsaghd fasghd</p>', '2019-01-24 19:09:18', NULL, 0),
-(16, 'etf_org', 1, 'dasdas', '<p>&lt;script&gt;</p><p>alert("HALLOOO");</p><p>&lt;/script&gt;</p>', '2019-01-24 19:21:15', NULL, 0),
-(17, 'etf_org', 1, 'dasdas', '<p><em>&lt;script&gt;</em></p><p><em>alert("HALLOOO");</em></p><p><em>&lt;/script&gt;</em></p>', '2019-01-24 19:21:27', NULL, 0);
+(15, 'etf_org', 1, 'Nina Grujic', 'Zdravoooo\n<p>dasbdsadbhdbahdbash <strong>ashdasjdhas </strong>dashbdasjhdba adsjdhasbdjha dasjhd ashd a ad asbd abdasnd ajshd asjd as dasnd asjd ah dasd asmd ajhdajhsdb</p>\n<p><u>dgash asgdas h sgdas gdjshad gahsd gashjdg asjhdgashd gasjhdgas dyasg djhasgd hasjdg jhdasgjd ashjdg ashdgashd as gdajhdgasdghasgd asjhjas </u></p>\n<ol>\n <li><u>dasdasda</u></li>\n <li><em><u>dasdasdsa</u></em></li>\n <li><u>dasdasd</u></li>\n</ol>', '2019-01-26 02:55:40', NULL, 0),
+(16, 'etf_org', 1, 'dsdaas', '<p>&lt;script&gt;</p>\n<p>alert("HELLOOOOO");</p>\n<p>&lt;/script&gt;</p>', '2019-01-26 02:56:53', NULL, 0),
+(17, 'etf_org', 1, '5', 'dasdasdasdas\n<p>dasdasdasdasd asdfasd <strong>fasd </strong>fad fasgdf asgdas fghd <em>fasgdfasghdf </em>asgd fasghd <u>fashdfasghd </u>fasgd fasghd fasgdfash</p>', '2019-01-26 03:14:31', NULL, 0),
+(18, 'etf_org', 1, '4', '<h1>dadassasdas</h1>\n<h2>dasdasdasasas</h2>\n<h3>dasdasdasdasdasa</h3>\n<p>dasdasdassdasdasdas <strong>ashgdahjd </strong>gajhd <em>gashd </em>gashd gashd <u>gasdjhga </u>shd gashd gasjhdgashd asghd <a href="http://www.facebook.com" rel="nofollow">gashjd </a>gas</p>\n<ol>\n <li>dasdasdasasd</li>\n <li>dadasds</li>\n <li>dasd</li>\n</ol>\n<ul>\n <li>dasdasdadas</li>\n <li>dasdasdda</li>\n <li>sdasdadadasda</li>\n <li>dasdasadsasd</li>\n</ul>', '2019-01-26 03:21:56', NULL, 0),
+(21, 'etf_org', 3, '1', '<p><strong><em><u>dgsd asghas fghds afdghas fdasgh fdshg dfasgd fasghdfasgd afsdgas fghdasf dgas fd ghasfdgas dfasghd fasgdfshgdfasgd fasgd fashgdfasghdfasghdfsghd fasgd fasghdf asghd fasghdafdgasfdgasfdgas dfagsdfasg hdfasgd fasghd fasdghas fdghas fdgahs dfasghd fasghd fasdgh fasdghfasgdfasgdhas fdghas fdgas fdghas fhdgfas dghasfdgasd fasdfas ghdfasgd asfgdh asfghd asghd asfdg asg</u></em></strong></p>', '2019-01-26 03:55:16', NULL, 0),
+(22, 'etf_org', 1, 'najnovija vest', '<p>asdsdsad adasdasd<u>as dasd asd asd asdasd asd asds d gshjdgasjd gas</u>hd gasjh</p>', '2019-01-26 04:19:25', NULL, 0);
 
 --
 -- Indexes for dumped tables

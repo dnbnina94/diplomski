@@ -6,8 +6,8 @@
 package beans;
 
 import db.Dogadjaji;
+import db.Organizacije;
 import db.StavkeSifarnika;
-import db.Vesti;
 import db.helpers.StavkeSifarnikaHelper;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +30,7 @@ public class PretragaDogadjaja {
     private String kljucneReci = "";
     private Dogadjaji dogadjaj;
     private List<Dogadjaji> dogadjaji;
+    private Organizacije organizacija;
 
     //1 - klasicna pretraga, 2 - dogadjaji korisnika
     private int tipPretrage;
@@ -148,11 +149,25 @@ public class PretragaDogadjaja {
     }
 
     public List<Dogadjaji> getDogadjaji() {
-        return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
+        if (tipPretrage == 1) {
+            return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija()); 
+        } else {
+            return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis()); 
+        }
     }
 
     public void setDogadjaji(List<Dogadjaji> dogadjaji) {
         this.dogadjaji = dogadjaji;
     }
+
+    public Organizacije getOrganizacija() {
+        return organizacija;
+    }
+
+    public void setOrganizacija(Organizacije organizacija) {
+        this.organizacija = organizacija;
+    }
+    
+    
 
 }

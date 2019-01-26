@@ -649,7 +649,7 @@
                                                 #{vest.naslovShort}
                                             </div>
                                             <div class="news-content-container-front-page">
-                                                #{vest.tekstShort}
+                                                <h:outputText value="#{vest.tekstShort}" />
                                             </div>
                                             <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                         </b:commandLink>
@@ -660,16 +660,16 @@
 
                         <div class="stripe-line-header news-category-header">
                             <h:form>
-                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
                                     <div class="stripe-line-header-link"><h:outputText value="Događaji" /></div>
-                                    <f:setPropertyActionListener target="#{pretragaVesti.organizacija}" value="#{organizacijaBean.organizacija}" />
-                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.organizacija}" value="#{organizacijaBean.organizacija}" />
+                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="2" />
                                 </b:commandLink>
                             </h:form>
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                                <c:if test="#{organizacijaBean.setVestiToList().size() == 0}">
+                                <c:if test="#{organizacijaBean.setDogadjajiToList().size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni događaji korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
                                         <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
@@ -682,18 +682,29 @@
                                         </c:if>
                                     </div>
                                 </c:if>
-                                <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.setDogadjajiToListFeatured()}" var="dogadjaj">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
-                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-image-container-front-page" style="background: url(/vesti/#{vest.thumbnail})">
+                                        <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
+                                            <div class="news-image-container-front-page" style="background: #{dogadjaj.getThumbnailUrl()}">
                                             </div>
                                             <div class="news-header-container-front-page">
-                                                #{vest.naslovShort}
+                                                #{dogadjaj.naslovShort}
+                                            </div>
+                                            <div class="date-container">
+                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
+                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                </h:outputText>
+                                                <br/>
+                                                <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
+                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                    <f:convertDateTime pattern=" HH:mm" />
+                                                </h:outputText>
                                             </div>
                                             <div class="news-content-container-front-page">
-                                                #{vest.tekstShort}
+                                                <h:outputText value="#{dogadjaj.tekstShort}" />
                                             </div>
-                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
@@ -702,16 +713,16 @@
 
                         <div class="stripe-line-header news-category-header">
                             <h:form>
-                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                <b:commandLink action="oglasi?faces-redirect=true" styleClass="customNewsLink">
                                     <div class="stripe-line-header-link"><h:outputText value="Oglasi" /></div>
-                                    <f:setPropertyActionListener target="#{pretragaVesti.organizacija}" value="#{organizacijaBean.organizacija}" />
-                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaOglasa.organizacija}" value="#{organizacijaBean.organizacija}" />
+                                    <f:setPropertyActionListener target="#{pretragaOglasa.tipPretrage}" value="2" />
                                 </b:commandLink>
                             </h:form>
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                                <c:if test="#{organizacijaBean.setVestiToList().size() == 0}">
+                                <c:if test="#{organizacijaBean.setOglasiToList().size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni oglasi korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
                                         <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
@@ -724,18 +735,30 @@
                                         </c:if>
                                     </div>
                                 </c:if>
-                                <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.setOglasiToListFeatured()}" var="oglas">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
-                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-image-container-front-page" style="background: url(/vesti/#{vest.thumbnail})">
-                                            </div>
-                                            <div class="news-header-container-front-page">
-                                                #{vest.naslovShort}
+                                        <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
+                                            <div class="news-header-container-front-page" style="margin-top: 0px !important; border-bottom: 1px solid #ddd;">
+                                                #{oglas.naslovShort}
                                             </div>
                                             <div class="news-content-container-front-page">
-                                                #{vest.tekstShort}
+                                                <h:outputText value="#{oglas.tekstShort}" />
                                             </div>
-                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                            <div style="margin-top: 5px; font-size: 12px">
+                                                Rok prijave:
+                                            </div>
+                                            <div class="date-container" style="margin-bottom: 0px">
+                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
+                                                <h:outputText value="#{oglas.datumIsticanja}" >
+                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                </h:outputText>
+                                                <br/>
+                                                <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
+                                                <h:outputText value="#{oglas.datumIsticanja}" >
+                                                    <f:convertDateTime pattern=" HH:mm" />
+                                                </h:outputText>
+                                            </div>
+                                            <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>

@@ -24,9 +24,13 @@ and open the template in the editor.
                                                 </span></td></tr>
                                         <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
                                             <tr><td style="vertical-align: middle">
-                                                    <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
-                                                    &#xA0;
-                                                    <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
+                                                    <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                                        <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
+                                                        &#xA0;
+                                                        <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
+                                                        <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                                                        <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                                    </b:commandLink>
                                                 </td></tr>
                                         </ui:repeat>
                                     </table>

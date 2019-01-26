@@ -65,7 +65,7 @@ and open the template in the editor.
                                                         <h:outputText value="#{vest.naslov}" />
                                                     </div>
                                                     <div class="featured-news-content">
-                                                        <h:outputText value="#{vest.tekst}" escape="false" />
+                                                        <h:outputText value="#{vest.getTekstPure()}" />
                                                     </div>
                                                     <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                                 </b:commandLink>
