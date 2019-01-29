@@ -273,5 +273,23 @@ public class KorisniciHelper {
             throw e;
         }
     }
+    
+    public List<Organizacije> getSveOrganizacije() {
+        session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            session.getTransaction().begin();
+
+            Query q = session.createQuery("FROM Organizacije AS organizacija");
+            List<Organizacije> l = q.list();
+            session.getTransaction().commit();
+
+            return l;
+
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 
 }

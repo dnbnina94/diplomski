@@ -7,10 +7,16 @@ package db.helpers;
 
 import db.HibernateUtil;
 import db.Oglasi;
+import db.Organizacije;
 import db.Vesti;
+import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -51,6 +57,47 @@ public class OglasiHelper {
                 return 0;
             else
                 return oglasi.get(oglasi.size()-1).getIdOglas();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Oglasi> pretragaOglasa(String kljucneReci, String kreatorOglasa, int sortiranje) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Oglasi.class);
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
+            }
+            if (!kreatorOglasa.isEmpty()) {
+                c.add(Restrictions.eq("korisnici.korisnickoIme", kreatorOglasa));
+            }
+            
+            Date danas = new Date();
+            c.add(Restrictions.gt("datumIsticanja", danas));
+            
+            if (sortiranje == 1) {
+                c.addOrder(Order.desc("datumKreiranja"));
+            }
+            if (sortiranje == 2) {
+                c.addOrder(Order.asc("datumKreiranja"));
+            }
+            if (sortiranje == 3) {
+                c.addOrder(Order.asc("datumIsticanja"));
+            }
+            if (sortiranje == 4) {
+                c.addOrder(Order.desc("datumIsticanja"));
+            }
+            
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

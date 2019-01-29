@@ -9,9 +9,21 @@ import db.HibernateUtil;
 import db.Dogadjaji;
 import db.Oglasi;
 import db.StavkeSifarnika;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -89,6 +101,82 @@ public class DogadjajiHelper {
             }
 
             session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public List<Dogadjaji> pretragaDogadjaja(Date datumDogadjaja, Map<StavkeSifarnika, Boolean> checkMap, StavkeSifarnika mesto, StavkeSifarnika uzrast, String kljucneReci, int sortiranje) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            if (datumDogadjaja != null) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(datumDogadjaja);
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                Date minDate = cal.getTime();
+
+                cal.set(Calendar.HOUR_OF_DAY, 23);
+                cal.set(Calendar.MINUTE, 59);
+                cal.set(Calendar.SECOND, 59);
+                Date maxDate = cal.getTime();
+
+                Conjunction and1 = Restrictions.conjunction();
+                and1.add(Restrictions.ge("datumDogadjaja", minDate));
+                and1.add(Restrictions.lt("datumDogadjaja", maxDate));
+                Conjunction and2 = Restrictions.conjunction();
+                and2.add(Restrictions.ge("datumIsticanja", minDate));
+                and2.add(Restrictions.lt("datumIsticanja", maxDate));
+                Disjunction or = Restrictions.disjunction();
+                or.add(and1);
+                or.add(and2);
+                c.add(or);
+            }
+            
+            Disjunction orKategorije = Restrictions.disjunction();
+            for (Entry<StavkeSifarnika, Boolean> entry : checkMap.entrySet()) {
+                if (entry.getValue()) {
+                    orKategorije.add(Restrictions.eq("kategorija", entry.getKey()));
+                }
+            }
+            c.add(orKategorije);
+            
+            if (mesto != null) {
+                c.add(Restrictions.eq("mesto", mesto));
+            }
+            
+            if (uzrast != null) {
+                c.add(Restrictions.eq("uzrast", uzrast));
+            }
+            
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
+            }
+            
+            if (sortiranje == 1) {
+                c.addOrder(Order.desc("datumKreiranja"));
+            }
+            if (sortiranje == 2) {
+                c.addOrder(Order.asc("datumKreiranja"));
+            }
+            if (sortiranje == 3) {
+                c.addOrder(Order.asc("datumDogadjaja"));
+            }
+            if (sortiranje == 4) {
+                c.addOrder(Order.desc("datumDogadjaja"));
+            }
+
+            List l = c.list();
+
+            session.getTransaction().commit();
+
+            return l;
+
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

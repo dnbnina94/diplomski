@@ -15,6 +15,8 @@ $(document).ready(function () {
         dayNamesShort: ['Ned', 'Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub'],
         dayNamesMin: ['Ned', 'Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub'],
         firstDay: 1,
+        defaultDate: null,
+        setDate: null,
         isRTL: false,
         showMonthAfterYear: false/*,
         minDate: 0*/

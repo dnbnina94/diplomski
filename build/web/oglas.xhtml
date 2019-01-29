@@ -33,36 +33,37 @@
                         <div class="stripe-line-header news-category-header">                        
                         </div>
                         <h:form>
-                            <div style="height: 17px"></div>
-                            <h:outputText styleClass="news-title-news-page" value="#{pretragaOglasa.oglas.naslov}" />
+                            <div class="#{pretragaOglasa.oglas.arhiviran}">
+                                <div style="height: 17px"></div>
+                                <h:outputText styleClass="news-title-news-page" value="#{pretragaOglasa.oglas.naslov}" />
 
-                            <div class="news-parameters-news-page">
-                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                    <h:outputText value=" #{pretragaOglasa.oglas.korisnici.korisnickoIme}" />
-                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaOglasa.oglas.korisnici.organizacije}" />
-                                </b:commandLink>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
-                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                </h:outputText>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
-                                    <f:convertDateTime pattern=" HH:mm" />
-                                </h:outputText>
+                                <div class="news-parameters-news-page">
+                                    <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                        <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                        <h:outputText value=" #{pretragaOglasa.oglas.korisnici.korisnickoIme}" />
+                                        <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaOglasa.oglas.korisnici.organizacije}" />
+                                    </b:commandLink>
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                    <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
+                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                    </h:outputText>
+                                    &nbsp;
+                                    <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                    <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
+                                        <f:convertDateTime pattern=" HH:mm" />
+                                    </h:outputText>
+                                </div>
+
+                                <h:outputText id="tekst" value="#{pretragaOglasa.oglas.tekst}" escape="false" />
+                                <div class="date-container" style="font-size: 16px">
+                                    <h:outputText value="Rok za prijavu: " style="color: orangered"/>
+                                    &nbsp;
+                                    <h:outputText value="#{pretragaOglasa.oglas.datumIsticanja}" >
+                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                    </h:outputText>
+                                </div>
                             </div>
-
-                            <h:outputText id="tekst" value="#{pretragaOglasa.oglas.tekst}" escape="false" />
-                            <div class="date-container" style="font-size: 16px">
-                                <h:outputText value="Rok za prijavu: " style="color: orangered"/>
-                                &nbsp;
-                                <h:outputText value="#{pretragaOglasa.oglas.datumIsticanja}" >
-                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                </h:outputText>
-                            </div>
-
                         </h:form>
                     </div>
                     <div class="col-md-3">

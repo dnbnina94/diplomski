@@ -34,7 +34,7 @@
                         <div class="stripe-line-header news-category-header">
                             <div>
                                 <c:if test="#{pretragaOglasa.tipPretrage eq 1}">
-                                    <h:outputText value="Oglasi" />
+                                    <h:outputText value="Oglasi - rezultati pretrage" />
                                 </c:if>
                                 <c:if test="#{pretragaOglasa.tipPretrage eq 2}">
                                     <h:form>
@@ -52,34 +52,41 @@
                             <b:dataTable value="#{pretragaOglasa.oglasi}" var="oglas" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
 
                                 <b:dataTableColumn>
-                                    <div class="news-date" style="border-bottom: 1px solid #eee; margin-bottom: 10px">
-                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{oglas.datumKreiranja}" >
-                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{oglas.datumKreiranja}" >
-                                            <f:convertDateTime pattern=" HH:mm" />
-                                        </h:outputText>
-                                    </div>
-
-                                    <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
-                                        <h:outputText value="#{oglas.naslov}" styleClass="news-heading" /> <br/>
-                                        <div class="news-text">
-                                            <h:outputText value="#{oglas.getTekstShortRezultatPretrage()}" styleClass="news-text" />
-                                        </div>
-                                        <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
-                                            <h:outputText value="Rok za prijavu: " style="color: orangered" />
+                                    <div class="#{oglas.arhiviran}">
+                                        <div class="news-date" style="margin-bottom: 10px">
+                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                <h:outputText value=" #{oglas.korisnici.korisnickoIme}" />
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{oglas.korisnici.organizacije}" />
+                                            </b:commandLink>
                                             &nbsp;
-                                            <h:outputText value="#{oglas.datumIsticanja}" >
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{oglas.datumKreiranja}" >
                                                 <f:convertDateTime pattern=" dd.MM.yyyy." />
                                             </h:outputText>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{oglas.datumKreiranja}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
                                         </div>
-                                        <b:button styleClass="read-more-button" value="Pročitaj još"/>
-                                        <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
-                                    </b:commandLink>
 
+                                        <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
+                                            <h:outputText value="#{oglas.naslov}" styleClass="news-heading" /> <br/>
+                                            <div class="news-text">
+                                                <h:outputText value="#{oglas.getTekstShortRezultatPretrage()}" styleClass="news-text" />
+                                            </div>
+                                            <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
+                                                <h:outputText value="Rok za prijavu: " style="color: orangered" />
+                                                &nbsp;
+                                                <h:outputText value="#{oglas.datumIsticanja}" >
+                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                </h:outputText>
+                                            </div>
+                                            <b:button styleClass="read-more-button" value="Pročitaj još"/>
+                                            <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
+                                        </b:commandLink>
+                                    </div>
                                 </b:dataTableColumn>
 
                             </b:dataTable>

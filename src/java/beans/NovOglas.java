@@ -7,8 +7,11 @@ package beans;
 
 import db.Oglasi;
 import db.helpers.OglasiHelper;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.el.ELContext;
 import javax.faces.context.FacesContext;
 import org.jsoup.Jsoup;
@@ -153,6 +156,17 @@ public class NovOglas {
             oglas.setKorisnici(korisnikBean.getKorisnik());
 
             oglasiHelper.insertOglas(oglas);
+            
+            PretragaOglasa pretragaOglasaBean = (PretragaOglasa) elContext.getELResolver().getValue(elContext, null, "pretragaOglasa");
+            pretragaOglasaBean.setOglas(oglas);
+            elContext.getELResolver().setValue(elContext, null, "pretragaOglasa", pretragaOglasaBean);
+
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("oglas.xhtml");
+                FacesContext.getCurrentInstance().responseComplete();
+            } catch (IOException ex) {
+                Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

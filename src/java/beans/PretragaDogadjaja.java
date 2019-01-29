@@ -8,11 +8,15 @@ package beans;
 import db.Dogadjaji;
 import db.Organizacije;
 import db.StavkeSifarnika;
+import db.helpers.DogadjajiHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -21,37 +25,51 @@ import java.util.Set;
  */
 public class PretragaDogadjaja {
 
-    private String mesto;
-    private String uzrast;
+    private StavkeSifarnika mesto;
+    private StavkeSifarnika uzrast;
+    private StavkeSifarnika karakteristikaProstora;
     private StavkeSifarnika kategorijaDogadjaja;
     private List<StavkeSifarnika> kategorijeDogadjaja;
     private List<StavkeSifarnika> mesta;
     private List<StavkeSifarnika> uzrasti;
+    private List<StavkeSifarnika> karakteristikeProstora;
     private String kljucneReci = "";
     private Dogadjaji dogadjaj;
     private List<Dogadjaji> dogadjaji;
     private Organizacije organizacija;
+    private int sortiranje;
+    private Date datumDogadjaja;
+
+    private Map<StavkeSifarnika, Boolean> checkMap = new HashMap<StavkeSifarnika, Boolean>();
 
     //1 - klasicna pretraga, 2 - dogadjaji korisnika
     private int tipPretrage;
 
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
-    
+    private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
+
     class SortDogadjajiByDatumDescending implements Comparator<Dogadjaji> {
-        
+
         @Override
-        public int compare (Dogadjaji a, Dogadjaji b) {
+        public int compare(Dogadjaji a, Dogadjaji b) {
             return b.getDatumKreiranja().compareTo(a.getDatumKreiranja());
         }
-        
+
     }
 
     public PretragaDogadjaja() {
         kategorijeDogadjaja = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
         Collections.sort(kategorijeDogadjaja, new PretragaDogadjaja.SortByIdSifarnik());
 
+        for (StavkeSifarnika kategorija : kategorijeDogadjaja) {
+            checkMap.put(kategorija, Boolean.FALSE);
+        }
+
         uzrasti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
         Collections.sort(uzrasti, new PretragaDogadjaja.SortByIdSifarnik());
+        
+        karakteristikeProstora = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(7).getStavkeSifarnikas());
+        Collections.sort(karakteristikeProstora, new PretragaDogadjaja.SortByIdSifarnik());
     }
 
     class SortByIdSifarnik implements Comparator<StavkeSifarnika> {
@@ -69,19 +87,19 @@ public class PretragaDogadjaja {
         return stavkeSifarnika;
     }
 
-    public String getMesto() {
+    public StavkeSifarnika getMesto() {
         return mesto;
     }
 
-    public void setMesto(String mesto) {
+    public void setMesto(StavkeSifarnika mesto) {
         this.mesto = mesto;
     }
 
-    public String getUzrast() {
+    public StavkeSifarnika getUzrast() {
         return uzrast;
     }
 
-    public void setUzrast(String uzrast) {
+    public void setUzrast(StavkeSifarnika uzrast) {
         this.uzrast = uzrast;
     }
 
@@ -141,7 +159,7 @@ public class PretragaDogadjaja {
     public void setTipPretrage(int tipPretrage) {
         this.tipPretrage = tipPretrage;
     }
-    
+
     private List<Dogadjaji> setToListDogadjaji(Set set) {
         dogadjaji = new ArrayList<Dogadjaji>(set);
         Collections.sort(dogadjaji, new PretragaDogadjaja.SortDogadjajiByDatumDescending());
@@ -150,9 +168,9 @@ public class PretragaDogadjaja {
 
     public List<Dogadjaji> getDogadjaji() {
         if (tipPretrage == 1) {
-            return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija()); 
+            return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
         } else {
-            return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis()); 
+            return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
         }
     }
 
@@ -167,7 +185,50 @@ public class PretragaDogadjaja {
     public void setOrganizacija(Organizacije organizacija) {
         this.organizacija = organizacija;
     }
-    
-    
+
+    public int getSortiranje() {
+        return sortiranje;
+    }
+
+    public void setSortiranje(int sortiranje) {
+        this.sortiranje = sortiranje;
+    }
+
+    public Date getDatumDogadjaja() {
+        return datumDogadjaja;
+    }
+
+    public void setDatumDogadjaja(Date datumDogadjaja) {
+        this.datumDogadjaja = datumDogadjaja;
+    }
+
+    public void pretraziDogadjaje() {
+        dogadjaji = dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, sortiranje);
+        return;
+    }
+
+    public Map<StavkeSifarnika, Boolean> getCheckMap() {
+        return checkMap;
+    }
+
+    public void setCheckMap(Map<StavkeSifarnika, Boolean> checkMap) {
+        this.checkMap = checkMap;
+    }
+
+    public List<StavkeSifarnika> getKarakteristikeProstora() {
+        return karakteristikeProstora;
+    }
+
+    public void setKarakteristikeProstora(List<StavkeSifarnika> karakteristikeProstora) {
+        this.karakteristikeProstora = karakteristikeProstora;
+    }
+
+    public StavkeSifarnika getKarakteristikaProstora() {
+        return karakteristikaProstora;
+    }
+
+    public void setKarakteristikaProstora(StavkeSifarnika karakteristikaProstora) {
+        this.karakteristikaProstora = karakteristikaProstora;
+    }
 
 }

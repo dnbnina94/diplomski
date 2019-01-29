@@ -15,14 +15,15 @@ and open the template in the editor.
             <div>Događaji</div>
         </div>
 
-        <h:form>
-            <b:datepicker mode='inline' styleClass='custom-datepicker-bootsfaces' style="margin-bottom: 20px"/>
+        <h:form id="pretraga_dogadjaja">
+            <b:datepicker id="datum_dogadjaja" value="#{pretragaDogadjaja.datumDogadjaja}" mode='inline' styleClass='custom-datepicker-bootsfaces' style="margin-bottom: 20px; display: none"/>
+            <b:button id="clear_date_btn" styleClass="big-red-button" value="Resetuj datum" style="color: white; background-color: #ccc !important; margin-bottom: 20px" />
             <span style="font-family: BebasNeueRegular; font-size: 18px;">Kategorija:</span>
             <div class="row search-type-option">
                 <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj">
                     <div class="col-md-4 event-type-option">
                         <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
+                            <b:selectBooleanCheckbox value="#{pretragaDogadjaja.checkMap[kategorijaDogadjaj]}" styleClass="custom-checkbox-bootsfaces" />
                         </div><br/>
                         #{kategorijaDogadjaj.naziv}
                     </div>
@@ -31,21 +32,88 @@ and open the template in the editor.
             <div class="custom-select">
                 <span>Mesto:</span>
                 <b:selectOneMenu value="#{pretragaDogadjaja.mesto}" styleClass="place-select" select2="true">
-                    <f:selectItem itemLabel="Sva mesta" itemValue="" />
-                    <f:selectItems value="#{pretragaDogadjaja.mesta}" var="mesto" itemLabel="#{mesto.naziv}" itemValue="#{mesto.naziv}" />
+                    <f:selectItem itemLabel="Sva mesta" itemValue="#{null}" />
+                    <f:selectItems value="#{pretragaDogadjaja.mesta}" var="mesto" itemLabel="#{mesto.naziv}" itemValue="#{mesto}" />
                 </b:selectOneMenu>
             </div>
             <div class="custom-select">
                 <span>Uzrast:</span>
                 <b:selectOneMenu value="#{pretragaDogadjaja.uzrast}" styleClass="place-select" select2="true">
-                    <f:selectItem itemLabel="Svi uzrasti" itemValue="" />
-                    <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast.naziv}" />
+                    <f:selectItem itemLabel="Svi uzrasti" itemValue="#{null}" />
+                    <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast}" />
                 </b:selectOneMenu>
             </div>
             <span style="font-family: BebasNeueRegular; font-size: 18px">Ključne reči:</span>
-            <b:inputText placeholder="Unesite ključne reči" styleClass="event-keywords" value="#{pretragaDogadjaja.kljucneReci}" />
-            <span style="font-size: 12px">(Molimo koristite ',' za razdvajanje ključnih reči)</span>
-            <b:button value="Pretraga" look="primary" styleClass="big-red-button" style="margin-top: 20px" />
+            <b:inputText placeholder="Unesite ključne reči" styleClass="login-form-input" value="#{pretragaDogadjaja.kljucneReci}" style="margin-top: 0px" />
+            <div class="custom-select">
+                <span>Karakteristike prostora:</span>
+                <b:selectOneMenu value="#{pretragaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
+                    <f:selectItem itemLabel="Sve karakteristike" itemValue="#{null}" />
+                    <f:selectItems value="#{pretragaDogadjaja.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
+                </b:selectOneMenu>
+            </div>
+            <div class="custom-select">
+                <span>Sortiraj po:</span>
+                <b:selectOneMenu id="sortiranje" value="#{pretragaDogadjaja.sortiranje}" styleClass="place-select">
+                    <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
+                    <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
+                    <f:selectItem itemLabel="Datumu događaja - rastuće" itemValue="3" />
+                    <f:selectItem itemLabel="Datumu događaja - opadajuće" itemValue="4" />
+                </b:selectOneMenu>
+            </div>
+            <b:commandButton value="Pretraga" 
+                             look="primary" 
+                             ajax="true"
+                             onclick="ajax:pretragaDogadjaja.pretraziDogadjaje();"
+                             styleClass="big-red-button" 
+                             style="margin-top: 5px" />
+
+            <script>
+                $(document).ready(function () {
+                    $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker({
+                        altField: "#pretraga_dogadjaja\\:datum_dogadjaja_input",
+                        setDate: null,
+                        defaultDate: null
+                    });
+                    
+                    $("#pretraga_dogadjaja\\:clear_date_btn").click(function() {
+                        $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker('setDate', null);
+                        $(".ui-state-active").removeClass("ui-state-active");
+                    });
+                });
+            </script>
+        </h:form>
+
+        <div class="stripe-line-header events-calendar" style="margin-top: 40px; margin-bottom: 20px">
+            <div>Oglasi</div>
+        </div>
+
+        <h:form id="pretraga_oglasa">
+            <span style="font-family: BebasNeueRegular; font-size: 18px;">Ključne reči:</span>
+            <b:inputText id="kljucne_reci" placeholder="Unesite ključne reči" styleClass="login-form-input" value="#{pretragaOglasa.kljucneReci}" style="margin-top: 0px" />
+            <div class="custom-select">
+                <span>Organizacija:</span>
+                <b:selectOneMenu id="organizacija" value="#{pretragaOglasa.kreatorOglasa}" styleClass="place-select" select2="true">
+                    <f:selectItem itemLabel="Sve organizacije" itemValue="" />
+                    <f:selectItems value="#{pretragaOglasa.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija.korisnickoIme}" />
+                </b:selectOneMenu>
+            </div>
+            <div class="custom-select">
+                <span>Sortiraj po:</span>
+                <b:selectOneMenu id="sortiranje" value="#{pretragaOglasa.sortiranje}" styleClass="place-select">
+                    <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
+                    <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
+                    <f:selectItem itemLabel="Roku isteka - rastuće" itemValue="3" />
+                    <f:selectItem itemLabel="Roku isteka - opadajuće" itemValue="4" />
+                </b:selectOneMenu>
+            </div>
+            <b:commandButton value="Pretraga" 
+                             styleClass="big-red-button" 
+                             ajax="true"
+                             action="oglasi?faces-redirect=true"
+                             onclick="ajax:pretragaOglasa.pretraziOglase()"
+                             style="margin-top: 5px; color: white" />
         </h:form>
     </h:body>
+
 </html>

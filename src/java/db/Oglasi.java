@@ -17,6 +17,8 @@ public class Oglasi  implements java.io.Serializable {
      private String tekst;
      private Date datumKreiranja;
      private Date datumIsticanja;
+     
+     private String arhiviran = "";
 
     public Oglasi() {
     }
@@ -88,6 +90,18 @@ public class Oglasi  implements java.io.Serializable {
     public String getTekstShortRezultatPretrage() {
         String tekstShort = Jsoup.parse(tekst).text();
         return tekstShort.substring(0, Math.min(tekstShort.length(), 256))+"...";
+    }
+    
+    public void setArhiviran(String arhiviran) {
+        this.arhiviran = arhiviran;
+    }
+    
+    public String getArhiviran() {
+        Date danas = new Date();
+        if (danas.after(datumIsticanja)) {
+            arhiviran = "expired";
+        }
+        return arhiviran;
     }
     
 }
