@@ -9,8 +9,10 @@ import db.Dogadjaji;
 import db.Organizacije;
 import db.StavkeSifarnika;
 import db.helpers.DogadjajiHelper;
+import db.helpers.KorisniciHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -39,14 +41,19 @@ public class PretragaDogadjaja {
     private Organizacije organizacija;
     private int sortiranje;
     private Date datumDogadjaja;
+    private List<StavkeSifarnika> selectedKarakteristikeProstora;
+    private String kreatorDogadjaja;
+    private List<Organizacije> organizacije;
+    private String dateScript = "";
 
     private Map<StavkeSifarnika, Boolean> checkMap = new HashMap<StavkeSifarnika, Boolean>();
 
-    //1 - klasicna pretraga, 2 - dogadjaji korisnika
+    //1 - pretraga po kategoriji, 2 - dogadjaji korisnika, 3 - rezultat pretrage
     private int tipPretrage;
 
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
+    private KorisniciHelper korisniciHelper = new KorisniciHelper();
 
     class SortDogadjajiByDatumDescending implements Comparator<Dogadjaji> {
 
@@ -67,9 +74,23 @@ public class PretragaDogadjaja {
 
         uzrasti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
         Collections.sort(uzrasti, new PretragaDogadjaja.SortByIdSifarnik());
-        
+
         karakteristikeProstora = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(7).getStavkeSifarnikas());
         Collections.sort(karakteristikeProstora, new PretragaDogadjaja.SortByIdSifarnik());
+        
+        selectedKarakteristikeProstora = new ArrayList<StavkeSifarnika>();
+        
+        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOrganizacije());
+        Collections.sort(organizacije, new PretragaDogadjaja.SortOrganizacijeByName());
+    }
+    
+    class SortOrganizacijeByName implements Comparator<Organizacije> {
+
+        @Override
+        public int compare(Organizacije a, Organizacije b) {
+            return a.getKorisnickoIme().toLowerCase().compareTo(b.getKorisnickoIme().toLowerCase());
+        }
+
     }
 
     class SortByIdSifarnik implements Comparator<StavkeSifarnika> {
@@ -169,9 +190,11 @@ public class PretragaDogadjaja {
     public List<Dogadjaji> getDogadjaji() {
         if (tipPretrage == 1) {
             return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
-        } else {
+        } 
+        if (tipPretrage == 2) {
             return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
         }
+        return dogadjaji;
     }
 
     public void setDogadjaji(List<Dogadjaji> dogadjaji) {
@@ -195,6 +218,18 @@ public class PretragaDogadjaja {
     }
 
     public Date getDatumDogadjaja() {
+        if (datumDogadjaja != null) {
+            Calendar datumDogadjajaCal = Calendar.getInstance();
+            datumDogadjajaCal.setTime(datumDogadjaja);
+            int month = datumDogadjajaCal.get(Calendar.MONTH);
+            int day = datumDogadjajaCal.get(Calendar.DAY_OF_MONTH);
+            int year = datumDogadjajaCal.get(Calendar.YEAR);
+            String datumDogadjajaString = "new Date(" + year + "," + month + "," + day + ")";
+            dateScript = "$('#pretraga_dogadjaja\\\\:datum_dogadjaja').datepicker('setDate', " + datumDogadjajaString + ");";
+        } else {
+            dateScript = "$('#pretraga_dogadjaja\\\\:datum_dogadjaja').datepicker('setDate', null);";
+            dateScript += "$('.ui-state-active').removeClass('ui-state-active');";
+        }
         return datumDogadjaja;
     }
 
@@ -203,8 +238,8 @@ public class PretragaDogadjaja {
     }
 
     public void pretraziDogadjaje() {
-        dogadjaji = dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, sortiranje);
-        return;
+        dogadjaji = dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje);
+        tipPretrage = 3;
     }
 
     public Map<StavkeSifarnika, Boolean> getCheckMap() {
@@ -229,6 +264,73 @@ public class PretragaDogadjaja {
 
     public void setKarakteristikaProstora(StavkeSifarnika karakteristikaProstora) {
         this.karakteristikaProstora = karakteristikaProstora;
+    }
+
+    public List<StavkeSifarnika> getSelectedKarakteristikeProstora() {
+        return selectedKarakteristikeProstora;
+    }
+
+    public void setSelectedKarakteristikeProstora(List<StavkeSifarnika> selectedKarakteristikeProstora) {
+        this.selectedKarakteristikeProstora = selectedKarakteristikeProstora;
+    }
+
+    public void removeKarakteristika(int status) {
+        selectedKarakteristikeProstora.remove(status);
+    }
+
+    public boolean karakteristikaValidacija() {
+        if (karakteristikaProstora == null) {
+            //karakteristikeProstoraGreska = "Polje 'Karakteristika prostora' ne sme ostati prazno.";
+            return false;
+        }
+
+        //karakteristikeProstoraGreska = "";
+        return true;
+    }
+
+    public void addKarakteristika() {
+        boolean valid = karakteristikaValidacija();
+
+        if (valid) {
+            for (int i = 0; i < selectedKarakteristikeProstora.size(); i++) {
+                if (selectedKarakteristikeProstora.get(i).getNaziv().equals(karakteristikaProstora.getNaziv())) {
+                    //karakteristikeProstoraGreska = "Već ste dodali zadatu vrednost.";
+                    valid = false;
+                    break;
+                }
+            }
+        } else {
+            selectedKarakteristikeProstora = new ArrayList<StavkeSifarnika>();
+        }
+
+        if (valid) {
+            selectedKarakteristikeProstora.add(karakteristikaProstora);
+            karakteristikaProstora = null;
+        }
+    }
+
+    public List<Organizacije> getOrganizacije() {
+        return organizacije;
+    }
+
+    public void setOrganizacije(List<Organizacije> organizacije) {
+        this.organizacije = organizacije;
+    }
+
+    public String getKreatorDogadjaja() {
+        return kreatorDogadjaja;
+    }
+
+    public void setKreatorDogadjaja(String kreatorDogadjaja) {
+        this.kreatorDogadjaja = kreatorDogadjaja;
+    }
+
+    public String getDateScript() {
+        return dateScript;
+    }
+
+    public void setDateScript(String dateScript) {
+        this.dateScript = dateScript;
     }
 
 }

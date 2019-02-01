@@ -22,7 +22,7 @@ and open the template in the editor.
             <div class="row search-type-option">
                 <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaj">
                     <div class="col-md-4 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
+                        <div class="custom-checkbox #{pretragaDogadjaja.checkMap[kategorijaDogadjaj] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
                             <b:selectBooleanCheckbox value="#{pretragaDogadjaja.checkMap[kategorijaDogadjaj]}" styleClass="custom-checkbox-bootsfaces" />
                         </div><br/>
                         #{kategorijaDogadjaj.naziv}
@@ -47,9 +47,41 @@ and open the template in the editor.
             <b:inputText placeholder="Unesite ključne reči" styleClass="login-form-input" value="#{pretragaDogadjaja.kljucneReci}" style="margin-top: 0px" />
             <div class="custom-select">
                 <span>Karakteristike prostora:</span>
-                <b:selectOneMenu value="#{pretragaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
+                <br/>
+                <h:panelGroup id="karakteristikeProstoraWrapper">
+                    <ui:repeat id="karakteristikeProstora" value="#{pretragaDogadjaja.selectedKarakteristikeProstora}" var="karakteristikaProstora" varStatus="status">
+                        <div class="custom-tag">
+                            <h:outputText value="#{karakteristikaProstora.naziv}" />
+
+                            <b:commandButton id="removeButton"
+                                             icon="remove" 
+                                             styleClass="remove-field-button" 
+                                             ajax="true"
+                                             update="@form:karakteristikaProstora @form:karakteristikeProstoraWrapper"
+                                             onclick="ajax:pretragaDogadjaja.removeKarakteristika(status.index)" />
+                        </div>
+                    </ui:repeat>
+                    <div style="#{pretragaDogadjaja.selectedKarakteristikeProstora.size() != 0 ? 'margin-bottom: 5px' : ''}"></div>
+                </h:panelGroup>
+                <b:selectOneMenu id="karakteristikaProstora" value="#{pretragaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
                     <f:selectItem itemLabel="Sve karakteristike" itemValue="#{null}" />
                     <f:selectItems value="#{pretragaDogadjaja.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
+                    <f:facet name="append">
+                        <b:commandButton id="plusButton"
+                                         icon="plus" 
+                                         styleClass="add-field-button" 
+                                         style="border: 1px solid #4c4c4c;"
+                                         ajax="true"
+                                         update="karakteristikaProstora karakteristikeProstoraWrapper"
+                                         onclick="ajax:pretragaDogadjaja.addKarakteristika()"/>
+                    </f:facet>
+                </b:selectOneMenu>
+            </div>
+            <div class="custom-select">
+                <span>Organizacija:</span>
+                <b:selectOneMenu id="organizacija" value="#{pretragaDogadjaja.kreatorDogadjaja}" styleClass="place-select" select2="true">
+                    <f:selectItem itemLabel="Sve organizacije" itemValue="" />
+                    <f:selectItems value="#{pretragaDogadjaja.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija.korisnickoIme}" />
                 </b:selectOneMenu>
             </div>
             <div class="custom-select">
@@ -64,24 +96,30 @@ and open the template in the editor.
             <b:commandButton value="Pretraga" 
                              look="primary" 
                              ajax="true"
-                             onclick="ajax:pretragaDogadjaja.pretraziDogadjaje();"
+                             action="dogadjaji?faces-redirect=true"
+                             onclick="ajax:pretragaDogadjaja.pretraziDogadjaje()"
                              styleClass="big-red-button" 
                              style="margin-top: 5px" />
 
-            <script>
-                $(document).ready(function () {
-                    $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker({
-                        altField: "#pretraga_dogadjaja\\:datum_dogadjaja_input",
-                        setDate: null,
-                        defaultDate: null
+            <h:outputScript>
+              
+                    $(document).ready(function () {
+                        $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker({
+                            altField: "#pretraga_dogadjaja\\:datum_dogadjaja_input",
+                            setDate: null,
+                            defaultDate: null
+                        });
+
+                        $("#pretraga_dogadjaja\\:clear_date_btn").click(function () {
+                            $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker('setDate', null);
+                            $(".ui-state-active").removeClass("ui-state-active");
+                        });
+                        
+                        #{pretragaDogadjaja.dateScript}
                     });
-                    
-                    $("#pretraga_dogadjaja\\:clear_date_btn").click(function() {
-                        $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker('setDate', null);
-                        $(".ui-state-active").removeClass("ui-state-active");
-                    });
-                });
-            </script>
+                
+            </h:outputScript>
+            
         </h:form>
 
         <div class="stripe-line-header events-calendar" style="margin-top: 40px; margin-bottom: 20px">

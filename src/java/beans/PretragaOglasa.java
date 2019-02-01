@@ -54,7 +54,7 @@ public class PretragaOglasa {
 
         @Override
         public int compare(Organizacije a, Organizacije b) {
-            return b.getKorisnickoIme().compareTo(a.getKorisnickoIme());
+            return a.getKorisnickoIme().toLowerCase().compareTo(b.getKorisnickoIme().toLowerCase());
         }
 
     }
@@ -142,7 +142,7 @@ public class PretragaOglasa {
     }
 
     public void pretraziOglase() {
-        oglasi = new ArrayList<Oglasi>();
+        //oglasi = new ArrayList<Oglasi>();
         oglasi = oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje);
         tipPretrage = 1;
     }

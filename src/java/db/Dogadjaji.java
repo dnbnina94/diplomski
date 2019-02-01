@@ -28,12 +28,12 @@ public class Dogadjaji implements java.io.Serializable {
     private Korisnici korisnici;
     private Date datumIsticanja;
     private String thumbnail;
-    private Set karakteristikeProstora = new HashSet(0);
+    private Set karakteristikeProstoras = new HashSet(0);
 
     public Dogadjaji() {
     }
 
-    public Dogadjaji(int idDogadjaj, String naslov, String tekst, StavkeSifarnika kategorija, StavkeSifarnika mesto, StavkeSifarnika ulica, StavkeSifarnika uzrast, Date datumDogadjaja, Date datumKreiranja, Korisnici korisnici, Date datumIsticanja, String thumbnail, Set karakteristikeProstora) {
+    public Dogadjaji(int idDogadjaj, String naslov, String tekst, StavkeSifarnika kategorija, StavkeSifarnika mesto, StavkeSifarnika ulica, StavkeSifarnika uzrast, Date datumDogadjaja, Date datumKreiranja, Korisnici korisnici, Date datumIsticanja, String thumbnail, Set karakteristikeProstoras) {
         this.idDogadjaj = idDogadjaj;
         this.naslov = naslov;
         this.tekst = tekst;
@@ -46,7 +46,7 @@ public class Dogadjaji implements java.io.Serializable {
         this.korisnici = korisnici;
         this.datumIsticanja = datumIsticanja;
         this.thumbnail = thumbnail;
-        this.karakteristikeProstora = karakteristikeProstora;
+        this.karakteristikeProstoras = karakteristikeProstoras;
     }
     
     public int getIdDogadjaj() {
@@ -145,12 +145,12 @@ public class Dogadjaji implements java.io.Serializable {
         this.ulica = ulica;
     }
 
-    public Set getKarakteristikeProstora() {
-        return karakteristikeProstora;
+    public Set getKarakteristikeProstoras() {
+        return karakteristikeProstoras;
     }
 
-    public void setKarakteristikeProstora(Set karakteristikeProstora) {
-        this.karakteristikeProstora = karakteristikeProstora;
+    public void setKarakteristikeProstoras(Set karakteristikeProstoras) {
+        this.karakteristikeProstoras = karakteristikeProstoras;
     }
     
     public String getTekstShort() {
@@ -174,7 +174,7 @@ public class Dogadjaji implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            thumbnailUrl = "url('/Diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/dogadjaji/" + thumbnail + ")";
         }

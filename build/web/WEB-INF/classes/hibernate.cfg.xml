@@ -52,5 +52,6 @@ Contributor(s):
     <mapping resource="db/Dogadjaji.hbm.xml"/>
     <mapping resource="db/Organizacije.hbm.xml"/>
     <mapping resource="db/Oglasi.hbm.xml"/>
+    <mapping resource="db/KarakteristikeProstora.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

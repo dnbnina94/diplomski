@@ -111,12 +111,27 @@ $("#nov_dogadjaj\\:datumPocetka_input").change(function (event) {
     if (val === "") {
         greska = "Polje 'Datum početka' ne sme ostati prazno.";
     }
+    if (!Date.parse(val)) {
+        greska = "Polje 'Datum početka' ne sme ostati prazno.";
+    }
 
     if (greska !== "") {
         $("#nov_dogadjaj\\:datumPocetka_input").parent().addClass("custom-datetimepicker-bootsfaces-error");
         $("#datumPocetkaGreska").removeClass("input-error-message-hidden");
         $("#datumPocetkaGreska").html(greska);
+        /*var datumIVremePocetkaGreskaVal = $("#nov_dogadjaj\\:datumIVremePocetkaGreskaVal").html();
+         //console.log("Datum pocetka validacija: " + datumIVremePocetkaGreskaVal.length);
+         if (typeof datumIVremePocetkaGreskaVal !== 'undefined') {
+         if (datumIVremePocetkaGreskaVal.length) {*/
+        if (!$("#datumIVremePocetkaGreska").hasClass("input-error-message-hidden")) {
+            $("#datumIVremePocetkaGreska").addClass("input-error-message-hidden");
+            $("#nov_dogadjaj\\:vremePocetka").removeClass("custom-datetimepicker-bootsfaces-error");
+            $("#vremePocetkaGreska").addClass("input-error-message-hidden");
+        }
+        /*}
+         }*/
     } else {
+        $("#datumIVremePocetkaGreska").addClass("input-error-message-hidden");
         $("#nov_dogadjaj\\:datumPocetka_input").parent().removeClass("custom-datetimepicker-bootsfaces-error");
         $("#datumPocetkaGreska").addClass("input-error-message-hidden");
     }
@@ -134,6 +149,17 @@ function vremePocetkaChange() {
         $("#nov_dogadjaj\\:vremePocetka").addClass("custom-datetimepicker-bootsfaces-error");
         $("#vremePocetkaGreska").removeClass("input-error-message-hidden");
         $("#vremePocetkaGreska").html(greska);
+        /*var datumIVremePocetkaGreskaVal = $("#nov_dogadjaj\\:datumIVremePocetkaGreskaVal").html();
+         //console.log("Vreme pocetka validacija: " + datumIVremePocetkaGreskaVal.length);
+         if (typeof datumIVremePocetkaGreskaVal !== 'undefined') {
+         if (datumIVremePocetkaGreskaVal.length) {*/
+        if (!$("#datumIVremePocetkaGreska").hasClass("input-error-message-hidden")) {
+            $("#datumIVremePocetkaGreska").addClass("input-error-message-hidden");
+            $("#nov_dogadjaj\\:datumPocetka_input").parent().removeClass("custom-datetimepicker-bootsfaces-error");
+            $("#datumPocetkaGreska").addClass("input-error-message-hidden");
+        }
+        /*}
+         }*/
     } else {
         $("#nov_dogadjaj\\:vremePocetka").removeClass("custom-datetimepicker-bootsfaces-error");
         $("#vremePocetkaGreska").addClass("input-error-message-hidden");
@@ -152,12 +178,27 @@ $("#nov_dogadjaj\\:datumKraja_input").change(function (event) {
     if (val === "") {
         greska = "Polje 'Datum kraja' ne sme ostati prazno.";
     }
+    if (!Date.parse(val)) {
+        greska = "Polje 'Datum kraja' ne sme ostati prazno.";
+    }
 
     if (greska !== "") {
         $("#nov_dogadjaj\\:datumKraja_input").parent().addClass("custom-datetimepicker-bootsfaces-error");
         $("#datumKrajaGreska").removeClass("input-error-message-hidden");
         $("#datumKrajaGreska").html(greska);
+        /*var datumIVremeKrajaGreskaVal = $("#nov_dogadjaj\\:datumIVremeKrajaGreskaVal").html();
+         //console.log("Datum pocetka validacija: " + datumIVremePocetkaGreskaVal.length);
+         if (typeof datumIVremeKrajaGreskaVal !== 'undefined') {
+         if (datumIVremeKrajaGreskaVal.length) {*/
+        if (!$("#datumIVremeKrajaGreska").hasClass("input-error-message-hidden")) {
+            $("#datumIVremeKrajaGreska").addClass("input-error-message-hidden");
+            $("#nov_dogadjaj\\:vremeKraja").removeClass("custom-datetimepicker-bootsfaces-error");
+            $("#vremeKrajaGreska").addClass("input-error-message-hidden");
+        }
+        /*}
+         }*/
     } else {
+        $("#datumIVremeKrajaGreska").addClass("input-error-message-hidden");
         $("#nov_dogadjaj\\:datumKraja_input").parent().removeClass("custom-datetimepicker-bootsfaces-error");
         $("#datumKrajaGreska").addClass("input-error-message-hidden");
     }
@@ -175,6 +216,17 @@ function vremeKrajaChange() {
         $("#nov_dogadjaj\\:vremeKraja").addClass("custom-datetimepicker-bootsfaces-error");
         $("#vremeKrajaGreska").removeClass("input-error-message-hidden");
         $("#vremeKrajaGreska").html(greska);
+        /*var datumIVremeKrajaGreskaVal = $("#nov_dogadjaj\\:datumIVremeKrajaGreskaVal").html();
+         //console.log("Vreme pocetka validacija: " + datumIVremePocetkaGreskaVal.length);
+         if (typeof datumIVremeKrajaGreskaVal !== 'undefined') {
+         if (datumIVremeKrajaGreskaVal.length) {*/
+        if (!$("#datumIVremeKrajaGreska").hasClass("input-error-message-hidden")) {
+            $("#datumIVremeKrajaGreska").addClass("input-error-message-hidden");
+            $("#nov_dogadjaj\\:datumKraja_input").parent().removeClass("custom-datetimepicker-bootsfaces-error");
+            $("#datumKrajaGreska").addClass("input-error-message-hidden");
+        }
+        /*}
+         }*/
     } else {
         $("#nov_dogadjaj\\:vremeKraja").removeClass("custom-datetimepicker-bootsfaces-error");
         $("#vremeKrajaGreska").addClass("input-error-message-hidden");
@@ -204,7 +256,7 @@ $("#nov_dogadjaj\\:uzrastInner").change(function () {
 });
 
 $("#nov_dogadjaj\\:karakteristikaProstoraInner").change(function () {
-    
+
     $("#nov_dogadjaj\\:karakteristikaProstora").css({'border': 'none'});
     $("#karakteristikeProstoraGreska").addClass("input-error-message-hidden");
 });

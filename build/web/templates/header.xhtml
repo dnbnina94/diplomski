@@ -14,84 +14,50 @@ and open the template in the editor.
     <h:body>
         <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
 
-            <h:form>
+            <h:form id="filter_pretrage">
+
                 <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">vrsta događaja</div>
+                    <div class="stripe-line-header-content">kategorija</div>
                 </div>
 
                 <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Koncerti
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Clubbing
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Festivali
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Projekcije
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Sajmovi
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Radionice
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Predstave
-                    </div>
-                    <div class="col-md-3 event-type-option">
-                        <div class="custom-checkbox custom-checkbox-unchecked">
-                            <b:selectBooleanCheckbox value="false" styleClass="custom-checkbox-bootsfaces" />
-                        </div><br/>
-                        Izložbe
-                    </div>
+                    <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorija">
+                        <div class="col-md-3 event-type-option">
+                            <div class="custom-checkbox #{pretragaVesti.checkMap[kategorija] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
+                                <b:selectBooleanCheckbox id="kategorijaVesti" value="#{pretragaVesti.checkMap[kategorija]}" styleClass="custom-checkbox-bootsfaces filterPretrageKatCheckbox" />
+                            </div><br/>
+                            #{kategorija.naziv}
+                        </div>
+                    </ui:repeat>
                 </div>
 
                 <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">Datum i vreme</div>
-                </div>
-
-                <div class="custom-datepicker">
-                    <b:datepicker mode='popup-icon' styleClass='custom-datepicker-bootsfaces'
-                                  placeholder='Izaberite datum' />
-                </div>
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">mesto</div>
+                    <div class="stripe-line-header-content">Organizacija</div>
                 </div>
 
                 <div class="custom-select">
-                    <b:selectOneMenu value="#{selectOneMenuBean.type}" styleClass="place-select">
-                        <f:selectItem itemLabel="Izaberite mesto" itemValue="" />
-                        <f:selectItem itemLabel="Beograd" itemValue="1" />
-                        <f:selectItem itemLabel="Novi Sad" itemValue="2" />
-                        <f:selectItem itemLabel="Niš" itemValue="3" />
-                        <f:selectItem itemLabel="Kragujevac" itemValue="4" />
+                    <b:selectOneMenu id="organizacija" value="#{pretragaVesti.kreatorVesti}" styleClass="place-select" select2="true">
+                        <f:selectItem itemLabel="Sve organizacije" itemValue="" />
+                        <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija.korisnickoIme}" />
                     </b:selectOneMenu>
                 </div>
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">Sortiraj</div>
+                </div>
+
+                <div class="custom-select">
+                    <b:selectOneMenu id="sortiranje" value="#{pretragaVesti.sortiranje}" styleClass="place-select">
+                        <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
+                        <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
+                    </b:selectOneMenu>
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#amodal").removeAttr("tabindex");
+                    });
+                </script>
 
             </h:form>
 
@@ -99,6 +65,17 @@ and open the template in the editor.
                 <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
             </f:facet>
         </b:modal>
+
+        <script>
+            $('#amodal').on('hidden.bs.modal', function () {
+                $("#input_pretraga_vesti\\:organizacija").val($("#filter_pretrage\\:organizacijaInner").val());
+                $("#input_pretraga_vesti\\:sortiranje").val($("#filter_pretrage\\:sortiranjeInner").val());
+                var filterPretrageCheckboxes = $(".filterPretrageKatCheckbox");
+                filterPretrageCheckboxes.each(function(i,item) {
+                   $(".pretragaVestiKatCheckbox").eq(i).prop('checked', $(item).is(':checked'));
+                });
+            });
+        </script>
 
         <nav id="top-nav">
             <div class="container">
@@ -148,7 +125,12 @@ and open the template in the editor.
                 <div class="col-md-4 logo-col">
                     <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
                 </div>
-                <h:form>
+                <h:form id="pretraga_vesti">
+                    <b:inputText style="display: none" id="organizacija" value="#{pretragaVesti.kreatorVesti}" />
+                    <b:inputText style="display: none" id="sortiranje" value="#{pretragaVesti.sortiranje}" />
+                    <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorija">
+                        <b:selectBooleanCheckbox id="kategorijaVesti" value="#{pretragaVesti.checkMap[kategorija]}" styleClass="custom-checkbox-bootsfaces pretragaVestiKatCheckbox" style="display:none" />
+                    </ui:repeat>
                     <div class="col-md-4 search-col-1">
                         <button type="button" class="filter-button" data-target="#amodal" data-toggle="modal">Filter</button>
                     </div>
@@ -156,11 +138,13 @@ and open the template in the editor.
                         <table style="width: 100%; height: 38px">
                             <tr>
                                 <td style="width: 100%">
-                                    <b:inputText class="search-input-text" placeholder="Pretraga" />
+                                    <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga" />
                                 </td>
                                 <td>
-                                    <b:button icon="search" class="search-button">
-                                    </b:button>
+                                    <b:commandButton icon="search" 
+                                                     class="search-button" 
+                                                     ajax="true"
+                                                     onclick="ajax:pretragaVesti.pretraziVesti();"/>
                                 </td>
                             </tr>
                         </table>

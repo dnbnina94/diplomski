@@ -120,7 +120,7 @@ public class Vesti implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            thumbnailUrl = "url('/Diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/vesti/" + thumbnail + ")";
         }

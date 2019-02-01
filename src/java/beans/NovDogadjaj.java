@@ -6,8 +6,10 @@
 package beans;
 
 import db.Dogadjaji;
+import db.KarakteristikeProstora;
 import db.StavkeSifarnika;
 import db.helpers.DogadjajiHelper;
+import db.helpers.KarakteristikeProstoraHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.io.File;
 import java.io.IOException;
@@ -77,9 +79,12 @@ public class NovDogadjaj {
     private List<StavkeSifarnika> karakteristikeProstora;
     private StavkeSifarnika karakteristikaProstora;
     private String karakteristikeProstoraGreska = "";
+    
+    private List<KarakteristikeProstora> karakteristikeProstoraList;
 
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
+    private KarakteristikeProstoraHelper karakteristikeProstoraHelper = new KarakteristikeProstoraHelper();
 
     public NovDogadjaj() {
         karakteristikeProstora = new ArrayList<StavkeSifarnika>();
@@ -388,11 +393,19 @@ public class NovDogadjaj {
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
             novDogadjaj.setKorisnici(korisnikBean.getKorisnik());
 
-            if (!karakteristikeProstora.isEmpty()) {
-                novDogadjaj.setKarakteristikeProstora(new HashSet<StavkeSifarnika>(karakteristikeProstora));
-            }
-
             dogadjajiHelper.insertDogadjaj(novDogadjaj);
+            
+            if (!karakteristikeProstora.isEmpty()) {
+                int karakteristikeId = karakteristikeProstoraHelper.getMaxId()+1;
+                
+                for (int i=0; i<karakteristikeProstora.size(); i++) {
+                    KarakteristikeProstora novaKarakteristika = new KarakteristikeProstora(karakteristikeId, novDogadjaj, karakteristikeProstora.get(i));
+                    karakteristikeProstoraHelper.insertKarakteristikaProstora(novaKarakteristika);
+                    karakteristikeId++;
+                }
+                
+                //novDogadjaj.setKarakteristikeProstoras(new HashSet<KarakteristikeProstora>(karakteristikeProstoraList));
+            }
             
             PretragaDogadjaja pretragaDogadjajaBean = (PretragaDogadjaja) elContext.getELResolver().getValue(elContext, null, "pretragaDogadjaja");
             pretragaDogadjajaBean.setDogadjaj(novDogadjaj);
@@ -681,6 +694,14 @@ public class NovDogadjaj {
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         NovDogadjaj novDogadjajBean = new NovDogadjaj();
         elContext.getELResolver().setValue(elContext, null, "novDogadjaj", novDogadjajBean);
+    }
+
+    public List<KarakteristikeProstora> getKarakteristikeProstoraList() {
+        return karakteristikeProstoraList;
+    }
+
+    public void setKarakteristikeProstoraList(List<KarakteristikeProstora> karakteristikeProstoraList) {
+        this.karakteristikeProstoraList = karakteristikeProstoraList;
     }
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2019 at 08:15 PM
+-- Generation Time: Feb 01, 2019 at 08:11 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -46,7 +46,8 @@ CREATE TABLE `dogadjaji` (
 --
 
 INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`, `ulica`, `uzrast`, `datum_dogadjaja`, `datum_kreiranja`, `korisnicko_ime`, `datum_isticanja`, `thumbnail`) VALUES
-(1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:00', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:00', '1.jpg');
+(1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:00', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:00', '1.jpg'),
+(2, 'dadasasddas', '<p>dasdassdasd</p>', 6, 8, 22, 9, '2019-02-01 00:44:40', '2019-01-31 00:44:55', 'ORCA', '2019-02-01 00:44:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -55,9 +56,19 @@ INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`
 --
 
 CREATE TABLE `karakteristike_prostora` (
+  `id_karakteristika` int(11) NOT NULL,
   `id_dogadjaj` int(11) NOT NULL,
   `id_stavka` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `karakteristike_prostora`
+--
+
+INSERT INTO `karakteristike_prostora` (`id_karakteristika`, `id_dogadjaj`, `id_stavka`) VALUES
+(1, 1, 33),
+(2, 1, 34),
+(3, 2, 33);
 
 -- --------------------------------------------------------
 
@@ -279,8 +290,9 @@ ALTER TABLE `dogadjaji`
 -- Indexes for table `karakteristike_prostora`
 --
 ALTER TABLE `karakteristike_prostora`
-  ADD PRIMARY KEY (`id_dogadjaj`,`id_stavka`),
-  ADD KEY `FK_karakteristika_stavka` (`id_stavka`);
+  ADD PRIMARY KEY (`id_karakteristika`),
+  ADD KEY `id_dogadjaj` (`id_dogadjaj`),
+  ADD KEY `id_stavka` (`id_stavka`);
 
 --
 -- Indexes for table `korisnici`

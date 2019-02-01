@@ -8,13 +8,16 @@ package beans;
 import db.Organizacije;
 import db.StavkeSifarnika;
 import db.Vesti;
+import db.helpers.KorisniciHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,14 +37,36 @@ public class PretragaVesti {
     private Organizacije organizacija;
     private Vesti vest;
     private VestiHelper vestiHelper = new VestiHelper();
+    private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     
-    // 1 - vesti kategorije, 2 - vesti korisnika
+    private List<Organizacije> organizacije;
+    private String kreatorVesti;
+    private int sortiranje;
+    private String kljucneReci;
+    
+    // 1 - vesti kategorije, 2 - vesti korisnika, 3 - rezultat pretrage
     private int tipPretrage;
+    private Map<StavkeSifarnika, Boolean> checkMap = new HashMap<StavkeSifarnika, Boolean>();
     
     public PretragaVesti() {
         kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
         Collections.sort(kategorijeVesti, new PretragaVesti.SortByIdSifarnik());
+        
+        for (StavkeSifarnika kategorija : kategorijeVesti) {
+            checkMap.put(kategorija, Boolean.FALSE);
+        }
+        
+        organizacije = korisniciHelper.getSveOrganizacije();
+        Collections.sort(organizacije, new PretragaVesti.SortOrganizacijeByKorIme());
+    }
+    
+    class SortOrganizacijeByKorIme implements Comparator<Organizacije> {
+
+        @Override
+        public int compare(Organizacije a, Organizacije b) {
+            return a.getKorisnickoIme().toLowerCase().compareTo(b.getKorisnickoIme().toLowerCase());
+        }
     }
     
     class SortVestiByDatumDescending implements Comparator<Vesti> {
@@ -79,9 +104,11 @@ public class PretragaVesti {
     public List<Vesti> getVesti() {
         if (tipPretrage == 1) {
             return setToList(kategorijaVesti.getVestis()); 
-        } else {
+        }
+        if (tipPretrage == 2) {
             return setToList(organizacija.getKorisnici().getVestis()); 
         }
+        return vesti;
     }
     
     public void setVesti(List<Vesti> vesti) {
@@ -123,6 +150,51 @@ public class PretragaVesti {
 
     public void setTipPretrage(int tipPretrage) {
         this.tipPretrage = tipPretrage;
+    }
+
+    public List<Organizacije> getOrganizacije() {
+        return organizacije;
+    }
+
+    public void setOrganizacije(List<Organizacije> organizacije) {
+        this.organizacije = organizacije;
+    }
+
+    public String getKreatorVesti() {
+        return kreatorVesti;
+    }
+
+    public void setKreatorVesti(String kreatorVesti) {
+        this.kreatorVesti = kreatorVesti;
+    }
+
+    public int getSortiranje() {
+        return sortiranje;
+    }
+
+    public void setSortiranje(int sortiranje) {
+        this.sortiranje = sortiranje;
+    }
+    
+    public void pretraziVesti() {
+        //vesti = vestiHelper.pretragaVesti();
+        return;
+    }
+
+    public String getKljucneReci() {
+        return kljucneReci;
+    }
+
+    public void setKljucneReci(String kljucneReci) {
+        this.kljucneReci = kljucneReci;
+    }
+
+    public Map<StavkeSifarnika, Boolean> getCheckMap() {
+        return checkMap;
+    }
+
+    public void setCheckMap(Map<StavkeSifarnika, Boolean> checkMap) {
+        this.checkMap = checkMap;
     }
     
 }

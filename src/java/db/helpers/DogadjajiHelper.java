@@ -7,11 +7,14 @@ package db.helpers;
 
 import db.HibernateUtil;
 import db.Dogadjaji;
+import db.KarakteristikeProstora;
 import db.Oglasi;
 import db.StavkeSifarnika;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,10 +23,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 
 /**
  *
@@ -107,7 +113,14 @@ public class DogadjajiHelper {
         }
     }
 
-    public List<Dogadjaji> pretragaDogadjaja(Date datumDogadjaja, Map<StavkeSifarnika, Boolean> checkMap, StavkeSifarnika mesto, StavkeSifarnika uzrast, String kljucneReci, int sortiranje) {
+    public List<Dogadjaji> pretragaDogadjaja(Date datumDogadjaja,
+            Map<StavkeSifarnika, Boolean> checkMap,
+            StavkeSifarnika mesto,
+            StavkeSifarnika uzrast,
+            String kljucneReci,
+            List<StavkeSifarnika> selectedKarakteristikeProstora,
+            String kreatorDogadjaja,
+            int sortiranje) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.getTransaction().begin();
@@ -137,7 +150,7 @@ public class DogadjajiHelper {
                 or.add(and2);
                 c.add(or);
             }
-            
+
             Disjunction orKategorije = Restrictions.disjunction();
             for (Entry<StavkeSifarnika, Boolean> entry : checkMap.entrySet()) {
                 if (entry.getValue()) {
@@ -145,19 +158,34 @@ public class DogadjajiHelper {
                 }
             }
             c.add(orKategorije);
-            
+
             if (mesto != null) {
                 c.add(Restrictions.eq("mesto", mesto));
             }
-            
+
             if (uzrast != null) {
                 c.add(Restrictions.eq("uzrast", uzrast));
             }
-            
+
             if (!kljucneReci.isEmpty()) {
                 c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
             }
             
+            if (selectedKarakteristikeProstora != null) {
+                for(StavkeSifarnika selectedKar : selectedKarakteristikeProstora) {
+                    Iterator karIterator = selectedKar.getKarakteristikeProstoras().iterator();
+                    Disjunction karDisj = Restrictions.disjunction();
+                    while (karIterator.hasNext()) {
+                        karDisj.add(Restrictions.eq("idDogadjaj", ((KarakteristikeProstora) karIterator.next()).getDogadjaji().getIdDogadjaj()));
+                    }
+                    c.add(karDisj);
+                }
+            }
+            
+            if (!kreatorDogadjaja.isEmpty()) {
+                c.add(Restrictions.eq("korisnici.korisnickoIme", kreatorDogadjaja));
+            }
+
             if (sortiranje == 1) {
                 c.addOrder(Order.desc("datumKreiranja"));
             }

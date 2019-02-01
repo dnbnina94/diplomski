@@ -27,12 +27,12 @@ public class StavkeSifarnika  implements java.io.Serializable {
     private Set organizacijesUlica = new HashSet(0);
     private Set organizacijesOblastDelovanja = new HashSet(0);
     
-    private Set dogadjajisKarakteristike = new HashSet(0);
+    private Set karakteristikeProstoras = new HashSet(0);
 
     public StavkeSifarnika() {
     }
 
-    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja, Set dogadjajisKarakteristike) {
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja, Set karakteristikeProstoras) {
        this.idStavka = idStavka;
        this.sifarnici = sifarnici;
        this.naziv = naziv;
@@ -44,7 +44,7 @@ public class StavkeSifarnika  implements java.io.Serializable {
        this.organizacijesMesto = organizacijesMesto;
        this.organizacijesUlica = organizacijesUlica;
        this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
-       this.dogadjajisKarakteristike = dogadjajisKarakteristike;
+       this.karakteristikeProstoras = karakteristikeProstoras;
     }
     
     public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica) {
@@ -144,12 +144,12 @@ public class StavkeSifarnika  implements java.io.Serializable {
         this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
     }
 
-    public Set getDogadjajisKarakteristike() {
-        return dogadjajisKarakteristike;
+    public Set getKarakteristikeProstoras() {
+        return karakteristikeProstoras;
     }
 
-    public void setDogadjajisKarakteristike(Set dogadjajisKarakteristike) {
-        this.dogadjajisKarakteristike = dogadjajisKarakteristike;
+    public void setKarakteristikeProstoras(Set karakteristikeProstoras) {
+        this.karakteristikeProstoras = karakteristikeProstoras;
     }
     
 }

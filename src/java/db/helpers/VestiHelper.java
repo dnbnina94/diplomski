@@ -101,4 +101,8 @@ public class VestiHelper {
         }
     }
     
+    public List<Vesti> pretragaVesti() {
+        return null;
+    }
+    
 }

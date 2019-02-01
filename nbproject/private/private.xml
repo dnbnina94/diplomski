@@ -12,16 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/OglasiHelper.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/oglasi.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/PretragaDogadjaja.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/templates/right_content.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/Dogadjaji.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/resources/js/datepickerMonths.js</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/StavkeSifarnika.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/resources/css/style.css</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/resources/js/customCheckbox.js</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/DogadjajiHelper.java</file>
+            <file>file:/D:/Nina/Faks/Diplomski/web/templates/right_content.xhtml</file>
+            <file>file:/D:/Nina/Faks/Diplomski/src/java/beans/PretragaVesti.java</file>
+            <file>file:/D:/Nina/Faks/Diplomski/web/templates/header.xhtml</file>
+            <file>file:/D:/Nina/Faks/Diplomski/src/java/db/helpers/VestiHelper.java</file>
+            <file>file:/D:/Nina/Faks/Diplomski/src/java/beans/PretragaDogadjaja.java</file>
+            <file>file:/D:/Nina/Faks/Diplomski/src/java/db/helpers/OglasiHelper.java</file>
         </group>
     </open-files>
 </project-private>

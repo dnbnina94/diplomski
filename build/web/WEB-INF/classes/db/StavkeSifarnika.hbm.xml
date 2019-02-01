@@ -41,13 +41,11 @@
             </key>
             <one-to-many class="db.Dogadjaji" />
         </set>
-        <set name="dogadjajisKarakteristike" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
+        <set name="karakteristikeProstoras" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_stavka" not-null="true" />
             </key>
-            <many-to-many entity-name="db.Dogadjaji">
-                <column name="id_dogadjaj" not-null="true" />
-            </many-to-many>
+            <one-to-many class="db.KarakteristikeProstora" />
         </set>
     </class>
 </hibernate-mapping>

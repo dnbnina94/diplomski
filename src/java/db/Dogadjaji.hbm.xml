@@ -41,13 +41,11 @@
         <property name="thumbnail" type="string">
             <column name="thumbnail" length="256" />
         </property>
-        <set name="karakteristikeProstora" table="karakteristike_prostora" inverse="false" lazy="true" fetch="select">
+        <set name="karakteristikeProstoras" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_dogadjaj" not-null="true" />
             </key>
-            <many-to-many entity-name="db.StavkeSifarnika">
-                <column name="id_stavka" not-null="true" />
-            </many-to-many>
+            <one-to-many class="db.KarakteristikeProstora" />
         </set>
     </class>
 </hibernate-mapping>
