@@ -12,70 +12,6 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
     <h:body>
-        <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
-
-            <h:form id="filter_pretrage">
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">kategorija</div>
-                </div>
-
-                <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
-                    <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorija">
-                        <div class="col-md-3 event-type-option">
-                            <div class="custom-checkbox #{pretragaVesti.checkMap[kategorija] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
-                                <b:selectBooleanCheckbox id="kategorijaVesti" value="#{pretragaVesti.checkMap[kategorija]}" styleClass="custom-checkbox-bootsfaces filterPretrageKatCheckbox" />
-                            </div><br/>
-                            #{kategorija.naziv}
-                        </div>
-                    </ui:repeat>
-                </div>
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">Organizacija</div>
-                </div>
-
-                <div class="custom-select">
-                    <b:selectOneMenu id="organizacija" value="#{pretragaVesti.kreatorVesti}" styleClass="place-select" select2="true">
-                        <f:selectItem itemLabel="Sve organizacije" itemValue="" />
-                        <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija.korisnickoIme}" />
-                    </b:selectOneMenu>
-                </div>
-
-                <div class="stripe-line-header">
-                    <div class="stripe-line-header-content">Sortiraj</div>
-                </div>
-
-                <div class="custom-select">
-                    <b:selectOneMenu id="sortiranje" value="#{pretragaVesti.sortiranje}" styleClass="place-select">
-                        <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
-                        <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
-                    </b:selectOneMenu>
-                </div>
-
-                <script>
-                    $(document).ready(function () {
-                        $("#amodal").removeAttr("tabindex");
-                    });
-                </script>
-
-            </h:form>
-
-            <f:facet name="footer">
-                <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
-            </f:facet>
-        </b:modal>
-
-        <script>
-            $('#amodal').on('hidden.bs.modal', function () {
-                $("#input_pretraga_vesti\\:organizacija").val($("#filter_pretrage\\:organizacijaInner").val());
-                $("#input_pretraga_vesti\\:sortiranje").val($("#filter_pretrage\\:sortiranjeInner").val());
-                var filterPretrageCheckboxes = $(".filterPretrageKatCheckbox");
-                filterPretrageCheckboxes.each(function(i,item) {
-                   $(".pretragaVestiKatCheckbox").eq(i).prop('checked', $(item).is(':checked'));
-                });
-            });
-        </script>
 
         <nav id="top-nav">
             <div class="container">
@@ -120,38 +56,103 @@ and open the template in the editor.
             </div>
         </nav>
 
-        <nav id="nav-middle">
-            <div class="container">
-                <div class="col-md-4 logo-col">
-                    <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
+        <h:form id="pretraga_vesti">
+
+            <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">kategorija</div>
                 </div>
-                <h:form id="pretraga_vesti">
-                    <b:inputText style="display: none" id="organizacija" value="#{pretragaVesti.kreatorVesti}" />
-                    <b:inputText style="display: none" id="sortiranje" value="#{pretragaVesti.sortiranje}" />
+
+                <div class="row search-type-option" style="padding-top: 20px; padding-bottom: 30px">
                     <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorija">
-                        <b:selectBooleanCheckbox id="kategorijaVesti" value="#{pretragaVesti.checkMap[kategorija]}" styleClass="custom-checkbox-bootsfaces pretragaVestiKatCheckbox" style="display:none" />
+                        <div class="col-md-4 event-type-option">
+                            <div class="custom-checkbox #{pretragaVesti.checkMap[kategorija] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
+                                <b:selectBooleanCheckbox id="kategorijaVesti" value="#{pretragaVesti.checkMap[kategorija]}" styleClass="custom-checkbox-bootsfaces filterPretrageKatCheckbox" />
+                            </div><br/>
+                            #{kategorija.naziv}
+                        </div>
                     </ui:repeat>
-                    <div class="col-md-4 search-col-1">
-                        <button type="button" class="filter-button" data-target="#amodal" data-toggle="modal">Filter</button>
+                </div>
+
+                <div class="stripe-line-header" style="margin-top: 20px">
+                    <div class="stripe-line-header-content">Organizacija</div>
+                </div>
+
+                <div class="custom-select">
+                    <b:selectOneMenu id="organizacija" value="#{pretragaVesti.kreatorVesti}" styleClass="place-select" select2="true">
+                        <f:selectItem itemLabel="Sve organizacije" itemValue="" />
+                        <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija.korisnickoIme}" />
+                    </b:selectOneMenu>
+                </div>
+
+                <div class="stripe-line-header">
+                    <div class="stripe-line-header-content">Datum kreiranja vesti</div>
+                </div>
+
+                <b:datepicker id="datum" mode='popup-icon' styleClass="custom-datepicker-bootsfaces"
+                              placeholder='Izaberite datum kreiranja vesti'
+                              value="#{pretragaVesti.datum}" />
+
+                <div class="stripe-line-header" style="margin-top: 20px">
+                    <div class="stripe-line-header-content">Sortiraj</div>
+                </div>
+
+                <div class="custom-select">
+                    <b:selectOneMenu id="sortiranje" value="#{pretragaVesti.sortiranje}" styleClass="place-select">
+                        <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
+                        <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
+                    </b:selectOneMenu>
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#pretraga_vesti\\:amodal").removeAttr("tabindex");
+                    });
+                </script>
+
+                <f:facet name="footer">
+                    <b:button value="Zatvori" look="primary" dismiss="modal" styleClass="big-red-button" />
+                </f:facet>
+            </b:modal>
+
+            <nav id="nav-middle">
+                <div class="container">
+                    <div class="col-md-5 logo-col">
+                        <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
                     </div>
-                    <div class="col-md-4 search-col-2">
-                        <table style="width: 100%; height: 38px">
-                            <tr>
-                                <td style="width: 100%">
-                                    <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga" />
-                                </td>
-                                <td>
-                                    <b:commandButton icon="search" 
-                                                     class="search-button" 
-                                                     ajax="true"
-                                                     onclick="ajax:pretragaVesti.pretraziVesti();"/>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="col-md-7" style="padding: 0px">
+                        <div class="col-md-6 search-col-1">
+                            <b:selectOneMenu id="organizacijaPretraga" value="#{pretragaOrganizacija.organizacija}" styleClass="place-select" select2="true"
+                                             onchange="ajax:pretragaOrganizacija.pretraziOrganizaciju()">
+                                <f:selectItem itemLabel="Pretraga organizacija" itemValue="#{null}" />
+                                <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija}" />
+                            </b:selectOneMenu>
+                        </div>
+                        <div class="col-md-6 search-col-2">
+                            <table style="width: 100%; height: 38px">
+                                <tr>
+                                    <td>
+                                        <button type="button" class="filter-button" data-target="#pretraga_vesti\:amodal" data-toggle="modal">Filter</button>
+                                    </td>
+                                    <td style="width: 100%">
+                                        <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga vesti" />
+                                    </td>
+                                    <td>
+                                        <b:commandButton icon="search" 
+                                                         class="search-button" 
+                                                         action="vesti?faces-redirect=true"
+                                                         ajax="true"
+                                                         onclick="ajax:pretragaVesti.pretraziVesti();"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </h:form>
-            </div>
-        </nav>
+                </div>
+            </nav>
+
+        </h:form>
 
         <nav></nav>
 

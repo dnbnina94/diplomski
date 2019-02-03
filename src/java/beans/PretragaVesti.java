@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class PretragaVesti {
     private String kreatorVesti;
     private int sortiranje;
     private String kljucneReci;
+    private Date datum;
     
     // 1 - vesti kategorije, 2 - vesti korisnika, 3 - rezultat pretrage
     private int tipPretrage;
@@ -177,7 +179,8 @@ public class PretragaVesti {
     }
     
     public void pretraziVesti() {
-        //vesti = vestiHelper.pretragaVesti();
+        vesti = vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum);
+        tipPretrage = 3;
         return;
     }
 
@@ -195,6 +198,14 @@ public class PretragaVesti {
 
     public void setCheckMap(Map<StavkeSifarnika, Boolean> checkMap) {
         this.checkMap = checkMap;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
     
 }

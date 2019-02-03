@@ -174,7 +174,7 @@ public class Dogadjaji implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/Diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/dogadjaji/" + thumbnail + ")";
         }

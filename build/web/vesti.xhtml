@@ -45,6 +45,9 @@
                                         </b:commandLink>
                                     </h:form>
                                 </c:if>
+                                <c:if test="#{pretragaVesti.tipPretrage eq 3}">
+                                    <h:outputText value="Vesti - rezultat pretrage" />
+                                </c:if>
                             </div>                           
                         </div>
 

@@ -6,10 +6,15 @@
 package db.helpers;
 
 import db.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -101,8 +106,66 @@ public class VestiHelper {
         }
     }
     
-    public List<Vesti> pretragaVesti() {
-        return null;
+    public List<Vesti> pretragaVesti(String kljucneReci, Map<StavkeSifarnika, Boolean> checkMap, String kreatorVesti, int sortiranje, Date datum) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Vesti.class);
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
+            }
+            if (!kreatorVesti.isEmpty()) {
+                c.add(Restrictions.eq("korisnici.korisnickoIme", kreatorVesti));
+            }
+            
+            if (datum != null) {
+                Calendar minDate = Calendar.getInstance();
+                Calendar maxDate = Calendar.getInstance();
+                
+                minDate.setTime(datum);
+                maxDate.setTime(datum);
+                
+                minDate.set(Calendar.HOUR_OF_DAY, 0);
+                minDate.set(Calendar.MINUTE, 0);
+                minDate.set(Calendar.SECOND, 0);
+                
+                maxDate.set(Calendar.HOUR_OF_DAY, 23);
+                maxDate.set(Calendar.MINUTE, 59);
+                maxDate.set(Calendar.SECOND, 59);
+                
+                c.add(Restrictions.and(Restrictions.ge("datum", minDate.getTime()), Restrictions.le("datum", maxDate.getTime())));
+            }
+            
+            Disjunction orKategorije = Restrictions.disjunction();
+            for (Map.Entry<StavkeSifarnika, Boolean> entry : checkMap.entrySet()) {
+                if (entry.getValue()) {
+                    orKategorije.add(Restrictions.eq("kategorija", entry.getKey()));
+                }
+            }
+            c.add(orKategorije);
+            
+            
+            
+            if (sortiranje == 1) {
+                c.addOrder(Order.desc("datum"));
+            }
+            if (sortiranje == 2) {
+                c.addOrder(Order.asc("datum"));
+            }
+            
+            c.add(Restrictions.eq("arhivirana", 0));
+            
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
     
 }

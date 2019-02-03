@@ -141,10 +141,10 @@ public class DogadjajiHelper {
 
                 Conjunction and1 = Restrictions.conjunction();
                 and1.add(Restrictions.ge("datumDogadjaja", minDate));
-                and1.add(Restrictions.lt("datumDogadjaja", maxDate));
+                and1.add(Restrictions.le("datumDogadjaja", maxDate));
                 Conjunction and2 = Restrictions.conjunction();
                 and2.add(Restrictions.ge("datumIsticanja", minDate));
-                and2.add(Restrictions.lt("datumIsticanja", maxDate));
+                and2.add(Restrictions.le("datumIsticanja", maxDate));
                 Disjunction or = Restrictions.disjunction();
                 or.add(and1);
                 or.add(and2);

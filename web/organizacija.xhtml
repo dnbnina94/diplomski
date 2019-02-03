@@ -50,43 +50,47 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="nazivOrgVal" value="#{organizacijaBean.organizacija.naziv}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonNazivOrg" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="nazivOrg nazivOrgGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editNaziv(organizacijaBean.organizacija.naziv)"
-                                                                         oncomplete="editField('NazivOrg')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonNazivOrg" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="nazivOrg nazivOrgGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editNaziv(organizacijaBean.organizacija.naziv)"
+                                                                             oncomplete="editField('NazivOrg')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperNazivOrg"><td colspan="2" style="padding-right: 0px;">
-                                                        <b:inputText id="nazivOrg"
-                                                                     value="#{izmenaPodataka.nazivOrg}" 
-                                                                     styleClass="#{izmenaPodataka.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     placeholder="Unesite naziv svoje organizacije">
-                                                        </b:inputText>
-                                                        <h:panelGroup id="nazivOrgGreskaWrapper" >
-                                                            <div id="nazivOrgGreska" class="#{izmenaPodataka.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                <h:outputText id="nazivOrgGreskaVal" value="#{izmenaPodataka.nazivOrgGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonNazivOrg"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important"
-                                                                         ajax="true"
-                                                                         update="nazivOrgVal nazivOrg nazivOrgGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajNaziv()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonNazivOrg"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                  onclick="closeField('NazivOrg')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperNazivOrg"><td colspan="2" style="padding-right: 0px;">
+                                                            <b:inputText id="nazivOrg"
+                                                                         value="#{izmenaPodataka.nazivOrg}" 
+                                                                         styleClass="#{izmenaPodataka.nazivOrgGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         placeholder="Unesite naziv svoje organizacije">
+                                                            </b:inputText>
+                                                            <h:panelGroup id="nazivOrgGreskaWrapper" >
+                                                                <div id="nazivOrgGreska" class="#{izmenaPodataka.nazivOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText id="nazivOrgGreskaVal" value="#{izmenaPodataka.nazivOrgGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonNazivOrg"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             ajax="true"
+                                                                             update="nazivOrgVal nazivOrg nazivOrgGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajNaziv()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonNazivOrg"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                      onclick="closeField('NazivOrg')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -104,42 +108,46 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="opisOrgVal" value="#{organizacijaBean.organizacija.tekst}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonOpisOrg" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="opisOrg opisOrgGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editOpis(organizacijaBean.organizacija.tekst)"
-                                                                         oncomplete="editField('OpisOrg')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonOpisOrg" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="opisOrg opisOrgGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editOpis(organizacijaBean.organizacija.tekst)"
+                                                                             oncomplete="editField('OpisOrg')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperOpisOrg"><td colspan="2" style="padding-right: 0px;">
-                                                        <b:inputTextarea id="opisOrg"
-                                                                         placeholder="Kratko opišite svoju organizaciju" 
-                                                                         styleClass="#{izmenaPodataka.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
-                                                                         value="#{izmenaPodataka.opisOrg}" />
-                                                        <h:panelGroup id="opisOrgGreskaWrapper" >
-                                                            <div id="opisOrgGreska" class="#{izmenaPodataka.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                <h:outputText value="#{izmenaPodataka.opisOrgGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonOpisOrg"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important"
-                                                                         ajax="true"
-                                                                         update="opisOrgVal opisOrg opisOrgGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajOpis()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonOpisOrg"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                  onclick="closeField('OpisOrg')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperOpisOrg"><td colspan="2" style="padding-right: 0px;">
+                                                            <b:inputTextarea id="opisOrg"
+                                                                             placeholder="Kratko opišite svoju organizaciju" 
+                                                                             styleClass="#{izmenaPodataka.opisOrgGreska == '' ? 'custom-textarea' : 'custom-textarea custom-textarea-error'}" 
+                                                                             value="#{izmenaPodataka.opisOrg}" />
+                                                            <h:panelGroup id="opisOrgGreskaWrapper" >
+                                                                <div id="opisOrgGreska" class="#{izmenaPodataka.opisOrgGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{izmenaPodataka.opisOrgGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonOpisOrg"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             ajax="true"
+                                                                             update="opisOrgVal opisOrg opisOrgGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajOpis()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonOpisOrg"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                      onclick="closeField('OpisOrg')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -157,44 +165,48 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="oblastDelovanjaVal" value="#{organizacijaBean.organizacija.oblastDelovanja.naziv}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonOblastDelovanja" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="oblastDelovanja oblastDelovanjaGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editOblastDelovanja(organizacijaBean.organizacija.oblastDelovanja.naziv)"
-                                                                         oncomplete="editField('OblastDelovanja')"/>
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonOblastDelovanja" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="oblastDelovanja oblastDelovanjaGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editOblastDelovanja(organizacijaBean.organizacija.oblastDelovanja.naziv)"
+                                                                             oncomplete="editField('OblastDelovanja')"/>
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperOblastDelovanja"><td colspan="2" style="padding-right: 0px;">
-                                                        <b:inputText id="oblastDelovanja"
-                                                                     styleClass="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     placeholder="Npr. zaštita životne sredine" 
-                                                                     typeahead="true" 
-                                                                     typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.oblastiDelovanja)}" 
-                                                                     value="#{izmenaPodataka.oblastDelovanja}" />
-                                                        <h:panelGroup id="oblastDelovanjaGreskaWrapper" >
-                                                            <div id="oblastDelovanjaGreska" class="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                <h:outputText value="#{izmenaPodataka.oblastDelovanjaGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonOblastDelovanja"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important"
-                                                                         ajax="true"
-                                                                         update="oblastDelovanjaVal oblastDelovanja oblastDelovanjaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajOblastDelovanja()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonOblastDelovanja"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                  onclick="closeField('OblastDelovanja')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperOblastDelovanja"><td colspan="2" style="padding-right: 0px;">
+                                                            <b:inputText id="oblastDelovanja"
+                                                                         styleClass="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         placeholder="Npr. zaštita životne sredine" 
+                                                                         typeahead="true" 
+                                                                         typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.oblastiDelovanja)}" 
+                                                                         value="#{izmenaPodataka.oblastDelovanja}" />
+                                                            <h:panelGroup id="oblastDelovanjaGreskaWrapper" >
+                                                                <div id="oblastDelovanjaGreska" class="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{izmenaPodataka.oblastDelovanjaGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonOblastDelovanja"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             ajax="true"
+                                                                             update="oblastDelovanjaVal oblastDelovanja oblastDelovanjaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajOblastDelovanja()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonOblastDelovanja"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                      onclick="closeField('OblastDelovanja')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -212,48 +224,52 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="webAdresaVal" value="#{organizacijaBean.organizacija.webAdresa}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonWebAdresa" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="webAdresa webAdresaGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editWebAdresa(organizacijaBean.organizacija.webAdresa)"
-                                                                         oncomplete="editField('WebAdresa')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonWebAdresa" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="webAdresa webAdresaGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editWebAdresa(organizacijaBean.organizacija.webAdresa)"
+                                                                             oncomplete="editField('WebAdresa')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperWebAdresa"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
-                                                        <b:inputText id="webAdresa"
-                                                                     styleClass="#{izmenaPodataka.webAdresaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     style="margin-top: 0px !important; margin-bottom: 0px !important"
-                                                                     value="#{izmenaPodataka.webAdresa}"
-                                                                     placeholder="Npr. www.mojaorg.com">
-                                                            <f:facet name="prepend">
-                                                                <h:graphicImage library="img" name="world.png" style="height: 18px" />
-                                                            </f:facet>
-                                                        </b:inputText>
-                                                        <h:panelGroup id="webAdresaGreskaWrapper">
-                                                            <div id="webAdresaGreska" class="#{izmenaPodataka.webAdresaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                                                 style="margin-top: 5px; margin-bottom: 0px">
-                                                                <h:outputText value="#{izmenaPodataka.webAdresaGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonWebAdresa"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important; margin-top: 10px"
-                                                                         ajax="true"
-                                                                         update="webAdresaVal webAdresa webAdresaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajWebAdresa()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonWebAdresa"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
-                                                                  onclick="closeField('WebAdresa')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperWebAdresa"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
+                                                            <b:inputText id="webAdresa"
+                                                                         styleClass="#{izmenaPodataka.webAdresaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                         value="#{izmenaPodataka.webAdresa}"
+                                                                         placeholder="Npr. www.mojaorg.com">
+                                                                <f:facet name="prepend">
+                                                                    <h:graphicImage library="img" name="world.png" style="height: 18px" />
+                                                                </f:facet>
+                                                            </b:inputText>
+                                                            <h:panelGroup id="webAdresaGreskaWrapper">
+                                                                <div id="webAdresaGreska" class="#{izmenaPodataka.webAdresaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                                     style="margin-top: 5px; margin-bottom: 0px">
+                                                                    <h:outputText value="#{izmenaPodataka.webAdresaGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonWebAdresa"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important; margin-top: 10px"
+                                                                             ajax="true"
+                                                                             update="webAdresaVal webAdresa webAdresaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajWebAdresa()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonWebAdresa"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
+                                                                      onclick="closeField('WebAdresa')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -273,65 +289,69 @@
                                                     <h:outputText value=", " />
                                                     <h:outputText id="ulicaVal" value="#{organizacijaBean.organizacija.ulica.naziv}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonMestoUlica" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="mestoOrg ulicaOrg mestoGreskaWrapper ulicaGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editMestoUlica(organizacijaBean.organizacija.mesto.naziv, organizacijaBean.organizacija.ulica.naziv)"
-                                                                         oncomplete="editField('MestoUlica')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonMestoUlica" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="mestoOrg ulicaOrg mestoGreskaWrapper ulicaGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editMestoUlica(organizacijaBean.organizacija.mesto.naziv, organizacijaBean.organizacija.ulica.naziv)"
+                                                                             oncomplete="editField('MestoUlica')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperMestoUlica"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
-                                                        <div class="row edit-place-fields-container">
-                                                            <div class="col-md-6">
-                                                                <h:outputText value="Mesto: " styleClass="login-form-label" />
-                                                                <b:inputText id="mestoOrg"
-                                                                             styleClass="#{izmenaPodataka.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                             placeholder="Npr. Beograd" 
-                                                                             typeahead="true" 
-                                                                             typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
-                                                                             value="#{izmenaPodataka.mesto}" />
-                                                                <h:panelGroup id="mestoGreskaWrapper">
-                                                                    <div id="mestoGreska" class="#{izmenaPodataka.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                        <h:outputText value="#{izmenaPodataka.mestoGreska}" />
-                                                                    </div>
-                                                                </h:panelGroup>
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperMestoUlica"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
+                                                            <div class="row edit-place-fields-container">
+                                                                <div class="col-md-6">
+                                                                    <h:outputText value="Mesto: " styleClass="login-form-label" />
+                                                                    <b:inputText id="mestoOrg"
+                                                                                 styleClass="#{izmenaPodataka.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                                 placeholder="Npr. Beograd" 
+                                                                                 typeahead="true" 
+                                                                                 typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
+                                                                                 value="#{izmenaPodataka.mesto}" />
+                                                                    <h:panelGroup id="mestoGreskaWrapper">
+                                                                        <div id="mestoGreska" class="#{izmenaPodataka.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                            <h:outputText value="#{izmenaPodataka.mestoGreska}" />
+                                                                        </div>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <h:outputText value="Ulica: " styleClass="login-form-label" />
+                                                                    <b:inputText id="ulicaOrg"
+                                                                                 styleClass="#{izmenaPodataka.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                                 placeholder="Npr. Bulevar Kralja Aleksandra 73" 
+                                                                                 typeahead="true" 
+                                                                                 typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
+                                                                                 value="#{izmenaPodataka.ulica}" />
+                                                                    <h:panelGroup id="ulicaGreskaWrapper">
+                                                                        <div id="ulicaGreska" class="#{izmenaPodataka.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                            <h:outputText value="#{izmenaPodataka.ulicaGreska}" />
+                                                                        </div>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <b:commandButton id="saveEditButtonMestoUlica"
+                                                                                     value="Sačuvaj"
+                                                                                     styleClass="form-step-button-sm"
+                                                                                     style="background-color: #4c4c4c !important"
+                                                                                     ajax="true"
+                                                                                     update="mestoVal ulicaVal mestoOrg ulicaOrg mestoGreskaWrapper ulicaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                                     onclick="ajax:izmenaPodataka.sacuvajMestoUlica()"
+                                                                                     />
+                                                                    <b:button id="cancelEditButtonMestoUlica"
+                                                                              value="Odustani"
+                                                                              styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                              onclick="closeField('MestoUlica')" />
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <h:outputText value="Ulica: " styleClass="login-form-label" />
-                                                                <b:inputText id="ulicaOrg"
-                                                                             styleClass="#{izmenaPodataka.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                             placeholder="Npr. Bulevar Kralja Aleksandra 73" 
-                                                                             typeahead="true" 
-                                                                             typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
-                                                                             value="#{izmenaPodataka.ulica}" />
-                                                                <h:panelGroup id="ulicaGreskaWrapper">
-                                                                    <div id="ulicaGreska" class="#{izmenaPodataka.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                        <h:outputText value="#{izmenaPodataka.ulicaGreska}" />
-                                                                    </div>
-                                                                </h:panelGroup>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <b:commandButton id="saveEditButtonMestoUlica"
-                                                                                 value="Sačuvaj"
-                                                                                 styleClass="form-step-button-sm"
-                                                                                 style="background-color: #4c4c4c !important"
-                                                                                 ajax="true"
-                                                                                 update="mestoVal ulicaVal mestoOrg ulicaOrg mestoGreskaWrapper ulicaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                                 onclick="ajax:izmenaPodataka.sacuvajMestoUlica()"
-                                                                                 />
-                                                                <b:button id="cancelEditButtonMestoUlica"
-                                                                          value="Odustani"
-                                                                          styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                          onclick="closeField('MestoUlica')" />
-                                                            </div>
-                                                        </div>
-                                                    </td></tr> 
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -349,43 +369,47 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="kontaktOsobaVal" value="#{organizacijaBean.organizacija.kontaktOsoba}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonKontaktOsoba" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="kontaktOsoba kontaktOsobaGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editKontaktOsoba(organizacijaBean.organizacija.kontaktOsoba)"
-                                                                         oncomplete="editField('KontaktOsoba')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonKontaktOsoba" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="kontaktOsoba kontaktOsobaGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editKontaktOsoba(organizacijaBean.organizacija.kontaktOsoba)"
+                                                                             oncomplete="editField('KontaktOsoba')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperKontaktOsoba"><td colspan="2" style="padding-right: 0px;">
-                                                        <b:inputText id="kontaktOsoba"
-                                                                     styleClass="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                                     style="margin-bottom: 5px"
-                                                                     value="#{izmenaPodataka.kontaktOsoba}"
-                                                                     placeholder="Unesite ime i prezime kontakt osobe" />
-                                                        <h:panelGroup id="kontaktOsobaGreskaWrapper" >
-                                                            <div id="kontaktOsobaGreska" class="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                <h:outputText value="#{izmenaPodataka.kontaktOsobaGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonKontaktOsoba"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important"
-                                                                         ajax="true"
-                                                                         update="kontaktOsobaVal kontaktOsoba kontaktOsobaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajKontaktOsoba()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonKontaktOsoba"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                  onclick="closeField('KontaktOsoba')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperKontaktOsoba"><td colspan="2" style="padding-right: 0px;">
+                                                            <b:inputText id="kontaktOsoba"
+                                                                         styleClass="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                         style="margin-bottom: 5px"
+                                                                         value="#{izmenaPodataka.kontaktOsoba}"
+                                                                         placeholder="Unesite ime i prezime kontakt osobe" />
+                                                            <h:panelGroup id="kontaktOsobaGreskaWrapper" >
+                                                                <div id="kontaktOsobaGreska" class="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{izmenaPodataka.kontaktOsobaGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonKontaktOsoba"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             ajax="true"
+                                                                             update="kontaktOsobaVal kontaktOsoba kontaktOsobaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajKontaktOsoba()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonKontaktOsoba"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                      onclick="closeField('KontaktOsoba')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -403,69 +427,73 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="telefoniVal" value="#{organizacijaBean.organizacija.telefoni}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil"
-                                                                         id="editButtonTelefoni" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="telefoniWrapper telefon telefonGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editTelefoni(organizacijaBean.organizacija.telefoni)"
-                                                                         oncomplete="editField('Telefoni')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil"
+                                                                             id="editButtonTelefoni" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="telefoniWrapper telefon telefonGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editTelefoni(organizacijaBean.organizacija.telefoni)"
+                                                                             oncomplete="editField('Telefoni')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperTelefoni"><td colspan="2" style="padding-right: 0px;">
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperTelefoni"><td colspan="2" style="padding-right: 0px;">
 
-                                                        <h:panelGroup id="telefoniWrapper">
-                                                            <ui:repeat id="telefoni" value="#{izmenaPodataka.telefoni}" var="telefon" varStatus="status">
-                                                                <div class="custom-tag">
-                                                                    <h:outputText value="#{telefon}" />
+                                                            <h:panelGroup id="telefoniWrapper">
+                                                                <ui:repeat id="telefoni" value="#{izmenaPodataka.telefoni}" var="telefon" varStatus="status">
+                                                                    <div class="custom-tag">
+                                                                        <h:outputText value="#{telefon}" />
 
-                                                                    <b:commandButton id="removeButton"
-                                                                                     icon="remove" 
-                                                                                     styleClass="remove-field-button" 
-                                                                                     update="@form:telefon @form:telefoniWrapper @form:izmenaPodatakaValidacija @form:telefonGreskaWrapper"
-                                                                                     onclick="ajax:izmenaPodataka.removeTelefon(status.index)" />
+                                                                        <b:commandButton id="removeButton"
+                                                                                         icon="remove" 
+                                                                                         styleClass="remove-field-button" 
+                                                                                         update="@form:telefon @form:telefoniWrapper @form:izmenaPodatakaValidacija @form:telefonGreskaWrapper"
+                                                                                         onclick="ajax:izmenaPodataka.removeTelefon(status.index)" />
+                                                                    </div>
+                                                                </ui:repeat>
+                                                            </h:panelGroup>
+
+                                                            <b:inputText id="telefon"
+                                                                         value="#{izmenaPodataka.telefon}" 
+                                                                         styleClass="#{izmenaPodataka.telefonGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         placeholder="Npr. 381601234567">
+                                                                <f:facet name="append">
+                                                                    <b:commandButton id="plusButton"
+                                                                                     icon="plus" 
+                                                                                     styleClass="add-field-button" 
+                                                                                     ajax="true" 
+                                                                                     update="telefon telefonGreskaWrapper izmenaPodatakaValidacija telefoniWrapper" 
+                                                                                     onclick="ajax:izmenaPodataka.addTelefon();" 
+                                                                                     style="border: 1px solid #4c4c4c; #{izmenaPodataka.telefonGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
+                                                                </f:facet>
+                                                            </b:inputText>
+
+                                                            <h:panelGroup id="telefonGreskaWrapper" >
+                                                                <div id="telefonGreska" class="#{izmenaPodataka.telefonGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                    <h:outputText value="#{izmenaPodataka.telefonGreska}" />
                                                                 </div>
-                                                            </ui:repeat>
-                                                        </h:panelGroup>
+                                                            </h:panelGroup>
 
-                                                        <b:inputText id="telefon"
-                                                                     value="#{izmenaPodataka.telefon}" 
-                                                                     styleClass="#{izmenaPodataka.telefonGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     placeholder="Npr. 381601234567">
-                                                            <f:facet name="append">
-                                                                <b:commandButton id="plusButton"
-                                                                                 icon="plus" 
-                                                                                 styleClass="add-field-button" 
-                                                                                 ajax="true" 
-                                                                                 update="telefon telefonGreskaWrapper izmenaPodatakaValidacija telefoniWrapper" 
-                                                                                 onclick="ajax:izmenaPodataka.addTelefon();" 
-                                                                                 style="border: 1px solid #4c4c4c; #{izmenaPodataka.telefonGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
-                                                            </f:facet>
-                                                        </b:inputText>
-
-                                                        <h:panelGroup id="telefonGreskaWrapper" >
-                                                            <div id="telefonGreska" class="#{izmenaPodataka.telefonGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                                <h:outputText value="#{izmenaPodataka.telefonGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-
-                                                        <b:commandButton id="saveEditButtonTelefoni"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important"
-                                                                         ajax="true"
-                                                                         update="telefoniVal telefoniWrapper telefon telefonGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajTelefone()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonTelefoni"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px"
-                                                                  onclick="closeField('Telefoni')" />
-                                                    </td></tr> 
+                                                            <b:commandButton id="saveEditButtonTelefoni"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important"
+                                                                             ajax="true"
+                                                                             update="telefoniVal telefoniWrapper telefon telefonGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajTelefone()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonTelefoni"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px"
+                                                                      onclick="closeField('Telefoni')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
@@ -483,124 +511,129 @@
                                                 <td style="width: 100%">
                                                     <h:outputText id="emailVal" value="#{organizacijaBean.organizacija.email}" />
                                                 </td>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <td>
-                                                        <b:commandButton icon="pencil" 
-                                                                         id="editButtonEmail" 
-                                                                         styleClass="edit-info-button"
-                                                                         ajax="true"
-                                                                         update="email emailGreskaWrapper izmenaPodatakaValidacija"
-                                                                         onclick="ajax:izmenaPodataka.editEmail(organizacijaBean.organizacija.email)"
-                                                                         oncomplete="editField('Email')" />
-                                                    </td>     
+                                                <c:if test="#{korisnikBean.korisnik != null}">
+                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <td>
+                                                            <b:commandButton icon="pencil" 
+                                                                             id="editButtonEmail" 
+                                                                             styleClass="edit-info-button"
+                                                                             ajax="true"
+                                                                             update="email emailGreskaWrapper izmenaPodatakaValidacija"
+                                                                             onclick="ajax:izmenaPodataka.editEmail(organizacijaBean.organizacija.email)"
+                                                                             oncomplete="editField('Email')" />
+                                                        </td>     
+                                                    </c:if>
                                                 </c:if>
                                             </tr>
-                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                <tr class="field-wrapper" id="fieldWrapperEmail"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
-                                                        <b:inputText id="email"
-                                                                     styleClass="#{izmenaPodataka.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                     style="margin-top: 0px !important; margin-bottom: 0px !important"
-                                                                     value="#{izmenaPodataka.email}"
-                                                                     placeholder="Npr. org@mojaorg.com" >
-                                                            <f:facet name="prepend">
-                                                                <b:icon value="envelope" style="padding-left: 1.5px; padding-right: 1.5px;" />
-                                                            </f:facet>
-                                                        </b:inputText>
-                                                        <h:panelGroup id="emailGreskaWrapper" >
-                                                            <div id="emailGreska" class="#{izmenaPodataka.emailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" 
-                                                                 style="margin-top: 5px; margin-bottom: 0px">
-                                                                <h:outputText value="#{izmenaPodataka.emailGreska}" />
-                                                            </div>
-                                                        </h:panelGroup>
-                                                        <b:commandButton id="saveEditButtonEmail"
-                                                                         value="Sačuvaj"
-                                                                         styleClass="form-step-button-sm"
-                                                                         style="background-color: #4c4c4c !important; margin-top: 10px"
-                                                                         ajax="true"
-                                                                         update="emailVal email emailGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                         onclick="ajax:izmenaPodataka.sacuvajEmail()"
-                                                                         />
-                                                        <b:button id="cancelEditButtonEmail"
-                                                                  value="Odustani"
-                                                                  styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
-                                                                  onclick="closeField('Email')" />
-                                                    </td></tr> 
+                                            <c:if test="#{korisnikBean.korisnik != null}">
+                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                    <tr class="field-wrapper" id="fieldWrapperEmail"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
+                                                            <b:inputText id="email"
+                                                                         styleClass="#{izmenaPodataka.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                         style="margin-top: 0px !important; margin-bottom: 0px !important"
+                                                                         value="#{izmenaPodataka.email}"
+                                                                         placeholder="Npr. org@mojaorg.com" >
+                                                                <f:facet name="prepend">
+                                                                    <b:icon value="envelope" style="padding-left: 1.5px; padding-right: 1.5px;" />
+                                                                </f:facet>
+                                                            </b:inputText>
+                                                            <h:panelGroup id="emailGreskaWrapper" >
+                                                                <div id="emailGreska" class="#{izmenaPodataka.emailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" 
+                                                                     style="margin-top: 5px; margin-bottom: 0px">
+                                                                    <h:outputText value="#{izmenaPodataka.emailGreska}" />
+                                                                </div>
+                                                            </h:panelGroup>
+                                                            <b:commandButton id="saveEditButtonEmail"
+                                                                             value="Sačuvaj"
+                                                                             styleClass="form-step-button-sm"
+                                                                             style="background-color: #4c4c4c !important; margin-top: 10px"
+                                                                             ajax="true"
+                                                                             update="emailVal email emailGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                             onclick="ajax:izmenaPodataka.sacuvajEmail()"
+                                                                             />
+                                                            <b:button id="cancelEditButtonEmail"
+                                                                      value="Odustani"
+                                                                      styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
+                                                                      onclick="closeField('Email')" />
+                                                        </td></tr> 
+                                                </c:if>
                                             </c:if>
                                         </table>
                                     </div>
                                 </div>
+                                <c:if test="#{korisnikBean.korisnik != null}">
+                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                        <div class="custom-div-separator"></div>
 
-                                <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                    <div class="custom-div-separator"></div>
-
-                                    <div class="row">
-                                        <div class="col-md-3 organizacija-detail-header">
-                                            Lozinka:
-                                        </div>
-                                        <div class="col-md-9 organizacija-detail-content">
-                                            <table style="width: 100%">
-                                                <tr id="infoWrapperLozinka">
-                                                    <td style="width: 100%">
-                                                        &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-                                                    </td>
+                                        <div class="row">
+                                            <div class="col-md-3 organizacija-detail-header">
+                                                Lozinka:
+                                            </div>
+                                            <div class="col-md-9 organizacija-detail-content">
+                                                <table style="width: 100%">
+                                                    <tr id="infoWrapperLozinka">
+                                                        <td style="width: 100%">
+                                                            &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+                                                        </td>
+                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                            <td>
+                                                                <b:commandButton icon="pencil" 
+                                                                                 id="editButtonLozinka" 
+                                                                                 styleClass="edit-info-button"
+                                                                                 ajax="true"
+                                                                                 update="staraLozinka staraLozinkaGreskaWrapper novaLozinka novaLozinkaGreskaWrapper ponovljenaNovaLozinka ponovljenaNovaLozinkaGreskaWrapper izmenaPodatakaValidacija"
+                                                                                 onclick="ajax:izmenaPodataka.editLozinka()"
+                                                                                 oncomplete="editField('Lozinka')" />
+                                                            </td>     
+                                                        </c:if>
+                                                    </tr>
                                                     <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                        <td>
-                                                            <b:commandButton icon="pencil" 
-                                                                             id="editButtonLozinka" 
-                                                                             styleClass="edit-info-button"
-                                                                             ajax="true"
-                                                                             update="staraLozinka staraLozinkaGreskaWrapper novaLozinka novaLozinkaGreskaWrapper ponovljenaNovaLozinka ponovljenaNovaLozinkaGreskaWrapper izmenaPodatakaValidacija"
-                                                                             onclick="ajax:izmenaPodataka.editLozinka()"
-                                                                             oncomplete="editField('Lozinka')" />
-                                                        </td>     
+                                                        <tr class="field-wrapper" id="fieldWrapperLozinka"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
+                                                                <h:outputText value="Stara lozinka:" styleClass="login-form-label" />
+                                                                <b:inputSecret id="staraLozinka"
+                                                                               styleClass="#{izmenaPodataka.staraLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                               value="#{izmenaPodataka.staraLozinka}" />
+                                                                <h:panelGroup id="staraLozinkaGreskaWrapper" >
+                                                                    <div id="staraLozinkaGreska" class="#{izmenaPodataka.staraLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
+                                                                        <h:outputText value="#{izmenaPodataka.staraLozinkaGreska}" />
+                                                                    </div>
+                                                                </h:panelGroup>
+                                                                <h:outputText value="Nova lozinka:" styleClass="login-form-label" />
+                                                                <b:inputSecret id="novaLozinka"
+                                                                               styleClass="#{izmenaPodataka.novaLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                               value="#{izmenaPodataka.novaLozinka}" />
+                                                                <h:panelGroup id="novaLozinkaGreskaWrapper" >
+                                                                    <div id="novaLozinkaGreska" class="#{izmenaPodataka.novaLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
+                                                                        <h:outputText value="#{izmenaPodataka.novaLozinkaGreska}" />
+                                                                    </div>
+                                                                </h:panelGroup>
+                                                                <h:outputText value="Ponovljena nova lozinka:" styleClass="login-form-label" />
+                                                                <b:inputSecret id="ponovljenaNovaLozinka"
+                                                                               styleClass="#{izmenaPodataka.ponovljenaNovaLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                                               value="#{izmenaPodataka.ponovljenaNovaLozinka}" />
+                                                                <h:panelGroup id="ponovljenaNovaLozinkaGreskaWrapper" >
+                                                                    <div id="ponovljenaNovaLozinkaGreska" class="#{izmenaPodataka.ponovljenaNovaLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
+                                                                        <h:outputText value="#{izmenaPodataka.ponovljenaNovaLozinkaGreska}" />
+                                                                    </div>
+                                                                </h:panelGroup>
+                                                                <b:commandButton id="saveEditButtonLozinka"
+                                                                                 value="Sačuvaj"
+                                                                                 styleClass="form-step-button-sm"
+                                                                                 style="background-color: #4c4c4c !important;"
+                                                                                 ajax="true"
+                                                                                 update="staraLozinka staraLozinkaGreskaWrapper novaLozinka novaLozinkaGreskaWrapper ponovljenaNovaLozinka ponovljenaNovaLozinkaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
+                                                                                 onclick="ajax:izmenaPodataka.sacuvajLozinku()"
+                                                                                 />
+                                                                <b:button id="cancelEditButtonLozinka"
+                                                                          value="Odustani"
+                                                                          styleClass="form-step-button-sm" style="margin-left: 5px;"
+                                                                          onclick="closeField('Lozinka')" />
+                                                            </td></tr> 
                                                     </c:if>
-                                                </tr>
-                                                <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
-                                                    <tr class="field-wrapper" id="fieldWrapperLozinka"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
-                                                            <h:outputText value="Stara lozinka:" styleClass="login-form-label" />
-                                                            <b:inputSecret id="staraLozinka"
-                                                                           styleClass="#{izmenaPodataka.staraLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                           value="#{izmenaPodataka.staraLozinka}" />
-                                                            <h:panelGroup id="staraLozinkaGreskaWrapper" >
-                                                                <div id="staraLozinkaGreska" class="#{izmenaPodataka.staraLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
-                                                                    <h:outputText value="#{izmenaPodataka.staraLozinkaGreska}" />
-                                                                </div>
-                                                            </h:panelGroup>
-                                                            <h:outputText value="Nova lozinka:" styleClass="login-form-label" />
-                                                            <b:inputSecret id="novaLozinka"
-                                                                           styleClass="#{izmenaPodataka.novaLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                           value="#{izmenaPodataka.novaLozinka}" />
-                                                            <h:panelGroup id="novaLozinkaGreskaWrapper" >
-                                                                <div id="novaLozinkaGreska" class="#{izmenaPodataka.novaLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
-                                                                    <h:outputText value="#{izmenaPodataka.novaLozinkaGreska}" />
-                                                                </div>
-                                                            </h:panelGroup>
-                                                            <h:outputText value="Ponovljena nova lozinka:" styleClass="login-form-label" />
-                                                            <b:inputSecret id="ponovljenaNovaLozinka"
-                                                                           styleClass="#{izmenaPodataka.ponovljenaNovaLozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
-                                                                           value="#{izmenaPodataka.ponovljenaNovaLozinka}" />
-                                                            <h:panelGroup id="ponovljenaNovaLozinkaGreskaWrapper" >
-                                                                <div id="ponovljenaNovaLozinkaGreska" class="#{izmenaPodataka.ponovljenaNovaLozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" >
-                                                                    <h:outputText value="#{izmenaPodataka.ponovljenaNovaLozinkaGreska}" />
-                                                                </div>
-                                                            </h:panelGroup>
-                                                            <b:commandButton id="saveEditButtonLozinka"
-                                                                             value="Sačuvaj"
-                                                                             styleClass="form-step-button-sm"
-                                                                             style="background-color: #4c4c4c !important;"
-                                                                             ajax="true"
-                                                                             update="staraLozinka staraLozinkaGreskaWrapper novaLozinka novaLozinkaGreskaWrapper ponovljenaNovaLozinka ponovljenaNovaLozinkaGreskaWrapper izmenaPodatakaValidacija saveFieldScript"
-                                                                             onclick="ajax:izmenaPodataka.sacuvajLozinku()"
-                                                                             />
-                                                            <b:button id="cancelEditButtonLozinka"
-                                                                      value="Odustani"
-                                                                      styleClass="form-step-button-sm" style="margin-left: 5px;"
-                                                                      onclick="closeField('Lozinka')" />
-                                                        </td></tr> 
-                                                </c:if>
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:if>
                                 </c:if>
                             </div>
 
@@ -630,13 +663,15 @@
                                 <c:if test="#{organizacijaBean.setVestiToList().size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađene vesti korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                            <br/>
-                                            <b:commandButton action="nova_vest?faces-redirect=true"
-                                                             onclick="ajax:novaVest.reset()"
-                                                             value="Kreirajte vest" 
-                                                             styleClass="form-step-button-sm"
-                                                             style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                        <c:if test="#{korisnikBean.korisnik != null}">
+                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <br/>
+                                                <b:commandButton action="nova_vest?faces-redirect=true"
+                                                                 onclick="ajax:novaVest.reset()"
+                                                                 value="Kreirajte vest" 
+                                                                 styleClass="form-step-button-sm"
+                                                                 style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                            </c:if>
                                         </c:if>
                                     </div>
                                 </c:if>
@@ -672,13 +707,15 @@
                                 <c:if test="#{organizacijaBean.setDogadjajiToList().size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni događaji korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                            <br/>
-                                            <b:commandButton action="nov_dogadjaj?faces-redirect=true"
-                                                             onclick="ajax:novDogadjaj.reset()"
-                                                             value="Kreirajte događaj" 
-                                                             styleClass="form-step-button-sm"
-                                                             style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                        <c:if test="#{korisnikBean.korisnik != null}">
+                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <br/>
+                                                <b:commandButton action="nov_dogadjaj?faces-redirect=true"
+                                                                 onclick="ajax:novDogadjaj.reset()"
+                                                                 value="Kreirajte događaj" 
+                                                                 styleClass="form-step-button-sm"
+                                                                 style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                            </c:if>
                                         </c:if>
                                     </div>
                                 </c:if>
@@ -725,13 +762,15 @@
                                 <c:if test="#{organizacijaBean.setOglasiToList().size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni oglasi korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
-                                            <br/>
-                                            <b:commandButton action="nov_oglas?faces-redirect=true"
-                                                             onclick="ajax:novOglas.reset()"
-                                                             value="Kreirajte oglas" 
-                                                             styleClass="form-step-button-sm"
-                                                             style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                        <c:if test="#{korisnikBean.korisnik != null}">
+                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <br/>
+                                                <b:commandButton action="nov_oglas?faces-redirect=true"
+                                                                 onclick="ajax:novOglas.reset()"
+                                                                 value="Kreirajte oglas" 
+                                                                 styleClass="form-step-button-sm"
+                                                                 style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                            </c:if>
                                         </c:if>
                                     </div>
                                 </c:if>
