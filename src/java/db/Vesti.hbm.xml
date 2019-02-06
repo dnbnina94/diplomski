@@ -29,5 +29,8 @@
         <property name="arhivirana" type="int">
             <column name="arhivirana" not-null="true" />
         </property>
+        <property name="zahtevBrisanje" type="boolean">
+            <column name="zahtev_brisanje" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

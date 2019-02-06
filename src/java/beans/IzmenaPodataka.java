@@ -17,6 +17,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -665,10 +666,10 @@ public class IzmenaPodataka {
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(korisnik.getSalt().getBytes());
+            md.update(korisnik.getSalt());
             byte[] hashedPassword = md.digest(staraLozinka.getBytes(StandardCharsets.UTF_8));
-
-            if (!(new String(hashedPassword)).equals(korisnik.getLozinka())) {
+            
+            if (! Arrays.equals(hashedPassword, korisnik.getLozinka())) {
                 staraLozinkaGreska = "Lozinka koju ste uneli je neispravna.";
                 saveFieldJs = "";
                 return false;
@@ -749,12 +750,12 @@ public class IzmenaPodataka {
                 
                 ELContext elContext = FacesContext.getCurrentInstance().getELContext();
                 KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-                korisnikBean.getKorisnik().setLozinka(new String(hashedPassword));
-                korisnikBean.getKorisnik().setSalt(new String(salt));
+                korisnikBean.getKorisnik().setLozinka(hashedPassword);
+                korisnikBean.getKorisnik().setSalt(salt);
                 elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
                 
-                korHelper.updateOrganizacijaLozinka(new String(hashedPassword), korisnikBean.getKorisnik().getKorisnickoIme());
-                korHelper.updateOrganizacijaSalt(new String(salt), korisnikBean.getKorisnik().getKorisnickoIme());
+                korHelper.updateOrganizacijaLozinka(hashedPassword, korisnikBean.getKorisnik().getKorisnickoIme());
+                korHelper.updateOrganizacijaSalt(salt, korisnikBean.getKorisnik().getKorisnickoIme());
                 
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(IzmenaPodataka.class.getName()).log(Level.SEVERE, null, ex);

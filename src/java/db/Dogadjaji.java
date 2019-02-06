@@ -5,8 +5,12 @@
  */
 package db;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.jsoup.Jsoup;
 
@@ -28,12 +32,24 @@ public class Dogadjaji implements java.io.Serializable {
     private Korisnici korisnici;
     private Date datumIsticanja;
     private String thumbnail;
+    private boolean zahtevBrisanje;
     private Set karakteristikeProstoras = new HashSet(0);
+    
+    private boolean arhiviran;
 
     public Dogadjaji() {
     }
+    
+    private class SortByIdKarakteristika implements Comparator<KarakteristikeProstora> {
+        
+        @Override
+        public int compare(KarakteristikeProstora a, KarakteristikeProstora b) {
+            return a.getIdKarakteristika()-b.getIdKarakteristika();
+        }
+        
+    }
 
-    public Dogadjaji(int idDogadjaj, String naslov, String tekst, StavkeSifarnika kategorija, StavkeSifarnika mesto, StavkeSifarnika ulica, StavkeSifarnika uzrast, Date datumDogadjaja, Date datumKreiranja, Korisnici korisnici, Date datumIsticanja, String thumbnail, Set karakteristikeProstoras) {
+    public Dogadjaji(int idDogadjaj, String naslov, String tekst, StavkeSifarnika kategorija, StavkeSifarnika mesto, StavkeSifarnika ulica, StavkeSifarnika uzrast, Date datumDogadjaja, Date datumKreiranja, Korisnici korisnici, Date datumIsticanja, String thumbnail, boolean zahtevBrisanje, Set karakteristikeProstoras) {
         this.idDogadjaj = idDogadjaj;
         this.naslov = naslov;
         this.tekst = tekst;
@@ -46,6 +62,7 @@ public class Dogadjaji implements java.io.Serializable {
         this.korisnici = korisnici;
         this.datumIsticanja = datumIsticanja;
         this.thumbnail = thumbnail;
+        this.zahtevBrisanje = zahtevBrisanje;
         this.karakteristikeProstoras = karakteristikeProstoras;
     }
     
@@ -155,7 +172,7 @@ public class Dogadjaji implements java.io.Serializable {
     
     public String getTekstShort() {
         String tekstShort = Jsoup.parse(tekst).text();
-        return tekstShort.substring(0, Math.min(tekstShort.length(), 150))+"...";
+        return tekstShort.substring(0, Math.min(tekstShort.length(), 100))+"...";
     }
     
     public String getTekstShortRezultatPretrage() {
@@ -180,6 +197,32 @@ public class Dogadjaji implements java.io.Serializable {
         }
         
         return thumbnailUrl;
+    }
+
+    public boolean isArhiviran() {
+        Date danas = new Date();
+        if (danas.after(datumIsticanja)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setArhiviran(boolean arhiviran) {
+        this.arhiviran = arhiviran;
+    }
+
+    public boolean isZahtevBrisanje() {
+        return zahtevBrisanje;
+    }
+
+    public void setZahtevBrisanje(boolean zahtevBrisanje) {
+        this.zahtevBrisanje = zahtevBrisanje;
+    }
+    
+    public List<KarakteristikeProstora> karakteristikeToList() {
+        List<KarakteristikeProstora> karakteristikeProstoraList = new ArrayList<KarakteristikeProstora>(karakteristikeProstoras);
+        Collections.sort(karakteristikeProstoraList, new Dogadjaji.SortByIdKarakteristika());
+        return karakteristikeProstoraList;
     }
     
 }

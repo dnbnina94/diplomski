@@ -23,5 +23,8 @@
         <property name="datumIsticanja" type="timestamp">
             <column name="datum_isticanja" length="19" not-null="true" />
         </property>
+        <property name="zahtevBrisanje" type="boolean">
+            <column name="zahtev_brisanje" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

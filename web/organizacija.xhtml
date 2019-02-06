@@ -676,7 +676,7 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
-                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12 #{vest.arhivirana == 1 ? 'expired' : ''}" style="margin-bottom: 15px">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                             <div class="news-image-container-front-page" style="background: #{vest.getThumbnailUrl()}">
                                             </div>
@@ -690,6 +690,17 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
+                                <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
+                                    <c:if test="#{korisnikBean.korisnik != null}">
+                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                            <b:commandButton action="nova_vest?faces-redirect=true"
+                                                             onclick="ajax:novaVest.reset()"
+                                                             value="Kreirajte vest" 
+                                                             styleClass="form-step-button-sm"
+                                                             style="background-color: #4c4c4c !important;" />
+                                        </c:if>
+                                    </c:if>
+                                </div>
                             </h:form>
                         </div>
 
@@ -720,7 +731,7 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setDogadjajiToListFeatured()}" var="dogadjaj">
-                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12 #{dogadjaj.arhiviran ? 'expired' : ''}" style="margin-bottom: 15px">
                                         <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
                                             <div class="news-image-container-front-page" style="background: #{dogadjaj.getThumbnailUrl()}">
                                             </div>
@@ -745,6 +756,17 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
+                                <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
+                                    <c:if test="#{korisnikBean.korisnik != null}">
+                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                            <b:commandButton action="nov_dogadjaj?faces-redirect=true"
+                                                             onclick="ajax:novDogadjaj.reset()"
+                                                             value="Kreirajte događaj" 
+                                                             styleClass="form-step-button-sm"
+                                                             style="background-color: #4c4c4c !important;" />
+                                        </c:if>
+                                    </c:if>
+                                </div>
                             </h:form>
                         </div>
 
@@ -775,7 +797,7 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setOglasiToListFeatured()}" var="oglas">
-                                    <div class="col-md-3 col-sm-6 col-xs-12 #{oglas.arhiviran}" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12 #{oglas.arhiviran ? 'expired' : ''}" style="margin-bottom: 15px">
                                         <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
                                             <div class="news-header-container-front-page" style="margin-top: 0px !important; border-bottom: 1px solid #ddd;">
                                                 #{oglas.naslovShort}
@@ -801,6 +823,17 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
+                                <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
+                                    <c:if test="#{korisnikBean.korisnik != null}">
+                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                            <b:commandButton action="nov_oglas?faces-redirect=true"
+                                                             onclick="ajax:novOglas.reset()"
+                                                             value="Kreirajte oglas" 
+                                                             styleClass="form-step-button-sm"
+                                                             style="background-color: #4c4c4c !important;" />
+                                        </c:if>
+                                    </c:if>
+                                </div>
                             </h:form>
                         </div>
 

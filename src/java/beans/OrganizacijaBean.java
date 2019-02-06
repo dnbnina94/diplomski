@@ -10,7 +10,10 @@ import db.Korisnici;
 import db.Oglasi;
 import db.Organizacije;
 import db.Vesti;
+import db.helpers.DogadjajiHelper;
 import db.helpers.KorisniciHelper;
+import db.helpers.OglasiHelper;
+import db.helpers.VestiHelper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +31,10 @@ import javax.faces.context.FacesContext;
 public class OrganizacijaBean {
 
     private Organizacije organizacija;
+    
+    private VestiHelper vestiHelper = new VestiHelper();
+    private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
+    private OglasiHelper oglasiHelper = new OglasiHelper();
 
     public OrganizacijaBean() {
     }
@@ -79,7 +86,7 @@ public class OrganizacijaBean {
         Collections.sort(telefoni, new OrganizacijaBean.SortByIdTelefon());
         return telefoni;
     }*/
- /*public String telefoniToString() {
+    /*public String telefoniToString() {
         String telefoniString = "";
         List<Telefoni> telefoni = this.setTelefoniToList();
         for (int i=0; i < telefoni.size(); i++) {
@@ -100,7 +107,8 @@ public class OrganizacijaBean {
 
     public List<Vesti> setVestiToList() {
         if (organizacija != null) {
-            List<Vesti> vesti = new ArrayList<Vesti>(organizacija.getKorisnici().getVestis());
+            //List<Vesti> vesti = new ArrayList<Vesti>(organizacija.getKorisnici().getVestis());
+            List<Vesti> vesti = vestiHelper.getVestiByKorisnik(organizacija.getKorisnici());
             Collections.sort(vesti, new OrganizacijaBean.SortVestiByDatumDescending());
             return vesti;
         }
@@ -109,7 +117,8 @@ public class OrganizacijaBean {
 
     public List<Dogadjaji> setDogadjajiToList() {
         if (organizacija != null) {
-            List<Dogadjaji> dogadjaji = new ArrayList<Dogadjaji>(organizacija.getKorisnici().getDogadjajis());
+            //List<Dogadjaji> dogadjaji = new ArrayList<Dogadjaji>(organizacija.getKorisnici().getDogadjajis());
+            List<Dogadjaji> dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
             Collections.sort(dogadjaji, new OrganizacijaBean.SortDogadjajiByDatumDescending());
             return dogadjaji;
         }
@@ -118,7 +127,8 @@ public class OrganizacijaBean {
 
     public List<Oglasi> setOglasiToList() {
         if (organizacija != null) {
-            List<Oglasi> oglasi = new ArrayList<Oglasi>(organizacija.getKorisnici().getOglasis());
+            //List<Oglasi> oglasi = new ArrayList<Oglasi>(organizacija.getKorisnici().getOglasis());
+            List<Oglasi> oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
             Collections.sort(oglasi, new OrganizacijaBean.SortOglasiByDatumDescending());
             return oglasi;
         }

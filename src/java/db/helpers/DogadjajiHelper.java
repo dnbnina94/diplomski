@@ -8,6 +8,7 @@ package db.helpers;
 import db.HibernateUtil;
 import db.Dogadjaji;
 import db.KarakteristikeProstora;
+import db.Korisnici;
 import db.Oglasi;
 import db.StavkeSifarnika;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Conjunction;
@@ -43,7 +45,11 @@ public class DogadjajiHelper {
     }
 
     public List<Dogadjaji> dogadjaji() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -61,7 +67,11 @@ public class DogadjajiHelper {
     }
 
     public int getMaxId() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -83,7 +93,11 @@ public class DogadjajiHelper {
     }
 
     public void insertDogadjaj(Dogadjaji dogadjaj) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -97,7 +111,11 @@ public class DogadjajiHelper {
     }
 
     public void insertKarakteristike(int idDogadjaj, List<StavkeSifarnika> karakteristikeProsotora) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -121,7 +139,11 @@ public class DogadjajiHelper {
             List<StavkeSifarnika> selectedKarakteristikeProstora,
             String kreatorDogadjaja,
             int sortiranje) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -185,6 +207,9 @@ public class DogadjajiHelper {
             if (!kreatorDogadjaja.isEmpty()) {
                 c.add(Restrictions.eq("korisnici.korisnickoIme", kreatorDogadjaja));
             }
+            
+            Date danas = new Date();
+            c.add(Restrictions.gt("datumIsticanja", danas));
 
             if (sortiranje == 1) {
                 c.addOrder(Order.desc("datumKreiranja"));
@@ -205,6 +230,49 @@ public class DogadjajiHelper {
 
             return l;
 
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void zahtevBrisanjeDogadjaja(Dogadjaji dogadjaj) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "update Dogadjaji c set c.zahtevBrisanje = 1 where c.idDogadjaj = :idDogadjaj";
+            int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
+            
+            session.getTransaction().commit();
+            session.close();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Dogadjaji> getDogadjajiByKorisnik(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("korisnici", korisnik));
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            //session.close();
+            
+            return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

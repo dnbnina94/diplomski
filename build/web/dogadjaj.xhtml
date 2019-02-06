@@ -32,75 +32,140 @@
                     <div class="col-md-9">
                         <div class="stripe-line-header news-category-header">                        
                         </div>
-                        <h:form>
-                            <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaDogadjaja.dogadjaj.getThumbnailUrl()}"></div>
-                            <div style="height: 10px"></div>
-                            <h:outputText styleClass="news-title-news-page" value="#{pretragaDogadjaja.dogadjaj.naslov}" />
+                        <h:form id="dogadjaj">
+                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme}">
+                                <b:modal id="amodal" styleClass="modalPseudoClass">
 
-                            <div class="news-parameters-news-page" style="margin-bottom: 10px;">
-                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                    <h:outputText value=" #{pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme}" />
-                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaDogadjaja.dogadjaj.korisnici.organizacije}" />
-                                </b:commandLink>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumKreiranja}" >
-                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                </h:outputText>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumKreiranja}" >
-                                    <f:convertDateTime pattern=" HH:mm" />
-                                </h:outputText>
-                                &nbsp;
-                                <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
-                                    <h:outputText value=" #{pretragaDogadjaja.dogadjaj.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                        <f:convertDateTime pattern="dd.MM.yyyy." />
-                                    </h:outputText>
-                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{pretragaDogadjaja.dogadjaj.kategorija}" />
-                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
-                                </b:commandLink>
-                            </div>
+                                    <div class="stripe-line-header">
+                                        <div class="stripe-line-header-content">Brisanje događaja</div>
+                                    </div>
 
-                            <div class="row event-dates-container">
-                                <div class="col-md-5">
-                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" >
-                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                    </h:outputText>
+                                    <div style="margin-top: 40px; margin-bottom: 40px">
+                                        Da li ste sigurni da želite da obrišete ovaj događaj?
+                                    </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#dogadjaj\\:amodal").removeAttr("tabindex");
+                                        });
+                                    </script>
+
+                                    <f:facet name="footer">
+                                        <div class="row modal-buttons-wrapper">
+                                            <div class="col-md-6">
+                                                <b:commandButton value="Obriši događaj" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="dogadjaj_content"
+                                                                 onclick="ajax:zahteviKorisnika.obrisiDogadjaj();"
+                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                            </div>
+                                        </div>
+                                    </f:facet>
+                                </b:modal>
+                            </c:if>
+                            <h:panelGroup id="dogadjaj_content">
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+                                <div class="#{pretragaDogadjaja.dogadjaj.arhiviran ? 'expired' : ''}" >
+                                    <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaDogadjaja.dogadjaj.getThumbnailUrl()}"></div>
+                                    <div style="height: 10px"></div>
+                                    <h:outputText styleClass="news-title-news-page" value="#{pretragaDogadjaja.dogadjaj.naslov}" />
+
+                                    <div class="news-parameters-news-page" style="margin-bottom: 10px;">
+                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                            <h:outputText value=" #{pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme}" />
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaDogadjaja.dogadjaj.korisnici.organizacije}" />
+                                        </b:commandLink>
+                                        &nbsp;
+                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                        <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumKreiranja}" >
+                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                        </h:outputText>
+                                        &nbsp;
+                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                        <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumKreiranja}" >
+                                            <f:convertDateTime pattern=" HH:mm" />
+                                        </h:outputText>
+                                        &nbsp;
+                                        <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
+                                            <h:outputText value=" #{pretragaDogadjaja.dogadjaj.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                                <f:convertDateTime pattern="dd.MM.yyyy." />
+                                            </h:outputText>
+                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{pretragaDogadjaja.dogadjaj.kategorija}" />
+                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
+                                        </b:commandLink>
+                                    </div>
+
+                                    <div class="row event-dates-container">
+                                        <div class="col-md-5">
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                            </h:outputText>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
+                                        </div>
+                                        <div class="col-md-2">
+                                            &mdash;
+                                        </div>
+                                        <div class="col-md-5">
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                            </h:outputText>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 10px"></div>
+                                    <b>Mesto:</b>
                                     &nbsp;
-                                    <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" >
-                                        <f:convertDateTime pattern=" HH:mm" />
-                                    </h:outputText>
+                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.mesto.naziv}" />
+                                    <h:outputText value=", " />
+                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.ulica.naziv}" /> <br/>
+                                    <ui:repeat value="#{pretragaDogadjaja.dogadjaj.karakteristikeToList()}" var="karakteristika">
+                                        <div style="height: 25px; width: 25px; display: inline-block; margin-top: 10px; margin-bottom: 5px">
+                                            <h:graphicImage title="#{karakteristika.stavkeSifarnika.naziv}" library="img" name="ikonice/#{karakteristika.stavkeSifarnika.ikonica}" style="height: 100%; width: 100%;"/>
+                                        </div>
+                                    </ui:repeat>
+                                    <div style="height: 10px; border-bottom: 1px solid #eee"></div>
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.tekst}" escape="false" />
                                 </div>
-                                <div class="col-md-2">
-                                    &mdash;
+                                <div style="margin-top: 20px; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
+                                    <c:if test="#{!pretragaDogadjaja.dogadjaj.zahtevBrisanje}" >
+                                        <div data-target="#dogadjaj\:amodal" 
+                                             data-toggle="modal"
+                                             style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
+                                                             ajax="true"
+                                                             style="background-color: #ccc !important; #{korisnikBean.korisnik.korisnickoIme != pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme ? 'display: none' : ''}" 
+                                                             value="Obriši događaj"
+                                                             disabled="#{pretragaDogadjaja.dogadjaj.zahtevBrisanje}" >
+                                                <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{pretragaDogadjaja.dogadjaj}" />
+                                            </b:commandButton>
+                                        </div>
+                                    </c:if>
                                 </div>
-                                <div class="col-md-5">
-                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" >
-                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                    </h:outputText>
-                                    &nbsp;
-                                    <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                    <h:outputText value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" >
-                                        <f:convertDateTime pattern=" HH:mm" />
-                                    </h:outputText>
-                                </div>
-                            </div>
 
-                            <div style="height: 10px"></div>
-                            <b>Mesto:</b>
-                            &nbsp;
-                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.mesto.naziv}" />
-                            <h:outputText value=", " />
-                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.ulica.naziv}" />
-                            <div style="height: 10px; border-bottom: 1px solid #eee"></div>
-                            <div style="height: 10px"></div>
-                            <h:outputText value="#{pretragaDogadjaja.dogadjaj.tekst}" escape="false" />
-
+                                <style>
+                                    #dogadjaj\:growl-success {
+                                        margin-top: 20px !important;
+                                    }
+                                </style>
+                            </h:panelGroup>
                         </h:form>
                     </div>
                     <div class="col-md-3">

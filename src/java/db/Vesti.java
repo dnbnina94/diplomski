@@ -18,6 +18,7 @@ public class Vesti implements java.io.Serializable {
     private Date datum;
     private String thumbnail;
     private int arhivirana;
+    private boolean zahtevBrisanje;
     
     private String outerDivClass="col-md-6 col-xs-12 featured-col-container";
     private String innerDivClassRelative="featured-col featured-col-bigger";
@@ -26,7 +27,7 @@ public class Vesti implements java.io.Serializable {
     public Vesti() {
     }
 
-    public Vesti(int idVest, Korisnici korisnici, String naslov, String tekst, StavkeSifarnika kategorija, Date datum, String thumbnail, int arhivirana) {
+    public Vesti(int idVest, Korisnici korisnici, String naslov, String tekst, StavkeSifarnika kategorija, Date datum, String thumbnail, int arhivirana, boolean zahtevBrisanje) {
         this.idVest = idVest;
         this.korisnici = korisnici;
         this.naslov = naslov;
@@ -36,6 +37,7 @@ public class Vesti implements java.io.Serializable {
         
         this.thumbnail = thumbnail;
         this.arhivirana = arhivirana;
+        this.zahtevBrisanje = zahtevBrisanje;
     }
 
     public int getIdVest() {
@@ -162,6 +164,14 @@ public class Vesti implements java.io.Serializable {
 
     public void setInnerDivClassAbsolute(String innerDivClassAbsolute) {
         this.innerDivClassAbsolute = innerDivClassAbsolute;
+    }
+
+    public boolean isZahtevBrisanje() {
+        return zahtevBrisanje;
+    }
+
+    public void setZahtevBrisanje(boolean zahtevBrisanje) {
+        this.zahtevBrisanje = zahtevBrisanje;
     }
 
 }

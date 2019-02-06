@@ -6,6 +6,7 @@ import db.Organizacije;
 import db.StavkeSifarnika;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -22,7 +23,11 @@ public class KorisniciHelper {
     }
 
     public Korisnici getKorisnikByKorisnickoIme(String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -43,7 +48,11 @@ public class KorisniciHelper {
     }
 
     public Organizacije getOrganizacijaByEmail(String email) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
 
         try {
             session.getTransaction().begin();
@@ -66,7 +75,11 @@ public class KorisniciHelper {
     }
 
     public void insertKorisnik(Korisnici korisnik) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -85,7 +98,11 @@ public class KorisniciHelper {
     }
 
     public void insertOrganizacija(Organizacije organizacija) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -99,7 +116,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaNaziv(String naziv, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -115,7 +136,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaOpis(String opis, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -131,7 +156,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaOblastDelovanja(StavkeSifarnika oblastDelovanja, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -147,7 +176,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaWebAdresa(String webAdresa, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -163,7 +196,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaKontaktOsoba(String kontaktOsoba, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -179,7 +216,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaEmail(String email, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -195,7 +236,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaMesto(StavkeSifarnika mesto, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -211,7 +256,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaUlica(StavkeSifarnika ulica, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -227,7 +276,11 @@ public class KorisniciHelper {
     }
     
     public void updateOrganizacijaTelefoni(String telefoni, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -242,13 +295,17 @@ public class KorisniciHelper {
         }
     }
     
-    public void updateOrganizacijaLozinka(String lozinka, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+    public void updateOrganizacijaLozinka(byte[] lozinka, String korisnickoIme) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
             String hqlUpdate = "update Korisnici c set c.lozinka = :lozinka where c.korisnickoIme = :korisnickoIme";
-            int updatedEntities = session.createQuery( hqlUpdate ).setString("lozinka", lozinka ).setString( "korisnickoIme", korisnickoIme ).executeUpdate();
+            int updatedEntities = session.createQuery( hqlUpdate ).setBinary("lozinka", lozinka ).setString("korisnickoIme", korisnickoIme ).executeUpdate();
             
             session.getTransaction().commit();
             session.close();
@@ -258,13 +315,17 @@ public class KorisniciHelper {
         }
     }
     
-    public void updateOrganizacijaSalt(String salt, String korisnickoIme) {
-        session = HibernateUtil.getSessionFactory().openSession();
+    public void updateOrganizacijaSalt(byte[] salt, String korisnickoIme) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
             String hqlUpdate = "update Korisnici c set c.salt = :salt where c.korisnickoIme = :korisnickoIme";
-            int updatedEntities = session.createQuery( hqlUpdate ).setString("salt", salt ).setString( "korisnickoIme", korisnickoIme ).executeUpdate();
+            int updatedEntities = session.createQuery( hqlUpdate ).setBinary("salt", salt ).setString( "korisnickoIme", korisnickoIme ).executeUpdate();
             
             session.getTransaction().commit();
             session.close();
@@ -275,7 +336,11 @@ public class KorisniciHelper {
     }
     
     public List<Organizacije> getSveOrganizacije() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
 
         try {
             session.getTransaction().begin();

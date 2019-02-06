@@ -32,40 +32,151 @@
                     <div class="col-md-9">
                         <div class="stripe-line-header news-category-header">                        
                         </div>
-                        <h:form>
-                            <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaVesti.vest.getThumbnailUrl()}"></div>
-                            <div style="height: 10px"></div>
-                            <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
+                        <h:form id="vest">
+                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == pretragaVesti.vest.korisnici.korisnickoIme}">
+                                <b:modal id="amodal_brisanje" styleClass="modalPseudoClass">
 
-                            <div class="news-parameters-news-page">
-                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                    <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
-                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaVesti.vest.korisnici.organizacije}" />
-                                </b:commandLink>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                </h:outputText>
-                                &nbsp;
-                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                    <f:convertDateTime pattern=" HH:mm" />
-                                </h:outputText>
-                                &nbsp;
-                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                    <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
-                                    <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                        <f:convertDateTime pattern="dd.MM.yyyy." />
-                                    </h:outputText>
-                                    <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
-                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
-                                </b:commandLink>
-                            </div>
+                                    <div class="stripe-line-header">
+                                        <div class="stripe-line-header-content">Brisanje vesti</div>
+                                    </div>
 
-                            <h:outputText id="tekst" value="#{pretragaVesti.vest.tekst}" escape="false" />
+                                    <div style="margin-top: 40px; margin-bottom: 40px">
+                                        Da li ste sigurni da želite da obrišete ovu vest?
+                                    </div>
 
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#vest\\:amodal_brisanje").removeAttr("tabindex");
+                                        });
+                                    </script>
+
+                                    <f:facet name="footer">
+                                        <div class="row modal-buttons-wrapper">
+                                            <div class="col-md-6">
+                                                <b:commandButton value="Obriši vest" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="vest_content"
+                                                                 onclick="ajax:zahteviKorisnika.obrisiVest();"
+                                                                 oncomplete="$('#vest\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                            </div>
+                                        </div>
+                                    </f:facet>
+                                </b:modal>
+
+                                <b:modal id="amodal_arhiviranje" styleClass="modalPseudoClass">
+
+                                    <div class="stripe-line-header">
+                                        <div class="stripe-line-header-content">Arhiviranje vesti</div>
+                                    </div>
+
+                                    <div style="margin-top: 40px; margin-bottom: 40px">
+                                        Da li ste sigurni da želite da arhivirate ovu vest?
+                                    </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#vest\\:amodal_arhiviranje").removeAttr("tabindex");
+                                        });
+                                    </script>
+
+                                    <f:facet name="footer">
+                                        <div class="row modal-buttons-wrapper">
+                                            <div class="col-md-6">
+                                                <b:commandButton value="Arhiviraj vest" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="vest_content"
+                                                                 onclick="ajax:zahteviKorisnika.arhivirajVest();"
+                                                                 oncomplete="$('#vest\\:amodal_arhiviranje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                            </div>
+                                        </div>
+                                    </f:facet>
+                                </b:modal>
+
+                            </c:if>
+                            <h:panelGroup id="vest_content">
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+                                <div class="#{pretragaVesti.vest.arhivirana == 1 ? 'expired' : ''}">
+                                    <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaVesti.vest.getThumbnailUrl()}"></div>
+                                    <div style="height: 10px"></div>
+                                    <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
+
+                                    <div class="news-parameters-news-page">
+                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                            <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
+                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaVesti.vest.korisnici.organizacije}" />
+                                        </b:commandLink>
+                                        &nbsp;
+                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                        <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                        </h:outputText>
+                                        &nbsp;
+                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                        <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                            <f:convertDateTime pattern=" HH:mm" />
+                                        </h:outputText>
+                                        &nbsp;
+                                        <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                            <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
+                                            <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                                <f:convertDateTime pattern="dd.MM.yyyy." />
+                                            </h:outputText>
+                                            <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
+                                            <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                        </b:commandLink>
+                                    </div>
+
+                                    <h:outputText id="tekst" value="#{pretragaVesti.vest.tekst}" escape="false" />
+
+                                </div>
+                                <div style="margin-top: 20px; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
+                                    <c:if test="#{pretragaVesti.vest.arhivirana != 1}">
+                                        <div data-target="#vest\:amodal_arhiviranje" 
+                                             data-toggle="modal"
+                                             style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
+                                                             ajax="true"
+                                                             style="background-color: #4C4C4C !important; #{korisnikBean.korisnik.korisnickoIme != pretragaVesti.vest.korisnici.korisnickoIme ? 'display: none' : ''}" 
+                                                             value="Arhiviraj vest"
+                                                             id="arhiviranje_button"
+                                                             disabled="#{pretragaVesti.vest.arhivirana == 0 ? 'false' : 'true'}">
+                                                <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanaVestArhiviranje}" value="#{pretragaVesti.vest}" />
+                                            </b:commandButton>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="#{!pretragaVesti.vest.zahtevBrisanje}">
+                                        <div data-target="#vest\:amodal_brisanje" 
+                                             data-toggle="modal"
+                                             style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
+                                                             style="background-color: #ccc !important; #{korisnikBean.korisnik.korisnickoIme != pretragaVesti.vest.korisnici.korisnickoIme ? 'display: none' : ''}" 
+                                                             value="Obriši vest"
+                                                             ajax="true"
+                                                             id="brisanje_button"
+                                                             disabled="#{pretragaVesti.vest.zahtevBrisanje ? 'true' : 'false'}" >
+                                                <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanaVestBrisanje}" value="#{pretragaVesti.vest}" />
+                                            </b:commandButton>
+                                        </div>
+                                    </c:if>
+                                </div>
+
+                                <style>
+                                    #vest\:growl-success {
+                                        margin-top: 20px !important;
+                                    }
+                                </style>
+                            </h:panelGroup>
                         </h:form>
                     </div>
                     <div class="col-md-3">

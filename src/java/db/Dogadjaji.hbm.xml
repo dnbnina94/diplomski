@@ -41,6 +41,9 @@
         <property name="thumbnail" type="string">
             <column name="thumbnail" length="256" />
         </property>
+        <property name="zahtevBrisanje" type="boolean">
+            <column name="zahtev_brisanje" not-null="true" />
+        </property>
         <set name="karakteristikeProstoras" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_dogadjaj" not-null="true" />

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
@@ -31,7 +32,11 @@ public class VestiHelper {
     }
     
     public List<Vesti> aktuelneVesti() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -53,7 +58,11 @@ public class VestiHelper {
     }
     
     public Vesti getVestById(int idVest) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -72,7 +81,11 @@ public class VestiHelper {
     }
     
     public int getMaxId() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -93,7 +106,11 @@ public class VestiHelper {
     }
     
     public void insertVest(Vesti vest) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -107,7 +124,11 @@ public class VestiHelper {
     }
     
     public List<Vesti> pretragaVesti(String kljucneReci, Map<StavkeSifarnika, Boolean> checkMap, String kreatorVesti, int sortiranje, Date datum) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -162,6 +183,92 @@ public class VestiHelper {
             
             return l;
             
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void arhiviranjeVesti(Vesti vest) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "update Vesti c set c.arhivirana = 1 where c.idVest = :idVest";
+            int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idVest", vest.getIdVest()).executeUpdate();
+            
+            session.getTransaction().commit();
+            session.close();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void zahtevBrisanjeVesti(Vesti vest) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "update Vesti c set c.zahtevBrisanje = 1 where c.idVest = :idVest";
+            int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idVest", vest.getIdVest()).executeUpdate();
+            
+            session.getTransaction().commit();
+            session.close();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Vesti> getVestiByKategorija(StavkeSifarnika kategorija) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Vesti.class);
+            c.add(Restrictions.eq("kategorija", kategorija));
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            //session.close();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Vesti> getVestiByKorisnik(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Vesti.class);
+            c.add(Restrictions.eq("korisnici", korisnik));
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            //session.close();
+            
+            return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

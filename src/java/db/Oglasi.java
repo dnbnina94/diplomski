@@ -17,19 +17,21 @@ public class Oglasi  implements java.io.Serializable {
      private String tekst;
      private Date datumKreiranja;
      private Date datumIsticanja;
+     private boolean zahtevBrisanje;
      
-     private String arhiviran = "";
+     private boolean arhiviran;
 
     public Oglasi() {
     }
 
-    public Oglasi(int idOglas, Korisnici korisnici, String naslov, String tekst, Date datumKreiranja, Date datumIsticanja) {
+    public Oglasi(int idOglas, Korisnici korisnici, String naslov, String tekst, Date datumKreiranja, Date datumIsticanja, boolean zahtevBrisanje) {
        this.idOglas = idOglas;
        this.korisnici = korisnici;
        this.naslov = naslov;
        this.tekst = tekst;
        this.datumKreiranja = datumKreiranja;
        this.datumIsticanja = datumIsticanja;
+       this.zahtevBrisanje = zahtevBrisanje;
     }
    
     public int getIdOglas() {
@@ -92,16 +94,24 @@ public class Oglasi  implements java.io.Serializable {
         return tekstShort.substring(0, Math.min(tekstShort.length(), 256))+"...";
     }
     
-    public void setArhiviran(String arhiviran) {
+    public void setArhiviran(boolean arhiviran) {
         this.arhiviran = arhiviran;
     }
     
-    public String getArhiviran() {
+    public boolean isArhiviran() {
         Date danas = new Date();
         if (danas.after(datumIsticanja)) {
-            arhiviran = "expired";
+            return true;
         }
-        return arhiviran;
+        return false;
+    }
+
+    public boolean isZahtevBrisanje() {
+        return zahtevBrisanje;
+    }
+
+    public void setZahtevBrisanje(boolean zahtevBrisanje) {
+        this.zahtevBrisanje = zahtevBrisanje;
     }
     
 }

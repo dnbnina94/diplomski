@@ -438,7 +438,7 @@ public class Registracija {
                     
                     byte[] hashedPassword = md.digest(lozinka.getBytes(StandardCharsets.UTF_8));
                     
-                    Korisnici noviKorisnik = new Korisnici(korIme, new String(hashedPassword), new String(salt), 2, false);
+                    Korisnici noviKorisnik = new Korisnici(korIme, hashedPassword, salt, 2, false);
                     
                     StavkeSifarnika oblDelovanja = stavkeHelper.getStavkaByNaziv(oblastDelovanja);
                     if (oblDelovanja == null) {

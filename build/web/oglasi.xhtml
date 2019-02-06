@@ -48,48 +48,104 @@
                             </div>                           
                         </div>
 
-                        <h:form>
-                            <b:dataTable value="#{pretragaOglasa.oglasi}" var="oglas" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
+                        <h:form id="oglas">
+                            <b:modal id="amodal" styleClass="modalPseudoClass">
 
-                                <b:dataTableColumn>
-                                    <div class="#{oglas.arhiviran}">
-                                        <div class="news-date" style="margin-bottom: 10px">
-                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                                <h:outputText value=" #{oglas.korisnici.korisnickoIme}" />
-                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{oglas.korisnici.organizacije}" />
-                                            </b:commandLink>
-                                            &nbsp;
-                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                            <h:outputText value="#{oglas.datumKreiranja}" >
-                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                            </h:outputText>
-                                            &nbsp;
-                                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                            <h:outputText value="#{oglas.datumKreiranja}" >
-                                                <f:convertDateTime pattern=" HH:mm" />
-                                            </h:outputText>
+                                <div class="stripe-line-header">
+                                    <div class="stripe-line-header-content">Brisanje oglasa</div>
+                                </div>
+
+                                <div style="margin-top: 40px; margin-bottom: 40px">
+                                    Da li ste sigurni da želite da obrišete ovaj oglas?
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#oglas\\:amodal").removeAttr("tabindex");
+                                    });
+                                </script>
+
+                                <f:facet name="footer">
+                                    <div class="row modal-buttons-wrapper">
+                                        <div class="col-md-6">
+                                            <b:commandButton value="Obriši oglas" 
+                                                             look="primary"
+                                                             styleClass="big-red-button"
+                                                             ajax="true"
+                                                             update="oglas_content"
+                                                             onclick="ajax:zahteviKorisnika.obrisiOglas();"
+                                                             oncomplete="$('#oglas\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                         </div>
+                                        <div class="col-md-6">
+                                            <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                        </div>
+                                    </div>
+                                </f:facet>
+                            </b:modal>
+                            <h:panelGroup id="oglas_content">
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+                                <b:dataTable value="#{pretragaOglasa.oglasi}" var="oglas" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
 
-                                        <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
-                                            <h:outputText value="#{oglas.naslov}" styleClass="news-heading" /> <br/>
-                                            <div class="news-text">
-                                                <h:outputText value="#{oglas.getTekstShortRezultatPretrage()}" styleClass="news-text" />
-                                            </div>
-                                            <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
-                                                <h:outputText value="Rok za prijavu: " style="color: orangered" />
+                                    <b:dataTableColumn>
+                                        <div class="#{oglas.arhiviran ? 'expired' : ''}">
+                                            <div class="news-date" style="margin-bottom: 10px">
+                                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                    <h:outputText value=" #{oglas.korisnici.korisnickoIme}" />
+                                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{oglas.korisnici.organizacije}" />
+                                                </b:commandLink>
                                                 &nbsp;
-                                                <h:outputText value="#{oglas.datumIsticanja}" >
+                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                                <h:outputText value="#{oglas.datumKreiranja}" >
                                                     <f:convertDateTime pattern=" dd.MM.yyyy." />
                                                 </h:outputText>
+                                                &nbsp;
+                                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                                <h:outputText value="#{oglas.datumKreiranja}" >
+                                                    <f:convertDateTime pattern=" HH:mm" />
+                                                </h:outputText>
                                             </div>
-                                            <b:button styleClass="read-more-button" value="Pročitaj još"/>
-                                            <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
-                                        </b:commandLink>
-                                    </div>
-                                </b:dataTableColumn>
 
-                            </b:dataTable>
+                                            <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
+                                                <h:outputText value="#{oglas.naslov}" styleClass="news-heading" /> <br/>
+                                                <div class="news-text">
+                                                    <h:outputText value="#{oglas.getTekstShortRezultatPretrage()}" styleClass="news-text" />
+                                                </div>
+                                                <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
+                                                    <h:outputText value="Rok za prijavu: " style="color: orangered" />
+                                                    &nbsp;
+                                                    <h:outputText value="#{oglas.datumIsticanja}" >
+                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                    </h:outputText>
+                                                </div>
+                                                <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
+                                            </b:commandLink>
+
+                                            <div style="display: inline-block; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
+                                                <div data-target="#oglas\:amodal" 
+                                                     data-toggle="modal">
+                                                    <b:commandButton styleClass="read-more-button" 
+                                                                     value="Obriši"
+                                                                     ajax="true"
+                                                                     disabled="#{oglas.zahtevBrisanje}"
+                                                                     style="background-color: #ccc !important; #{korisnikBean.korisnik.korisnickoIme != oglas.korisnici.korisnickoIme ? 'display: none' : ''
+                                                                                                                 or (korisnikBean.korisnik.korisnickoIme == oglas.korisnici.korisnickoIme and oglas.zahtevBrisanje) ? 'display: none' : ''}" >
+                                                        <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanOglasBrisanje}" value="#{oglas}" />
+                                                    </b:commandButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b:dataTableColumn>
+
+                                </b:dataTable>
+                            </h:panelGroup>
+
+                            <style>
+                                #oglas\:growl-success {
+                                    margin-top: 20px;
+                                }
+                            </style>
                         </h:form>
 
                     </div>

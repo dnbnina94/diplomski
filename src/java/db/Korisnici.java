@@ -12,8 +12,8 @@ public class Korisnici  implements java.io.Serializable {
 
 
      private String korisnickoIme;
-     private String lozinka;
-     private String salt;
+     private byte[] lozinka;
+     private byte[] salt;
      private int tip;
      private Set vestis = new HashSet(0);
      private Set dogadjajis = new HashSet(0);
@@ -25,7 +25,7 @@ public class Korisnici  implements java.io.Serializable {
     }
 
 	
-    public Korisnici(String korisnickoIme, String lozinka, String salt, int tip, boolean odobren) {
+    public Korisnici(String korisnickoIme, byte[] lozinka, byte[] salt, int tip, boolean odobren) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.salt = salt;
@@ -33,7 +33,7 @@ public class Korisnici  implements java.io.Serializable {
         this.odobren = odobren;
     }
     
-    public Korisnici(String korisnickoIme, String lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis) {
+    public Korisnici(String korisnickoIme, byte[] lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis) {
        this.korisnickoIme = korisnickoIme;
        this.lozinka = lozinka;
        this.tip = tip;
@@ -49,11 +49,11 @@ public class Korisnici  implements java.io.Serializable {
     public void setKorisnickoIme(String korisnickoIme) {
         this.korisnickoIme = korisnickoIme;
     }
-    public String getLozinka() {
+    public byte[] getLozinka() {
         return this.lozinka;
     }
     
-    public void setLozinka(String lozinka) {
+    public void setLozinka(byte[] lozinka) {
         this.lozinka = lozinka;
     }
     public int getTip() {
@@ -95,11 +95,11 @@ public class Korisnici  implements java.io.Serializable {
         return odobren;
     }
     
-    public String getSalt() {
+    public byte[] getSalt() {
         return salt;
     }
     
-    public void setSalt(String salt) {
+    public void setSalt(byte[] salt) {
         this.salt = salt;
     }
 

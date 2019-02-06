@@ -252,7 +252,7 @@ nav {
     width: 450px !important;
 }
 
-#pretraga_vesti\:amodal_header {
+#pretraga_vesti\:amodal_header, #oglas\:amodal_header, #dogadjaj\:amodal_header, #vest\:amodal_header, #vest\:amodal_brisanje_header, #vest\:amodal_arhiviranje_header {
     display: none;
 }
 
@@ -505,12 +505,12 @@ select:focus {
     line-height: 18px !important;
 }
 
-#pretraga_vesti\:amodal_footer {
+#pretraga_vesti\:amodal_footer, #oglas\:amodal_footer, #dogadjaj\:amodal_footer, #vest\:amodal_footer, #vest\:amodal_brisanje_footer, #vest\:amodal_arhiviranje_footer {
     border: none !important;
     padding-top: 0px !important;
 }
 
-#pretraga_vesti\:amodal_body {
+#pretraga_vesti\:amodal_body, #oglas\:amodal_body, #dogadjaj\:amodal_body, #vest\:amodal_body, #vest\:amodal_brisanje_body, #vest\:amodal_arhiviranje_body {
     padding-bottom: 0px !important;
 }
 
@@ -1380,11 +1380,11 @@ table.dataTable {
     padding-bottom: 5px;
 }
 
-.edit-place-fields-container > div:nth-child(1) {
+.edit-place-fields-container > div:nth-child(1), .modal-buttons-wrapper > div:nth-child(1) {
     padding-right: 7.5px;
 }
 
-.edit-place-fields-container > div:nth-child(2) {
+.edit-place-fields-container > div:nth-child(2), .modal-buttons-wrapper > div:nth-child(2) {
     padding-left: 7.5px;
 }
 

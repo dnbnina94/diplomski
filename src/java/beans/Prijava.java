@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
@@ -89,10 +90,11 @@ public class Prijava {
 
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
-                md.update(korisnik.getSalt().getBytes());
+                md.update(korisnik.getSalt());
                 byte[] hashedPassword = md.digest(lozinka.getBytes(StandardCharsets.UTF_8));
 
-                if (!(new String(hashedPassword)).equals(korisnik.getLozinka())) {
+                //if (!(new String(hashedPassword)).equals(korisnik.getLozinka())) {
+                if (! Arrays.equals(hashedPassword, korisnik.getLozinka())) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pogrešno ste uneli korisničko ime i/ili lozinku.", null);
                     FacesContext.getCurrentInstance().addMessage("prijava:growl-error", message);
                     FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

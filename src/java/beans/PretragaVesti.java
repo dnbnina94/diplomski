@@ -105,10 +105,16 @@ public class PretragaVesti {
     
     public List<Vesti> getVesti() {
         if (tipPretrage == 1) {
-            return setToList(kategorijaVesti.getVestis()); 
+            vesti = vestiHelper.getVestiByKategorija(kategorijaVesti);
+            Collections.sort(vesti, new PretragaVesti.SortVestiByDatumDescending());
+            return vesti;
+            //return setToList(kategorijaVesti.getVestis()); 
         }
         if (tipPretrage == 2) {
-            return setToList(organizacija.getKorisnici().getVestis()); 
+            vesti = vestiHelper.getVestiByKorisnik(organizacija.getKorisnici());
+            Collections.sort(vesti, new PretragaVesti.SortVestiByDatumDescending());
+            return vesti;
+            //return setToList(organizacija.getKorisnici().getVestis()); 
         }
         return vesti;
     }

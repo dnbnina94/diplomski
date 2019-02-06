@@ -45,8 +45,6 @@ public class KarakteristikeProstora  implements java.io.Serializable {
     }
 
 
-
-
 }
 
 

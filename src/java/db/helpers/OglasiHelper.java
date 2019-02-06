@@ -6,12 +6,14 @@
 package db.helpers;
 
 import db.HibernateUtil;
+import db.Korisnici;
 import db.Oglasi;
 import db.Organizacije;
 import db.Vesti;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -29,7 +31,11 @@ public class OglasiHelper {
     }
     
     public void insertOglas(Oglasi oglas) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         
         try {
             session.getTransaction().begin();
@@ -44,7 +50,11 @@ public class OglasiHelper {
     }
     
     public int getMaxId() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -65,7 +75,11 @@ public class OglasiHelper {
     }
     
     public List<Oglasi> pretragaOglasa(String kljucneReci, String kreatorOglasa, int sortiranje) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
             
@@ -99,6 +113,49 @@ public class OglasiHelper {
             
             return l;
             
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public void zahtevBrisanjeOglasa(Oglasi oglas) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "update Oglasi c set c.zahtevBrisanje = 1 where c.idOglas = :idOglas";
+            int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();
+            
+            session.getTransaction().commit();
+            session.close();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Oglasi> getOglasiByKorisnik(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Oglasi.class);
+            c.add(Restrictions.eq("korisnici", korisnik));
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            //session.close();
+            
+            return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

@@ -51,54 +51,125 @@
                             </div>                           
                         </div>
 
-                        <h:form>
-                            <b:dataTable value="#{pretragaVesti.vesti}" var="vest" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
-                                <b:dataTableColumn>
-                                    <div class="news-date">
-                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{vest.datum}" >
-                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{vest.datum}" >
-                                            <f:convertDateTime pattern=" HH:mm" />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                            <b:image library="img" name="ikonice/#{vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
-                                            <h:outputText value=" #{vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                                <f:convertDateTime pattern="dd.MM.yyyy." />
-                                            </h:outputText>
-                                            <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{vest.kategorija}" />
-                                            <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
-                                        </b:commandLink>
-                                    </div>
-                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                        <div class="news-thumbnail-container" style="background: #{vest.getThumbnailUrl()}"></div>
-                                        <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
-                                    </b:commandLink>
-                                    <div class="news-content-sm-devices">
-                                        <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                            <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
-                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" /> <br/><br/>
-                                            <b:button styleClass="read-more-button" value="Pročitaj još"/>
-                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
-                                        </b:commandLink>
-                                    </div>
+                        <h:form id="vest">
+                            <b:modal id="amodal" styleClass="modalPseudoClass">
 
-                                </b:dataTableColumn>
-                                <b:dataTableColumn>
-                                    <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                        <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/>
-                                        <div class="news-text">
-                                            <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" />
-                                        </div> <br/>
-                                        <b:button styleClass="read-more-button" value="Pročitaj još"/>
-                                        <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
-                                    </b:commandLink>
-                                </b:dataTableColumn>
-                            </b:dataTable>
+                                <div class="stripe-line-header">
+                                    <div class="stripe-line-header-content">Arhiviranje vesti</div>
+                                </div>
+
+                                <div style="margin-top: 40px; margin-bottom: 40px">
+                                    Da li ste sigurni da želite da arhivirate ovu vest?
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#vest\\:amodal").removeAttr("tabindex");
+                                    });
+                                </script>
+
+                                <f:facet name="footer">
+                                    <div class="row modal-buttons-wrapper">
+                                        <div class="col-md-6">
+                                            <b:commandButton value="Arhiviraj vest" 
+                                                             look="primary" 
+                                                             styleClass="big-red-button"
+                                                             ajax="true"
+                                                             update="vest_content"
+                                                             onclick="ajax:zahteviKorisnika.arhivirajVest();"
+                                                             oncomplete="$('#vest\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                        </div>
+                                    </div>
+                                </f:facet>
+                            </b:modal>
+                            <h:panelGroup id="vest_content">
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+                                <b:dataTable value="#{pretragaVesti.vesti}" var="vest" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
+                                    <b:dataTableColumn>
+                                        <div class="#{vest.arhivirana == 1 ? 'expired' : ''}">
+                                            <div class="news-date">
+                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                                <h:outputText value="#{vest.datum}" >
+                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                </h:outputText>
+                                                &nbsp;
+                                                <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                                <h:outputText value="#{vest.datum}" >
+                                                    <f:convertDateTime pattern=" HH:mm" />
+                                                </h:outputText>
+                                                &nbsp;
+                                                <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                                    <b:image library="img" name="ikonice/#{vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
+                                                    <h:outputText value=" #{vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                                        <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                    </h:outputText>
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{vest.kategorija}" />
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                                </b:commandLink>
+                                            </div>
+                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                                <div class="news-thumbnail-container" style="background: #{vest.getThumbnailUrl()}"></div>
+                                                <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                            </b:commandLink>
+                                            <div class="news-content-sm-devices">
+                                                <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                                    <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/><br/>
+                                                    <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" /> <br/><br/>
+                                                    <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                                </b:commandLink>
+                                                <div style="display: inline-block; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
+                                                    <div data-target="#vest\:amodal" 
+                                                         data-toggle="modal">
+                                                        <b:commandButton styleClass="read-more-button" 
+                                                                         value="Arhiviraj"
+                                                                         ajax="true"
+                                                                         disabled="#{vest.arhivirana == 1 ? 'true' : 'false'}"
+                                                                         style="background-color: #4C4C4C !important; #{korisnikBean.korisnik.korisnickoIme != vest.korisnici.korisnickoIme ? 'display: none' : ''
+                                                                                                                        or (korisnikBean.korisnik.korisnickoIme == vest.korisnici.korisnickoIme and vest.arhivirana == 1) ? 'display: none' : ''}" >
+                                                            <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanaVestArhiviranje}" value="#{vest}" />
+                                                        </b:commandButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <div class="#{vest.arhivirana == 1 ? 'expired' : ''}">
+                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
+                                                <h:outputText value="#{vest.naslov}" styleClass="news-heading" /> <br/>
+                                                <div class="news-text">
+                                                    <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" />
+                                                </div> <br/>
+                                                <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
+                                            </b:commandLink>
+                                            <div style="display: inline-block; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
+                                                <div data-target="#vest\:amodal" 
+                                                     data-toggle="modal">
+                                                    <b:commandButton styleClass="read-more-button" 
+                                                                     value="Arhiviraj"
+                                                                     ajax="true"
+                                                                     disabled="#{vest.arhivirana == 1 ? 'true' : 'false'}"
+                                                                     style="background-color: #4C4C4C !important; #{korisnikBean.korisnik.korisnickoIme != vest.korisnici.korisnickoIme ? 'display: none' : ''
+                                                                                                                    or (korisnikBean.korisnik.korisnickoIme == vest.korisnici.korisnickoIme and vest.arhivirana == 1) ? 'display: none' : ''}" >
+                                                        <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanaVestArhiviranje}" value="#{vest}" />
+                                                    </b:commandButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+                            </h:panelGroup>
+
+                            <style>
+                                #vest\:growl-success {
+                                    margin-top: 20px;
+                                }
+                            </style>
                         </h:form>
 
                     </div>

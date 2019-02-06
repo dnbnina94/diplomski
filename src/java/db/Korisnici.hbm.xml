@@ -8,11 +8,11 @@
             <column name="korisnicko_ime" length="50" />
             <generator class="assigned" />
         </id>
-        <property name="lozinka" type="string">
-            <column name="lozinka" length="64" not-null="true" />
+        <property name="lozinka" type="binary">
+            <column name="lozinka" />
         </property>
-        <property name="salt" type="string">
-            <column name="salt" length="16" not-null="true" />
+        <property name="salt" type="binary">
+            <column name="salt" />
         </property>
         <property name="tip" type="int">
             <column name="tip" not-null="true" />

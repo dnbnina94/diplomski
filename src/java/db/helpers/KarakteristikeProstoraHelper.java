@@ -9,6 +9,7 @@ import db.Dogadjaji;
 import db.HibernateUtil;
 import db.KarakteristikeProstora;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -20,7 +21,11 @@ public class KarakteristikeProstoraHelper {
     private Session session;
     
     public int getMaxId() {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
@@ -42,7 +47,11 @@ public class KarakteristikeProstoraHelper {
     }
     
     public void insertKarakteristikaProstora(KarakteristikeProstora karakteristikaProstora) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
         try {
             session.getTransaction().begin();
 
