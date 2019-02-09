@@ -252,7 +252,8 @@ nav {
     width: 450px !important;
 }
 
-#pretraga_vesti\:amodal_header, #oglas\:amodal_header, #dogadjaj\:amodal_header, #vest\:amodal_header, #vest\:amodal_brisanje_header, #vest\:amodal_arhiviranje_header {
+#pretraga_vesti\:amodal_header, #oglas\:amodal_header, #dogadjaj\:amodal_header, #vest\:amodal_header, #vest\:amodal_brisanje_header, #vest\:amodal_arhiviranje_header,
+#korisnici\:amodal_brisanje_header, #korisnici\:amodal_prihvatanje_header {
     display: none;
 }
 
@@ -505,12 +506,14 @@ select:focus {
     line-height: 18px !important;
 }
 
-#pretraga_vesti\:amodal_footer, #oglas\:amodal_footer, #dogadjaj\:amodal_footer, #vest\:amodal_footer, #vest\:amodal_brisanje_footer, #vest\:amodal_arhiviranje_footer {
+#pretraga_vesti\:amodal_footer, #oglas\:amodal_footer, #dogadjaj\:amodal_footer, #vest\:amodal_footer, #vest\:amodal_brisanje_footer, #vest\:amodal_arhiviranje_footer
+#korisnici\:amodal_brisanje_footer, #korisnici\:amodal_prihvatanje_footer {
     border: none !important;
     padding-top: 0px !important;
 }
 
-#pretraga_vesti\:amodal_body, #oglas\:amodal_body, #dogadjaj\:amodal_body, #vest\:amodal_body, #vest\:amodal_brisanje_body, #vest\:amodal_arhiviranje_body {
+#pretraga_vesti\:amodal_body, #oglas\:amodal_body, #dogadjaj\:amodal_body, #vest\:amodal_body, #vest\:amodal_brisanje_body, #vest\:amodal_arhiviranje_body,
+#korisnici\:amodal_brisanje_body, #korisnici\:amodal_prihvatanje_body {
     padding-bottom: 0px !important;
 }
 
@@ -1650,4 +1653,21 @@ table.dataTable {
     width: 40px !important;
     height: 40px !important;
     background: url("#{resource['img:arrow_down_gray.png']}") no-repeat center #4C4C4C;
+}
+
+.dataTables_empty:before {
+    content: "Nema rezultata za zadate kriterijume :(";
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    left: 0px;
+}
+
+table.dataTable tbody tr.selected, table.dataTable tbody th.selected, table.dataTable tbody td.selected {
+    color: #333 !important;
+    background-color: #ddd !important;
+}
+
+table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.dataTable tbody td.selected a {
+    color: orangered !important;
 }

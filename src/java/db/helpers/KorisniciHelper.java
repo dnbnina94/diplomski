@@ -356,5 +356,72 @@ public class KorisniciHelper {
             throw e;
         }
     }
+    
+    public List<Korisnici> getNeodobreniKorisnici() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("odobren", false));
+            List l = c.list();
+            session.getTransaction().commit();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Korisnici> getSveOdobreneOrganizacije() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("odobren", true));
+            c.add(Restrictions.eq("tip", 2));
+            List l = c.list();
+            session.getTransaction().commit();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    public List<Korisnici> getSviAdmini() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("tip", 1));
+            List l = c.list();
+            session.getTransaction().commit();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 
 }

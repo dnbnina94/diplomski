@@ -84,7 +84,7 @@
                             </b:modal>
                             <h:panelGroup id="oglas_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
-                                <b:dataTable value="#{pretragaOglasa.oglasi}" var="oglas" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
+                                <b:dataTable value="#{pretragaOglasa.oglasi}" var="oglas" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10" onpage='$("html, body").animate({ scrollTop: 0 }, "slow");'>
 
                                     <b:dataTableColumn>
                                         <div class="#{oglas.arhiviran ? 'expired' : ''}">

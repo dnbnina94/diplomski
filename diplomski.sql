@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2019 at 05:20 PM
+-- Generation Time: Feb 09, 2019 at 07:25 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -91,6 +91,8 @@ CREATE TABLE `korisnici` (
 --
 
 INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) VALUES
+('admin', 0xe53197da3a954069670e74083f305c3f541e71ce662c959c8abf014ab628f6a8d5cce06cb57963b9e276353548d3d7c9f87cafae04349b1fd80f384768c56006, 0xb77185db910f62b15a3d6bcf252e2ff4, 1, 1),
+('asdf', 0xc2e95e7562920a5ace225d78ea757a07da70836aeb66b6d9b9136273b35b59a4dbfe40203a94f1c7e34d202b4f58188ad0d1e56ca64d4a9efbba296d51eb96cd, 0x42fe59ceff7c79ebc157c760ec9f734d, 2, 0),
 ('etf_org', 0x2ecc97f986bc88dff9704aa1caeae3415debba1ebc85f4227c31f9e837f8b5d0a2ce9e0818f884d3412538c08ced6c225953ffe01e1800eaf440335403231215, 0x53a07065c8afb37b995edc2b5b3d63d2, 2, 1),
 ('nina_org', 0xb009206e47a9ff12b07e4d2b0949b0bafd3b01a41acb54cbf5a746374ec602d59a49dea0b7e466b54cf9b232480fd906944c352b7dd0972f484e365cae43f045, 0xd57097cc3bd46e89c133215fb46634a4, 2, 1),
 ('ORCA', 0xb5e7d8e57329da237af182ca2257374132df85860ac832bf64a814f89f64d9c922536b904ebec5dee410eccc57db44c3d8d470e38bff4017eda42956d35b5e46, 0x52a7acd395cd5775e2f52594d4acbdac, 2, 1);
@@ -147,6 +149,7 @@ CREATE TABLE `organizacije` (
 --
 
 INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`, `mesto`, `ulica`, `telefoni`) VALUES
+('asdf', 'dasda', 'Nina Grujic', 'dsa@gmail.com', 'dasdada', 17, 'http://dsdadasda.com', 8, 22, '0601844595'),
 ('etf_org', 'Elektrotehnički fakultet Univerziteta u Beogradu', 'Miloš Nalović', 'opsta_sluzba@etf.bg.ac.rs', 'Razvoj Elektrotehničkog fakulteta u bliskoj je vezi sa istorijom univerzitetskog obrazovanja u Srbiji. Prvo visokoškolsko predavanje iz oblasti elektrotehnike održano je davne 1894. Profesor Stevan Marković bio je prvi predavač i osnivač Elektrotehničke katedre Inženjerskog odeljenja Velike škole u Beogradu. Stevan Marković Samo četiri godine kasnije, profesor Marković je osnovao i elektroinženjersku laboratoriju. Od tada, elektrotehničke teme su se izučavale na Velikoj školi, a zatim i na beogradskom Univerzitetu koji je iz nje nastao 1905. Prve diplome dodeljene su 1922 godine.', 18, 'http://www.etf.bg.ac.rs', 8, 22, '0113226760, 0113226992'),
 ('nina_org', 'Ninina organizacija', 'Nina Grujić', 'ninaorg@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet dui at magna hendrerit aliquet. Ut consectetur scelerisque orci, non faucibus nunc laoreet eget. Aenean condimentum nisl a tortor faucibus, non malesuada nisl rhoncus. Nam non bibendum est. Sed aliquam elit non mauris dapibus, eu vestibulum libero consectetur. Proin nec urna dui. Nulla sed nisi nec ex cursus vulputate interdum vel augue. Pellentesque suscipit faucibus lorem. Aenean ultricies a purus in bibendum. In id erat vitae augue posuere pharetra. Maecenas augue orci, scelerisque vestibulum nulla at, mattis rutrum massa. Curabitur maximus lorem ac eros hendrerit, in rutrum nisi suscipit. Sed nisl risus, ornare non est non, fringilla rhoncus magna. Praesent posuere fermentum orci, sit amet dapibus sem. Donec sodales, nunc sed placerat hendrerit, quam ante luctus felis, a commodo urna augue id justo.', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
 ('ORCA', 'ORCA', 'Dragana Tar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj.\n\nSvoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 31, 'http://www.orca.rs', 8, 32, '0112438653');

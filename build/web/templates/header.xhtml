@@ -21,23 +21,38 @@ and open the template in the editor.
                         <b:link outcome="prijava" styleClass="top-nav-link">Ulogujte se</b:link>
                     </c:if>
                     <c:if test="#{korisnikBean.korisnik != null}">
-                        <h:form>
-                            <div class="pull-left">
-                                <ul class="list-inline">
-                                    <li>
-                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
-                                            <h:outputText value="Profil" />
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
-                                        </b:commandLink>
-                                    </li>
-                                    <li>
-                                        <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
-                                            <h:outputText value="Izlogujte se" style="font-weight: bold" />
-                                        </b:commandLink>
-                                    </li>
-                                </ul>
-                            </div>
-                        </h:form>
+                        <c:if test="#{korisnikBean.korisnik.tip == 2}">
+                            <h:form>
+                                <div class="pull-left">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                                <h:outputText value="Profil" />
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
+                                            <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
+                                                <h:outputText value="Izlogujte se" style="font-weight: bold" />
+                                            </b:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
+                        </c:if>
+                        <c:if test="#{korisnikBean.korisnik.tip == 1}">
+                            <h:form>
+                                <div class="pull-left">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
+                                                <h:outputText value="Izlogujte se" style="font-weight: bold" />
+                                            </b:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
+                        </c:if>
                     </c:if>
                 </div>
                 <div class="pull-right">

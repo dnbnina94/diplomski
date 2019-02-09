@@ -87,7 +87,7 @@
                             </b:modal>
                             <h:panelGroup id="vest_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
-                                <b:dataTable value="#{pretragaVesti.vesti}" var="vest" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
+                                <b:dataTable value="#{pretragaVesti.vesti}" var="vest" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10" onpage='$("html, body").animate({ scrollTop: 0 }, "slow");'>
                                     <b:dataTableColumn>
                                         <div class="#{vest.arhivirana == 1 ? 'expired' : ''}">
                                             <div class="news-date">

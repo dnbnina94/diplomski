@@ -125,6 +125,15 @@ public class Prijava {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("organizacija.xhtml");
                     FacesContext.getCurrentInstance().responseComplete();
                 }
+                if (korisnik.getTip() == 1) {
+                    ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+                    KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+                    korisnikBean.setKorisnik(korisnik);
+                    elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+                    
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("adminKorisnici.xhtml");
+                    FacesContext.getCurrentInstance().responseComplete();
+                }
             } catch (IOException ex) {
                 Logger.getLogger(Prijava.class.getName()).log(Level.SEVERE, null, ex);
             }

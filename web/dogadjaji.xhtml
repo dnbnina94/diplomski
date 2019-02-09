@@ -86,7 +86,7 @@
                             </b:modal>
                             <h:panelGroup id="dogadjaj_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
-                                <b:dataTable value="#{pretragaDogadjaja.dogadjaji}" var="dogadjaj" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10">
+                                <b:dataTable id="dataTable" value="#{pretragaDogadjaja.dogadjaji}" var="dogadjaj" styleClass="news-data-table" info="false" page-length="10" page-length-menu="10" onpage='$("html, body").animate({ scrollTop: 0 }, "slow");'>
                                     <b:dataTableColumn>
                                         <div class="#{dogadjaj.arhiviran ? 'expired' : ''}">
                                             <div class="news-date">
@@ -239,6 +239,7 @@
                                         </div>
                                     </b:dataTableColumn>
                                 </b:dataTable>
+
                             </h:panelGroup>
 
                             <style>

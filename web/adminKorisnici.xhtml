@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="customCheckbox.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <h:form id="korisnici">
+                            <b:panel look="primary" >
+                                <b:pillLinks>
+                                    <b:navLink value="Korisnici" update="@form @(.content)"
+                                               onclick="ajax:admin.setPage('adminNeodobreni.xhtml')" />
+                                    <b:navLink value="Odobreni korisnici" update="@form @(.content)"
+                                               onclick="ajax:admin.setPage('adminOdobreni.xhtml')" />
+                                </b:pillLinks>
+                            </b:panel>
+                            <b:row>
+                                <b:column span="12" class="content">
+                                    <ui:include src="#{admin.page}" />
+                                </b:column>
+                            </b:row>
+                        </h:form>
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+
