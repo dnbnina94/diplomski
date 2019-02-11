@@ -59,7 +59,7 @@ public class PretragaVesti {
             checkMap.put(kategorija, Boolean.FALSE);
         }
         
-        organizacije = korisniciHelper.getSveOrganizacije();
+        organizacije = korisniciHelper.getSveOdobreneOrganizacije();
         Collections.sort(organizacije, new PretragaVesti.SortOrganizacijeByKorIme());
     }
     

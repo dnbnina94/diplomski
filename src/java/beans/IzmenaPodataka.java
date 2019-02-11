@@ -357,14 +357,17 @@ public class IzmenaPodataka {
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setNaziv(nazivOrg);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setNaziv(nazivOrg);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setNaziv(nazivOrg);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaNaziv(nazivOrg, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaNaziv(nazivOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -385,14 +388,17 @@ public class IzmenaPodataka {
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setTekst(opisOrg);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setTekst(opisOrg);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setTekst(opisOrg);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaOpis(opisOrg, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaOpis(opisOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -425,14 +431,17 @@ public class IzmenaPodataka {
             }
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setOblastDelovanja(oblDelovanja);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setOblastDelovanja(oblDelovanja);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setOblastDelovanja(oblDelovanja);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaOblastDelovanja(oblDelovanja, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaOblastDelovanja(oblDelovanja, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -456,14 +465,17 @@ public class IzmenaPodataka {
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setWebAdresa(webAdresa);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setWebAdresa(webAdresa);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setWebAdresa(webAdresa);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaWebAdresa(webAdresa, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaWebAdresa(webAdresa, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -490,14 +502,17 @@ public class IzmenaPodataka {
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setKontaktOsoba(kontaktOsoba);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setKontaktOsoba(kontaktOsoba);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setKontaktOsoba(kontaktOsoba);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaKontaktOsoba(kontaktOsoba, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaKontaktOsoba(kontaktOsoba, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -530,14 +545,17 @@ public class IzmenaPodataka {
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setEmail(email);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setEmail(email);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setEmail(email);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaEmail(email, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaEmail(email, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -590,9 +608,12 @@ public class IzmenaPodataka {
                 stavkeHelper.insertStavka(mesto);
             }
 
-            korisnikBean.getKorisnik().getOrganizacije().setMesto(mesto);
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setMesto(mesto);
+            }
+
             organizacijaBean.getOrganizacija().setMesto(mesto);
-            korHelper.updateOrganizacijaMesto(mesto, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaMesto(mesto, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
 
         if (ulicaValid) {
@@ -602,12 +623,17 @@ public class IzmenaPodataka {
                 stavkeHelper.insertStavka(ulica);
             }
 
-            korisnikBean.getKorisnik().getOrganizacije().setUlica(ulica);
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setUlica(ulica);
+            }
+
             organizacijaBean.getOrganizacija().setUlica(ulica);
-            korHelper.updateOrganizacijaUlica(ulica, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaUlica(ulica, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
 
-        elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+        if (korisnikBean.getKorisnik().getTip() != 1) {
+            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+        }
         elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
         if (mestoValid && ulicaValid) {
@@ -642,14 +668,17 @@ public class IzmenaPodataka {
             }
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            korisnikBean.getKorisnik().getOrganizacije().setTelefoni(telefoniOrg);
-            elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+
+            if (korisnikBean.getKorisnik().getTip() != 1) {
+                korisnikBean.getKorisnik().getOrganizacije().setTelefoni(telefoniOrg);
+                elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
+            }
 
             OrganizacijaBean organizacijaBean = (OrganizacijaBean) elContext.getELResolver().getValue(elContext, null, "organizacijaBean");
             organizacijaBean.getOrganizacija().setTelefoni(telefoniOrg);
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
-            korHelper.updateOrganizacijaTelefoni(telefoniOrg, korisnikBean.getKorisnik().getKorisnickoIme());
+            korHelper.updateOrganizacijaTelefoni(telefoniOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
         }
     }
 
@@ -659,7 +688,7 @@ public class IzmenaPodataka {
             saveFieldJs = "";
             return false;
         }
-        
+
         ELContext elContext = FacesContext.getCurrentInstance().getELContext();
         KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
         Korisnici korisnik = korisnikBean.getKorisnik();
@@ -668,8 +697,8 @@ public class IzmenaPodataka {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(korisnik.getSalt());
             byte[] hashedPassword = md.digest(staraLozinka.getBytes(StandardCharsets.UTF_8));
-            
-            if (! Arrays.equals(hashedPassword, korisnik.getLozinka())) {
+
+            if (!Arrays.equals(hashedPassword, korisnik.getLozinka())) {
                 staraLozinkaGreska = "Lozinka koju ste uneli je neispravna.";
                 saveFieldJs = "";
                 return false;
@@ -677,7 +706,7 @@ public class IzmenaPodataka {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(IzmenaPodataka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         staraLozinkaGreska = "";
         return true;
     }
@@ -734,29 +763,29 @@ public class IzmenaPodataka {
         boolean staraLozinkaValid = staraLozinkaValidacija();
         boolean novaLozinkaValid = novaLozinkaValidacija();
         boolean ponovljenaNovaLozinkaValid = ponovljenaNovaLozinkaValidacija();
-        
+
         if (staraLozinkaValid && novaLozinkaValid && ponovljenaNovaLozinkaValid) {
             saveFieldJs = "closeField('Lozinka')";
-            
+
             SecureRandom random = new SecureRandom();
             byte[] salt = new byte[16];
             random.nextBytes(salt);
-            
+
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
                 md.update(salt);
-                
+
                 byte[] hashedPassword = md.digest(novaLozinka.getBytes(StandardCharsets.UTF_8));
-                
+
                 ELContext elContext = FacesContext.getCurrentInstance().getELContext();
                 KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
                 korisnikBean.getKorisnik().setLozinka(hashedPassword);
                 korisnikBean.getKorisnik().setSalt(salt);
                 elContext.getELResolver().setValue(elContext, null, "korisnikBean", korisnikBean);
-                
+
                 korHelper.updateOrganizacijaLozinka(hashedPassword, korisnikBean.getKorisnik().getKorisnickoIme());
                 korHelper.updateOrganizacijaSalt(salt, korisnikBean.getKorisnik().getKorisnickoIme());
-                
+
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(IzmenaPodataka.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -19,6 +19,33 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        
+        <style>
+            .panel-group {
+                margin-bottom: 0px !important;
+            }
+            
+            .panel-body {
+                padding: 10px !important;
+            }
+            
+            table.dataTable {
+                margin-top: 0px !important;
+            }
+            
+            .table > thead > tr > th {
+                border-bottom: 1px solid #ddd !important;
+            }
+            
+            .dataTables_empty {
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
+            
+            .dataTables_wrapper {
+                margin-top: 10px !important;
+            }
+        </style>
 
         <div class="content">
 
@@ -31,12 +58,14 @@
                 <div class="row page-content">
                     <div class="col-md-9">
                         <h:form id="korisnici">
-                            <b:panel look="primary" >
+                            <b:panel look="primary" id="korisnici-admin-menu" styleClass="adminMenu">
                                 <b:pillLinks>
-                                    <b:navLink value="Korisnici" update="@form @(.content)"
-                                               onclick="ajax:admin.setPage('adminNeodobreni.xhtml')" />
+                                    <b:navLink value="Novi korisnici" update="@form @(.content)"
+                                               onclick="ajax:admin.setPage('adminNeodobreni.xhtml')"
+                                               style="#{admin.page == 'adminNeodobreni.xhtml' ? 'background-color: orangered; color: white !important;' : ''}"/>
                                     <b:navLink value="Odobreni korisnici" update="@form @(.content)"
-                                               onclick="ajax:admin.setPage('adminOdobreni.xhtml')" />
+                                               onclick="ajax:admin.setPage('adminOdobreni.xhtml')"
+                                               style="#{admin.page == 'adminOdobreni.xhtml' ? 'background-color: orangered; color: white !important;' : ''}"/>
                                 </b:pillLinks>
                             </b:panel>
                             <b:row>

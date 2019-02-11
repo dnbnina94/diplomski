@@ -46,7 +46,7 @@ public class PretragaOglasa {
     private int sortiranje;
 
     public PretragaOglasa() {
-        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOrganizacije());
+        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
         Collections.sort(organizacije, new PretragaOglasa.SortOrganizacijeByName());
     }
 
@@ -76,7 +76,10 @@ public class PretragaOglasa {
 
     public List<Oglasi> getOglasi() {
         if (tipPretrage == 2) {
-            return setToList(organizacija.getKorisnici().getOglasis());
+            oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
+            Collections.sort(oglasi, new PretragaOglasa.SortOglasiByDatumDescending());
+            return oglasi;
+            //return setToList(organizacija.getKorisnici().getOglasis());
         }
         return oglasi;
     }

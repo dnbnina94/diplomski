@@ -63,7 +63,7 @@
                                              styleClass="big-red-button"
                                              ajax="true"
                                              update="korisnici:korisnici_content"
-                                             onclick="ajax:admin.prihvatiKorisnika();"
+                                             onclick="ajax:admin.odobriKorisnika();"
                                              oncomplete="$('#korisnici\\:amodal_prihvatanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                         </div>
                         <div class="col-md-6">
@@ -73,6 +73,7 @@
                 </f:facet>
             </b:modal>
             <h:panelGroup id="korisnici_content">
+                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
                 <b:dataTable value="#{admin.korisnici}" 
                              var="korisnik"
                              border="false"
@@ -84,11 +85,15 @@
                              onpage='$("html, body").animate({ scrollTop: 0 }, "slow");'
                              select="true"
                              onselect="selectRow(indexes);"
+                             searching="false"
                              ondeselect="deselectRow(indexes);" >
                     <b:dataTableColumn label="Korisničko ime" orderable="false" style="cursor: pointer !important" >
                         <div class="row" style="margin: auto;">
                             <div class="col-md-6" style="padding: 0px; line-height: 26px">
-                                <h:outputText value=" #{korisnik.korisnickoIme}" />
+                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                    <h:outputText value=" #{korisnik.korisnickoIme}" style="color: orangered !important" />
+                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnik.organizacije}" />
+                                </b:commandLink>
                             </div>
                             <div class="col-md-6" style="text-align:right; padding: 0px">
                                 <div data-target="#korisnici\:amodal_prihvatanje" 
@@ -98,6 +103,7 @@
                                                      styleClass="edit-info-button accept-button"
                                                      id="prihvatanje_button"
                                                      ajax="true"
+                                                     disabled="#{korisnik.odobren}"
                                                      style="background-color: yellowgreen !important; border: 1px solid yellowgreen !important;">
                                         <f:setPropertyActionListener target="#{admin.selektovanKorisnikPrihvatanje}" value="#{korisnik}" />
                                     </b:commandButton>
@@ -119,7 +125,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Naziv organizacije:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.naziv}" />
                                         </div>
                                     </div>
@@ -127,7 +133,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Opis organizacije:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.tekst}" />
                                         </div>
                                     </div>
@@ -135,7 +141,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Oblast delovanja:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.oblastDelovanja.naziv}" />
                                         </div>
                                     </div>
@@ -143,7 +149,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Web adresa:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <a href="#{korisnik.organizacije.webAdresa}" target="_blank" style="color: orangered !important">
                                                 #{korisnik.organizacije.webAdresa}
                                             </a>
@@ -153,7 +159,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Mesto i ulica:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.mesto.naziv}" />
                                             <h:outputText value=", " />
                                             <h:outputText value="#{korisnik.organizacije.ulica.naziv}" />
@@ -163,7 +169,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Kontakt osoba:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.kontaktOsoba}" />
                                         </div>
                                     </div>
@@ -171,7 +177,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Kontakt telefoni:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.telefoni}" />
                                         </div>
                                     </div>
@@ -179,7 +185,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Email:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.email}" />
                                         </div>
                                     </div>

@@ -40,6 +40,7 @@
                 </f:facet>
             </b:modal>
             <h:panelGroup id="korisnici_content">
+                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
                 <b:dataTable value="#{admin.korisnici}" 
                              var="korisnik"
                              border="false"
@@ -51,6 +52,7 @@
                              onpage='$("html, body").animate({ scrollTop: 0 }, "slow");'
                              select="true"
                              onselect="selectRow(indexes);"
+                             searching="false"
                              ondeselect="deselectRow(indexes);" >
                     <b:dataTableColumn label="Korisničko ime" orderable="false" style="cursor: pointer">
                         <div class="row" style="margin: auto;">
@@ -78,7 +80,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Naziv organizacije:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important;">
                                             <h:outputText value="#{korisnik.organizacije.naziv}" />
                                         </div>
                                     </div>
@@ -86,7 +88,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Opis organizacije:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.tekst}" />
                                         </div>
                                     </div>
@@ -94,7 +96,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Oblast delovanja:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.oblastDelovanja.naziv}" />
                                         </div>
                                     </div>
@@ -102,7 +104,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Web adresa:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <a href="#{korisnik.organizacije.webAdresa}" target="_blank" style="color: orangered !important">
                                                 #{korisnik.organizacije.webAdresa}
                                             </a>
@@ -112,7 +114,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Mesto i ulica:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.mesto.naziv}" />
                                             <h:outputText value=", " />
                                             <h:outputText value="#{korisnik.organizacije.ulica.naziv}" />
@@ -122,7 +124,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Kontakt osoba:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.kontaktOsoba}" />
                                         </div>
                                     </div>
@@ -130,7 +132,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Kontakt telefoni:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.telefoni}" />
                                         </div>
                                     </div>
@@ -138,7 +140,7 @@
                                         <div class="col-md-3 organizacija-detail-header">
                                             Email:
                                         </div>
-                                        <div class="col-md-9 organizacija-detail-content">
+                                        <div class="col-md-9 organizacija-detail-content" style="padding-top: 4px !important">
                                             <h:outputText value="#{korisnik.organizacije.email}" />
                                         </div>
                                     </div>

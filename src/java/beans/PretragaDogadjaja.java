@@ -80,7 +80,7 @@ public class PretragaDogadjaja {
         
         selectedKarakteristikeProstora = new ArrayList<StavkeSifarnika>();
         
-        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOrganizacije());
+        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
         Collections.sort(organizacije, new PretragaDogadjaja.SortOrganizacijeByName());
     }
     
@@ -189,10 +189,16 @@ public class PretragaDogadjaja {
 
     public List<Dogadjaji> getDogadjaji() {
         if (tipPretrage == 1) {
-            return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
+            dogadjaji = dogadjajiHelper.getDogadjajiByKategorija(kategorijaDogadjaja);
+            Collections.sort(dogadjaji, new PretragaDogadjaja.SortDogadjajiByDatumDescending());
+            return dogadjaji;
+            //return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
         } 
         if (tipPretrage == 2) {
-            return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
+            dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
+            Collections.sort(dogadjaji, new PretragaDogadjaja.SortDogadjajiByDatumDescending());
+            return dogadjaji;
+            //return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
         }
         return dogadjaji;
     }

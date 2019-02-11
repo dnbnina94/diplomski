@@ -278,5 +278,32 @@ public class DogadjajiHelper {
             throw e;
         }
     }
+    
+    public List<Dogadjaji> getDogadjajiByKategorija(StavkeSifarnika kategorija) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("kategorija", kategorija));
+            
+            Date danas = new Date();
+            c.add(Restrictions.gt("datumIsticanja", danas));
+            
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            //session.close();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 
 }

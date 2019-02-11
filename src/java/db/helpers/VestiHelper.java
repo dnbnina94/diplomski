@@ -240,6 +240,7 @@ public class VestiHelper {
             
             Criteria c = session.createCriteria(Vesti.class);
             c.add(Restrictions.eq("kategorija", kategorija));
+            c.add(Restrictions.eq("arhivirana", 0));
             List l = c.list();
             
             session.getTransaction().commit();

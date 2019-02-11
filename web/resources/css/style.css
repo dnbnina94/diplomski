@@ -253,7 +253,7 @@ nav {
 }
 
 #pretraga_vesti\:amodal_header, #oglas\:amodal_header, #dogadjaj\:amodal_header, #vest\:amodal_header, #vest\:amodal_brisanje_header, #vest\:amodal_arhiviranje_header,
-#korisnici\:amodal_brisanje_header, #korisnici\:amodal_prihvatanje_header {
+#korisnici\:amodal_brisanje_header, #korisnici\:amodal_prihvatanje_header, #izmena_podataka\:amodal_prihvatanje_header, #izmena_podataka\:amodal_brisanje_header {
     display: none;
 }
 
@@ -507,13 +507,13 @@ select:focus {
 }
 
 #pretraga_vesti\:amodal_footer, #oglas\:amodal_footer, #dogadjaj\:amodal_footer, #vest\:amodal_footer, #vest\:amodal_brisanje_footer, #vest\:amodal_arhiviranje_footer
-#korisnici\:amodal_brisanje_footer, #korisnici\:amodal_prihvatanje_footer {
+#korisnici\:amodal_brisanje_footer, #korisnici\:amodal_prihvatanje_footer, #izmena_podataka\:amodal_prihvatanje_footer, #izmena_podataka\:amodal_brisanje_footer {
     border: none !important;
     padding-top: 0px !important;
 }
 
 #pretraga_vesti\:amodal_body, #oglas\:amodal_body, #dogadjaj\:amodal_body, #vest\:amodal_body, #vest\:amodal_brisanje_body, #vest\:amodal_arhiviranje_body,
-#korisnici\:amodal_brisanje_body, #korisnici\:amodal_prihvatanje_body {
+#korisnici\:amodal_brisanje_body, #korisnici\:amodal_prihvatanje_body, #izmena_podataka\:amodal_prihvatanje_body, #izmena_podataka\:amodal_brisanje_body {
     padding-bottom: 0px !important;
 }
 
@@ -1670,4 +1670,12 @@ table.dataTable tbody tr.selected, table.dataTable tbody th.selected, table.data
 
 table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.dataTable tbody td.selected a {
     color: orangered !important;
+}
+
+.nav-pills > li > a {
+    color: #333 !important;
+    padding: 5px 10px;
+    font-family: BebasNeueRegular;
+    font-size: 16px;
+    border-radius: 0px !important;
 }

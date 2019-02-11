@@ -110,6 +110,8 @@ public class Korisnici  implements java.io.Serializable {
     public void setOglasis(Set oglasis) {
         this.oglasis = oglasis;
     }
+    
+    
 }
 
 
