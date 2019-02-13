@@ -46,6 +46,8 @@ public class OglasiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -71,6 +73,8 @@ public class OglasiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -116,6 +120,8 @@ public class OglasiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -132,10 +138,11 @@ public class OglasiHelper {
             int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();
             
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -153,12 +160,34 @@ public class OglasiHelper {
             List l = c.list();
             
             session.getTransaction().commit();
-            //session.close();
             
             return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void obrisiOglas(Oglasi oglas) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "Delete Oglasi c where c.idOglas = :idOglas";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();
+            
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
         }
     }
     

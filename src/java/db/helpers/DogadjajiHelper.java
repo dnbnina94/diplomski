@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -63,6 +64,8 @@ public class DogadjajiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -89,6 +92,8 @@ public class DogadjajiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -107,6 +112,8 @@ public class DogadjajiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -128,6 +135,8 @@ public class DogadjajiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -192,9 +201,9 @@ public class DogadjajiHelper {
             if (!kljucneReci.isEmpty()) {
                 c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
             }
-            
+
             if (selectedKarakteristikeProstora != null) {
-                for(StavkeSifarnika selectedKar : selectedKarakteristikeProstora) {
+                for (StavkeSifarnika selectedKar : selectedKarakteristikeProstora) {
                     Iterator karIterator = selectedKar.getKarakteristikeProstoras().iterator();
                     Disjunction karDisj = Restrictions.disjunction();
                     while (karIterator.hasNext()) {
@@ -203,11 +212,11 @@ public class DogadjajiHelper {
                     c.add(karDisj);
                 }
             }
-            
+
             if (!kreatorDogadjaja.isEmpty()) {
                 c.add(Restrictions.eq("korisnici.korisnickoIme", kreatorDogadjaja));
             }
-            
+
             Date danas = new Date();
             c.add(Restrictions.gt("datumIsticanja", danas));
 
@@ -233,9 +242,11 @@ public class DogadjajiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
-    
+
     public void zahtevBrisanjeDogadjaja(Dogadjaji dogadjaj) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -244,18 +255,19 @@ public class DogadjajiHelper {
         }
         try {
             session.getTransaction().begin();
-            
+
             String hqlUpdate = "update Dogadjaji c set c.zahtevBrisanje = 1 where c.idDogadjaj = :idDogadjaj";
-            int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
-            
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
+
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
-    
+
     public List<Dogadjaji> getDogadjajiByKorisnik(Korisnici korisnik) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -264,21 +276,22 @@ public class DogadjajiHelper {
         }
         try {
             session.getTransaction().begin();
-            
+
             Criteria c = session.createCriteria(Dogadjaji.class);
             c.add(Restrictions.eq("korisnici", korisnik));
             List l = c.list();
-            
+
             session.getTransaction().commit();
-            //session.close();
-            
+
             return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
-    
+
     public List<Dogadjaji> getDogadjajiByKategorija(StavkeSifarnika kategorija) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -287,22 +300,47 @@ public class DogadjajiHelper {
         }
         try {
             session.getTransaction().begin();
-            
+
             Criteria c = session.createCriteria(Dogadjaji.class);
             c.add(Restrictions.eq("kategorija", kategorija));
-            
+
             Date danas = new Date();
             c.add(Restrictions.gt("datumIsticanja", danas));
-            
+
             List l = c.list();
-            
+
             session.getTransaction().commit();
-            //session.close();
-            
+
             return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    public void obrisiDogadjaj(Dogadjaji dogadjaj) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            for (KarakteristikeProstora karakteristika : (Set<KarakteristikeProstora>) dogadjaj.getKarakteristikeProstoras()) {
+                String hqlUpdate = "Delete KarakteristikeProstora c where c.idKarakteristika = :idKarakteristika";
+                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idKarakteristika", karakteristika.getIdKarakteristika()).executeUpdate();
+            }
+            String hqlUpdate = "Delete Dogadjaji c where c.idDogadjaj = :idDogadjaj";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
     }
 

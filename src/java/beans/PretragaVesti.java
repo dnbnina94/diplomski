@@ -116,6 +116,7 @@ public class PretragaVesti {
             return vesti;
             //return setToList(organizacija.getKorisnici().getVestis()); 
         }
+        this.pretraziVesti();
         return vesti;
     }
     

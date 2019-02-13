@@ -33,7 +33,7 @@
                         <div class="stripe-line-header news-category-header">                        
                         </div>
                         <h:form id="dogadjaj">
-                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme}">
+                            <h:panelGroup rendered='#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanDogadjajBrisanje.korisnici.korisnickoIme or korisnikBean.korisnik.tip == 1}'>
                                 <b:modal id="amodal" styleClass="modalPseudoClass">
 
                                     <div class="stripe-line-header">
@@ -58,8 +58,17 @@
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
                                                                  update="dogadjaj_content"
+                                                                 rendered='#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanDogadjajBrisanje.korisnici.korisnickoIme}'
                                                                  onclick="ajax:zahteviKorisnika.obrisiDogadjaj();"
-                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');"/>
+                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                <b:commandButton value="Obriši događaj" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="dogadjaj_content"
+                                                                 rendered='#{korisnikBean.korisnik.tip == 1}'
+                                                                 onclick="ajax:admin.obrisiDogadjaj();"
+                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                             </div>
                                             <div class="col-md-6">
                                                 <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
@@ -67,7 +76,8 @@
                                         </div>
                                     </f:facet>
                                 </b:modal>
-                            </c:if>
+                            </h:panelGroup>
+
                             <h:panelGroup id="dogadjaj_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
                                 <div class="#{pretragaDogadjaja.dogadjaj.arhiviran ? 'expired' : ''}" >
@@ -144,22 +154,36 @@
                                     <div style="height: 10px"></div>
                                     <h:outputText value="#{pretragaDogadjaja.dogadjaj.tekst}" escape="false" />
                                 </div>
-                                <div style="margin-top: 20px; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
-                                    <c:if test="#{!pretragaDogadjaja.dogadjaj.zahtevBrisanje}" >
-                                        <div data-target="#dogadjaj\:amodal" 
-                                             data-toggle="modal"
-                                             style="display: inline-block">
+                                <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme}">
+                                    <div style="margin-top: 20px;">
+                                        <div style="display: inline-block">
                                             <b:commandButton class="read-more-button" 
                                                              ajax="true"
-                                                             style="background-color: #ccc !important; #{korisnikBean.korisnik.korisnickoIme != pretragaDogadjaja.dogadjaj.korisnici.korisnickoIme ? 'display: none' : ''}" 
-                                                             value="Obriši događaj"
-                                                             disabled="#{pretragaDogadjaja.dogadjaj.zahtevBrisanje}" >
+                                                             style="background-color: #ccc !important;" 
+                                                             value="#{pretragaDogadjaja.dogadjaj.zahtevBrisanje ? 'Obriši događaj - poslat zahtev' : 'Obriši događaj'}"
+                                                             update="@form"
+                                                             disabled="#{pretragaDogadjaja.dogadjaj.zahtevBrisanje}"
+                                                             oncomplete="$('#dogadjaj\\:amodal').modal('show');" >
                                                 <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{pretragaDogadjaja.dogadjaj}" />
                                             </b:commandButton>
                                         </div>
-                                    </c:if>
-                                </div>
-
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered='#{korisnikBean.korisnik.tip == 1}'>
+                                    <div style="margin-top: 20px;">
+                                        <div style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
+                                                             ajax="true"
+                                                             style="background-color: #ccc !important;" 
+                                                             value="Obriši događaj"
+                                                             update="@form"
+                                                             oncomplete="$('#dogadjaj\\:amodal').modal('show');" >
+                                                <f:setPropertyActionListener target="#{admin.selektovanDogadjajBrisanje}" value="#{pretragaDogadjaja.dogadjaj}" />
+                                            </b:commandButton>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                
                                 <style>
                                     #dogadjaj\:growl-success {
                                         margin-top: 20px !important;

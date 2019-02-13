@@ -50,7 +50,6 @@ public class DBConnection {
         Statement stat = null;
         ResultSet retValue = null;
 
-
         try {
             Class.forName(dbDriver);
             conn = DriverManager.getConnection(dbName, dbUsername, dbPassword);

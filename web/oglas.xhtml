@@ -33,7 +33,7 @@
                         <div class="stripe-line-header news-category-header">                        
                         </div>
                         <h:form id="oglas">
-                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == pretragaOglasa.oglas.korisnici.korisnickoIme}">
+                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanOglasBrisanje.korisnici.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                 <b:modal id="amodal" styleClass="modalPseudoClass">
 
                                     <div class="stripe-line-header">
@@ -59,6 +59,15 @@
                                                                  ajax="true"
                                                                  update="oglas_content"
                                                                  onclick="ajax:zahteviKorisnika.obrisiOglas();"
+                                                                 rendered="#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanOglasBrisanje.korisnici.korisnickoIme}"
+                                                                 oncomplete="$('#oglas\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                <b:commandButton value="Obriši oglas" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="oglas_content"
+                                                                 onclick="ajax:admin.obrisiOglas();"
+                                                                 rendered="#{korisnikBean.korisnik.tip == 1}"
                                                                  oncomplete="$('#oglas\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                             </div>
                                             <div class="col-md-6">
@@ -67,7 +76,7 @@
                                         </div>
                                     </f:facet>
                                 </b:modal>
-                            </c:if>
+                            </h:panelGroup>
                             <h:panelGroup id="oglas_content" style="margin-top: 0px">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
                                 <div class="#{pretragaOglasa.oglas.arhiviran ? 'expired' : ''}">
@@ -100,21 +109,35 @@
                                         </h:outputText>
                                     </div>
                                 </div>
-                                <div style="margin-top: 20px; #{korisnikBean.korisnik != null ? '' : 'display: none'}">
-                                    <c:if test="#{!pretragaOglasa.oglas.zahtevBrisanje}">
-                                        <div data-target="#oglas\:amodal" 
-                                             data-toggle="modal"
-                                             style="display: inline-block">
+                                <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == pretragaOglasa.oglas.korisnici.korisnickoIme}">
+                                    <div style="margin-top: 20px;">
+                                        <div style="display: inline-block">
                                             <b:commandButton class="read-more-button" 
                                                              ajax="true"
-                                                             style="background-color: #ccc !important; #{korisnikBean.korisnik.korisnickoIme != pretragaOglasa.oglas.korisnici.korisnickoIme ? 'display: none' : ''}" 
-                                                             value="Obriši oglas"
-                                                             disabled="#{pretragaOglasa.oglas.zahtevBrisanje}" >
+                                                             style="background-color: #ccc !important;"
+                                                             value="#{pretragaOglasa.oglas.zahtevBrisanje ? 'Obriši oglas - poslat zahtev' : 'Obriši oglas'}"
+                                                             update="@form"
+                                                             disabled="#{pretragaOglasa.oglas.zahtevBrisanje}"
+                                                             oncomplete="$('#oglas\\:amodal').modal('show');" >
                                                 <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanOglasBrisanje}" value="#{pretragaOglasa.oglas}" />
                                             </b:commandButton>
                                         </div>
-                                    </c:if>
-                                </div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
+                                    <div style="margin-top: 20px;">
+                                        <div style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
+                                                             ajax="true"
+                                                             style="background-color: #ccc !important;"
+                                                             value="Obriši oglas"
+                                                             update="@form"
+                                                             oncomplete="$('#oglas\\:amodal').modal('show');" >
+                                                <f:setPropertyActionListener target="#{admin.selektovanOglasBrisanje}" value="#{pretragaOglasa.oglas}" />
+                                            </b:commandButton>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
 
                                 <style>
                                     #oglas\:growl-success {

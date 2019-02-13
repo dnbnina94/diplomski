@@ -43,6 +43,8 @@ public class StavkeSifarnikaHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -66,6 +68,8 @@ public class StavkeSifarnikaHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -84,6 +88,8 @@ public class StavkeSifarnikaHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -109,6 +115,8 @@ public class StavkeSifarnikaHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     

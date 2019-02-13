@@ -5,9 +5,15 @@
  */
 package beans;
 
+import db.Dogadjaji;
 import db.Korisnici;
+import db.Oglasi;
 import db.Organizacije;
+import db.Vesti;
+import db.helpers.DogadjajiHelper;
 import db.helpers.KorisniciHelper;
+import db.helpers.OglasiHelper;
+import db.helpers.VestiHelper;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,8 +31,15 @@ public class Admin {
     private String page = "adminNeodobreni.xhtml";
     private Korisnici selektovanKorisnikBrisanje;
     private Korisnici selektovanKorisnikPrihvatanje;
+    private Dogadjaji selektovanDogadjajBrisanje;
+    private Vesti selektovanaVestBrisanje;
+    private Vesti selektovanaVestArhiviranje;
+    private Oglasi selektovanOglasBrisanje;
 
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
+    private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
+    private VestiHelper vestiHelper = new VestiHelper();
+    private OglasiHelper oglasiHelper = new OglasiHelper();
 
     class SortKorisniciByKorIme implements Comparator<Korisnici> {
 
@@ -120,6 +133,79 @@ public class Admin {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste odobrili korisnikov zahtev za registraciju.", null);
             FacesContext.getCurrentInstance().addMessage("izmena_podataka:growl-success", message);
             //FacesContext.getCurrentInstance().addMessage("korisnici:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
+    }
+
+    public Dogadjaji getSelektovanDogadjajBrisanje() {
+        return selektovanDogadjajBrisanje;
+    }
+
+    public void setSelektovanDogadjajBrisanje(Dogadjaji selektovanDogadjajBrisanje) {
+        this.selektovanDogadjajBrisanje = selektovanDogadjajBrisanje;
+    }
+    
+    public void obrisiDogadjaj() {
+        if (selektovanDogadjajBrisanje != null) {
+            dogadjajiHelper.obrisiDogadjaj(selektovanDogadjajBrisanje);
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali događaj.", null);
+            FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
+    }
+
+    public Vesti getSelektovanaVestBrisanje() {
+        return selektovanaVestBrisanje;
+    }
+
+    public void setSelektovanaVestBrisanje(Vesti selektovanaVestBrisanje) {
+        this.selektovanaVestBrisanje = selektovanaVestBrisanje;
+    }
+    
+    public void obrisiVest() {
+        if (selektovanaVestBrisanje != null) {
+            vestiHelper.obrisiVest(selektovanaVestBrisanje);
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali vest.", null);
+            FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
+    }
+
+    public Vesti getSelektovanaVestArhiviranje() {
+        return selektovanaVestArhiviranje;
+    }
+
+    public void setSelektovanaVestArhiviranje(Vesti selektovanaVestArhiviranje) {
+        this.selektovanaVestArhiviranje = selektovanaVestArhiviranje;
+    }
+    
+    public void arhivirajVest() {
+        if (selektovanaVestArhiviranje != null) {
+            selektovanaVestArhiviranje.setArhivirana(1);
+            vestiHelper.arhiviranjeVesti(selektovanaVestArhiviranje);
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste arhivirali vest.", null);
+            FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }
+    }
+
+    public Oglasi getSelektovanOglasBrisanje() {
+        return selektovanOglasBrisanje;
+    }
+
+    public void setSelektovanOglasBrisanje(Oglasi selektovanOglasBrisanje) {
+        this.selektovanOglasBrisanje = selektovanOglasBrisanje;
+    }
+    
+    public void obrisiOglas() {
+        if (selektovanOglasBrisanje != null) {
+            oglasiHelper.obrisiOglas(selektovanOglasBrisanje);
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali oglas.", null);
+            FacesContext.getCurrentInstance().addMessage("oglas:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
     }

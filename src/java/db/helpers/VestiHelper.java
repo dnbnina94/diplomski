@@ -54,6 +54,8 @@ public class VestiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -77,6 +79,8 @@ public class VestiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -102,6 +106,8 @@ public class VestiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -120,6 +126,8 @@ public class VestiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -186,6 +194,8 @@ public class VestiHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -202,10 +212,11 @@ public class VestiHelper {
             int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idVest", vest.getIdVest()).executeUpdate();
             
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -222,10 +233,11 @@ public class VestiHelper {
             int updatedEntities = session.createQuery( hqlUpdate ).setInteger("idVest", vest.getIdVest()).executeUpdate();
             
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -244,12 +256,13 @@ public class VestiHelper {
             List l = c.list();
             
             session.getTransaction().commit();
-            //session.close();
             
             return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -267,12 +280,33 @@ public class VestiHelper {
             List l = c.list();
             
             session.getTransaction().commit();
-            //session.close();
             
             return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void obrisiVest(Vesti vest) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            String hqlUpdate = "Delete Vesti c where c.idVest = :idVest";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idVest", vest.getIdVest()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
     }
     

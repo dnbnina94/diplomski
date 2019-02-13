@@ -97,9 +97,10 @@ and open the template in the editor.
                              look="primary" 
                              ajax="true"
                              action="dogadjaji?faces-redirect=true"
-                             onclick="ajax:pretragaDogadjaja.pretraziDogadjaje()"
                              styleClass="big-red-button" 
-                             style="margin-top: 5px" />
+                             style="margin-top: 5px" >
+                <f:setPropertyActionListener target='#{pretragaDogadjaja.tipPretrage}' value='3' />
+            </b:commandButton>
 
             <h:outputScript>
               
@@ -149,8 +150,9 @@ and open the template in the editor.
                              styleClass="big-red-button" 
                              ajax="true"
                              action="oglasi?faces-redirect=true"
-                             onclick="ajax:pretragaOglasa.pretraziOglase()"
-                             style="margin-top: 5px; color: white" />
+                             style="margin-top: 5px; color: white" >
+                <f:setPropertyActionListener target="#{pretragaOglasa.tipPretrage}" value="1" />
+            </b:commandButton>
         </h:form>
     </h:body>
 

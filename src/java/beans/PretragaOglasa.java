@@ -81,6 +81,7 @@ public class PretragaOglasa {
             return oglasi;
             //return setToList(organizacija.getKorisnici().getOglasis());
         }
+        this.pretraziOglase();
         return oglasi;
     }
 

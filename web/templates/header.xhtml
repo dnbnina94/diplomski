@@ -157,8 +157,9 @@ and open the template in the editor.
                                         <b:commandButton icon="search" 
                                                          class="search-button" 
                                                          action="vesti?faces-redirect=true"
-                                                         ajax="true"
-                                                         onclick="ajax:pretragaVesti.pretraziVesti();"/>
+                                                         ajax="true">
+                                            <f:setPropertyActionListener target='#{pretragaVesti.tipPretrage}' value='3' />
+                                        </b:commandButton>
                                     </td>
                                 </tr>
                             </table>

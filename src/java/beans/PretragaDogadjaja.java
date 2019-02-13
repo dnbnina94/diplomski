@@ -200,6 +200,7 @@ public class PretragaDogadjaja {
             return dogadjaji;
             //return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
         }
+        this.pretraziDogadjaje();
         return dogadjaji;
     }
 

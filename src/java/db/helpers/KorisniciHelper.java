@@ -51,6 +51,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -77,6 +79,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
 
     }
@@ -100,6 +104,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -118,6 +124,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -134,10 +142,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("naziv", naziv).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -154,10 +163,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("opis", opis).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -174,10 +184,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setInteger("oblastDelovanja", oblastDelovanja.getIdStavka()).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -194,10 +205,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("webAdresa", webAdresa).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -214,10 +226,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("kontaktOsoba", kontaktOsoba).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -234,10 +247,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("email", email).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -254,10 +268,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setInteger("mesto", mesto.getIdStavka()).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -274,10 +289,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setInteger("ulica", ulica.getIdStavka()).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -294,10 +310,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("telefoni", telefoni).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -314,10 +331,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setBinary("lozinka", lozinka).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -334,10 +352,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setBinary("salt", salt).setString("korisnickoIme", korisnickoIme).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -360,6 +379,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
     
@@ -391,6 +412,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -412,6 +435,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -434,6 +459,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -456,6 +483,8 @@ public class KorisniciHelper {
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -472,10 +501,11 @@ public class KorisniciHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setBoolean("odobren", korisnik.isOdobren()).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
@@ -514,10 +544,11 @@ public class KorisniciHelper {
             updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();
 
             session.getTransaction().commit();
-            session.close();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
+        } finally {
+            session.close();
         }
     }
 
