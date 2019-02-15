@@ -195,6 +195,21 @@
 
                                         <div style="display: inline-block">
                                             <b:commandButton class="read-more-button" 
+                                                             style="background-color: orangered !important;" 
+                                                             value="Izmeni vest"
+                                                             action="izmena_vesti?faces-redirect=true"
+                                                             ajax="true" >
+                                                <f:setPropertyActionListener target="#{izmenaVesti.kategorija}" value="#{pretragaVesti.vest.kategorija}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.naslov}" value="#{pretragaVesti.vest.naslov}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.tekst}" value="#{pretragaVesti.vest.tekst}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.thumbnailName}" value="#{pretragaVesti.vest.thumbnail}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.menjanThumbnail}" value="#{false}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.vest}" value="#{pretragaVesti.vest}" />
+                                            </b:commandButton>
+                                        </div>
+
+                                        <div style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
                                                              ajax="true"
                                                              style="background-color: #4C4C4C !important;" 
                                                              value="#{pretragaVesti.vest.arhivirana == 0 ? 'Arhiviraj vest' : 'Vest je arhivirana'}"

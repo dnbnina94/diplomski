@@ -209,5 +209,9 @@ public class Admin {
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
     }
+    
+    public void izmeniVest() {
+        
+    }
 
 }

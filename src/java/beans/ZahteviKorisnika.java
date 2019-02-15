@@ -6,11 +6,15 @@
 package beans;
 
 import db.Dogadjaji;
+import db.Obavestenja;
 import db.Oglasi;
 import db.Vesti;
 import db.helpers.DogadjajiHelper;
+import db.helpers.ObavestenjaHelper;
 import db.helpers.OglasiHelper;
 import db.helpers.VestiHelper;
+import java.util.Date;
+import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -28,6 +32,7 @@ public class ZahteviKorisnika {
     private VestiHelper vestiHelper = new VestiHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private OglasiHelper oglasiHelper = new OglasiHelper();
+    private ObavestenjaHelper obavestenjaHelper = new ObavestenjaHelper();
 
     public ZahteviKorisnika() {
     }

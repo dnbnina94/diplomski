@@ -45,6 +45,16 @@ and open the template in the editor.
                                 <div class="pull-left">
                                     <ul class="list-inline">
                                         <li>
+                                            <b:commandLink action="obavestenja?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                                <h:outputText value="Obaveštenja" />
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
+                                            <b:commandLink action="adminKorisnici?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                                <h:outputText value="Korisnici" />
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
                                             <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
                                                 <h:outputText value="Izlogujte se" style="font-weight: bold" />
                                             </b:commandLink>

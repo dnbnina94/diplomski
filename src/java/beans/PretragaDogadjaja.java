@@ -71,6 +71,8 @@ public class PretragaDogadjaja {
         for (StavkeSifarnika kategorija : kategorijeDogadjaja) {
             checkMap.put(kategorija, Boolean.FALSE);
         }
+        
+        mesta = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
 
         uzrasti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
         Collections.sort(uzrasti, new PretragaDogadjaja.SortByIdSifarnik());
@@ -133,7 +135,6 @@ public class PretragaDogadjaja {
     }
 
     public List<StavkeSifarnika> getMesta() {
-        mesta = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
         return mesta;
     }
 

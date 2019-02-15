@@ -11,6 +11,13 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/izmena_vesti.xhtml</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/AktuelneVesti.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Admin.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/IzmenaVesti.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/vest.xhtml</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/NovaVest.java</file>
+        </group>
     </open-files>
 </project-private>

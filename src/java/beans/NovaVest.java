@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.safety.Whitelist;
 
 /**
@@ -216,7 +217,7 @@ public class NovaVest {
 
             novaVest.setKategorija(kategorija);
             novaVest.setNaslov(naslov);
-            novaVest.setTekst(Jsoup.clean(tekst, Whitelist.basic().addTags("h1", "h2", "h3")));
+            novaVest.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new OutputSettings().prettyPrint(false)));
             novaVest.setDatum(new Date());
             novaVest.setArhivirana(0);
 

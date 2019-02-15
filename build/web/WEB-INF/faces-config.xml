@@ -88,4 +88,9 @@
         <managed-bean-class>beans.Admin</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>izmenaVesti</managed-bean-name>
+        <managed-bean-class>beans.IzmenaVesti</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

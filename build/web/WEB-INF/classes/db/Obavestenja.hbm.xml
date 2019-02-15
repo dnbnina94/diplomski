@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 15, 2019 1:44:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Obavestenja" table="obavestenja" catalog="diplomski" optimistic-lock="version">
+        <id name="idObavestenje" type="int">
+            <column name="idObavestenje" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="korisnici" class="db.Korisnici" fetch="select">
+            <column name="korisnicko_ime" length="50" not-null="true" />
+        </many-to-one>
+        <property name="datum" type="timestamp">
+            <column name="datum" length="19" not-null="true" />
+        </property>
+        <property name="tekst" type="string">
+            <column name="tekst" length="65535" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

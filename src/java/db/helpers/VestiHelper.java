@@ -310,4 +310,88 @@ public class VestiHelper {
         }
     }
     
+    public void updateVestNaslov(Vesti vest, String naslov) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            String hqlUpdate = "update Vesti c set c.naslov = :naslov where c.idVest = :idVest";
+            int updatedEntities = session.createQuery(hqlUpdate).setString("naslov", naslov).setInteger("idVest", vest.getIdVest()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateVestTekst(Vesti vest, String tekst) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            String hqlUpdate = "update Vesti c set c.tekst = :tekst where c.idVest = :idVest";
+            int updatedEntities = session.createQuery(hqlUpdate).setString("tekst", tekst).setInteger("idVest", vest.getIdVest()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateVestKategorija(Vesti vest, StavkeSifarnika kategorija) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            String hqlUpdate = "update Vesti c set c.kategorija = :kategorija where c.idVest = :idVest";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("kategorija", kategorija.getIdStavka()).setInteger("idVest", vest.getIdVest()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateVestThumbnail(Vesti vest, String thumbnail) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            String hqlUpdate = "update Vesti c set c.thumbnail = :thumbnail where c.idVest = :idVest";
+            int updatedEntities = session.createQuery(hqlUpdate).setString("thumbnail", thumbnail).setInteger("idVest", vest.getIdVest()).executeUpdate();
+
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
 }
