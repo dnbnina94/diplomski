@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,20 +23,28 @@ import org.jsoup.safety.Whitelist;
  *
  * @author Nina
  */
-public class NovOglas {
+public class IzmenaOglasa {
 
+    private Oglasi oglas;
     private String naslov;
-    private String naslovGreska = "";
-
     private String tekst;
-    private String tekstGreska = "";
-
     private Date datumIsticanja;
+
+    private String naslovGreska = "";
+    private String tekstGreska = "";
     private String datumIsticanjaGreska = "";
 
     private OglasiHelper oglasiHelper = new OglasiHelper();
 
-    public NovOglas() {
+    public IzmenaOglasa() {
+    }
+
+    public Oglasi getOglas() {
+        return oglas;
+    }
+
+    public void setOglas(Oglasi oglas) {
+        this.oglas = oglas;
     }
 
     public String getNaslov() {
@@ -46,14 +55,6 @@ public class NovOglas {
         this.naslov = naslov;
     }
 
-    public String getNaslovGreska() {
-        return naslovGreska;
-    }
-
-    public void setNaslovGreska(String naslovGreska) {
-        this.naslovGreska = naslovGreska;
-    }
-
     public String getTekst() {
         return tekst;
     }
@@ -62,20 +63,28 @@ public class NovOglas {
         this.tekst = tekst;
     }
 
-    public String getTekstGreska() {
-        return tekstGreska;
-    }
-
-    public void setTekstGreska(String tekstGreska) {
-        this.tekstGreska = tekstGreska;
-    }
-
     public Date getDatumIsticanja() {
         return datumIsticanja;
     }
 
     public void setDatumIsticanja(Date datumIsticanja) {
         this.datumIsticanja = datumIsticanja;
+    }
+
+    public String getNaslovGreska() {
+        return naslovGreska;
+    }
+
+    public void setNaslovGreska(String naslovGreska) {
+        this.naslovGreska = naslovGreska;
+    }
+
+    public String getTekstGreska() {
+        return tekstGreska;
+    }
+
+    public void setTekstGreska(String tekstGreska) {
+        this.tekstGreska = tekstGreska;
     }
 
     public String getDatumIsticanjaGreska() {
@@ -112,25 +121,11 @@ public class NovOglas {
             return false;
         }
 
-        Calendar datumIsticanjaCal = Calendar.getInstance();
-        datumIsticanjaCal.setTime(datumIsticanja);
-
-        datumIsticanjaCal.set(Calendar.HOUR_OF_DAY, 23);
-        datumIsticanjaCal.set(Calendar.MINUTE, 59);
-        datumIsticanjaCal.set(Calendar.SECOND, 59);
-
-        datumIsticanja = datumIsticanjaCal.getTime();
-
-        if (datumIsticanja.before(new Date())) {
-            datumIsticanjaGreska = "Datum isticanja oglasa ne sme biti pre današnjeg datuma.";
-            return false;
-        }
-
         datumIsticanjaGreska = "";
         return true;
     }
 
-    public void kreirajOglas() {
+    public void izmeniOglas() {
         boolean valid = true;
 
         if (!naslovValidacija()) {
@@ -144,37 +139,38 @@ public class NovOglas {
         }
 
         if (valid) {
-            Oglasi oglas = new Oglasi();
-
-            oglas.setIdOglas(oglasiHelper.getMaxId() + 1);
             oglas.setNaslov(naslov);
             oglas.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
-            oglas.setDatumKreiranja(new Date());
-            oglas.setDatumIsticanja(datumIsticanja);
 
-            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
-            oglas.setKorisnici(korisnikBean.getKorisnik());
+            Calendar datumIsticanjaCal = Calendar.getInstance();
+            datumIsticanjaCal.setTime(datumIsticanja);
 
-            oglasiHelper.insertOglas(oglas);
+            datumIsticanjaCal.set(Calendar.HOUR_OF_DAY, 23);
+            datumIsticanjaCal.set(Calendar.MINUTE, 59);
+            datumIsticanjaCal.set(Calendar.SECOND, 59);
             
+            datumIsticanja = datumIsticanjaCal.getTime();
+            
+            oglas.setDatumIsticanja(datumIsticanja);
+            
+            oglasiHelper.updateOglas(oglas);
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaOglasa pretragaOglasaBean = (PretragaOglasa) elContext.getELResolver().getValue(elContext, null, "pretragaOglasa");
             pretragaOglasaBean.setOglas(oglas);
             elContext.getELResolver().setValue(elContext, null, "pretragaOglasa", pretragaOglasaBean);
-
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste izmenili oglas.", null);
+            FacesContext.getCurrentInstance().addMessage("oglas:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+            
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("oglas.xhtml");
                 FacesContext.getCurrentInstance().responseComplete();
             } catch (IOException ex) {
-                Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(IzmenaOglasa.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    public void reset() {
-        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-        NovOglas novOglasBean = new NovOglas();
-        elContext.getELResolver().setValue(elContext, null, "novOglas", novOglasBean);
     }
 
 }

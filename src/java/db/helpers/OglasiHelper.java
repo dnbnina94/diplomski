@@ -191,4 +191,24 @@ public class OglasiHelper {
         }
     }
     
+    public void updateOglas(Oglasi oglas) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            session.update(oglas);
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
 }

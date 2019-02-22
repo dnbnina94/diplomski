@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2019 at 05:57 PM
+-- Generation Time: Feb 22, 2019 at 10:15 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -47,8 +47,10 @@ CREATE TABLE `dogadjaji` (
 --
 
 INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`, `ulica`, `uzrast`, `datum_dogadjaja`, `datum_kreiranja`, `korisnicko_ime`, `datum_isticanja`, `thumbnail`, `zahtev_brisanje`) VALUES
-(1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:00', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:00', '1.jpg', 0),
-(2, 'dadasasddas', '<p>dasdassdasd</p>', 6, 8, 22, 9, '2019-02-01 00:44:40', '2019-01-31 00:44:55', 'ORCA', '2019-02-01 00:44:46', NULL, 0);
+(1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:01', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:01', '1.jpg', 0),
+(2, 'dadasasddas', '<p>dasdassdasd</p>', 6, 8, 22, 9, '2019-02-01 00:44:40', '2019-01-31 00:44:55', 'ORCA', '2019-02-01 00:44:46', NULL, 0),
+(3, 'asdf', '<p>asdf</p>', 7, 8, 22, 9, '2019-02-22 22:00:00', '2019-02-22 21:01:53', 'etf_org', '2019-02-23 12:15:00', NULL, 0),
+(5, 'Bullet For My Valentine u Beogradu', '<p>MM Concerts predstavlja:<strong>BULLET FOR MY VALENTINE u Beogradu!</strong></p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p>', 6, 8, 40, 9, '2019-04-03 20:00:00', '2019-02-22 21:03:49', 'etf_org', '2019-04-04 00:00:00', '5.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -68,9 +70,8 @@ CREATE TABLE `karakteristike_prostora` (
 
 INSERT INTO `karakteristike_prostora` (`id_karakteristika`, `id_dogadjaj`, `id_stavka`) VALUES
 (1, 1, 33),
-(2, 1, 34),
-(4, 1, 38),
-(5, 1, 39);
+(2, 1, 39),
+(3, 5, 39);
 
 -- --------------------------------------------------------
 
@@ -131,8 +132,8 @@ CREATE TABLE `oglasi` (
 
 INSERT INTO `oglasi` (`id_oglas`, `naslov`, `tekst`, `datum_kreiranja`, `datum_isticanja`, `korisnicko_ime`, `zahtev_brisanje`) VALUES
 (1, 'Java Junior Developer dasgfdsg fasg sgdas fgdhas fghdsa fghas fdghsfd asghd fasghd asgd fasgd fasghdfasghd fasghd fasgd fasghdas fh', '<p>dasdasdas dasd asgdasgd asgdasfgdasfdasg dasgf asgd asgdfasgdas fda ghsd fas gdas fdagsd asd gasdasddasd gas gda ghsd ghasdasdasdasd as das d asdas fgdasd asdas d gas gdd gasd fgasdsdasdasdas fhasdasdas das d adas</p>', '2019-01-26 01:59:05', '2019-01-31 23:59:59', 'etf_org', 0),
-(2, 'Advokat', '<h3><strong>Uslovi:</strong></h3>\n<ul>\n <li>Advokati bi trebali vladati prvenstveno privrednim pravom između ostalog, kao i izvršenjima.</li>\n</ul>\n<p><br></p>', '2019-01-27 18:28:18', '2019-01-29 23:59:59', 'ORCA', 0),
-(3, 'Lead Software Engineer (Java/.NET)', '<p>Successful candidates will have an opportunity to benefit from:</p>\n<ul>\n <li>Ability to work with most technically gifted people in our industry</li>\n <li>Training package (dedicated working days - approx. 5 % of your time and a matching financial budget)</li>\n <li>Clear career path and defined personal goals with achievement based career prospects</li>\n <li>Permanent contract with competitive salary</li>\n <li>Opportunity to collaborate with colleagues and clients across the Zühlke Group</li>\n</ul>\n<h3><strong>Your Skills</strong></h3>\n<p>You should have a technical related degree and/or equivalent professional qualification, communicative and open-minded personality and be fluent in English (both written and spoken).</p>\n<p>Additionally, we are looking for software engineer who:</p>\n<ul>\n <li>has more than 8 years of stable professional experience in software development (Java or .NET)</li>\n <li>has continuously developed through career and can assess new technologies and trends correctly</li>\n <li>developed and implemented architectures for complex systems</li>\n <li>aware of actual effects of own architectural decisions on the code level</li>\n <li>can oversee progress of development team to ensure consistency with initial design</li>\n <li>provide technical guidance and coaching to engineers</li>\n <li>ensure software meets all requirements of quality, security, extensibility, etc.</li>\n <li>ideally, had experience with larger application environments and enterprise architecture</li>\n <li>broad technology skills: familiar with enterprise technologies, mobile and desktop clients, application servers,&nbsp;and relational and NoSQL databases and know how to integrate with systems outside of your primary interest. In&nbsp;addition, you know paradigms like SOA and BPM and technologies such as REST, Web services and messaging.</li>\n <li>team player, customer oriented and interested in innovative topics</li>\n</ul>\n<p><br></p>', '2019-01-27 23:28:17', '2019-02-10 23:59:59', 'etf_org', 0);
+(2, 'Advokat', '<h3><strong>Uslovi:</strong></h3><ul<li>Advokati bi trebali vladati prvenstveno privrednim pravom između ostalog, kao i izvršenjima.</li></ul><p><br></p>', '2019-01-27 18:28:18', '2019-01-29 23:59:59', 'ORCA', 0),
+(3, 'Lead Software Engineer (Java/.NET)', '<p>Successful candidates will have an opportunity to benefit from:</p><ul><li>Ability to work with most technically gifted people in our industry</li><li>Training package (dedicated working days - approx. 5 % of your time and a matching financial budget)</li><li>Clear career path and defined personal goals with achievement based career prospects</li><li>Permanent contract with competitive salary</li><li>Opportunity to collaborate with colleagues and clients across the Zühlke Group</li><li>asdf</li></ul>', '2019-01-27 23:28:17', '2019-02-10 23:59:59', 'etf_org', 0);
 
 -- --------------------------------------------------------
 
@@ -242,7 +243,8 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (36, 5, 'Cvijićeva 29', NULL),
 (37, 5, 'Mitropolita Petra 8', NULL),
 (38, 7, 'Podrška invalidima', 'accessible-icon.jpg'),
-(39, 7, 'WiFi', 'wifi.png');
+(39, 7, 'WiFi', 'wifi.png'),
+(40, 5, 'Makedonska 22', NULL);
 
 -- --------------------------------------------------------
 
@@ -284,7 +286,7 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (15, 'etf_org', 2, 'dsadadaa', '<p>dasdsadadsadas ddasd d</p><p>d dadas dadad</p>', '2019-02-15 03:16:45', NULL, 0, 0),
 (16, 'etf_org', 1, 'sdadsadasada', '<p>dasdasdassada aa sdas dvas</p><p>dadasdas dgaf dagdfas h</p>', '2019-02-15 03:32:23', '16.jpeg', 0, 0),
 (17, 'etf_org', 2, 'fgffh', '<p>gg dfd f dgf fgfg</p><p>gd fd f f fg</p>', '2019-02-15 03:48:02', NULL, 0, 0),
-(18, 'etf_org', 1, 'adsdasdsada', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p>', '2019-02-15 03:49:49', '18.jpg', 0, 0),
+(18, 'etf_org', 1, 'adsdasdsada', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p><ol><li>asdf</li><li>asdf2</li><li>asdf3</li></ol>', '2019-02-15 03:49:49', '18.jpg', 0, 0),
 (19, 'etf_org', 1, 'ssASAdasdsadasadad', '<h1>sdasdasdsdsdsad</h1><p>dasdsadsd sgdfsa dfsdsadfasd asdagsd <u>fagsdf </u>agh dfhag dga dagh da</p><p>dasd <em>afdasgdfasdasdagdfggads</em></p><p>dasd afdadad asf f dad asfd agd a <strong>da</strong></p><ul><li><strong>ddasd</strong></li><li><strong>dasdasdd</strong></li><li><strong>dasdsaas</strong></li></ul>', '2019-02-15 03:50:46', '19.jpg', 0, 0);
 
 --

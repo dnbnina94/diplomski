@@ -245,11 +245,11 @@ public class IzmenaVesti {
 
         if (valid) {
             vestiHelper.updateVestNaslov(vest, naslov);
-            vestiHelper.updateVestTekst(vest, tekst);
+            vestiHelper.updateVestTekst(vest, Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
             vestiHelper.updateVestKategorija(vest, kategorija);
             
             vest.setNaslov(naslov);
-            vest.setTekst(tekst);
+            vest.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
             vest.setKategorija(kategorija);
 
             if (menjanThumbnail) {
@@ -272,7 +272,7 @@ public class IzmenaVesti {
                             try (InputStream input = submittedThumbnail.getInputStream()) {
                                 Files.copy(input, file.toPath());
                             } catch (IOException ex) {
-                                Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(IzmenaVesti.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             
                             vestiHelper.updateVestThumbnail(vest, newThumbnailName);
@@ -298,7 +298,7 @@ public class IzmenaVesti {
                         try (InputStream input = submittedThumbnail.getInputStream()) {
                             Files.copy(input, file.toPath());
                         } catch (IOException ex) {
-                            Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(IzmenaVesti.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         vestiHelper.updateVestThumbnail(vest, newThumbnailName);
@@ -323,7 +323,7 @@ public class IzmenaVesti {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("vest.xhtml");
                 FacesContext.getCurrentInstance().responseComplete();
             } catch (IOException ex) {
-                Logger.getLogger(NovaVest.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(IzmenaVesti.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

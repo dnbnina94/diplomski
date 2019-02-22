@@ -2,6 +2,8 @@ package db;
 // Generated Nov 24, 2018 6:36:55 PM by Hibernate Tools 4.3.1
 
 import java.util.Date;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -122,7 +124,8 @@ public class Vesti implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            thumbnailUrl = "url('" + origRequest.getContextPath() + "/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/vesti/" + thumbnail + ")";
         }

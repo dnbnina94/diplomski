@@ -93,4 +93,14 @@
         <managed-bean-class>beans.IzmenaVesti</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>izmenaOglasa</managed-bean-name>
+        <managed-bean-class>beans.IzmenaOglasa</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>izmenaDogadjaja</managed-bean-name>
+        <managed-bean-class>beans.IzmenaDogadjaja</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 </faces-config>

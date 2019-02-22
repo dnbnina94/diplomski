@@ -31,36 +31,36 @@
                 <div class="row page-content">
                     <div class="col-md-9">
                         <div class="stripe-line-header news-category-header">
-                            <div>Nov oglas</div>     
+                            <div>Izmena oglasa</div>     
                         </div>
 
                         <h:form id="nov_oglas" enctype="">
 
                             <div class="container-w-red-header-header" style="margin-top: 20px">
-                                Kreirajte novi oglas
+                                izmenite oglas
                             </div>
                             <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; padding-bottom: 20px; margin-bottom: 15px !important" >
                                 <div class="col-md-12" style="padding: 0px !important">
                                     <h:outputText value="Naslov oglasa:" styleClass="login-form-label" />
                                     <b:inputText id="naslov"
-                                                 styleClass="#{novOglas.naslovGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                 value="#{novOglas.naslov}"
+                                                 styleClass="#{izmenaOglasa.naslovGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                 value="#{izmenaOglasa.naslov}"
                                                  placeholder="Unesite naslov oglasa" />
-                                    <div id="naslovGreska" class="#{novOglas.naslovGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                        <h:outputText value="#{novOglas.naslovGreska}" />
+                                    <div id="naslovGreska" class="#{izmenaOglasa.naslovGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <h:outputText value="#{izmenaOglasa.naslovGreska}" />
                                     </div>
 
                                     <h:outputText value="Tekst oglasa:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
                                     <h:panelGroup id="tekstWrapperPanelGroup">
-                                        <div id="tekstWrapper" style="#{novOglas.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
+                                        <div id="tekstWrapper" style="#{izmenaOglasa.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
                                         </div>
                                     </h:panelGroup>
-                                    <b:inputTextarea style="display: none" id="tekst" value="#{novOglas.tekst}" />
+                                    <b:inputTextarea style="display: none" id="tekst" value="#{izmenaOglasa.tekst}" />
                                     <h:panelGroup>
-                                        <div id="tekstGreska" class="#{novOglas.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="tekstGreska" class="#{izmenaOglasa.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px" >
-                                            <h:outputText value="#{novOglas.tekstGreska}" />
+                                            <h:outputText value="#{izmenaOglasa.tekstGreska}" />
                                         </div>
                                     </h:panelGroup>
 
@@ -69,12 +69,12 @@
                                     <div style="height: 5px"></div>
                                     <b:datepicker id="datumIsticanja"
                                                   mode='popup-icon' 
-                                                  styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novOglas.datumIsticanjaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                  styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{izmenaOglasa.datumIsticanjaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                   placeholder='Izaberite datum isticanja oglasa'
-                                                  value="#{novOglas.datumIsticanja}" />
-                                    <div id="datumIsticanjaGreska" class="#{novOglas.datumIsticanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                  value="#{izmenaOglasa.datumIsticanja}" />
+                                    <div id="datumIsticanjaGreska" class="#{izmenaOglasa.datumIsticanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                          style="margin-top: 5px; margin-bottom: 0px">
-                                        <h:outputText value="#{novOglas.datumIsticanjaGreska}" />
+                                        <h:outputText value="#{izmenaOglasa.datumIsticanjaGreska}" />
                                     </div>
 
                                     <h:outputScript library="js" name="quill.js" />
@@ -84,7 +84,7 @@
                                             theme: 'snow'
                                         });
 
-                                        quill.clipboard.dangerouslyPasteHTML('#{novOglas.tekst}');
+                                        quill.clipboard.dangerouslyPasteHTML('#{izmenaOglasa.tekst}');
                                     </script>
                                 </div>
                             </div>
@@ -92,22 +92,22 @@
                             <div class="row form-step-buttons-row">
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Nazad na profil"
+                                        <b:commandButton value="Nazad na oglas"
                                                          styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true"
+                                                         action="oglas?faces-redirect=true"
                                                          ajax="true" >
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                            <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{izmenaOglasa.oglas}" />
                                         </b:commandButton>
                                     </b:carouselControl>
                                 </div>
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Kreirajte oglas"
+                                        <b:commandButton value="Izmenite oglas"
                                                          styleClass="form-step-button"
                                                          style="background-color: #4c4c4c !important; margin-right: 15px"
                                                          ajax="true"
                                                          update="nov_oglas"
-                                                         onclick="javascript:editorToTextarea(); ajax:novOglas.kreirajOglas();"
+                                                         onclick="javascript:editorToTextarea(); ajax:izmenaOglasa.izmeniOglas();"
                                                          />
                                     </b:carouselControl>
 

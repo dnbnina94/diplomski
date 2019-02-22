@@ -107,7 +107,7 @@
                                         </div>
                                         <b:commandButton styleClass="remove-file-btn" disabled="#{novaVest.thumbnail == null ? 'true' : 'false'}"
                                                          ajax="true"
-                                                         update="thumbnailWrapper thumbnailGreskaWrapper thumbnail novaVestValidacija"
+                                                         update="thumbnailWrapper thumbnailGreskaWrapper thumbnail buttons novaVestValidacija"
                                                          onclick="ajax:novaVest.removeThumbnail();">
                                             <b:icon value="remove" />
                                         </b:commandButton>
@@ -132,39 +132,42 @@
                                 </div>
                             </div>
 
-                            <div class="row form-step-buttons-row">
-                                <div class="col-md-6">
-                                    <b:carouselControl >
-                                        <b:commandButton value="Nazad na profil"
-                                                         styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true">
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
-                                        </b:commandButton>
-                                    </b:carouselControl>
-                                </div>
-                                <div class="col-md-6">
-                                    <b:carouselControl >
-                                        <b:commandButton value="Kreirajte vest"
-                                                         styleClass="form-step-button"
-                                                         style="background-color: #4c4c4c !important; margin-right: 15px"
-                                                         ajax="true"
-                                                         update="nova_vest"
-                                                         onclick="javascript:editorToTextarea(); ajax:novaVest.kreirajVest();"
-                                                         />
-                                    </b:carouselControl>
+                            <h:panelGroup id="buttons">
+                                <div class="row form-step-buttons-row">
+                                    <div class="col-md-6">
+                                        <b:carouselControl >
+                                            <b:commandButton value="Nazad na profil"
+                                                             styleClass="form-step-button"
+                                                             action="organizacija?faces-redirect=true"
+                                                             ajax="true" >
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                            </b:commandButton>
+                                        </b:carouselControl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <b:carouselControl >
+                                            <b:commandButton value="Kreirajte vest"
+                                                             styleClass="form-step-button"
+                                                             style="background-color: #4c4c4c !important; margin-right: 15px"
+                                                             ajax="true"
+                                                             update="nova_vest"
+                                                             onclick="javascript:editorToTextarea(); ajax:novaVest.kreirajVest();"
+                                                             />
+                                        </b:carouselControl>
 
-                                    <script>
-                                        function editorToTextarea() {
-                                            if (quill.getText().trim().length === 0) {
-                                                $("#input_nova_vest\\:tekst").val("");
-                                            } else {
-                                                var editorVal = $(".ql-editor").html();
-                                                $("#input_nova_vest\\:tekst").val(editorVal);
+                                        <script>
+                                            function editorToTextarea() {
+                                                if (quill.getText().trim().length === 0) {
+                                                    $("#input_nova_vest\\:tekst").val("");
+                                                } else {
+                                                    var editorVal = $(".ql-editor").html();
+                                                    $("#input_nova_vest\\:tekst").val(editorVal);
+                                                }
                                             }
-                                        }
-                                    </script>
+                                        </script>
+                                    </div>
                                 </div>
-                            </div>
+                            </h:panelGroup>
 
                             <h:panelGroup id="novaVestValidacija">
                                 <h:outputScript library="js" name="novaVestValidacija.js" />

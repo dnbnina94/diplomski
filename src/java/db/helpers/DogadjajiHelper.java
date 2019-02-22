@@ -343,5 +343,22 @@ public class DogadjajiHelper {
             session.close();
         }
     }
+    
+    public void updateDogadjaj(Dogadjaji dogadjaj) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            session.update(dogadjaj);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
 
 }

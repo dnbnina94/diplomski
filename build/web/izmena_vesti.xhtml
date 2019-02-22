@@ -137,10 +137,11 @@
                             <div class="row form-step-buttons-row">
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Nazad na profil"
+                                        <b:commandButton value="Nazad na vest"
                                                          styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true">
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                                         action="vest?faces-redirect=true"
+                                                         ajax="true" >
+                                            <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{izmenaVesti.vest}" />
                                         </b:commandButton>
                                     </b:carouselControl>
                                 </div>

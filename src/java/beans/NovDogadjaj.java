@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 
 /**
@@ -367,7 +368,7 @@ public class NovDogadjaj {
 
             novDogadjaj.setIdDogadjaj(idDogadjaj);
             novDogadjaj.setNaslov(naslov);
-            novDogadjaj.setTekst(Jsoup.clean(tekst, Whitelist.basic().addTags("h1", "h2", "h3")));
+            novDogadjaj.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
             novDogadjaj.setKategorija(kategorija);
 
             StavkeSifarnika mestoDog = stavkeHelper.getStavkaByNaziv(mesto);

@@ -94,7 +94,8 @@
                                     <b:carouselControl >
                                         <b:commandButton value="Nazad na profil"
                                                          styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true">
+                                                         action="organizacija?faces-redirect=true"
+                                                         ajax="true" >
                                             <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
                                         </b:commandButton>
                                     </b:carouselControl>

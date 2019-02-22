@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.jsoup.Jsoup;
 
 /**
@@ -191,7 +193,8 @@ public class Dogadjaji implements java.io.Serializable {
         String thumbnailUrl;
         
         if (thumbnail == null) {
-            thumbnailUrl = "url('/diplomski/faces/javax.faces.resource/thumbnail.png?ln=img')";
+            HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            thumbnailUrl = "url('"+ origRequest.getContextPath() + "/faces/javax.faces.resource/thumbnail.png?ln=img')";
         } else {
             thumbnailUrl = "url(/dogadjaji/" + thumbnail + ")";
         }

@@ -31,38 +31,38 @@
                 <div class="row page-content">
                     <div class="col-md-9">
                         <div class="stripe-line-header news-category-header">
-                            <div>Nov događaj</div>     
+                            <div>Izmena događaja</div>     
                         </div>
 
                         <h:form id="nov_dogadjaj" enctype="multipart/form-data">
 
                             <div class="container-w-red-header-header" style="margin-top: 20px">
-                                Kreirajte nov događaj
+                                Izmenite događaj
                             </div>
                             <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; padding-bottom: 20px; margin-bottom: 15px !important" >
                                 <div class="col-md-12" style="padding: 0px !important">
                                     <h:outputText value="Naslov događaja:" styleClass="login-form-label" />
                                     <b:inputText id="naslov"
-                                                 styleClass="#{novDogadjaj.naslovGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                 value="#{novDogadjaj.naslov }"
+                                                 styleClass="#{izmenaDogadjaja.naslovGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                 value="#{izmenaDogadjaja.naslov}"
                                                  placeholder="Unesite naslov događaja" />
-                                    <div id="naslovGreska" class="#{novDogadjaj.naslovGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                        <h:outputText value="#{novDogadjaj.naslovGreska}" />
+                                    <div id="naslovGreska" class="#{izmenaDogadjaja.naslovGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <h:outputText value="#{izmenaDogadjaja.naslovGreska}" />
                                     </div>
 
                                     <h:outputText value="Kategorija događaja:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
-                                    <b:selectOneMenu id="kategorija" value="#{novDogadjaj.kategorija}" styleClass="place-select" select2="true">
+                                    <b:selectOneMenu id="kategorija" value="#{izmenaDogadjaja.kategorija}" styleClass="place-select" select2="true">
                                         <f:selectItem itemLabel="Izaberite kategoriju događaja" itemValue="#{null}" />
                                         <f:selectItems value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorija" itemLabel="#{kategorija.naziv}" itemValue="#{kategorija}" />
                                     </b:selectOneMenu>
                                     <h:panelGroup id="kategorijaGreskaWrapper">
-                                        <div id="kategorijaGreska" class="#{novDogadjaj.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="kategorijaGreska" class="#{izmenaDogadjaja.kategorijaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px">
-                                            <h:outputText value="#{novDogadjaj.kategorijaGreska}" />
+                                            <h:outputText value="#{izmenaDogadjaja.kategorijaGreska}" />
                                         </div>
                                     </h:panelGroup>
-                                    <c:if test="#{novDogadjaj.kategorijaGreska != ''}">
+                                    <c:if test="#{izmenaDogadjaja.kategorijaGreska != ''}">
                                         <style>
                                             #nov_dogadjaj\:kategorija {
                                                 border: 1px solid #DC3545;
@@ -74,14 +74,14 @@
                                     <h:outputText value="Tekst događaja:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
                                     <h:panelGroup id="tekstWrapperPanelGroup">
-                                        <div id="tekstWrapper" style="#{novDogadjaj.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
+                                        <div id="tekstWrapper" style="#{izmenaDogadjaja.tekstGreska == '' ? '' : 'border-color: #DC3545'}">
                                         </div>
                                     </h:panelGroup>
-                                    <b:inputTextarea style="display: none" id="tekst" value="#{novDogadjaj.tekst}" />
+                                    <b:inputTextarea style="display: none" id="tekst" value="#{izmenaDogadjaja.tekst}" />
                                     <h:panelGroup>
-                                        <div id="tekstGreska" class="#{novDogadjaj.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="tekstGreska" class="#{izmenaDogadjaja.tekstGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px" >
-                                            <h:outputText value="#{novDogadjaj.tekstGreska}" />
+                                            <h:outputText value="#{izmenaDogadjaja.tekstGreska}" />
                                         </div>
                                     </h:panelGroup>
 
@@ -92,7 +92,9 @@
                                             theme: 'snow'
                                         });
 
-                                        quill.clipboard.dangerouslyPasteHTML('#{novDogadjaj.tekst}');
+                                        quill.clipboard.dangerouslyPasteHTML('#{izmenaDogadjaja.tekst}');
+
+                                        $('*[data-label="#{izmenaDogadjaja.kategorija.naziv}"]').attr('selected', 'selected');
                                     </script>
 
                                     <div style="height: 10px"></div>
@@ -103,29 +105,29 @@
                                             <button class="custom-file-input-btn">
                                                 <b:icon value="upload" style="font-size: 12px" />
                                                 &nbsp;
-                                                <c:if test="#{novDogadjaj.thumbnail == null}">
+                                                <c:if test="#{izmenaDogadjaja.thumbnailName != null}">
+                                                    <h:outputText value="#{izmenaDogadjaja.thumbnailName}" />
+                                                </c:if>
+                                                <c:if test="#{izmenaDogadjaja.thumbnailName == null}">
                                                     <h:outputText value="Odaberite sliku" />
                                                 </c:if>
-                                                <c:if test="#{novDogadjaj.thumbnail != null}">
-                                                    <h:outputText value="#{novDogadjaj.thumbnail.submittedFileName}" />
-                                                </c:if>
                                             </button>
-                                            <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{novDogadjaj.thumbnail}">
-                                                <f:ajax listener="#{novDogadjaj.uploadThumbnail}"
+                                            <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{izmenaDogadjaja.thumbnail}">
+                                                <f:ajax listener="#{izmenaDogadjaja.uploadThumbnail}"
                                                         render="thumbnailWrapper thumbnailGreskaWrapper thumbnail novDogadjajValidacija" />
                                             </h:inputFile>
                                         </div>
-                                        <b:commandButton styleClass="remove-file-btn" disabled="#{novDogadjaj.thumbnail == null ? 'true' : 'false'}"
+                                        <b:commandButton styleClass="remove-file-btn" disabled="#{izmenaDogadjaja.thumbnailName == null ? 'true' : 'false'}"
                                                          ajax="true"
                                                          update="thumbnailWrapper thumbnailGreskaWrapper thumbnail novDogadjajValidacija"
-                                                         onclick="ajax:novDogadjaj.removeThumbnail();">
+                                                         onclick="ajax:izmenaDogadjaja.removeThumbnail();">
                                             <b:icon value="remove" />
                                         </b:commandButton>
                                     </h:panelGroup> 
                                     <h:panelGroup id="thumbnailGreskaWrapper">
-                                        <div id="thumbnailGreska" class="#{novDogadjaj.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="thumbnailGreska" class="#{izmenaDogadjaja.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-bottom: 0px">
-                                            <h:outputText value="#{novDogadjaj.thumbnailGreska}" />
+                                            <h:outputText value="#{izmenaDogadjaja.thumbnailGreska}" />
                                         </div>
                                     </h:panelGroup>
 
@@ -134,26 +136,26 @@
                                         <div class="col-md-6">
                                             <h:outputText value="Mesto: " styleClass="login-form-label" />
                                             <b:inputText id="mesto"
-                                                         styleClass="#{novDogadjaj.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                         styleClass="#{izmenaDogadjaja.mestoGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
                                                          placeholder="Npr. Beograd" 
                                                          typeahead="true" 
                                                          typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.mesta)}" 
-                                                         value="#{novDogadjaj.mesto}" />
-                                            <div id="mestoGreska" class="#{novDogadjaj.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                <h:outputText value="#{novDogadjaj.mestoGreska}" />
+                                                         value="#{izmenaDogadjaja.mesto}" />
+                                            <div id="mestoGreska" class="#{izmenaDogadjaja.mestoGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{izmenaDogadjaja.mestoGreska}" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <h:outputText value="Ulica: " styleClass="login-form-label" />
                                             <b:inputText id="ulica"
-                                                         styleClass="#{novDogadjaj.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                         styleClass="#{izmenaDogadjaja.ulicaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
                                                          placeholder="Npr. Bulevar Kralja Aleksandra 73" 
                                                          typeahead="true" 
                                                          typeahead-values="#{kategorijeSifarnika.StringList(kategorijeSifarnika.ulice)}"
-                                                         value="#{novDogadjaj.ulica}" />
-                                            <div id="ulicaGreska" class="#{novDogadjaj.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                <h:outputText value="#{novDogadjaj.ulicaGreska}" />
+                                                         value="#{izmenaDogadjaja.ulica}" />
+                                            <div id="ulicaGreska" class="#{izmenaDogadjaja.ulicaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{izmenaDogadjaja.ulicaGreska}" />
                                             </div>
                                         </div>
 
@@ -166,13 +168,13 @@
                                             <div style="height: 5px"></div>
                                             <b:datepicker id="datumPocetka"
                                                           mode='popup-icon' 
-                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.datumPocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
-                                                          #{novDogadjaj.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{izmenaDogadjaja.datumPocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                          #{izmenaDogadjaja.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                           placeholder='Izaberite datum i vreme početka događaja'
-                                                          value="#{novDogadjaj.datumPocetka}" />
-                                            <div id="datumPocetkaGreska" class="#{novDogadjaj.datumPocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                          value="#{izmenaDogadjaja.datumPocetka}" />
+                                            <div id="datumPocetkaGreska" class="#{izmenaDogadjaja.datumPocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
-                                                <h:outputText value="#{novDogadjaj.datumPocetkaGreska}" />
+                                                <h:outputText value="#{izmenaDogadjaja.datumPocetkaGreska}" />
                                             </div>
                                         </div>
 
@@ -182,20 +184,20 @@
                                             <b:dateTimePicker id="vremePocetka"
                                                               mode='popup-icon' 
                                                               show-date="false"
-                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.vremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
-                                                              #{novDogadjaj.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{izmenaDogadjaja.vremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{izmenaDogadjaja.datumIVremePocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                               placeholder='Izaberite datum i vreme početka događaja'
                                                               iconAwesome="clock-o"
-                                                              value="#{novDogadjaj.vremePocetka}" />
-                                            <div id="vremePocetkaGreska" class="#{novDogadjaj.vremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                              value="#{izmenaDogadjaja.vremePocetka}" />
+                                            <div id="vremePocetkaGreska" class="#{izmenaDogadjaja.vremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
-                                                <h:outputText value="#{novDogadjaj.vremePocetkaGreska}" />
+                                                <h:outputText value="#{izmenaDogadjaja.vremePocetkaGreska}" />
                                             </div>
                                         </div>
 
-                                        <div id="datumIVremePocetkaGreska" class="col-md-12 #{novDogadjaj.datumIVremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="datumIVremePocetkaGreska" class="col-md-12 #{izmenaDogadjaja.datumIVremePocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px">
-                                            <h:outputText id="datumIVremePocetkaGreskaVal" value="#{novDogadjaj.datumIVremePocetkaGreska}" />
+                                            <h:outputText id="datumIVremePocetkaGreskaVal" value="#{izmenaDogadjaja.datumIVremePocetkaGreska}" />
                                         </div>
 
                                     </div>
@@ -207,13 +209,13 @@
                                             <div style="height: 5px"></div>
                                             <b:datepicker id="datumKraja"
                                                           mode='popup-icon' 
-                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.datumKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'} 
-                                                          #{novDogadjaj.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                          styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{izmenaDogadjaja.datumKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'} 
+                                                          #{izmenaDogadjaja.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                           placeholder='Izaberite datum i vreme kraja događaja'
-                                                          value="#{novDogadjaj.datumKraja}" />
-                                            <div id="datumKrajaGreska" class="#{novDogadjaj.datumKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                          value="#{izmenaDogadjaja.datumKraja}" />
+                                            <div id="datumKrajaGreska" class="#{izmenaDogadjaja.datumKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
-                                                <h:outputText value="#{novDogadjaj.datumKrajaGreska}" />
+                                                <h:outputText value="#{izmenaDogadjaja.datumKrajaGreska}" />
                                             </div>
                                         </div>
 
@@ -223,20 +225,20 @@
                                             <b:dateTimePicker id="vremeKraja"
                                                               mode='popup-icon' 
                                                               show-date="false"
-                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{novDogadjaj.vremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
-                                                              #{novDogadjaj.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{izmenaDogadjaja.vremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{izmenaDogadjaja.datumIVremeKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
                                                               placeholder='Izaberite datum i vreme kraja događaja'
                                                               iconAwesome="clock-o"
-                                                              value="#{novDogadjaj.vremeKraja}" />
-                                            <div id="vremeKrajaGreska" class="#{novDogadjaj.vremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                              value="#{izmenaDogadjaja.vremeKraja}" />
+                                            <div id="vremeKrajaGreska" class="#{izmenaDogadjaja.vremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                                  style="margin-top: 5px; margin-bottom: 0px">
-                                                <h:outputText value="#{novDogadjaj.vremeKrajaGreska}" />
+                                                <h:outputText value="#{izmenaDogadjaja.vremeKrajaGreska}" />
                                             </div>
                                         </div>
 
-                                        <div id="datumIVremeKrajaGreska" class="col-md-12 #{novDogadjaj.datumIVremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="datumIVremeKrajaGreska" class="col-md-12 #{izmenaDogadjaja.datumIVremeKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px">
-                                            <h:outputText id="datumIVremeKrajaGreskaVal" value="#{novDogadjaj.datumIVremeKrajaGreska}" />
+                                            <h:outputText id="datumIVremeKrajaGreskaVal" value="#{izmenaDogadjaja.datumIVremeKrajaGreska}" />
                                         </div>
 
                                     </div>
@@ -244,23 +246,27 @@
                                     <div style="height: 10px"></div>
                                     <h:outputText value="Uzrast:" styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
-                                    <b:selectOneMenu id="uzrast" value="#{novDogadjaj.uzrast}" styleClass="place-select" select2="true">
+                                    <b:selectOneMenu id="uzrast" value="#{izmenaDogadjaja.uzrast}" styleClass="place-select" select2="true">
                                         <f:selectItem itemLabel="Izaberite uzrast kome je događaj namenjen" itemValue="#{null}" />
                                         <f:selectItems value="#{pretragaDogadjaja.uzrasti}" var="uzrast" itemLabel="#{uzrast.naziv}" itemValue="#{uzrast}" />
                                     </b:selectOneMenu>
                                     <h:panelGroup id="uzrastGreskaWrapper">
-                                        <div id="uzrastGreska" class="#{novDogadjaj.uzrastGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="uzrastGreska" class="#{izmenaDogadjaja.uzrastGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px">
-                                            <h:outputText value="#{novDogadjaj.uzrastGreska}" />
+                                            <h:outputText value="#{izmenaDogadjaja.uzrastGreska}" />
                                         </div>
                                     </h:panelGroup>
-                                    <c:if test="#{novDogadjaj.uzrastGreska != ''}">
+                                    <c:if test="#{izmenaDogadjaja.uzrastGreska != ''}">
                                         <style>
                                             #nov_dogadjaj\:uzrast {
                                                 border: 1px solid #DC3545;
                                             }
                                         </style>
                                     </c:if>
+
+                                    <script>
+                                        $('*[data-label="#{izmenaDogadjaja.uzrast.naziv}"]').attr('selected', 'selected');
+                                    </script>
 
                                     <div style="height: 10px"></div>
                                     <h:outputText value="Karakteristike prostora:" styleClass="login-form-label" />
@@ -272,7 +278,7 @@
                                     </span>
                                     <br/>
                                     <h:panelGroup id="karakteristikeProstoraWrapper">
-                                        <ui:repeat id="karakteristikeProstora" value="#{novDogadjaj.karakteristikeProstora}" var="karakteristikaProstora" varStatus="status">
+                                        <ui:repeat id="karakteristikeProstora" value="#{izmenaDogadjaja.karakteristikeProstora}" var="karakteristikaProstora" varStatus="status">
                                             <div class="custom-tag">
                                                 <h:outputText value="#{karakteristikaProstora.naziv}" />
 
@@ -281,12 +287,12 @@
                                                                  styleClass="remove-field-button" 
                                                                  ajax="true"
                                                                  update="@form:karakteristikaProstora @form:karakteristikeProstoraWrapper @form:novDogadjajValidacija @form:karakteristikeProstoraGreskaWrapper"
-                                                                 onclick="ajax:novDogadjaj.removeKarakteristika(status.index)" />
+                                                                 onclick="ajax:izmenaDogadjaja.removeKarakteristika(status.index)" />
                                             </div>
                                         </ui:repeat>
                                     </h:panelGroup>
                                     <div style="height: 5px"></div>
-                                    <b:selectOneMenu id="karakteristikaProstora" value="#{novDogadjaj.karakteristikaProstora}" styleClass="place-select" select2="true">
+                                    <b:selectOneMenu id="karakteristikaProstora" value="#{izmenaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
                                         <f:selectItem itemLabel="Izaberite karakteristike prostora" itemValue="#{null}" />
                                         <f:selectItems value="#{kategorijeSifarnika.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
                                         <f:facet name="append">
@@ -295,17 +301,17 @@
                                                              styleClass="add-field-button" 
                                                              ajax="true" 
                                                              update="karakteristikaProstora karakteristikeProstoraGreskaWrapper novDogadjajValidacija karakteristikeProstoraWrapper" 
-                                                             onclick="ajax:novDogadjaj.addKarakteristika();" 
-                                                             style="border: 1px solid #4c4c4c; #{novDogadjaj.karakteristikeProstoraGreska == '' ? 'margin-top: 0px' : ''}" />
+                                                             onclick="ajax:izmenaDogadjaja.addKarakteristika();" 
+                                                             style="border: 1px solid #4c4c4c; #{izmenaDogadjaja.karakteristikeProstoraGreska == '' ? 'margin-top: 0px' : ''}" />
                                         </f:facet>
                                     </b:selectOneMenu>
                                     <h:panelGroup id="karakteristikeProstoraGreskaWrapper" >
-                                        <div id="karakteristikeProstoraGreska" class="#{novDogadjaj.karakteristikeProstoraGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                        <div id="karakteristikeProstoraGreska" class="#{izmenaDogadjaja.karakteristikeProstoraGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
                                              style="margin-top: 5px; margin-bottom: 0px !important">
-                                            <h:outputText value="#{novDogadjaj.karakteristikeProstoraGreska}" />
+                                            <h:outputText value="#{izmenaDogadjaja.karakteristikeProstoraGreska}" />
                                         </div>
 
-                                        <c:if test="#{novDogadjaj.karakteristikeProstoraGreska != ''}">
+                                        <c:if test="#{izmenaDogadjaja.karakteristikeProstoraGreska != ''}">
                                             <style>
                                                 #nov_dogadjaj\:karakteristikaProstora {
                                                     border: 1px solid #DC3545;
@@ -320,28 +326,28 @@
                             <div class="row form-step-buttons-row">
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Nazad na profil"
+                                        <b:commandButton value="Nazad na događaj"
                                                          styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true"
+                                                         action="dogadjaj?faces-redirect=true"
                                                          ajax="true" >
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{korisnikBean.korisnik.organizacije}" />
+                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{izmenaDogadjaja.dogadjaj}" />
                                         </b:commandButton>
                                     </b:carouselControl>
                                 </div>
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Kreirajte događaj"
+                                        <b:commandButton value="Izmenite događaj"
                                                          styleClass="form-step-button"
                                                          style="background-color: #4c4c4c !important; margin-right: 15px"
                                                          ajax="true"
                                                          update="nov_dogadjaj"
-                                                         onclick="javascript:editorToTextarea(); ajax:novDogadjaj.kreirajDogadjaj();"
+                                                         onclick="javascript:editorToTextarea(); ajax:izmenaDogadjaja.izmeniDogadjaj();"
                                                          />
                                     </b:carouselControl>
 
                                     <script>
                                         $('[data-toggle="tooltip"]').tooltip();
-                                        
+
                                         function editorToTextarea() {
                                             if (quill.getText().trim().length === 0) {
                                                 $("#input_nov_dogadjaj\\:tekst").val("");

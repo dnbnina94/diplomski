@@ -173,6 +173,29 @@
                                     <div style="margin-top: 20px;">
                                         <div style="display: inline-block">
                                             <b:commandButton class="read-more-button" 
+                                                             style="background-color: orangered !important;" 
+                                                             value="Izmeni događaj"
+                                                             action="izmena_dogadjaja?faces-redirect=true"
+                                                             ajax="true" >
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.kategorija}" value="#{pretragaDogadjaja.dogadjaj.kategorija}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.naslov}" value="#{pretragaDogadjaja.dogadjaj.naslov}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.tekst}" value="#{pretragaDogadjaja.dogadjaj.tekst}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.thumbnailName}" value="#{pretragaDogadjaja.dogadjaj.thumbnail}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.menjanThumbnail}" value="#{false}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.datumPocetka}" value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.datumKraja}" value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.vremePocetka}" value="#{pretragaDogadjaja.dogadjaj.datumDogadjaja}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.vremeKraja}" value="#{pretragaDogadjaja.dogadjaj.datumIsticanja}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.uzrast}" value="#{pretragaDogadjaja.dogadjaj.uzrast}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.mesto}" value="#{pretragaDogadjaja.dogadjaj.mesto.naziv}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.ulica}" value="#{pretragaDogadjaja.dogadjaj.ulica.naziv}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.karakteristikeProstoraList}" value="#{pretragaDogadjaja.dogadjaj.karakteristikeToList()}" />
+                                                <f:setPropertyActionListener target="#{izmenaDogadjaja.dogadjaj}" value="#{pretragaDogadjaja.dogadjaj}" />
+                                            </b:commandButton>
+                                        </div>
+                                        
+                                        <div style="display: inline-block">
+                                            <b:commandButton class="read-more-button" 
                                                              ajax="true"
                                                              style="background-color: #ccc !important;" 
                                                              value="Obriši događaj"
