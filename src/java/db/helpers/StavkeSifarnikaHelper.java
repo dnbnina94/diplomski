@@ -9,6 +9,7 @@ import db.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -112,6 +113,29 @@ public class StavkeSifarnikaHelper {
             else
                 return stavkeSifarnika.get(stavkeSifarnika.size()-1).getIdStavka();
             
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Sifarnici> getSifarnici() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Sifarnici.class);
+            List<Sifarnici> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

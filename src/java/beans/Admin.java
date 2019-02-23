@@ -9,11 +9,15 @@ import db.Dogadjaji;
 import db.Korisnici;
 import db.Oglasi;
 import db.Organizacije;
+import db.Sifarnici;
+import db.StavkeSifarnika;
 import db.Vesti;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KorisniciHelper;
 import db.helpers.OglasiHelper;
+import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -35,11 +39,19 @@ public class Admin {
     private Vesti selektovanaVestBrisanje;
     private Vesti selektovanaVestArhiviranje;
     private Oglasi selektovanOglasBrisanje;
+    private List<Sifarnici> sifarnici;
+    private int pageSifarnici;
+    private List<StavkeSifarnika> stavkeSifarnika;
+    private StavkeSifarnika selectedStavkaSifarnikaIzmena;
+    private StavkeSifarnika selectedStavkaSifarnikaBrisanje;
+    private String stavka;
+    private String stavkaGreska = "";
 
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private VestiHelper vestiHelper = new VestiHelper();
     private OglasiHelper oglasiHelper = new OglasiHelper();
+    private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
 
     class SortKorisniciByKorIme implements Comparator<Korisnici> {
 
@@ -49,10 +61,36 @@ public class Admin {
         }
 
     }
+    
+    class SortSifarniciById implements Comparator<Sifarnici> {
+        
+        @Override
+        public int compare(Sifarnici a, Sifarnici b) {
+            return a.getIdSifarnik()-b.getIdSifarnik();
+        }
+        
+    }
+    
+    class SortStavkeSifarnikaById implements Comparator<StavkeSifarnika> {
+        
+        @Override
+        public int compare(StavkeSifarnika a, StavkeSifarnika b) {
+            return a.getIdStavka()-b.getIdStavka();
+        }
+        
+    }
 
     public Admin() {
         korisnici = korisniciHelper.getNeodobreniKorisnici();
         Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
+        
+        sifarnici = stavkeHelper.getSifarnici();
+        Collections.sort(sifarnici, new Admin.SortSifarniciById());
+        
+        pageSifarnici = sifarnici.get(0).getIdSifarnik();
+        
+        stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
+        Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
     }
 
     public List<Korisnici> getKorisnici() {
@@ -212,6 +250,77 @@ public class Admin {
     
     public void izmeniVest() {
         
+    }
+
+    public List<Sifarnici> getSifarnici() {
+        return sifarnici;
+    }
+
+    public void setSifarnici(List<Sifarnici> sifarnici) {
+        this.sifarnici = sifarnici;
+    }
+
+    public int getPageSifarnici() {
+        return pageSifarnici;
+    }
+
+    public void setPageSifarnici(int pageSifarnici) {
+        this.pageSifarnici = pageSifarnici;
+        
+        stavkeSifarnika = new ArrayList<StavkeSifarnika>(stavkeHelper.getStavkeByIdSifarnik(pageSifarnici).getStavkeSifarnikas());
+        Collections.sort(stavkeSifarnika, new SortStavkeSifarnikaById());
+    }
+
+    public List<StavkeSifarnika> getStavkeSifarnika() {
+        return stavkeSifarnika;
+    }
+
+    public void setStavkeSifarnika(List<StavkeSifarnika> stavkeSifarnika) {
+        this.stavkeSifarnika = stavkeSifarnika;
+    }
+    
+    public void izmeniStavku() {
+        if (selectedStavkaSifarnikaIzmena != null) {
+            
+        }
+    }
+
+    public StavkeSifarnika getSelectedStavkaSifarnikaIzmena() {
+        return selectedStavkaSifarnikaIzmena;
+    }
+
+    public void setSelectedStavkaSifarnikaIzmena(StavkeSifarnika selectedStavkaSifarnikaIzmena) {
+        this.selectedStavkaSifarnikaIzmena = selectedStavkaSifarnikaIzmena;
+    }
+
+    public StavkeSifarnika getSelectedStavkaSifarnikaBrisanje() {
+        return selectedStavkaSifarnikaBrisanje;
+    }
+
+    public void setSelectedStavkaSifarnikaBrisanje(StavkeSifarnika selectedStavkaSifarnikaBrisanje) {
+        this.selectedStavkaSifarnikaBrisanje = selectedStavkaSifarnikaBrisanje;
+    }
+    
+    public void obrisiStavku() {
+        if (getSelectedStavkaSifarnikaBrisanje() != null) {
+            
+        }
+    }
+
+    public String getStavka() {
+        return stavka;
+    }
+
+    public void setStavka(String stavka) {
+        this.stavka = stavka;
+    }
+
+    public String getStavkaGreska() {
+        return stavkaGreska;
+    }
+
+    public void setStavkaGreska(String stavkaGreska) {
+        this.stavkaGreska = stavkaGreska;
     }
 
 }
