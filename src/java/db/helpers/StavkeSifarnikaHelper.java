@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -136,6 +137,58 @@ public class StavkeSifarnikaHelper {
             session.getTransaction().commit();
             
             return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public StavkeSifarnika getStavkeSifarnikaBySifarnikAndNaziv (int sifarnik, String stavka, int idStavka) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(StavkeSifarnika.class);
+            c.add(Restrictions.eq("naziv", stavka));
+            c.add(Restrictions.eq("sifarnici.idSifarnik", sifarnik));
+            c.add(Restrictions.ne("idStavka", idStavka));
+            
+            List<StavkeSifarnika> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            if (l.isEmpty()) {
+                return null;
+            } else
+                return l.get(0);
+            
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateStavka(StavkeSifarnika stavka) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            session.update(stavka);
+            
+            session.getTransaction().commit();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

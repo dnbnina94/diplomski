@@ -46,6 +46,7 @@ public class Admin {
     private StavkeSifarnika selectedStavkaSifarnikaBrisanje;
     private String stavka;
     private String stavkaGreska = "";
+    private String closeModalScript;
 
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
@@ -61,34 +62,34 @@ public class Admin {
         }
 
     }
-    
+
     class SortSifarniciById implements Comparator<Sifarnici> {
-        
+
         @Override
         public int compare(Sifarnici a, Sifarnici b) {
-            return a.getIdSifarnik()-b.getIdSifarnik();
+            return a.getIdSifarnik() - b.getIdSifarnik();
         }
-        
+
     }
-    
+
     class SortStavkeSifarnikaById implements Comparator<StavkeSifarnika> {
-        
+
         @Override
         public int compare(StavkeSifarnika a, StavkeSifarnika b) {
-            return a.getIdStavka()-b.getIdStavka();
+            return a.getIdStavka() - b.getIdStavka();
         }
-        
+
     }
 
     public Admin() {
         korisnici = korisniciHelper.getNeodobreniKorisnici();
         Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
-        
+
         sifarnici = stavkeHelper.getSifarnici();
         Collections.sort(sifarnici, new Admin.SortSifarniciById());
-        
+
         pageSifarnici = sifarnici.get(0).getIdSifarnik();
-        
+
         stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
     }
@@ -165,7 +166,7 @@ public class Admin {
         if (selektovanKorisnikPrihvatanje != null) {
             selektovanKorisnikPrihvatanje.setOdobren(true);
             korisniciHelper.updateKorisnikOdobren(selektovanKorisnikPrihvatanje);
-            
+
             this.setPage(page);
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste odobrili korisnikov zahtev za registraciju.", null);
@@ -182,11 +183,11 @@ public class Admin {
     public void setSelektovanDogadjajBrisanje(Dogadjaji selektovanDogadjajBrisanje) {
         this.selektovanDogadjajBrisanje = selektovanDogadjajBrisanje;
     }
-    
+
     public void obrisiDogadjaj() {
         if (selektovanDogadjajBrisanje != null) {
             dogadjajiHelper.obrisiDogadjaj(selektovanDogadjajBrisanje);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali događaj.", null);
             FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -200,11 +201,11 @@ public class Admin {
     public void setSelektovanaVestBrisanje(Vesti selektovanaVestBrisanje) {
         this.selektovanaVestBrisanje = selektovanaVestBrisanje;
     }
-    
+
     public void obrisiVest() {
         if (selektovanaVestBrisanje != null) {
             vestiHelper.obrisiVest(selektovanaVestBrisanje);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -218,12 +219,12 @@ public class Admin {
     public void setSelektovanaVestArhiviranje(Vesti selektovanaVestArhiviranje) {
         this.selektovanaVestArhiviranje = selektovanaVestArhiviranje;
     }
-    
+
     public void arhivirajVest() {
         if (selektovanaVestArhiviranje != null) {
             selektovanaVestArhiviranje.setArhivirana(1);
             vestiHelper.arhiviranjeVesti(selektovanaVestArhiviranje);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste arhivirali vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -237,19 +238,19 @@ public class Admin {
     public void setSelektovanOglasBrisanje(Oglasi selektovanOglasBrisanje) {
         this.selektovanOglasBrisanje = selektovanOglasBrisanje;
     }
-    
+
     public void obrisiOglas() {
         if (selektovanOglasBrisanje != null) {
             oglasiHelper.obrisiOglas(selektovanOglasBrisanje);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali oglas.", null);
             FacesContext.getCurrentInstance().addMessage("oglas:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
     }
-    
+
     public void izmeniVest() {
-        
+
     }
 
     public List<Sifarnici> getSifarnici() {
@@ -266,7 +267,7 @@ public class Admin {
 
     public void setPageSifarnici(int pageSifarnici) {
         this.pageSifarnici = pageSifarnici;
-        
+
         stavkeSifarnika = new ArrayList<StavkeSifarnika>(stavkeHelper.getStavkeByIdSifarnik(pageSifarnici).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new SortStavkeSifarnikaById());
     }
@@ -278,10 +279,60 @@ public class Admin {
     public void setStavkeSifarnika(List<StavkeSifarnika> stavkeSifarnika) {
         this.stavkeSifarnika = stavkeSifarnika;
     }
-    
+
+    public boolean stavkaValidacija() {
+        switch (pageSifarnici) {
+            case 1: {
+                if (stavka.isEmpty()) {
+                    stavkaGreska = "Polje 'Kategorija vesti' ne sme ostati prazno.";
+                    return false;
+                }
+
+                stavkaGreska = "";
+                return true;
+            }
+            case 2: {
+                break;
+            }
+            case 3: {
+                break;
+            }
+            case 4: {
+                break;
+            }
+            case 5: {
+                break;
+            }
+            case 6: {
+                break;
+            }
+            case 7: {
+                break;
+            }
+        }
+
+        return true;
+    }
+
     public void izmeniStavku() {
         if (selectedStavkaSifarnikaIzmena != null) {
-            
+            if (stavkaValidacija()) {
+                if (stavkeHelper.getStavkeSifarnikaBySifarnikAndNaziv(pageSifarnici, stavka, selectedStavkaSifarnikaIzmena.getIdStavka()) == null) {
+                    selectedStavkaSifarnikaIzmena.setNaziv(stavka);
+                    stavkeHelper.updateStavka(selectedStavkaSifarnikaIzmena);
+
+                    stavkaGreska = "";
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspesno ste izmenili stavku sifarnika.", null);
+                    FacesContext.getCurrentInstance().addMessage("prijava:growl-success", message);
+                    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                    closeModalScript = "$('#sifarnici\\\\:amodal_izmena').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');";
+                } else {
+                    stavkaGreska = "Stavka sifarnika sa zadatim nazivom vec postoji.";
+                    closeModalScript = "";
+                }
+            } else {
+                closeModalScript = "";
+            }
         }
     }
 
@@ -300,10 +351,10 @@ public class Admin {
     public void setSelectedStavkaSifarnikaBrisanje(StavkeSifarnika selectedStavkaSifarnikaBrisanje) {
         this.selectedStavkaSifarnikaBrisanje = selectedStavkaSifarnikaBrisanje;
     }
-    
+
     public void obrisiStavku() {
         if (getSelectedStavkaSifarnikaBrisanje() != null) {
-            
+
         }
     }
 
@@ -321,6 +372,14 @@ public class Admin {
 
     public void setStavkaGreska(String stavkaGreska) {
         this.stavkaGreska = stavkaGreska;
+    }
+
+    public String getCloseModalScript() {
+        return closeModalScript;
+    }
+    
+    public void setCloseModalScript(String closeModalScript) {
+        this.closeModalScript = closeModalScript;
     }
 
 }

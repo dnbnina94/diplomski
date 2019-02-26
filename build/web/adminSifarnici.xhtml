@@ -65,16 +65,18 @@
                                         <div class="stripe-line-header-content">Izmena stavke šifarnika</div>
                                     </div>
 
-                                    <div style="margin-top: 20px; margin-bottom: 20px">
-                                        <h:outputText value="#{admin.selectedStavkaSifarnikaIzmena.sifarnici.naziv}:" styleClass="login-form-label" />
-                                        <b:inputText id="stavka"
-                                                     styleClass="#{admin.stavkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                     value="#{admin.stavka }"
-                                                     placeholder="Unesite stavku šifarnika" />
-                                        <div id="naslovGreska" class="#{admin.stavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                            <h:outputText value="#{admin.stavkaGreska}" />
+                                    <h:panelGroup id="stavka_input">
+                                        <div style="margin-top: 20px; margin-bottom: 20px">
+                                            <h:outputText value="#{admin.selectedStavkaSifarnikaIzmena.sifarnici.naziv}:" styleClass="login-form-label" />
+                                            <b:inputText id="stavka"
+                                                         styleClass="#{admin.stavkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                         value="#{admin.stavka }"
+                                                         placeholder="Unesite stavku šifarnika" />
+                                            <div id="naslovGreska" class="#{admin.stavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{admin.stavkaGreska}" />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </h:panelGroup>
 
                                     <script>
                                         $(document).ready(function () {
@@ -89,9 +91,8 @@
                                                                  look="primary" 
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content"
-                                                                 onclick="ajax:admin.izmeniStavku();"
-                                                                 oncomplete="$('#sifarnici\\:amodal_izmena').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                                 update="sifarnici:stavke_sifarnika_content sifarnici:stavka_input sifarnici:close_modal_script"
+                                                                 onclick="ajax:admin.izmeniStavku();" />
                                             </div>
                                             <div class="col-md-6">
                                                 <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
@@ -147,7 +148,7 @@
                             <b:row style="padding-top: 10px !important">
                                 <b:column span="12" class="content">
                                     <h:panelGroup id="stavke_sifarnika_content">
-                                        <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
+                                        <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
                                         <b:dataTable value="#{admin.stavkeSifarnika}" 
                                                      var="stavka"
                                                      border="false"
@@ -189,19 +190,12 @@
                                                 </div>
                                             </b:dataTableColumn>
                                         </b:dataTable>
-                                        <script>
-                                            /*$(".delete-button").on("click", function (event) {
-                                             event.stopImmediatePropagation();
-                                             
-                                             $('#sifarnici\\:amodal_brisanje').modal('show');
-                                             });*/
+                                    </h:panelGroup>
 
-                                            /*$(".edit-button").on("click", function (event) {
-                                             event.stopImmediatePropagation();
-                                             
-                                             $("#sifarnici\\:amodal_izmena").modal("show");
-                                             });*/
-                                        </script>
+                                    <h:panelGroup id="close_modal_script">
+                                        <h:outputScript>
+                                            #{admin.closeModalScript}
+                                        </h:outputScript>
                                     </h:panelGroup>
                                 </b:column>
                             </b:row>
