@@ -57,7 +57,7 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
-                        <h:form id="sifarnici">
+                        <h:form id="sifarnici"  enctype="multipart/form-data">
                             <h:panelGroup rendered='#{admin.selectedStavkaSifarnikaIzmena != null}'>
                                 <b:modal id="amodal_izmena" styleClass="modalPseudoClass">
 
@@ -72,9 +72,45 @@
                                                          styleClass="#{admin.stavkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
                                                          value="#{admin.stavka }"
                                                          placeholder="Unesite stavku šifarnika" />
-                                            <div id="naslovGreska" class="#{admin.stavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                            <div id="stavkaGreska" class="#{admin.stavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                                 <h:outputText value="#{admin.stavkaGreska}" />
                                             </div>
+
+                                            <h:panelGroup rendered="#{admin.selectedStavkaSifarnikaIzmena.sifarnici.idSifarnik == 1 or admin.selectedStavkaSifarnikaIzmena.sifarnici.idSifarnik == 7}">
+                                                <h:outputText value="Thumbnail:" styleClass="login-form-label" />
+                                                <div style="height: 5px"></div>
+                                                <h:panelGroup id="thumbnailWrapper">
+                                                    <div class="upload-btn-wrapper">
+                                                        <button class="custom-file-input-btn">
+                                                            <b:icon value="upload" style="font-size: 12px" />
+                                                            &nbsp;
+                                                            <c:if test="#{admin.thumbnailName != null}">
+                                                                <h:outputText value="#{admin.thumbnailName}" />
+                                                            </c:if>
+                                                            <c:if test="#{admin.thumbnailName == null}">
+                                                                <h:outputText value="Odaberite sliku" />
+                                                            </c:if>
+                                                        </button>
+                                                        <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{admin.thumbnail}" >
+                                                            <f:ajax listener="#{admin.uploadThumbnail}"
+                                                                    execute="@form"
+                                                                    render="thumbnailWrapper thumbnailGreskaWrapper thumbnail sifarniciValidacija stavka_input sifarnici:stavke_sifarnika_content" />
+                                                        </h:inputFile>
+                                                    </div>
+                                                    <b:commandButton styleClass="remove-file-btn" disabled="#{admin.thumbnailName == null ? 'true' : 'false'}"
+                                                                     ajax="true"
+                                                                     update="thumbnailWrapper thumbnailGreskaWrapper thumbnail sifarniciValidacija stavka_input"
+                                                                     onclick="ajax:admin.removeThumbnail();">
+                                                        <b:icon value="remove" />
+                                                    </b:commandButton>
+                                                </h:panelGroup> 
+                                                <h:panelGroup id="thumbnailGreskaWrapper">
+                                                    <div id="thumbnailGreska" class="#{admin.thumbnailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                         style="margin-bottom: 0px">
+                                                        <h:outputText value="#{admin.thumbnailGreska}" />
+                                                    </div>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
                                         </div>
                                     </h:panelGroup>
 
@@ -95,59 +131,69 @@
                                                                  onclick="ajax:admin.izmeniStavku();" />
                                             </div>
                                             <div class="col-md-6">
-                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                                <b:commandButton value="Odustani" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button" 
+                                                                 style="background-color: #ccc !important"
+                                                                 ajax="true"
+                                                                 update="sifarnici:stavke_sifarnika_content"
+                                                                 oncomplete="$('#sifarnici\\:amodal_izmena').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                             </div>
                                         </div>
                                     </f:facet>
                                 </b:modal>
                             </h:panelGroup>
 
-                            <b:modal id="amodal_brisanje" styleClass="modalPseudoClass">
+                            <h:panelGroup rendered="#{admin.selectedStavkaSifarnikaBrisanje != null}">
+                                <b:modal id="amodal_brisanje" styleClass="modalPseudoClass">
 
-                                <div class="stripe-line-header">
-                                    <div class="stripe-line-header-content">Brisanje stavke šifarnika</div>
-                                </div>
-
-                                <div style="margin-top: 40px; margin-bottom: 40px">
-                                    Da li ste sigurni da želite da obrišete ovu stavku šifarnika?
-                                </div>
-
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#sifarnici\\:amodal_brisanje").removeAttr("tabindex");
-                                    });
-                                </script>
-
-                                <f:facet name="footer">
-                                    <div class="row modal-buttons-wrapper">
-                                        <div class="col-md-6">
-                                            <b:commandButton value="Obriši stavku" 
-                                                             look="primary" 
-                                                             styleClass="big-red-button"
-                                                             ajax="true"
-                                                             update="sifarnici:stavke_sifarnika_content"
-                                                             onclick="ajax:admin.obrisiStavku();"
-                                                             oncomplete="$('#sifarnici\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
-                                        </div>
+                                    <div class="stripe-line-header">
+                                        <div class="stripe-line-header-content">Brisanje stavke šifarnika</div>
                                     </div>
-                                </f:facet>
-                            </b:modal>
-                            <b:panel look="primary" id="sifarnici-admin-menu" styleClass="adminMenu">
-                                <b:pillLinks>
-                                    <ui:repeat value="#{admin.sifarnici}" var="sifarnik">
-                                        <b:navLink value="#{sifarnik.naziv}"
-                                                   update="@form @(.content)"
-                                                   style="#{sifarnik.idSifarnik == admin.pageSifarnici ? 'background-color: orangered; color: white !important;' : ''}"
-                                                   onclick="ajax:admin.setPageSifarnici(sifarnik.idSifarnik);" />
-                                    </ui:repeat>
-                                </b:pillLinks>
-                            </b:panel>
-                            <b:row style="padding-top: 10px !important">
-                                <b:column span="12" class="content">
-                                    <h:panelGroup id="stavke_sifarnika_content">
+
+                                    <div style="margin-top: 40px; margin-bottom: 40px">
+                                        <h:outputText rendered="#{admin.postojeEntiteti}" value="#{admin.postojeEntitetiPoruka}" styleClass="text-danger" style="font-weight: bold" />
+                                        <h:outputText rendered="#{!admin.postojeEntiteti}" value="Da li ste sigurni da želite da obrišete ovu stavku šifarnika?" />
+                                    </div>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#sifarnici\\:amodal_brisanje").removeAttr("tabindex");
+                                        });
+                                    </script>
+
+                                    <f:facet name="footer">
+                                        <div class="row modal-buttons-wrapper">
+                                            <div class="col-md-6">
+                                                <b:commandButton value="Obriši stavku" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 ajax="true"
+                                                                 update="sifarnici:stavke_sifarnika_content"
+                                                                 onclick="ajax:admin.obrisiStavku();"
+                                                                 oncomplete="$('#sifarnici\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                            </div>
+                                        </div>
+                                    </f:facet>
+                                </b:modal>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup id="stavke_sifarnika_content">
+                                <b:panel look="primary" id="sifarnici-admin-menu" styleClass="adminMenu">
+                                    <b:pillLinks>
+                                        <ui:repeat value="#{admin.sifarnici}" var="sifarnik">
+                                            <b:navLink value="#{sifarnik.naziv}"
+                                                       update="@form @(.content)"
+                                                       style="#{sifarnik.idSifarnik == admin.pageSifarnici ? 'background-color: orangered; color: white !important;' : ''}"
+                                                       onclick="ajax:admin.setPageSifarnici(sifarnik.idSifarnik);" />
+                                        </ui:repeat>
+                                    </b:pillLinks>
+                                </b:panel>
+                                <b:row style="padding-top: 10px !important">
+                                    <b:column span="12" class="content">
                                         <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
                                         <b:dataTable value="#{admin.stavkeSifarnika}" 
                                                      var="stavka"
@@ -162,6 +208,10 @@
                                                 <div class="row" style="margin: auto;">
                                                     <div class="col-md-6" style="padding: 0px; line-height: 26px">
                                                         <h:outputText value=" #{stavka.naziv}" style="color: orangered !important" />
+                                                        <h:panelGroup rendered="#{stavka.sifarnici.idSifarnik == 1 or stavka.sifarnici.idSifarnik == 7}">
+                                                            <h:outputText value=" " />
+                                                            <img src="#{stavka.getThumbnailSrc()}" style="width: 20px; margin-top: -2px;" />
+                                                        </h:panelGroup>
                                                     </div>
                                                     <div class="col-md-6" style="text-align:right; padding: 0px">
                                                         <div style="display: inline-block">
@@ -174,6 +224,8 @@
                                                                 <f:setPropertyActionListener target="#{admin.selectedStavkaSifarnikaIzmena}" value="#{stavka}" />
                                                                 <f:setPropertyActionListener target="#{admin.stavka}" value="#{stavka.naziv}" />
                                                                 <f:setPropertyActionListener target="#{admin.stavkaGreska}" value="" />
+                                                                <f:setPropertyActionListener target="#{admin.thumbnailName}" value="#{stavka.ikonica}" />
+                                                                <f:setPropertyActionListener target="#{admin.menjanThumbnail}" value="#{false}" />
                                                             </b:commandButton>
                                                         </div>
                                                         <div style="display: inline-block">
@@ -182,23 +234,46 @@
                                                                              id="brisanje_button"
                                                                              update='@form'
                                                                              ajax="true"
+                                                                             onclick="ajax:admin.proveriBrisanje(stavka)"
                                                                              oncomplete="$('#sifarnici\\:amodal_brisanje').modal('show');">
-                                                                <f:setPropertyActionListener target="#{admin.selectedStavkaSifarnikaBrisanje}" value="#{stavka}" />
                                                             </b:commandButton>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </b:dataTableColumn>
                                         </b:dataTable>
-                                    </h:panelGroup>
 
-                                    <h:panelGroup id="close_modal_script">
-                                        <h:outputScript>
-                                            #{admin.closeModalScript}
-                                        </h:outputScript>
-                                    </h:panelGroup>
-                                </b:column>
-                            </b:row>
+                                        <h:outputText value="Dodajte stavku šifarnika:" styleClass="login-form-label" />
+                                        <b:inputText id="novaStavka"
+                                                     value="#{admin.novaStavka}" 
+                                                     styleClass="#{admin.novaStavkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                     placeholder="Unesite stavku šifarnika">
+                                            <f:facet name="append">
+                                                <b:commandButton id="plusButton"
+                                                                 icon="plus" 
+                                                                 styleClass="add-field-button" 
+                                                                 ajax="true" 
+                                                                 update="@form" 
+                                                                 onclick="ajax:admin.dodajStavku();" 
+                                                                 style="border: 1px solid #4c4c4c; #{admin.novaStavkaGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
+                                            </f:facet>
+                                        </b:inputText>
+                                        <div id="novaStavkaGreska" class="#{admin.novaStavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                            <h:outputText value="#{admin.novaStavkaGreska}" />
+                                        </div>
+
+                                        <h:panelGroup id="sifarniciValidacija">
+                                            <h:outputScript library="js" name="sifarniciValidacija.js" />
+                                        </h:panelGroup>
+
+                                        <h:panelGroup id="close_modal_script">
+                                            <h:outputScript>
+                                                #{admin.closeModalScript}
+                                            </h:outputScript>
+                                        </h:panelGroup>
+                                    </b:column>
+                                </b:row>
+                            </h:panelGroup>
                         </h:form>
                     </div>
                     <div class="col-md-3">

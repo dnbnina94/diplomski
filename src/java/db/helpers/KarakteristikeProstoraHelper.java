@@ -117,4 +117,30 @@ public class KarakteristikeProstoraHelper {
         }
     }
     
+    public List<KarakteristikeProstora> getKarakteristikeByStavka(StavkeSifarnika karakteristika) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(KarakteristikeProstora.class);
+            c.add(Restrictions.eq("stavkeSifarnika", karakteristika));
+            
+            List<KarakteristikeProstora> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
 }

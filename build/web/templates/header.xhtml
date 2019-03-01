@@ -190,7 +190,7 @@ and open the template in the editor.
                         <li>
                             <h:form>
                                 <b:commandLink action="vesti?faces-redirect=true">
-                                    <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="cultural-icon" />
+                                    <img src="#{kategorijaVest.getThumbnailSrc()}" class="cultural-icon" />
                                     <br/>
                                     <span>#{kategorijaVest.naziv}</span>
                                     <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />

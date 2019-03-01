@@ -360,5 +360,109 @@ public class DogadjajiHelper {
             session.close();
         }
     }
+    
+    public List<Dogadjaji> getDogadjajiByMesto(StavkeSifarnika mesto) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("mesto", mesto));
+            
+            List<Dogadjaji> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Dogadjaji> getDogadjajiByUlica(StavkeSifarnika ulica) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("ulica", ulica));
+            
+            List<Dogadjaji> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Dogadjaji> getDogadjajiByUzrast(StavkeSifarnika uzrast) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("uzrast", uzrast));
+            
+            List<Dogadjaji> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Dogadjaji> getDogadjajiByKategorija2(StavkeSifarnika kategorija) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Dogadjaji.class);
+            c.add(Restrictions.eq("kategorija", kategorija));
+            
+            List<Dogadjaji> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
 
 }

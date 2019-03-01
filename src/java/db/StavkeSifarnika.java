@@ -4,6 +4,8 @@ package db;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 
 
@@ -21,6 +23,7 @@ public class StavkeSifarnika  implements java.io.Serializable {
     private Set vestis = new HashSet(0);
     private Set dogadjajisKategorija = new HashSet(0);
     private Set dogadjajisMesto = new HashSet(0);
+    private Set dogadjajisUlica = new HashSet(0);
     private Set dogadjajisUzrast = new HashSet(0);
     
     private Set organizacijesMesto = new HashSet(0);
@@ -32,7 +35,7 @@ public class StavkeSifarnika  implements java.io.Serializable {
     public StavkeSifarnika() {
     }
 
-    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja, Set karakteristikeProstoras) {
+    public StavkeSifarnika(int idStavka, Sifarnici sifarnici, String naziv, String ikonica, Set vestis, Set dogadjajisKategorija, Set dogadjajisMesto, Set dogadjajisUzrast, Set dogadjajisUlica, Set organizacijesMesto, Set organizacijesUlica, Set organizacijesOblastDelovanja, Set karakteristikeProstoras) {
        this.idStavka = idStavka;
        this.sifarnici = sifarnici;
        this.naziv = naziv;
@@ -41,6 +44,7 @@ public class StavkeSifarnika  implements java.io.Serializable {
        this.dogadjajisKategorija = dogadjajisKategorija;
        this.dogadjajisMesto = dogadjajisMesto;
        this.dogadjajisUzrast = dogadjajisUzrast;
+       this.dogadjajisUlica = dogadjajisUlica;
        this.organizacijesMesto = organizacijesMesto;
        this.organizacijesUlica = organizacijesUlica;
        this.organizacijesOblastDelovanja = organizacijesOblastDelovanja;
@@ -150,6 +154,40 @@ public class StavkeSifarnika  implements java.io.Serializable {
 
     public void setKarakteristikeProstoras(Set karakteristikeProstoras) {
         this.karakteristikeProstoras = karakteristikeProstoras;
+    }
+
+    public Set getDogadjajisUlica() {
+        return dogadjajisUlica;
+    }
+
+    public void setDogadjajisUlica(Set dogadjajisUlica) {
+        this.dogadjajisUlica = dogadjajisUlica;
+    }
+    
+    public String getThumbnailUrl() {
+        String thumbnailUrl;
+        
+        if (ikonica == null) {
+            HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            thumbnailUrl = "url('"+ origRequest.getContextPath() + "/faces/javax.faces.resource/getleman2.png?ln=img')";
+        } else {
+            thumbnailUrl = "url(/ikonice/" + ikonica + ")";
+        }
+        
+        return thumbnailUrl;
+    }
+    
+    public String getThumbnailSrc() {
+        String thumbnailUrl;
+        
+        if (ikonica == null) {
+            HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            thumbnailUrl = origRequest.getContextPath() + "/faces/javax.faces.resource/gentleman2.png?ln=img";
+        } else {
+            thumbnailUrl = "/ikonice/" + ikonica;
+        }
+        
+        return thumbnailUrl;
     }
     
 }

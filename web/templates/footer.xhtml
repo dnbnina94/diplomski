@@ -25,7 +25,7 @@ and open the template in the editor.
                                         <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
                                             <tr><td style="vertical-align: middle">
                                                     <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                                        <h:graphicImage library="img" name="ikonice/#{kategorijaVest.ikonica}" class="news-category-icon-footer" />
+                                                        <img src="#{kategorijaVest.getThumbnailSrc()}" class="news-category-icon-footer" />
                                                         &#xA0;
                                                         <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
                                                         <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />

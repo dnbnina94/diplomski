@@ -41,11 +41,35 @@
             </key>
             <one-to-many class="db.Dogadjaji" />
         </set>
-        <set name="karakteristikeProstoras" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
+        <set name="DogadjajisUlica" table="dogadjaji" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ulica" not-null="true" />
+            </key>
+            <one-to-many class="db.Dogadjaji" />
+        </set>
+        <set name="KarakteristikeProstoras" table="karakteristike_prostora" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_stavka" not-null="true" />
             </key>
             <one-to-many class="db.KarakteristikeProstora" />
+        </set>
+        <set name="OrganizacijesMesto" table="organizacije" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mesto" not-null="true" />
+            </key>
+            <one-to-many class="db.Organizacije" />
+        </set>
+        <set name="OrganizacijesUlica" table="organizacije" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ulica" not-null="true" />
+            </key>
+            <one-to-many class="db.Organizacije" />
+        </set>
+        <set name="OrganizacijesOblastDelovanja" table="organizacije" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="oblast_delovanja" not-null="true" />
+            </key>
+            <one-to-many class="db.Organizacije" />
         </set>
     </class>
 </hibernate-mapping>

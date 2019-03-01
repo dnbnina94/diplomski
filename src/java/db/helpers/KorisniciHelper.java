@@ -551,5 +551,83 @@ public class KorisniciHelper {
             session.close();
         }
     }
+    
+    public List<Organizacije> getOrganizacijeByMesto(StavkeSifarnika mesto) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Organizacije.class);
+            c.add(Restrictions.eq("mesto", mesto));
+            
+            List<Organizacije> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Organizacije> getOrganizacijeByUlica(StavkeSifarnika ulica) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Organizacije.class);
+            c.add(Restrictions.eq("ulica", ulica));
+            
+            List<Organizacije> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    public List<Organizacije> getOrganizacijeByOblastDelovanja(StavkeSifarnika oblastDelovanja) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Organizacije.class);
+            c.add(Restrictions.eq("oblastDelovanja", oblastDelovanja));
+            
+            List<Organizacije> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
 
 }
