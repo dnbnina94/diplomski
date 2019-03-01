@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2019 at 10:15 PM
+-- Generation Time: Mar 01, 2019 at 11:09 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -69,7 +69,6 @@ CREATE TABLE `karakteristike_prostora` (
 --
 
 INSERT INTO `karakteristike_prostora` (`id_karakteristika`, `id_dogadjaj`, `id_stavka`) VALUES
-(1, 1, 33),
 (2, 1, 39),
 (3, 5, 39);
 
@@ -179,13 +178,13 @@ CREATE TABLE `sifarnici` (
 --
 
 INSERT INTO `sifarnici` (`id_sifarnik`, `naziv`) VALUES
-(1, 'vesti'),
-(2, 'dogadjaji'),
-(3, 'mesta'),
-(4, 'uzrast'),
-(5, 'ulice'),
-(6, 'oblasti_delovanja'),
-(7, 'karakteristike_prostora');
+(1, 'Kategorije vesti'),
+(2, 'Kategorije događaja'),
+(3, 'Mesta'),
+(4, 'Uzrast'),
+(5, 'Ulice'),
+(6, 'Oblasti delovanja'),
+(7, 'Karakteristike prostora');
 
 -- --------------------------------------------------------
 
@@ -205,21 +204,20 @@ CREATE TABLE `stavke_sifarnika` (
 --
 
 INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) VALUES
-(1, 1, 'muzika', 'vinyl.png'),
-(2, 1, 'film', 'movie.png'),
-(3, 1, 'festivali', 'festival.png'),
-(4, 1, 'pozorište', 'drama.png'),
-(5, 1, 'izložbe', 'art.png'),
-(6, 2, 'koncert', NULL),
+(1, 1, 'Muzika', '1.png'),
+(2, 1, 'Film', '2.png'),
+(4, 1, 'Pozorište', '4.png'),
+(5, 1, 'Izložbe', '5.png'),
+(6, 2, 'Koncert', NULL),
 (7, 2, 'Clubbing', NULL),
 (8, 3, 'Beograd', NULL),
 (9, 4, '18+', NULL),
-(10, 2, 'festival', NULL),
-(11, 2, 'projekcija', NULL),
-(12, 2, 'sajam', NULL),
-(13, 2, 'radionica', NULL),
-(14, 2, 'predstava', NULL),
-(15, 2, 'izložba', NULL),
+(10, 2, 'Festival', NULL),
+(11, 2, 'Projekcija', NULL),
+(12, 2, 'Sajam', NULL),
+(13, 2, 'Radionica', NULL),
+(14, 2, 'Predstava', NULL),
+(15, 2, 'Izložba', NULL),
 (16, 3, 'Novi Sad', NULL),
 (17, 6, 'Zaštita životne sredine', NULL),
 (18, 6, 'Naučna istraživanja', NULL),
@@ -237,14 +235,14 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (30, 5, 'Topolska 18', NULL),
 (31, 6, 'Zaštita životinja', NULL),
 (32, 5, 'Stjepana Filipovića 29', NULL),
-(33, 7, 'Pet friendly', 'pet-friendly.png'),
-(34, 7, 'Besplatan parking', 'parking.png'),
+(34, 7, 'Besplatan parking', '34.png'),
 (35, 3, 'Paraćin', NULL),
 (36, 5, 'Cvijićeva 29', NULL),
 (37, 5, 'Mitropolita Petra 8', NULL),
-(38, 7, 'Podrška invalidima', 'accessible-icon.jpg'),
-(39, 7, 'WiFi', 'wifi.png'),
-(40, 5, 'Makedonska 22', NULL);
+(38, 7, 'Podrška invalidima', '38.jpg'),
+(39, 7, 'WiFi', '39.png'),
+(40, 5, 'Makedonska 22', NULL),
+(41, 1, 'Festivali', NULL);
 
 -- --------------------------------------------------------
 
