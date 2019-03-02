@@ -147,7 +147,7 @@
                                     <h:outputText value="#{pretragaDogadjaja.dogadjaj.ulica.naziv}" /> <br/>
                                     <ui:repeat value="#{pretragaDogadjaja.dogadjaj.karakteristikeToList()}" var="karakteristika">
                                         <div style="height: 25px; width: 25px; display: inline-block; margin-top: 10px; margin-bottom: 5px">
-                                            <h:graphicImage title="#{karakteristika.stavkeSifarnika.naziv}" library="img" name="ikonice/#{karakteristika.stavkeSifarnika.ikonica}" style="height: 100%; width: 100%;"/>
+                                            <img title="#{karakteristika.stavkeSifarnika.naziv}" src="#{karakteristika.stavkeSifarnika.getThumbnailSrc()}" style="height: 100%; width: 100%;" />
                                         </div>
                                     </ui:repeat>
                                     <div style="height: 10px; border-bottom: 1px solid #eee"></div>

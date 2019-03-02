@@ -15,7 +15,7 @@
             <column name="naziv" length="50" not-null="true" />
         </property>
         <property name="ikonica" type="string">
-            <column name="ikonica" length="50" not-null="false" />
+            <column name="ikonica" length="256" not-null="false" />
         </property>
         <set name="Vestis" table="vesti" inverse="true" lazy="true" fetch="select">
             <key>

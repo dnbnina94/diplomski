@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2019 at 11:09 PM
+-- Generation Time: Mar 02, 2019 at 01:45 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -196,7 +196,7 @@ CREATE TABLE `stavke_sifarnika` (
   `id_stavka` int(11) NOT NULL,
   `id_sifarnik` int(11) NOT NULL,
   `naziv` varchar(50) NOT NULL,
-  `ikonica` varchar(50) DEFAULT NULL
+  `ikonica` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -204,10 +204,10 @@ CREATE TABLE `stavke_sifarnika` (
 --
 
 INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) VALUES
-(1, 1, 'Muzika', '1.png'),
-(2, 1, 'Film', '2.png'),
-(4, 1, 'Pozorište', '4.png'),
-(5, 1, 'Izložbe', '5.png'),
+(1, 1, 'Muzika', '6966c125-8a3d-4706-8db7-fe73da29466c.png'),
+(2, 1, 'Film', '570209ed-ecd4-49d1-a550-c8ba32182508.png'),
+(4, 1, 'Pozorište', 'bf0726b1-93ec-4e57-846c-8ff934f1ef5e.png'),
+(5, 1, 'Izložbe', '35596cc1-a944-4da4-9662-34da43391a13.png'),
 (6, 2, 'Koncert', NULL),
 (7, 2, 'Clubbing', NULL),
 (8, 3, 'Beograd', NULL),
@@ -217,7 +217,6 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (12, 2, 'Sajam', NULL),
 (13, 2, 'Radionica', NULL),
 (14, 2, 'Predstava', NULL),
-(15, 2, 'Izložba', NULL),
 (16, 3, 'Novi Sad', NULL),
 (17, 6, 'Zaštita životne sredine', NULL),
 (18, 6, 'Naučna istraživanja', NULL),
@@ -235,14 +234,16 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (30, 5, 'Topolska 18', NULL),
 (31, 6, 'Zaštita životinja', NULL),
 (32, 5, 'Stjepana Filipovića 29', NULL),
-(34, 7, 'Besplatan parking', '34.png'),
+(34, 7, 'Besplatan parking', 'e91606a4-9c82-4dca-b071-2f10852d12e0.png'),
 (35, 3, 'Paraćin', NULL),
 (36, 5, 'Cvijićeva 29', NULL),
 (37, 5, 'Mitropolita Petra 8', NULL),
-(38, 7, 'Podrška invalidima', '38.jpg'),
-(39, 7, 'WiFi', '39.png'),
+(38, 7, 'Podrška invalidima', '8276ecee-c8da-4339-805c-4adf9ac176cd.jpg'),
+(39, 7, 'WiFi', '033925a8-e5e8-4f14-b028-61a16728ef69.png'),
 (40, 5, 'Makedonska 22', NULL),
-(41, 1, 'Festivali', NULL);
+(41, 1, 'Festivali', 'fa83674c-def8-4101-8317-62a5657603ca.png'),
+(42, 2, 'Izložba', NULL),
+(43, 7, 'Pet friendly', '3f9b538b-cf4b-491b-80cb-85c92a5b58b0.png');
 
 -- --------------------------------------------------------
 

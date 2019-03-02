@@ -18,12 +18,17 @@ import db.helpers.KorisniciHelper;
 import db.helpers.OglasiHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -272,10 +277,6 @@ public class Admin {
         return sifarnici;
     }
 
-    public void setSifarnici(List<Sifarnici> sifarnici) {
-        this.sifarnici = sifarnici;
-    }
-
     public int getPageSifarnici() {
         return pageSifarnici;
     }
@@ -390,6 +391,71 @@ public class Admin {
             if (stavkaValidacija(stavka)) {
                 if (stavkeHelper.getStavkeSifarnikaBySifarnikAndNaziv(pageSifarnici, stavka, selectedStavkaSifarnikaIzmena.getIdStavka()) == null) {
                     selectedStavkaSifarnikaIzmena.setNaziv(stavka);
+
+                    if (menjanThumbnail) {
+                        if (selectedStavkaSifarnikaIzmena.getIkonica()!= null) {
+                            File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsIkonice"));
+                            File file = new File(uploads, selectedStavkaSifarnikaIzmena.getIkonica());
+
+                            try {
+                                boolean result = Files.deleteIfExists(file.toPath());
+
+                                if (submittedThumbnail != null) {
+                                    UUID uid = UUID.randomUUID();
+                                    String newThumbnailName = uid + ".";
+                                    int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
+                                    if (i > 0) {
+                                        newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
+                                    }
+
+                                    file = new File(uploads, newThumbnailName);
+
+                                    try (InputStream input = submittedThumbnail.getInputStream()) {
+                                        Files.copy(input, file.toPath());
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    
+                                    selectedStavkaSifarnikaIzmena.setIkonica(newThumbnailName);
+                                } else {
+                                    selectedStavkaSifarnikaIzmena.setIkonica(null);
+                                }
+                            } catch (IOException ex) {
+                                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            if (submittedThumbnail != null) {
+                                UUID uid = UUID.randomUUID();
+                                String newThumbnailName = uid + ".";
+                                int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
+                                if (i > 0) {
+                                    newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
+                                }
+
+                                File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsIkonice"));
+                                File file = new File(uploads, newThumbnailName);
+
+                                try (InputStream input = submittedThumbnail.getInputStream()) {
+                                    Files.copy(input, file.toPath());
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
+                                selectedStavkaSifarnikaIzmena.setIkonica(newThumbnailName);
+                            } else {
+                                selectedStavkaSifarnikaIzmena.setIkonica(null);
+                            }
+                        }
+                    }
+                    
+                    for (int i=0; i < stavkeSifarnika.size(); i++) {
+                        if (stavkeSifarnika.get(i).getIdStavka() == selectedStavkaSifarnikaIzmena.getIdStavka()) {
+                            stavkeSifarnika.remove(i);
+                            stavkeSifarnika.add(i, selectedStavkaSifarnikaIzmena);
+                            break;
+                        }
+                    }
+
                     stavkeHelper.updateStavka(selectedStavkaSifarnikaIzmena);
 
                     stavkaGreska = "";
@@ -426,6 +492,13 @@ public class Admin {
     public void obrisiStavku() {
         if (getSelectedStavkaSifarnikaBrisanje() != null) {
             stavkeHelper.obrisiStavku(selectedStavkaSifarnikaBrisanje);
+
+            for (StavkeSifarnika stavka : stavkeSifarnika) {
+                if (stavka.getIdStavka() == selectedStavkaSifarnikaBrisanje.getIdStavka()) {
+                    stavkeSifarnika.remove(stavka);
+                    break;
+                }
+            }
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali stavku šifarnika.", null);
             FacesContext.getCurrentInstance().addMessage("sifarnici:growl-success", message);
@@ -590,7 +663,7 @@ public class Admin {
     public void setThumbnailGreska(String thumbnailGreska) {
         this.thumbnailGreska = thumbnailGreska;
     }
-    
+
     public void removeThumbnail() {
         thumbnailGreska = "";
         thumbnail = null;
@@ -598,7 +671,7 @@ public class Admin {
         menjanThumbnail = true;
         thumbnailName = null;
     }
-    
+
     public void uploadThumbnail() {
         try (InputStream input = thumbnail.getInputStream()) {
             try {

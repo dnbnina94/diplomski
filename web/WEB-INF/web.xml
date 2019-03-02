@@ -16,6 +16,10 @@
         <param-name>thumbnailsDogadjaji</param-name>
         <param-value>/diplomski/dogadjaji</param-value>
     </context-param>
+    <context-param>
+        <param-name>thumbnailsIkonice</param-name>
+        <param-value>/diplomski/ikonice</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

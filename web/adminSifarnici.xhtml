@@ -93,8 +93,7 @@
                                                         </button>
                                                         <h:inputFile id="thumbnail" styleClass="custom-input-button" value="#{admin.thumbnail}" >
                                                             <f:ajax listener="#{admin.uploadThumbnail}"
-                                                                    execute="@form"
-                                                                    render="thumbnailWrapper thumbnailGreskaWrapper thumbnail sifarniciValidacija stavka_input sifarnici:stavke_sifarnika_content" />
+                                                                    render="thumbnailWrapper thumbnailGreskaWrapper thumbnail sifarniciValidacija stavka_input" />
                                                         </h:inputFile>
                                                     </div>
                                                     <b:commandButton styleClass="remove-file-btn" disabled="#{admin.thumbnailName == null ? 'true' : 'false'}"
@@ -131,13 +130,7 @@
                                                                  onclick="ajax:admin.izmeniStavku();" />
                                             </div>
                                             <div class="col-md-6">
-                                                <b:commandButton value="Odustani" 
-                                                                 look="primary" 
-                                                                 styleClass="big-red-button" 
-                                                                 style="background-color: #ccc !important"
-                                                                 ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content"
-                                                                 oncomplete="$('#sifarnici\\:amodal_izmena').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
                                             </div>
                                         </div>
                                     </f:facet>
@@ -180,15 +173,16 @@
                                     </f:facet>
                                 </b:modal>
                             </h:panelGroup>
-                            
+
                             <h:panelGroup id="stavke_sifarnika_content">
                                 <b:panel look="primary" id="sifarnici-admin-menu" styleClass="adminMenu">
                                     <b:pillLinks>
                                         <ui:repeat value="#{admin.sifarnici}" var="sifarnik">
-                                            <b:navLink value="#{sifarnik.naziv}"
-                                                       update="@form @(.content)"
-                                                       style="#{sifarnik.idSifarnik == admin.pageSifarnici ? 'background-color: orangered; color: white !important;' : ''}"
-                                                       onclick="ajax:admin.setPageSifarnici(sifarnik.idSifarnik);" />
+                                            <b:commandButton value="#{sifarnik.naziv}"
+                                                             update="@form @(.content)"
+                                                             style="#{sifarnik.idSifarnik == admin.pageSifarnici ? 'background-color: orangered; color: white !important;' : ''}"
+                                                             onclick="ajax:admin.setPageSifarnici(sifarnik.idSifarnik);"
+                                                             styleClass="pillLinkButton" />
                                         </ui:repeat>
                                     </b:pillLinks>
                                 </b:panel>
@@ -266,13 +260,14 @@
                                             <h:outputScript library="js" name="sifarniciValidacija.js" />
                                         </h:panelGroup>
 
-                                        <h:panelGroup id="close_modal_script">
-                                            <h:outputScript>
-                                                #{admin.closeModalScript}
-                                            </h:outputScript>
-                                        </h:panelGroup>
                                     </b:column>
                                 </b:row>
+                            </h:panelGroup>
+
+                            <h:panelGroup id="close_modal_script">
+                                <h:outputScript>
+                                    #{admin.closeModalScript}
+                                </h:outputScript>
                             </h:panelGroup>
                         </h:form>
                     </div>
