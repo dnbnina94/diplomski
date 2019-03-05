@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="customCheckbox.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <style>
+            .panel-group {
+                margin-bottom: 0px !important;
+            }
+
+            .panel-body {
+                padding: 10px !important;
+            }
+
+            table.dataTable {
+                margin-top: 0px !important;
+            }
+
+            .table > thead > tr > th {
+                border-bottom: 1px solid #ddd !important;
+            }
+
+            .dataTables_empty {
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
+
+            .dataTables_wrapper {
+                margin-top: 10px !important;
+            }
+        </style>
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <h:form id="obavestenja" >
+
+                            <h:panelGroup id="obavestenja_content">
+                                <b:row style="padding-top: 10px !important">
+                                    <b:column span="12" class="content">
+                                        <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
+                                        <b:dataTable value="#{admin.obavestenja}"
+                                                     searching="false"
+                                                     var="obavestenje"
+                                                     border="false"
+                                                     striped="false" 
+                                                     info="false"
+                                                     styleClass="admin-datatable"
+                                                     page-length="20"
+                                                     page-length-menu="20" 
+                                                     onpage='$("html, body").animate({ scrollTop: 0 }, "slow");' >
+                                            <b:dataTableColumn label="Obaveštenja" orderable="false" style="cursor: pointer !important" >
+                                                <div class="row" style="margin: auto; background-color: #{!obavestenje.procitano ? '#fef3ec' : ''}">
+                                                    <div class="col-md-12" style="padding: 0px; line-height: 26px">
+                                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                            <h:outputText value="#{obavestenje.korisnici.korisnickoIme}" />
+                                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{obavestenje.korisnici.organizacije}" />
+                                                        </b:commandLink>
+                                                        <h:outputText value=" " />
+                                                        <h:outputText value="#{obavestenje.tekst}" />
+                                                        <h:outputText value=" " />
+                                                        <h:panelGroup rendered="#{obavestenje.vesti != null}">
+                                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                                <h:outputText value="#{obavestenje.vesti.naslov}" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{obavestenje.vesti}" />
+                                                            </b:commandLink>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup rendered="#{obavestenje.dogadjaji != null}">
+                                                            <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                                <h:outputText value="#{obavestenje.dogadjaji.naslov}" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{obavestenje.dogadjaji}" />
+                                                            </b:commandLink>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup rendered="#{obavestenje.oglasi != null}">
+                                                            <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                                <h:outputText value="#{obavestenje.oglasi.naslov}" />
+                                                                <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{obavestenje.oglasi}" />
+                                                            </b:commandLink>
+                                                        </h:panelGroup>
+
+                                                        <h:outputText value="#{obavestenje.datum}" >
+                                                            <f:convertDateTime pattern=" (dd.MM.yyyy. HH:mm)" />
+                                                        </h:outputText>
+
+                                                    </div>
+                                                </div>
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+                                    </b:column>
+                                </b:row>
+                            </h:panelGroup>
+
+                            <h:panelGroup id="close_modal_script">
+                                <h:outputScript>
+                                    #{admin.closeModalScript}
+                                </h:outputScript>
+                            </h:panelGroup>
+                        </h:form>
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

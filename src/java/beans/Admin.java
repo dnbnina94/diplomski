@@ -7,6 +7,7 @@ package beans;
 
 import db.Dogadjaji;
 import db.Korisnici;
+import db.Obavestenja;
 import db.Oglasi;
 import db.Organizacije;
 import db.Sifarnici;
@@ -15,6 +16,7 @@ import db.Vesti;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KarakteristikeProstoraHelper;
 import db.helpers.KorisniciHelper;
+import db.helpers.ObavestenjaHelper;
 import db.helpers.OglasiHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
@@ -66,6 +68,7 @@ public class Admin {
     private Part submittedThumbnail = null;
     private String thumbnailName;
     private boolean menjanThumbnail;
+    private List<Obavestenja> obavestenja;
 
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
@@ -73,6 +76,7 @@ public class Admin {
     private OglasiHelper oglasiHelper = new OglasiHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
     private KarakteristikeProstoraHelper karakteristikeHelper = new KarakteristikeProstoraHelper();
+    private ObavestenjaHelper obavestenjaHelper = new ObavestenjaHelper();
 
     class SortKorisniciByKorIme implements Comparator<Korisnici> {
 
@@ -100,6 +104,14 @@ public class Admin {
         }
 
     }
+    
+    class SortObavestenjaByDatum implements Comparator<Obavestenja> {
+        
+        @Override
+        public int compare(Obavestenja a, Obavestenja b) {
+            return a.getDatum().compareTo(b.getDatum());
+        }
+    }
 
     public Admin() {
         korisnici = korisniciHelper.getNeodobreniKorisnici();
@@ -112,6 +124,9 @@ public class Admin {
 
         stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
+        
+        obavestenja = new ArrayList<Obavestenja>(obavestenjaHelper.getSvaObavestenja());
+        Collections.sort(obavestenja, new Admin.SortObavestenjaByDatum());
     }
 
     public List<Korisnici> getKorisnici() {
@@ -716,6 +731,35 @@ public class Admin {
 
     public void setMenjanThumbnail(boolean menjanThumbnail) {
         this.menjanThumbnail = menjanThumbnail;
+    }
+
+    public List<Obavestenja> getObavestenja() {
+        return obavestenja;
+    }
+
+    public void setObavestenja(List<Obavestenja> obavestenja) {
+        this.obavestenja = obavestenja;
+    }
+    
+    public int brNovihObavestenja() {
+        if (obavestenja != null) {
+            int br = 0;
+            for (Obavestenja o : obavestenja) {
+                if (!o.isProcitano())
+                    br++;
+            }
+            return br;
+        }
+        return 0;
+    }
+    
+    public void procitajObavestenja() {
+        if (obavestenja != null) {
+            for (Obavestenja o : obavestenja) {
+                o.setProcitano(true);
+                obavestenjaHelper.updateObavestenje(o);
+            }
+        }
     }
 
 }

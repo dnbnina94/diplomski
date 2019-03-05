@@ -74,6 +74,20 @@ public class ZahteviKorisnika {
             selektovanaVestBrisanje.setZahtevBrisanje(true);
             vestiHelper.zahtevBrisanjeVesti(selektovanaVestBrisanje);
             
+            Obavestenja obavestenje = new Obavestenja();
+            obavestenje.setIdObavestenje(obavestenjaHelper.getMaxId()+1);
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+            obavestenje.setKorisnici(korisnikBean.getKorisnik());
+            
+            obavestenje.setDatum(new Date());
+            obavestenje.setVesti(selektovanaVestBrisanje);
+            obavestenje.setTekst("Korisnik je poslao zahtev za brisanje vesti:");
+            obavestenje.setProcitano(false);
+            
+            obavestenjaHelper.insertObavestenje(obavestenje);
+            
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste podneli zahtev za brisanje vesti.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -84,6 +98,20 @@ public class ZahteviKorisnika {
         if (selektovanaVestArhiviranje != null) {
             selektovanaVestArhiviranje.setArhivirana(1);
             vestiHelper.arhiviranjeVesti(selektovanaVestArhiviranje);
+            
+            Obavestenja obavestenje = new Obavestenja();
+            obavestenje.setIdObavestenje(obavestenjaHelper.getMaxId()+1);
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+            obavestenje.setKorisnici(korisnikBean.getKorisnik());
+            
+            obavestenje.setDatum(new Date());
+            obavestenje.setVesti(selektovanaVestArhiviranje);
+            obavestenje.setTekst("Korisnik je arhivirao vest:");
+            obavestenje.setProcitano(false);
+            
+            obavestenjaHelper.insertObavestenje(obavestenje);
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste arhivirali vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
@@ -96,6 +124,20 @@ public class ZahteviKorisnika {
             selektovanDogadjajBrisanje.setZahtevBrisanje(true);
             dogadjajiHelper.zahtevBrisanjeDogadjaja(selektovanDogadjajBrisanje);
             
+            Obavestenja obavestenje = new Obavestenja();
+            obavestenje.setIdObavestenje(obavestenjaHelper.getMaxId()+1);
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+            obavestenje.setKorisnici(korisnikBean.getKorisnik());
+            
+            obavestenje.setDatum(new Date());
+            obavestenje.setDogadjaji(selektovanDogadjajBrisanje);
+            obavestenje.setTekst("Korisnik je poslao zahtev za brisanje događaja:");
+            obavestenje.setProcitano(false);
+            
+            obavestenjaHelper.insertObavestenje(obavestenje);
+            
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste podneli zahtev za brisanje događaja.", null);
             FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -106,6 +148,20 @@ public class ZahteviKorisnika {
         if (selektovanOglasBrisanje != null) {
             selektovanOglasBrisanje.setZahtevBrisanje(true);
             oglasiHelper.zahtevBrisanjeOglasa(selektovanOglasBrisanje);
+            
+            Obavestenja obavestenje = new Obavestenja();
+            obavestenje.setIdObavestenje(obavestenjaHelper.getMaxId()+1);
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+            obavestenje.setKorisnici(korisnikBean.getKorisnik());
+            
+            obavestenje.setDatum(new Date());
+            obavestenje.setOglasi(selektovanOglasBrisanje);
+            obavestenje.setTekst("Korisnik je poslao zahtev za brisanje oglasa:");
+            obavestenje.setProcitano(false);
+            
+            obavestenjaHelper.insertObavestenje(obavestenje);
             
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste podneli zahtev za brisanje oglasa.", null);
             FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);

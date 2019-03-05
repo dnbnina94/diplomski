@@ -7,8 +7,9 @@ package db.helpers;
 
 import db.HibernateUtil;
 import db.Obavestenja;
-import db.Vesti;
 import java.util.List;
+import java.util.Set;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,7 +22,10 @@ public class ObavestenjaHelper {
     
     private Session session;
     
-    public void kreirajObavestenje(Obavestenja obavestenje) {
+    public ObavestenjaHelper() {
+    }
+    
+    public List<Obavestenja> getSvaObavestenja() {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -29,10 +33,14 @@ public class ObavestenjaHelper {
         }
         try {
             session.getTransaction().begin();
-
-            session.save(obavestenje);
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            List<Obavestenja> obavestenja = c.list();
             
             session.getTransaction().commit();
+            
+            return obavestenja;
+            
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
@@ -59,6 +67,96 @@ public class ObavestenjaHelper {
                 return 0;
             else
                 return obavestenja.get(obavestenja.size()-1).getIdObavestenje();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void insertObavestenje(Obavestenja obavestenje) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            session.save(obavestenje);
+            
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateObavestenje(Obavestenja obavestenje) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            session.update(obavestenje);
+            
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void obrisiObavestenje(Obavestenja obavestenje) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            session.delete(obavestenje);
+            
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void obrisiObavestenja(Set obavestenja) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            for (Obavestenja o : (Set<Obavestenja>) obavestenja) {
+                session.delete(o);
+            }
+            
+            session.getTransaction().commit();
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

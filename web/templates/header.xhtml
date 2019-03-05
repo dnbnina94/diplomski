@@ -45,6 +45,18 @@ and open the template in the editor.
                                 <div class="pull-left">
                                     <ul class="list-inline">
                                         <li>
+                                            <b:commandLink action="adminObavestenja?faces-redirect=true" 
+                                                           styleClass="top-nav-link" 
+                                                           style="font-weight: normal"
+                                                           onclick="ajax:admin.procitajObavestenja()">
+                                                <h:outputText value="Obaveštenja " />
+
+                                                <div style="display: inline-block; background-color: #4C4C4C; padding-left: 5px; padding-right: 5px; border-radius: 2px">
+                                                    <h:outputText value="#{admin.brNovihObavestenja()}" style="font-weight: bold" />
+                                                </div>
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
                                             <b:commandLink action="adminSifarnici?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
                                                 <h:outputText value="Šifarnici" />
                                             </b:commandLink>
