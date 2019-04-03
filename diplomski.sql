@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2019 at 08:43 PM
+-- Generation Time: Apr 03, 2019 at 03:56 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -50,7 +50,8 @@ INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`
 (1, 'Povratak korenima: Back to Funk u klubu BitefArtCafe', '<p>BitefArtCafe vas poziva na potpuno novi koncept žurki Back To Funk koji će se prvi put održati ovog petka, 25. januara.</p><p>Funk hitove izvodiće uživo James Brown Belgrade Tribute bend, dok će hitove sa ploča vrteti najpopularniji beogradski funky DJ Stefan Novović – DJ Iron.</p><p>Ukoliko ste se uželeli pravih igranki, đuskanja uz najveće soul i funk hitove, ovo je prava vest za vas.</p><p>Beograd je oduvek bio mesto raznolikog noćnog provoda, gde možete da pronađete za svakoga po nešto, reklo bi se – „od Silvane do Nirvane“. Ali, poslednjih godina muzički spektar se sve više deli na dve opcije – veliki broj kafana sa narodnom muzikom sa jedne strane, i veliki broj klubova sa elektronskom muzikom sa druge.</p><p>U međuprostoru nalaze se pojedini lokali koji nude žive svirke domaćih i stranih pop-rock, house i dance hitova. Jedan od takvih klubova je BitefArtCafe koji je ove sezone pokrenuo tematske večeri posvećene <strong>oldschool</strong>, <strong>disco</strong> i <strong>funk</strong> muzici.</p>', 7, 8, 37, 9, '2019-01-25 23:00:01', '2019-01-24 02:47:20', 'etf_org', '2019-01-26 04:00:01', '1.jpg', 0),
 (2, 'dadasasddas', '<p>dasdassdasd</p>', 6, 8, 22, 9, '2019-02-01 00:44:40', '2019-01-31 00:44:55', 'ORCA', '2019-02-01 00:44:46', NULL, 0),
 (3, 'asdf', '<p>asdf</p>', 7, 8, 22, 9, '2019-02-22 22:00:00', '2019-02-22 21:01:53', 'etf_org', '2019-02-23 12:15:00', NULL, 0),
-(5, 'Bullet For My Valentine u Beogradu', '<p>MM Concerts predstavlja:<strong>BULLET FOR MY VALENTINE u Beogradu!</strong></p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p>', 6, 8, 40, 9, '2019-04-03 20:00:00', '2019-02-22 21:03:49', 'etf_org', '2019-04-04 00:00:00', '5.jpg', 1);
+(5, 'Bullet For My Valentine u Beogradu', '<p>MM Concerts predstavlja:<strong>BULLET FOR MY VALENTINE u Beogradu!</strong></p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila! Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p><p>Svetski poznati metalcore sastav Bullet For My Valentine, nastupiće po prvi put u karijeri&nbsp;u Srbiji, tačnije beogradskom Domu omladine 3. aprila!</p>', 6, 8, 40, 9, '2019-04-03 20:00:00', '2019-02-22 21:03:49', 'etf_org', '2019-04-04 00:00:00', '5.jpg', 1),
+(6, 'ASDF dogadjaj', '<h3><strong>dasdasdasdsa</strong></h3><p>dasdasdasdasdasddasdasd asfdasgd afdasdgha fdhasf dgas fdasghd fasgd fasghdfasgdasfdghas fdgasdas ghdasg dasghd fasgd asghdas fghdas dghasdf asghdf asghd fasghd fashd afsda fhgdas fdghas td fasyd astd astyd ftyd fastyd fastyd fastyd fastyd fastyd fastd fastyd afys</p><p>dasdas dfastd fastydastd fastydf ast dasty fastd fastdas d fasdasd asdasdas d asda tsd fas fdatsy dftays fdast dasd fya</p>', 6, 8, 22, 9, '2019-04-04 19:00:00', '2019-04-03 15:23:24', 'etf_org', '2019-04-04 22:00:00', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,9 @@ CREATE TABLE `karakteristike_prostora` (
 
 INSERT INTO `karakteristike_prostora` (`id_karakteristika`, `id_dogadjaj`, `id_stavka`) VALUES
 (2, 1, 39),
-(3, 5, 39);
+(3, 5, 39),
+(4, 6, 39),
+(5, 6, 38);
 
 -- --------------------------------------------------------
 
@@ -94,6 +97,7 @@ INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) 
 ('admin', 0xe53197da3a954069670e74083f305c3f541e71ce662c959c8abf014ab628f6a8d5cce06cb57963b9e276353548d3d7c9f87cafae04349b1fd80f384768c56006, 0xb77185db910f62b15a3d6bcf252e2ff4, 1, 1),
 ('etf_org', 0x2ecc97f986bc88dff9704aa1caeae3415debba1ebc85f4227c31f9e837f8b5d0a2ce9e0818f884d3412538c08ced6c225953ffe01e1800eaf440335403231215, 0x53a07065c8afb37b995edc2b5b3d63d2, 2, 1),
 ('nina_org', 0xb009206e47a9ff12b07e4d2b0949b0bafd3b01a41acb54cbf5a746374ec602d59a49dea0b7e466b54cf9b232480fd906944c352b7dd0972f484e365cae43f045, 0xd57097cc3bd46e89c133215fb46634a4, 2, 1),
+('novaorg', 0x12a63e6975b8730d5da28cdefb267d1cab6a5fbdb7c8cb787e6fee71afae62328a303d8ec86d8305da2443a9c16cda37790625e4b16531366955ebc63423faa7, 0x1a80b04a404b61cb81495676873c0afa, 2, 0),
 ('ORCA', 0xb5e7d8e57329da237af182ca2257374132df85860ac832bf64a814f89f64d9c922536b904ebec5dee410eccc57db44c3d8d470e38bff4017eda42956d35b5e46, 0x52a7acd395cd5775e2f52594d4acbdac, 2, 1);
 
 -- --------------------------------------------------------
@@ -124,7 +128,10 @@ INSERT INTO `obavestenja` (`id_obavestenje`, `korisnicko_ime`, `datum`, `tekst`,
 (4, 'etf_org', '2019-03-05 04:38:54', 'Korisnik je arhivirao vest:', 15, NULL, NULL, 1),
 (5, 'etf_org', '2019-03-05 04:39:05', 'Korisnik je poslao zahtev za brisanje događaja:', NULL, 5, NULL, 1),
 (6, 'etf_org', '2019-03-05 04:39:14', 'Korisnik je poslao zahtev za brisanje oglasa:', NULL, NULL, 1, 1),
-(7, 'nina_org', '2019-03-05 04:56:22', 'Korisnik je poslao zahtev za brisanje vesti:', 9, NULL, NULL, 1);
+(7, 'nina_org', '2019-03-05 04:56:22', 'Korisnik je poslao zahtev za brisanje vesti:', 9, NULL, NULL, 1),
+(8, 'etf_org', '2019-03-27 01:42:37', 'Korisnik je poslao zahtev za brisanje vesti:', 18, NULL, NULL, 1),
+(9, 'etf_org', '2019-03-27 01:42:49', 'Korisnik je arhivirao vest:', 18, NULL, NULL, 1),
+(10, 'etf_org', '2019-04-03 15:23:37', 'Korisnik je poslao zahtev za brisanje događaja:', NULL, 6, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -177,6 +184,7 @@ CREATE TABLE `organizacije` (
 INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`, `mesto`, `ulica`, `telefoni`) VALUES
 ('etf_org', 'Elektrotehnički fakultet Univerziteta u Beogradu', 'Nina Grujić', 'opsta_sluzba@etf.bg.ac.rs', 'Razvoj Elektrotehničkog fakulteta u bliskoj je vezi sa istorijom univerzitetskog obrazovanja u Srbiji. Prvo visokoškolsko predavanje iz oblasti elektrotehnike održano je davne 1894. Profesor Stevan Marković bio je prvi predavač i osnivač Elektrotehničke katedre Inženjerskog odeljenja Velike škole u Beogradu. Stevan Marković Samo četiri godine kasnije, profesor Marković je osnovao i elektroinženjersku laboratoriju. Od tada, elektrotehničke teme su se izučavale na Velikoj školi, a zatim i na beogradskom Univerzitetu koji je iz nje nastao 1905. Prve diplome dodeljene su 1922 godine.', 18, 'http://www.etf.bg.ac.rs', 8, 22, '0113226760'),
 ('nina_org', 'Ninina organizacija', 'Nina Grujić', 'ninaorg@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet dui at magna hendrerit aliquet. Ut consectetur scelerisque orci, non faucibus nunc laoreet eget. Aenean condimentum nisl a tortor faucibus, non malesuada nisl rhoncus. Nam non bibendum est. Sed aliquam elit non mauris dapibus, eu vestibulum libero consectetur. Proin nec urna dui. Nulla sed nisi nec ex cursus vulputate interdum vel augue. Pellentesque suscipit faucibus lorem. Aenean ultricies a purus in bibendum. In id erat vitae augue posuere pharetra. Maecenas augue orci, scelerisque vestibulum nulla at, mattis rutrum massa. Curabitur maximus lorem ac eros hendrerit, in rutrum nisi suscipit. Sed nisl risus, ornare non est non, fringilla rhoncus magna. Praesent posuere fermentum orci, sit amet dapibus sem. Donec sodales, nunc sed placerat hendrerit, quam ante luctus felis, a commodo urna augue id justo.', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
+('novaorg', 'NOVA ORG', 'Nina Grujic', 'org@mojaorg.com', 'adasdadas', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
 ('ORCA', 'ORCA', 'Dragana Tar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj.\n\nSvoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 31, 'http://www.orca.rs', 8, 32, '0112438653');
 
 -- --------------------------------------------------------
@@ -302,7 +310,7 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (15, 'etf_org', 2, 'dsadadaa', '<p>dasdsadadsadas ddasd d</p><p>d dadas dadad</p>', '2019-02-15 03:16:45', NULL, 1, 1),
 (16, 'etf_org', 1, 'sdadsadasada', '<p>dasdasdassada aa sdas dvas</p><p>dadasdas dgaf dagdfas h</p>', '2019-02-15 03:32:23', '16.jpeg', 0, 0),
 (17, 'etf_org', 2, 'fgffh', '<p>gg dfd f dgf fgfg</p><p>gd fd f f fg</p>', '2019-02-15 03:48:02', NULL, 1, 1),
-(18, 'etf_org', 1, 'adsdasdsada', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p><ol><li>asdf</li><li>asdf2</li><li>asdf3</li></ol>', '2019-02-15 03:49:49', '18.jpg', 0, 0),
+(18, 'etf_org', 1, 'adsdasdsada', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p><ol><li>asdf</li><li>asdf2</li><li>asdf3</li></ol>', '2019-02-15 03:49:49', '18.jpg', 1, 1),
 (19, 'etf_org', 1, 'ssASAdasdsadasadad', '<h1>sdasdasdsdsdsad</h1><p>dasdsadsd sgdfsa dfsdsadfasd asdagsd <u>fagsdf </u>agh dfhag dga dagh da</p><p>dasd <em>afdasgdfasdasdagdfggads</em></p><p>dasd afdadad asf f dad asfd agd a <strong>da</strong></p><ul><li><strong>ddasd</strong></li><li><strong>dasdasdd</strong></li><li><strong>dasdsaas</strong></li></ul>', '2019-02-15 03:50:46', '19.jpg', 0, 0);
 
 --
