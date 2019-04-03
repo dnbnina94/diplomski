@@ -284,6 +284,9 @@ public class PretragaDogadjaja {
 
     public void removeKarakteristika(int status) {
         selectedKarakteristikeProstora.remove(status);
+        if (selectedKarakteristikeProstora.isEmpty()) {
+            karakteristikaProstora = null;
+        }
     }
 
     public boolean karakteristikaValidacija() {
@@ -313,7 +316,7 @@ public class PretragaDogadjaja {
 
         if (valid) {
             selectedKarakteristikeProstora.add(karakteristikaProstora);
-            karakteristikaProstora = null;
+            //karakteristikaProstora = null;
         }
     }
 

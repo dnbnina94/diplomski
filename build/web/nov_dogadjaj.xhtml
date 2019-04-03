@@ -286,18 +286,15 @@
                                         </ui:repeat>
                                     </h:panelGroup>
                                     <div style="height: 5px"></div>
-                                    <b:selectOneMenu id="karakteristikaProstora" value="#{novDogadjaj.karakteristikaProstora}" styleClass="place-select" select2="true">
+                                    <b:selectOneMenu id="karakteristikaProstora" 
+                                                     value="#{novDogadjaj.karakteristikaProstora}" 
+                                                     styleClass="place-select" 
+                                                     select2="true"
+                                                     ajax="true"
+                                                     update="karakteristikaProstora karakteristikeProstoraGreskaWrapper novDogadjajValidacija karakteristikeProstoraWrapper"
+                                                     onchange="ajax:novDogadjaj.addKarakteristika();" >
                                         <f:selectItem itemLabel="Izaberite karakteristike prostora" itemValue="#{null}" />
                                         <f:selectItems value="#{kategorijeSifarnika.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
-                                        <f:facet name="append">
-                                            <b:commandButton id="plusButton"
-                                                             icon="plus" 
-                                                             styleClass="add-field-button" 
-                                                             ajax="true" 
-                                                             update="karakteristikaProstora karakteristikeProstoraGreskaWrapper novDogadjajValidacija karakteristikeProstoraWrapper" 
-                                                             onclick="ajax:novDogadjaj.addKarakteristika();" 
-                                                             style="border: 1px solid #4c4c4c; #{novDogadjaj.karakteristikeProstoraGreska == '' ? 'margin-top: 0px' : ''}" />
-                                        </f:facet>
                                     </b:selectOneMenu>
                                     <h:panelGroup id="karakteristikeProstoraGreskaWrapper" >
                                         <div id="karakteristikeProstoraGreska" class="#{novDogadjaj.karakteristikeProstoraGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"

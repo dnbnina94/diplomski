@@ -148,7 +148,7 @@
                                         </h:outputText>
                                         &nbsp;
                                         <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                            <b:image library="img" name="ikonice/#{pretragaVesti.vest.kategorija.ikonica}" styleClass="news-category-img-icon" />
+                                            <img src="#{pretragaVesti.vest.kategorija.getThumbnailSrc()}" class="news-category-img-icon" />
                                             <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
                                                 <f:convertDateTime pattern="dd.MM.yyyy." />
                                             </h:outputText>

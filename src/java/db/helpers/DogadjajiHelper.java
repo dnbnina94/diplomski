@@ -201,15 +201,35 @@ public class DogadjajiHelper {
             if (!kljucneReci.isEmpty()) {
                 c.add(Restrictions.or(Restrictions.like("naslov", kljucneReci, MatchMode.ANYWHERE), Restrictions.like("tekst", kljucneReci, MatchMode.ANYWHERE)));
             }
-
+            
             if (selectedKarakteristikeProstora != null) {
                 for (StavkeSifarnika selectedKar : selectedKarakteristikeProstora) {
                     Iterator karIterator = selectedKar.getKarakteristikeProstoras().iterator();
                     Disjunction karDisj = Restrictions.disjunction();
-                    while (karIterator.hasNext()) {
-                        karDisj.add(Restrictions.eq("idDogadjaj", ((KarakteristikeProstora) karIterator.next()).getDogadjaji().getIdDogadjaj()));
+                    
+                    //
+                    // U slucaju da neka od selektovanih karakteristika prostora korisnika ne postoji u tabeli
+                    // karakteristike prostora u tom slucaju ne treba vratiti ni jedan dogadjaj, jer ni jedan dogadjaj
+                    // nema zadatu karakteristiku prostora. Zato je na and uslov dodat 'false'.
+                    //
+                    if (!karIterator.hasNext()) {
+                        c.add(Restrictions.sqlRestriction("(1=0)"));
+                        break;
                     }
-                    c.add(karDisj);
+                    
+                    //
+                    // U slucaju da neka od selektovanih karakteristika prostora korisnika postoji u tabeli
+                    // karakteristike prostora, u tom slucaju iz tabele karakteristike prostora treba izdvojiti sve dogadjaje
+                    // koji imaju selektovanu karakteristiku prostora, i sve ih nadovezati na or uslov. Na kraju sve or uslove treba
+                    // nadovezati na and uslov, kako bi se izdvojili samo oni dogadjaji koji ispunjavaju sve kriterijume za selektovane
+                    // karakteristike prostora.
+                    //
+                    else {
+                        while (karIterator.hasNext()) {
+                            karDisj.add(Restrictions.eq("idDogadjaj", ((KarakteristikeProstora) karIterator.next()).getDogadjaji().getIdDogadjaj()));
+                        }
+                        c.add(karDisj);
+                    }
                 }
             }
 

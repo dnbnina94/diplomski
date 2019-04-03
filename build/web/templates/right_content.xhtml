@@ -63,18 +63,15 @@ and open the template in the editor.
                     </ui:repeat>
                     <div style="#{pretragaDogadjaja.selectedKarakteristikeProstora.size() != 0 ? 'margin-bottom: 5px' : ''}"></div>
                 </h:panelGroup>
-                <b:selectOneMenu id="karakteristikaProstora" value="#{pretragaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
+                <b:selectOneMenu id="karakteristikaProstora" 
+                                 value="#{pretragaDogadjaja.karakteristikaProstora}" 
+                                 styleClass="place-select" 
+                                 select2="true" 
+                                 ajax="true" 
+                                 update="karakteristikaProstora karakteristikeProstoraWrapper" 
+                                 onchange="ajax:pretragaDogadjaja.addKarakteristika()" >
                     <f:selectItem itemLabel="Sve karakteristike" itemValue="#{null}" />
                     <f:selectItems value="#{pretragaDogadjaja.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
-                    <f:facet name="append">
-                        <b:commandButton id="plusButton"
-                                         icon="plus" 
-                                         styleClass="add-field-button" 
-                                         style="border: 1px solid #4c4c4c;"
-                                         ajax="true"
-                                         update="karakteristikaProstora karakteristikeProstoraWrapper"
-                                         onclick="ajax:pretragaDogadjaja.addKarakteristika()"/>
-                    </f:facet>
                 </b:selectOneMenu>
             </div>
             <div class="custom-select">

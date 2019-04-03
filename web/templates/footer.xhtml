@@ -17,45 +17,51 @@ and open the template in the editor.
                     <div class="footer-top-container">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <table style="margin: auto; text-align: left">
-                                        <tr><td><span>
-                                                    Kategorije vesti
-                                                </span></td></tr>
-                                        <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
-                                            <tr><td style="vertical-align: middle">
-                                                    <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                                        <img src="#{kategorijaVest.getThumbnailSrc()}" class="news-category-icon-footer" />
-                                                        &#xA0;
-                                                        <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
-                                                        <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
-                                                        <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
-                                                    </b:commandLink>
-                                                </td></tr>
-                                        </ui:repeat>
-                                    </table>
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table style="margin: auto; text-align: left">
+                                                <tr><td style="font-family: BebasNeueRegular; font-size: 22px"><span>
+                                                            Kategorije vesti
+                                                        </span></td></tr>
+                                                <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
+                                                    <tr><td style="vertical-align: middle">
+                                                            <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                                                <img src="#{kategorijaVest.getThumbnailSrc()}" class="news-category-icon-footer" />
+                                                                &#xA0;
+                                                                <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                                            </b:commandLink>
+                                                        </td></tr>
+                                                </ui:repeat>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <table style="margin: auto; text-align: left">
+                                                <tr><td style="font-family: BebasNeueRegular; font-size: 22px"><span>
+                                                            Kategorije događaja
+                                                        </span></td></tr>
+                                                <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaja" >
+                                                    <tr><td style="vertical-align: middle">
+                                                            &#x2022;
+                                                            &#xA0;
+                                                            <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
+                                                                <h:outputText value="#{kategorijaDogadjaja.naziv}" styleClass="news-category-footer" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{kategorijaDogadjaja}" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
+                                                            </b:commandLink>
+                                                        </td></tr>
+                                                </ui:repeat>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <table style="margin: auto; text-align: left">
-                                        <tr><td><span>
-                                                    Kategorije događaja
-                                                </span></td></tr>
-                                        <ui:repeat value="#{pretragaDogadjaja.kategorijeDogadjaja}" var="kategorijaDogadjaja" >
-                                            <tr><td style="vertical-align: middle">
-                                                    &#x2022;
-                                                    &#xA0;
-                                                    <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
-                                                        <h:outputText value="#{kategorijaDogadjaja.naziv}" styleClass="news-category-footer" />
-                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{kategorijaDogadjaja}" />
-                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
-                                                    </b:commandLink>
-                                                </td></tr>
-                                        </ui:repeat>
-                                    </table>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
+                                <div class="col-md-3"></div>
                             </div>
                         </div>
                     </div>

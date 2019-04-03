@@ -12,13 +12,16 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/izmena_vesti.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/adminObavestenja.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/VestiHelper.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/templates/header.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Admin.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/ObavestenjaHelper.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/DogadjajiHelper.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/vest.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/db/helpers/DogadjajiHelper.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/vesti.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/templates/footer.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/beans/PretragaDogadjaja.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/db/KarakteristikeProstora.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/templates/right_content.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/nov_dogadjaj.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/templates/header.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/resources/css/style.css</file>
         </group>
     </open-files>
 </project-private>
