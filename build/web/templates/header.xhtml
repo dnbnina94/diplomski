@@ -11,6 +11,7 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
+
     <h:body>
 
         <nav id="top-nav">
@@ -95,6 +96,59 @@ and open the template in the editor.
 
         <h:form id="pretraga_vesti">
 
+            <nav id="nav-middle">
+                <div class="container">
+                    <div class="col-md-5 logo-col">
+                        <b:commandLink action="index?faces-redirect=true" styleClass="">
+                            <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
+                        </b:commandLink>
+                    </div>
+                    <div class="col-md-7" style="padding: 0px">
+                        <div class="col-md-6 search-col-1">
+                            <b:selectOneMenu id="organizacijaPretraga" value="#{pretragaOrganizacija.organizacija}" styleClass="place-select" select2="true"
+                                             onchange="ajax:pretragaOrganizacija.pretraziOrganizaciju()">
+                                <f:selectItem itemLabel="Pretraga organizacija" itemValue="#{null}" />
+                                <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija}" />
+                            </b:selectOneMenu>
+                        </div>
+
+                        <div class="col-md-6 search-col-2">
+                            <table style="width: 100%; height: 38px">
+                                <tr>
+                                    <td>
+                                        <button type="button" class="filter-button" data-target="#pretraga_vesti\:amodal" data-toggle="modal">Filter</button>
+                                    </td>
+                                    <td style="width: 100%">
+                                        <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga vesti" />
+                                    </td>
+                                    <td>
+                                        <b:commandButton icon="search" 
+                                                         class="search-button" 
+                                                         action="vesti?faces-redirect=true"
+                                                         ajax="true">
+                                            <f:setPropertyActionListener target='#{pretragaVesti.tipPretrage}' value='3' />
+                                        </b:commandButton>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <script>
+                $(document).ready(function () {
+                    $(".selection").click(function () {
+                        if ($(this).has("#select2-pretraga_vestiorganizacijaPretragaInner-container")) {
+                            $(".select2-dropdown--below").css("margin-top", "5px");
+                        } else {
+                            $(".select2-dropdown--below").css("margin-top", "0px");
+                        }
+                    });
+                });
+
+            </script>
+
             <b:modal id="amodal" title="Filter Pretrage" styleClass="modalPseudoClass">
 
                 <div class="stripe-line-header">
@@ -153,45 +207,6 @@ and open the template in the editor.
                 </f:facet>
             </b:modal>
 
-            <nav id="nav-middle">
-                <div class="container">
-                    <div class="col-md-5 logo-col">
-                        <h:graphicImage library="img" name="logo3.png" class="nav-logo" />
-                    </div>
-                    <div class="col-md-7" style="padding: 0px">
-                        <div class="col-md-6 search-col-1">
-                            <b:selectOneMenu id="organizacijaPretraga" value="#{pretragaOrganizacija.organizacija}" styleClass="place-select" select2="true"
-                                             onchange="ajax:pretragaOrganizacija.pretraziOrganizaciju()"
-                                             onclick="alert('HALOOO')">
-                                <f:selectItem itemLabel="Pretraga organizacija" itemValue="#{null}" />
-                                <f:selectItems value="#{pretragaVesti.organizacije}" var="organizacija" itemLabel="#{organizacija.korisnickoIme}" itemValue="#{organizacija}" />
-                            </b:selectOneMenu>
-                        </div>
-
-                        <div class="col-md-6 search-col-2">
-                            <table style="width: 100%; height: 38px">
-                                <tr>
-                                    <td>
-                                        <button type="button" class="filter-button" data-target="#pretraga_vesti\:amodal" data-toggle="modal">Filter</button>
-                                    </td>
-                                    <td style="width: 100%">
-                                        <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga vesti" />
-                                    </td>
-                                    <td>
-                                        <b:commandButton icon="search" 
-                                                         class="search-button" 
-                                                         action="vesti?faces-redirect=true"
-                                                         ajax="true">
-                                            <f:setPropertyActionListener target='#{pretragaVesti.tipPretrage}' value='3' />
-                                        </b:commandButton>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
         </h:form>
 
         <nav></nav>
@@ -199,23 +214,26 @@ and open the template in the editor.
         <nav class="navbar navbar-default" role="navigation">
 
             <div class="collapse navbar-collapse" id="navbar-categories">
-                <ul class="nav navbar-nav">
-                    <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
-                        <li>
-                            <h:form>
-                                <b:commandLink action="vesti?faces-redirect=true">
-                                    <img src="#{kategorijaVest.getThumbnailSrc()}" class="cultural-icon" />
-                                    <br/>
-                                    <span>#{kategorijaVest.naziv}</span>
-                                    <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
-                                    <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
-                                </b:commandLink>
-                            </h:form>
-                        </li>
-                    </ui:repeat>
-                </ul>
+                <h:form id="kategorije_vesti">
+                    <ul class="nav navbar-nav">
+                        <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
+                            <li>
+                               
+                                    <b:commandLink action="vesti?faces-redirect=true">
+                                        <img src="#{kategorijaVest.getThumbnailSrc()}" class="cultural-icon" />
+                                        <br/>
+                                        <span>#{kategorijaVest.naziv}</span>
+                                        <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
+                                        <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                    </b:commandLink>
+                               
+                            </li>
+                        </ui:repeat>
+                    </ul>
+                </h:form>
             </div>
 
         </nav>
+
     </h:body>
 </html>

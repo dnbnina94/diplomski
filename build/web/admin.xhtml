@@ -49,7 +49,7 @@
                     <div class="col-md-3">
 
                         <ui:insert name="left_content">
-                            <b:dataTable value="#{admin.korisnici}" var="korisnik">
+                            <b:dataTable value="#{admin.korisnici}" var="korisnik" onpage="">
                                 <b:dataTableColumn value="#{korisnik.korisnickoIme}" label="Korisničko ime" />
                                 <b:dataTableColumn label="" />
                             </b:dataTable>

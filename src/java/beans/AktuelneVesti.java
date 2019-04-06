@@ -43,6 +43,7 @@ public class AktuelneVesti implements Serializable {
     }
     
     public List<Vesti> getVesti() {
+        vesti = vestiHelper.aktuelneVesti();
         Collections.sort(vesti, new AktuelneVesti.SortVestiByDatumDescending());
         
         for (int i=0; i<vesti.size(); i++) {
@@ -73,7 +74,6 @@ public class AktuelneVesti implements Serializable {
     }
     
     public AktuelneVesti() {
-        vesti = vestiHelper.aktuelneVesti();
     }
     
     public List<Vesti> setToListVesti(Set set) {

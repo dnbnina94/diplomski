@@ -138,6 +138,13 @@ public class PretragaVesti {
     }
     
     public List<StavkeSifarnika> getKategorijeVesti() {
+        kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
+        Collections.sort(kategorijeVesti, new PretragaVesti.SortByIdSifarnik());
+        
+        for (StavkeSifarnika kategorija : kategorijeVesti) {
+            checkMap.put(kategorija, Boolean.FALSE);
+        }
+        
         return kategorijeVesti;
     }
     

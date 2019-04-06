@@ -30,7 +30,10 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
-                        <div class="stripe-line-header news-category-header">                        
+                        <div class="stripe-line-header news-category-header">
+                            <div class="stripe-line-header-link">
+                                <h:outputText value="Vest" />
+                            </div>
                         </div>
                         <h:form id="vest">
                             <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanaVestBrisanje.korisnici.korisnickoIme or korisnikBean.korisnik.tip == 1}">
@@ -125,40 +128,47 @@
                             </h:panelGroup>
                             <h:panelGroup id="vest_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
-                                <div class="#{pretragaVesti.vest.arhivirana == 1 ? 'expired' : ''}">
-                                    <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; background: #{pretragaVesti.vest.getThumbnailUrl()}"></div>
-                                    <div style="height: 10px"></div>
-                                    <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
+                                <div>
+                                    <h:panelGroup rendered="#{pretragaVesti.vest.arhivirana == 1}">
+                                        <div style="position: absolute; width: 100%; text-align: right; right: 20px; padding-top: 15px; z-index: 100">
+                                            <h:graphicImage library="img" name="arhivirano.png" style="width: 150px" />
+                                        </div>
+                                    </h:panelGroup>
 
-                                    <div class="news-parameters-news-page">
-                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                            <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaVesti.vest.korisnici.organizacije}" />
-                                        </b:commandLink>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{pretragaVesti.vest.datum}" >
-                                            <f:convertDateTime pattern=" HH:mm" />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
-                                            <img src="#{pretragaVesti.vest.kategorija.getThumbnailSrc()}" class="news-category-img-icon" />
-                                            <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                                <f:convertDateTime pattern="dd.MM.yyyy." />
+                                    <h:panelGroup styleClass="#{pretragaVesti.vest.arhivirana == 1 ? 'expired' : ''}">
+                                        <div class="news-thumbnail-container" style="padding-bottom: 50%; margin-top: 20px; margin-bottom: 20px; background: #{pretragaVesti.vest.getThumbnailUrl()}"></div>
+                                        <div style="height: 10px"></div>
+                                        <h:outputText styleClass="news-title-news-page" value="#{pretragaVesti.vest.naslov}" />
+
+                                        <div class="news-parameters-news-page">
+                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                <h:outputText value=" #{pretragaVesti.vest.korisnici.korisnickoIme}" />
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaVesti.vest.korisnici.organizacije}" />
+                                            </b:commandLink>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
                                             </h:outputText>
-                                            <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
-                                            <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
-                                        </b:commandLink>
-                                    </div>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{pretragaVesti.vest.datum}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
+                                            &nbsp;
+                                            <b:commandLink action="vesti?faces-redirect=true" styleClass="customNewsLink">
+                                                <img src="#{pretragaVesti.vest.kategorija.getThumbnailSrc()}" class="news-category-img-icon" />
+                                                <h:outputText value=" #{pretragaVesti.vest.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                                    <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                </h:outputText>
+                                                <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{pretragaVesti.vest.kategorija}" />
+                                                <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                            </b:commandLink>
+                                        </div>
 
-                                    <h:outputText id="tekst" value="#{pretragaVesti.vest.tekst}" escape="false" />
-
+                                        <h:outputText id="tekst" value="#{pretragaVesti.vest.tekst}" escape="false" />
+                                    </h:panelGroup>
                                 </div>
                                 <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == pretragaVesti.vest.korisnici.korisnickoIme}">
                                     <div style="margin-top: 20px;">

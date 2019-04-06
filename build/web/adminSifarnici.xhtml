@@ -126,7 +126,7 @@
                                                                  look="primary" 
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content sifarnici:stavka_input sifarnici:close_modal_script"
+                                                                 update="sifarnici:stavke_sifarnika_content sifarnici:stavka_input sifarnici:close_modal_script kategorije_vesti"
                                                                  onclick="ajax:admin.izmeniStavku();" />
                                             </div>
                                             <div class="col-md-6">
@@ -162,7 +162,7 @@
                                                                  look="primary" 
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content"
+                                                                 update="sifarnici:stavke_sifarnika_content kategorije_vesti"
                                                                  onclick="ajax:admin.obrisiStavku();"
                                                                  oncomplete="$('#sifarnici\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                             </div>
@@ -247,7 +247,7 @@
                                                                  icon="plus" 
                                                                  styleClass="add-field-button" 
                                                                  ajax="true" 
-                                                                 update="@form" 
+                                                                 update="@form kategorije_vesti" 
                                                                  onclick="ajax:admin.dodajStavku();" 
                                                                  style="border: 1px solid #4c4c4c; #{admin.novaStavkaGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
                                             </f:facet>

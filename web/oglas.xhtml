@@ -30,7 +30,10 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
-                        <div class="stripe-line-header news-category-header">                        
+                        <div class="stripe-line-header news-category-header">       
+                            <div class="stripe-line-header-link">
+                                <h:outputText value="Oglas" />
+                            </div>
                         </div>
                         <h:form id="oglas">
                             <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == zahteviKorisnika.selektovanOglasBrisanje.korisnici.korisnickoIme or korisnikBean.korisnik.tip == 1}">
@@ -79,35 +82,44 @@
                             </h:panelGroup>
                             <h:panelGroup id="oglas_content" style="margin-top: 0px">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
-                                <div class="#{pretragaOglasa.oglas.arhiviran ? 'expired' : ''}">
-                                    <h:outputText styleClass="news-title-news-page" value="#{pretragaOglasa.oglas.naslov}" />
+                                <div>
+                                    <h:panelGroup rendered="#{pretragaOglasa.oglas.arhiviran}">
+                                        <div style="position: absolute; width: 100%; text-align: right; right: 20px; padding-top: 15px">
+                                            <h:graphicImage library="img" name="arhivirano.png" style="width: 150px" />
+                                        </div>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup styleClass="#{pretragaOglasa.oglas.arhiviran ? 'expired' : ''}">
+                                        <h:outputText styleClass="news-title-news-page" value="#{pretragaOglasa.oglas.naslov}" />
 
-                                    <div class="news-parameters-news-page">
-                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
-                                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
-                                            <h:outputText value=" #{pretragaOglasa.oglas.korisnici.korisnickoIme}" />
-                                            <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaOglasa.oglas.korisnici.organizacije}" />
-                                        </b:commandLink>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
-                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                        </h:outputText>
-                                        &nbsp;
-                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                        <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
-                                            <f:convertDateTime pattern=" HH:mm" />
-                                        </h:outputText>
-                                    </div>
+                                        <div class="news-parameters-news-page" style="margin-top: 20px">
+                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                <h:outputText value=" #{pretragaOglasa.oglas.korisnici.korisnickoIme}" />
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaOglasa.oglas.korisnici.organizacije}" />
+                                            </b:commandLink>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                            </h:outputText>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{pretragaOglasa.oglas.datumKreiranja}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
+                                        </div>
 
-                                    <h:outputText id="tekst" value="#{pretragaOglasa.oglas.tekst}" escape="false" />
-                                    <div class="date-container" style="font-size: 16px; margin-top: 20px">
-                                        <h:outputText value="Rok za prijavu: " style="color: orangered"/>
-                                        &nbsp;
-                                        <h:outputText value="#{pretragaOglasa.oglas.datumIsticanja}" >
-                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                        </h:outputText>
-                                    </div>
+                                        <h:outputText id="tekst" value="#{pretragaOglasa.oglas.tekst}" escape="false" />
+                                        <div class="date-container" style="font-size: 16px; margin-top: 20px">
+                                            <h:outputText value="Rok za prijavu: " style="color: orangered"/>
+                                            &nbsp;
+                                            <h:outputText value="#{pretragaOglasa.oglas.datumIsticanja}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                            </h:outputText>
+                                        </div>
+
+                                    </h:panelGroup>
                                 </div>
                                 <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == pretragaOglasa.oglas.korisnici.korisnickoIme}">
                                     <div style="margin-top: 20px;">
@@ -138,7 +150,7 @@
                                                 <f:setPropertyActionListener target="#{izmenaOglasa.oglas}" value="#{pretragaOglasa.oglas}" />
                                             </b:commandButton>
                                         </div>
-                                        
+
                                         <div style="display: inline-block">
                                             <b:commandButton class="read-more-button" 
                                                              ajax="true"

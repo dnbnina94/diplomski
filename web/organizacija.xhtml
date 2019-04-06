@@ -33,7 +33,7 @@
                         <div class="stripe-line-header news-category-header">
                             <div><h:outputText value="#{organizacijaBean.organizacija.korisnickoIme}" /></div>     
                         </div>
-                        
+
                         <h:form id="izmena_podataka">
                             <c:if test="#{organizacijaBean.organizacija.korisnickoIme != korisnikBean.korisnik.korisnickoIme and korisnikBean.korisnik.tip != 1}">
                                 <style>
@@ -787,16 +787,26 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
-                                    <div class="col-md-3 col-sm-6 col-xs-12 #{vest.arhivirana == 1 ? 'expired' : ''}" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-image-container-front-page" style="background: #{vest.getThumbnailUrl()}">
-                                            </div>
-                                            <div class="news-header-container-front-page">
-                                                #{vest.naslovShort}
-                                            </div>
-                                            <div class="news-content-container-front-page">
-                                                <h:outputText value="#{vest.tekstShort}" />
-                                            </div>
+                                            <h:panelGroup rendered="#{vest.arhivirana == 1}">
+                                                <div style="position: absolute; width: 100%; z-index: 100; right: 0px; top: -10px">
+                                                    <div style="position: relative; text-align: right;">
+                                                        <h:graphicImage library="img" name="arhivirano.png" style="width: 30%" />
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="#{vest.arhivirana == 1 ? 'expired' : ''}">
+                                                <div class="news-image-container-front-page" style="background: #{vest.getThumbnailUrl()}">
+                                                </div>
+                                                <div class="news-header-container-front-page">
+                                                    #{vest.naslovShort}
+                                                </div>
+                                                <div class="news-content-container-front-page">
+                                                    <h:outputText value="#{vest.tekstShort}" />
+                                                </div>
+                                            </h:panelGroup>
                                             <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                         </b:commandLink>
                                     </div>
@@ -843,27 +853,37 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setDogadjajiToListFeatured()}" var="dogadjaj">
-                                    <div class="col-md-3 col-sm-6 col-xs-12 #{dogadjaj.arhiviran ? 'expired' : ''}" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-image-container-front-page" style="background: #{dogadjaj.getThumbnailUrl()}">
-                                            </div>
-                                            <div class="news-header-container-front-page">
-                                                #{dogadjaj.naslovShort}
-                                            </div>
-                                            <div class="date-container">
-                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
-                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
-                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                </h:outputText>
-                                                <br/>
-                                                <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
-                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
-                                                    <f:convertDateTime pattern=" HH:mm" />
-                                                </h:outputText>
-                                            </div>
-                                            <div class="news-content-container-front-page">
-                                                <h:outputText value="#{dogadjaj.tekstShort}" />
-                                            </div>
+                                            <h:panelGroup rendered="#{dogadjaj.arhiviran}">
+                                                <div style="position: absolute; width: 100%; z-index: 100; right: 0px; top: -10px">
+                                                    <div style="position: relative; text-align: right;">
+                                                        <h:graphicImage library="img" name="arhivirano.png" style="width: 30%" />
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="#{dogadjaj.arhiviran ? 'expired' : ''}">
+                                                <div class="news-image-container-front-page" style="background: #{dogadjaj.getThumbnailUrl()}">
+                                                </div>
+                                                <div class="news-header-container-front-page">
+                                                    #{dogadjaj.naslovShort}
+                                                </div>
+                                                <div class="date-container">
+                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
+                                                    <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                    </h:outputText>
+                                                    <br/>
+                                                    <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
+                                                    <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                        <f:convertDateTime pattern=" HH:mm" />
+                                                    </h:outputText>
+                                                </div>
+                                                <div class="news-content-container-front-page">
+                                                    <h:outputText value="#{dogadjaj.tekstShort}" />
+                                                </div>
+                                            </h:panelGroup>
                                             <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
                                         </b:commandLink>
                                     </div>
@@ -911,28 +931,38 @@
                                     </div>
                                 </c:if>
                                 <ui:repeat varStatus="status" value="#{organizacijaBean.setOglasiToListFeatured()}" var="oglas">
-                                    <div class="col-md-3 col-sm-6 col-xs-12 #{oglas.arhiviran ? 'expired' : ''}" style="margin-bottom: 15px">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
-                                            <div class="news-header-container-front-page" style="margin-top: 0px !important; border-bottom: 1px solid #ddd;">
-                                                #{oglas.naslovShort}
-                                            </div>
-                                            <div class="news-content-container-front-page">
-                                                <h:outputText value="#{oglas.tekstShort}" />
-                                            </div>
-                                            <div style="margin-top: 5px; font-size: 12px">
-                                                Rok prijave:
-                                            </div>
-                                            <div class="date-container" style="margin-bottom: 0px">
-                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
-                                                <h:outputText value="#{oglas.datumIsticanja}" >
-                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                </h:outputText>
-                                                <br/>
-                                                <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
-                                                <h:outputText value="#{oglas.datumIsticanja}" >
-                                                    <f:convertDateTime pattern=" HH:mm" />
-                                                </h:outputText>
-                                            </div>
+                                            <h:panelGroup rendered="#{oglas.arhiviran}">
+                                                <div style="position: absolute; width: 100%; z-index: 100; right: 0px; top: -10px">
+                                                    <div style="position: relative; text-align: right;">
+                                                        <h:graphicImage library="img" name="arhivirano.png" style="width: 30%" />
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="#{oglas.arhiviran ? 'expired' : ''}">
+                                                <div class="news-header-container-front-page" style="margin-top: 0px !important; border-bottom: 1px solid #ddd;">
+                                                    #{oglas.naslovShort}
+                                                </div>
+                                                <div class="news-content-container-front-page">
+                                                    <h:outputText value="#{oglas.tekstShort}" />
+                                                </div>
+                                                <div style="margin-top: 5px; font-size: 12px">
+                                                    Rok prijave:
+                                                </div>
+                                                <div class="date-container" style="margin-bottom: 0px">
+                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
+                                                    <h:outputText value="#{oglas.datumIsticanja}" >
+                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                    </h:outputText>
+                                                    <br/>
+                                                    <span class="glyphicon glyphicon-time" style="font-size: 12px;"></span>
+                                                    <h:outputText value="#{oglas.datumIsticanja}" >
+                                                        <f:convertDateTime pattern=" HH:mm" />
+                                                    </h:outputText>
+                                                </div>
+                                            </h:panelGroup>
                                             <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{oglas}" />
                                         </b:commandLink>
                                     </div>
