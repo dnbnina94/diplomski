@@ -12,6 +12,11 @@ html, body {
     height: 100%;
 }
 
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     font-family: Arial !important;
     background-image: url("#{resource['img:bg1.jpg']}");
@@ -670,7 +675,7 @@ select:focus {
 .page-content {
     background-color: white;
     padding-top: 20px;
-    padding-bottom: 15px;
+    padding-bottom: 30px;
 }
 
 .event-keywords {
@@ -1692,4 +1697,40 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
     font-family: BebasNeueRegular !important;
     font-size: 16px !important;
     padding: 10px 15px !important;
+}
+
+#vest\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#vest\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#vest\:progressBar > .progress-bar > span {
+    display: none;
+}
+
+#dogadjaj\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#dogadjaj\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#dogadjaj\:progressBar > .progress-bar > span {
+    display: none;
 }

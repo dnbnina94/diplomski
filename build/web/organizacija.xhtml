@@ -766,6 +766,9 @@
                                     <div class="stripe-line-header-link"><h:outputText value="Vesti" /></div>
                                     <f:setPropertyActionListener target="#{pretragaVesti.organizacija}" value="#{organizacijaBean.organizacija}" />
                                     <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.currentPage}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.numOfShowedItems}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaVesti.numOfTotalItems}" value="0" />
                                 </b:commandLink>
                             </h:form>
                         </div>
@@ -832,6 +835,9 @@
                                     <div class="stripe-line-header-link"><h:outputText value="Događaji" /></div>
                                     <f:setPropertyActionListener target="#{pretragaDogadjaja.organizacija}" value="#{organizacijaBean.organizacija}" />
                                     <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.currentPage}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.numOfShowedItems}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.numOfTotalItems}" value="0" />
                                 </b:commandLink>
                             </h:form>
                         </div>

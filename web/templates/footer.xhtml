@@ -13,7 +13,7 @@ and open the template in the editor.
     <h:body>
         <ui:composition>
             <h:form>
-                <footer class="footer">
+                <footer class="footer" id="footer">
                     <div class="footer-top-container">
                         <div class="container">
                             <div class="row">
@@ -34,6 +34,9 @@ and open the template in the editor.
                                                                 <h:outputText value="#{kategorijaVest.naziv}" styleClass="news-category-footer" />
                                                                 <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
                                                                 <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.currentPage}" value="0" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.numOfShowedItems}" value="0" />
+                                                                <f:setPropertyActionListener target="#{pretragaVesti.numOfTotalItems}" value="0" />
                                                             </b:commandLink>
                                                         </td></tr>
                                                 </ui:repeat>
@@ -53,6 +56,9 @@ and open the template in the editor.
                                                                 <h:outputText value="#{kategorijaDogadjaja.naziv}" styleClass="news-category-footer" />
                                                                 <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{kategorijaDogadjaja}" />
                                                                 <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.currentPage}" value="0" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.numOfShowedItems}" value="0" />
+                                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.numOfTotalItems}" value="0" />
                                                             </b:commandLink>
                                                         </td></tr>
                                                 </ui:repeat>

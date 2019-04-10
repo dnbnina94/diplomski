@@ -127,6 +127,9 @@ and open the template in the editor.
                                                          action="vesti?faces-redirect=true"
                                                          ajax="true">
                                             <f:setPropertyActionListener target='#{pretragaVesti.tipPretrage}' value='3' />
+                                            <f:setPropertyActionListener target="#{pretragaVesti.currentPage}" value="0" />
+                                            <f:setPropertyActionListener target="#{pretragaVesti.numOfShowedItems}" value="0" />
+                                            <f:setPropertyActionListener target="#{pretragaVesti.numOfTotalItems}" value="0" />
                                         </b:commandButton>
                                     </td>
                                 </tr>
@@ -225,8 +228,10 @@ and open the template in the editor.
                                         <span>#{kategorijaVest.naziv}</span>
                                         <f:setPropertyActionListener target="#{pretragaVesti.kategorijaVesti}" value="#{kategorijaVest}" />
                                         <f:setPropertyActionListener target="#{pretragaVesti.tipPretrage}" value="1" />
+                                        <f:setPropertyActionListener target="#{pretragaVesti.currentPage}" value="0" />
+                                        <f:setPropertyActionListener target="#{pretragaVesti.numOfShowedItems}" value="0" />
+                                        <f:setPropertyActionListener target="#{pretragaVesti.numOfTotalItems}" value="0" />
                                     </b:commandLink>
-                               
                             </li>
                         </ui:repeat>
                     </ul>

@@ -51,6 +51,11 @@ public class PretragaDogadjaja {
     //1 - pretraga po kategoriji, 2 - dogadjaji korisnika, 3 - rezultat pretrage
     private int tipPretrage;
 
+    private int currentPage = 0;
+    private int pageLength = 5;
+    private int numOfShowedItems = 0;
+    private long numOfTotalItems = 0;
+
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
@@ -71,7 +76,7 @@ public class PretragaDogadjaja {
         for (StavkeSifarnika kategorija : kategorijeDogadjaja) {
             checkMap.put(kategorija, Boolean.FALSE);
         }
-        
+
         mesta = this.setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(3).getStavkeSifarnikas());
 
         uzrasti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(4).getStavkeSifarnikas());
@@ -79,13 +84,13 @@ public class PretragaDogadjaja {
 
         karakteristikeProstora = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(7).getStavkeSifarnikas());
         Collections.sort(karakteristikeProstora, new PretragaDogadjaja.SortByIdSifarnik());
-        
+
         selectedKarakteristikeProstora = new ArrayList<StavkeSifarnika>();
-        
+
         organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
         Collections.sort(organizacije, new PretragaDogadjaja.SortOrganizacijeByName());
     }
-    
+
     class SortOrganizacijeByName implements Comparator<Organizacije> {
 
         @Override
@@ -190,18 +195,43 @@ public class PretragaDogadjaja {
 
     public List<Dogadjaji> getDogadjaji() {
         if (tipPretrage == 1) {
-            dogadjaji = dogadjajiHelper.getDogadjajiByKategorija(kategorijaDogadjaja);
+            /*dogadjaji = dogadjajiHelper.getDogadjajiByKategorija(kategorijaDogadjaja);
             Collections.sort(dogadjaji, new PretragaDogadjaja.SortDogadjajiByDatumDescending());
             return dogadjaji;
             //return setToListDogadjaji(kategorijaDogadjaja.getDogadjajisKategorija());
-        } 
+            */
+            if (numOfTotalItems == 0) {
+                numOfTotalItems = dogadjajiHelper.pretragaDogadjajaTotalCount(kategorijaDogadjaja);
+                dogadjaji = new ArrayList<Dogadjaji>();
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength));
+                numOfShowedItems = dogadjaji.size();
+                currentPage++;
+            }
+        }
         if (tipPretrage == 2) {
-            dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
+            /*dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
             Collections.sort(dogadjaji, new PretragaDogadjaja.SortDogadjajiByDatumDescending());
             return dogadjaji;
             //return setToListDogadjaji(organizacija.getKorisnici().getDogadjajis());
+             */
+            if (numOfTotalItems == 0) {
+                numOfTotalItems = dogadjajiHelper.pretragaDogadjajaTotalCount(organizacija.getKorisnici());
+                dogadjaji = new ArrayList<Dogadjaji>();
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength));
+                numOfShowedItems = dogadjaji.size();
+                currentPage++;
+            }
         }
-        this.pretraziDogadjaje();
+        if (tipPretrage == 3) {
+            //this.pretraziDogadjaje();
+            if (numOfTotalItems == 0) {
+                numOfTotalItems = dogadjajiHelper.PretragaDogadjajaTotalCount(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje);
+                dogadjaji = new ArrayList<Dogadjaji>();
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength));
+                numOfShowedItems = dogadjaji.size();
+                currentPage++;
+            }
+        }
         return dogadjaji;
     }
 
@@ -245,10 +275,10 @@ public class PretragaDogadjaja {
         this.datumDogadjaja = datumDogadjaja;
     }
 
-    public void pretraziDogadjaje() {
+    /*public void pretraziDogadjaje() {
         dogadjaji = dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje);
         tipPretrage = 3;
-    }
+    }*/
 
     public Map<StavkeSifarnika, Boolean> getCheckMap() {
         return checkMap;
@@ -342,6 +372,54 @@ public class PretragaDogadjaja {
 
     public void setDateScript(String dateScript) {
         this.dateScript = dateScript;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPageLength() {
+        return pageLength;
+    }
+
+    public void setPageLength(int pageLength) {
+        this.pageLength = pageLength;
+    }
+
+    public int getNumOfShowedItems() {
+        return numOfShowedItems;
+    }
+
+    public void setNumOfShowedItems(int numOfShowedItems) {
+        this.numOfShowedItems = numOfShowedItems;
+    }
+
+    public long getNumOfTotalItems() {
+        return numOfTotalItems;
+    }
+
+    public void setNumOfTotalItems(long numOfTotalItems) {
+        this.numOfTotalItems = numOfTotalItems;
+    }
+
+    public void currentPageIncrement() {
+        if (tipPretrage == 1) {
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength));
+            numOfShowedItems = dogadjaji.size();
+        }
+        if (tipPretrage == 2) {
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength));
+            numOfShowedItems = dogadjaji.size();
+        }
+        if (tipPretrage == 3) {
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength));
+            numOfShowedItems = dogadjaji.size();
+        }
+        currentPage++;
     }
 
 }
