@@ -191,7 +191,7 @@ public class VestiHelper {
 
             Criteria c = pretragaVesti(session, kljucneReci, checkMap, kreatorVesti, sortiranje, datum);
 
-            c.setFirstResult(pageLength*currentPage);
+            c.setFirstResult(pageLength * currentPage);
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -232,7 +232,7 @@ public class VestiHelper {
             session.close();
         }
     }
-    
+
     public long pretragaVestiTotalCount(StavkeSifarnika kategorijaVesti) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -259,7 +259,7 @@ public class VestiHelper {
             session.close();
         }
     }
-    
+
     public long pretragaVestiTotalCount(Korisnici korisnik) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -272,7 +272,7 @@ public class VestiHelper {
             Criteria c = session.createCriteria(Vesti.class);
             c.add(Restrictions.eq("korisnici", korisnik));
             c.setProjection(Projections.rowCount());
-            
+
             Long count = (Long) c.uniqueResult();
 
             session.getTransaction().commit();
@@ -342,7 +342,7 @@ public class VestiHelper {
             c.add(Restrictions.eq("kategorija", kategorija));
             c.add(Restrictions.eq("arhivirana", 0));
             c.addOrder(Order.desc("datum"));
-            
+
             List l = c.list();
 
             session.getTransaction().commit();
@@ -355,7 +355,7 @@ public class VestiHelper {
             session.close();
         }
     }
-    
+
     public List<Vesti> getVestiByKategorija(StavkeSifarnika kategorija, int currentPage, int pageLength) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -369,10 +369,10 @@ public class VestiHelper {
             c.add(Restrictions.eq("kategorija", kategorija));
             c.add(Restrictions.eq("arhivirana", 0));
             c.addOrder(Order.desc("datum"));
-            
-            c.setFirstResult(currentPage*pageLength);
+
+            c.setFirstResult(currentPage * pageLength);
             c.setMaxResults(pageLength);
-            
+
             List l = c.list();
 
             session.getTransaction().commit();
@@ -385,7 +385,7 @@ public class VestiHelper {
             session.close();
         }
     }
-    
+
     public List<Vesti> getVestiByKorisnik(Korisnici korisnik, int currentPage, int pageLength) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -398,10 +398,10 @@ public class VestiHelper {
             Criteria c = session.createCriteria(Vesti.class);
             c.add(Restrictions.eq("korisnici", korisnik));
             c.addOrder(Order.desc("datum"));
-            
-            c.setFirstResult(currentPage*pageLength);
+
+            c.setFirstResult(currentPage * pageLength);
             c.setMaxResults(pageLength);
-            
+
             List l = c.list();
 
             session.getTransaction().commit();
@@ -535,6 +535,34 @@ public class VestiHelper {
             int updatedEntities = session.createQuery(hqlUpdate).setString("thumbnail", thumbnail).setInteger("idVest", vest.getIdVest()).executeUpdate();
 
             session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<Vesti> getFeaturedVestiByKorisnik(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Vesti.class);
+            c.add(Restrictions.eq("korisnici", korisnik));
+            c.addOrder(Order.desc("datum"));
+            c.setMaxResults(8);
+
+            List<Vesti> l = c.list();
+
+            session.getTransaction().commit();
+
+            return l;
+
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

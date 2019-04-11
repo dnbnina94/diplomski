@@ -1734,3 +1734,39 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 #dogadjaj\:progressBar > .progress-bar > span {
     display: none;
 }
+
+#oglas\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#oglas\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#oglas\:progressBar > .progress-bar > span {
+    display: none;
+}
+
+#sifarnici\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#sifarnici\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#sifarnici\:progressBar > .progress-bar > span {
+    display: none;
+}

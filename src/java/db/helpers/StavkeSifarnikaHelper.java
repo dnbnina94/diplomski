@@ -13,6 +13,9 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -327,6 +330,65 @@ public class StavkeSifarnikaHelper {
             
             session.getTransaction().commit();
             
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<StavkeSifarnika> pretragaSifarnika(int idSifarnika, int currentPage, int pageLength, int numOfShowedItems) {
+        Sifarnici sifarnik = this.getStavkeByIdSifarnik(idSifarnika);
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(StavkeSifarnika.class);
+            c.add(Restrictions.eq("sifarnici", sifarnik));
+            c.addOrder(Order.desc("idStavka"));
+            
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems-currentPage*pageLength));
+            c.setMaxResults(pageLength);
+            
+            List<StavkeSifarnika> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public long pretragaSifarnikaTotalCount(int idSifarnika) {
+        Sifarnici sifarnik = this.getStavkeByIdSifarnik(idSifarnika);
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(StavkeSifarnika.class);
+            c.add(Restrictions.eq("sifarnici", sifarnik));
+            
+            c.setProjection(Projections.rowCount());
+            Long count = (Long) c.uniqueResult();
+            
+            session.getTransaction().commit();
+            
+            return count;
+
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

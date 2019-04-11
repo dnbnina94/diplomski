@@ -14,7 +14,6 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
-        <h:outputScript library="js" name="customCheckbox.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
@@ -43,7 +42,7 @@
                                 </style>
                             </c:if>
 
-                            <c:if test="#{korisnikBean.korisnik.tip == 1}">
+                            <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                 <b:modal id="amodal_brisanje" styleClass="modalPseudoClass">
 
                                     <div class="stripe-line-header">
@@ -112,12 +111,12 @@
                                         </div>
                                     </f:facet>
                                 </b:modal>
-                            </c:if>
+                            </h:panelGroup>
                             <h:panelGroup id="korisnik_podaci">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
-                                <c:if test="#{korisnikBean.korisnik.tip == 1}" >
+                                <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                     <div style="margin-top: 20px; text-align: right">
-                                        <c:if test="#{!organizacijaBean.organizacija.korisnici.odobren}">
+                                        <h:panelGroup rendered="#{!organizacijaBean.organizacija.korisnici.odobren}">
                                             <div data-target="#izmena_podataka\:amodal_prihvatanje" 
                                                  data-toggle="modal"
                                                  style="display: inline-block">
@@ -129,7 +128,7 @@
                                                     <f:setPropertyActionListener target="#{admin.selektovanKorisnikPrihvatanje}" value="#{organizacijaBean.organizacija.korisnici}" />
                                                 </b:commandButton>
                                             </div>
-                                        </c:if>
+                                        </h:panelGroup>
                                         <div data-target="#izmena_podataka\:amodal_brisanje" 
                                              data-toggle="modal"
                                              style="display: inline-block">
@@ -142,7 +141,7 @@
                                             </b:commandButton>
                                         </div>
                                     </div>
-                                </c:if>
+                                </h:panelGroup>
 
                                 <div class="container-w-red-header-header" style="margin-top: 20px">
                                     Detalji organizacije
@@ -158,8 +157,9 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="nazivOrgVal" value="#{organizacijaBean.organizacija.naziv}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonNazivOrg" 
@@ -169,11 +169,13 @@
                                                                                  onclick="ajax:izmenaPodataka.editNaziv(organizacijaBean.organizacija.naziv)"
                                                                                  oncomplete="editField('NazivOrg')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+
+
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperNazivOrg"><td colspan="2" style="padding-right: 0px;">
                                                                 <b:inputText id="nazivOrg"
                                                                              value="#{izmenaPodataka.nazivOrg}" 
@@ -198,8 +200,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px"
                                                                           onclick="closeField('NazivOrg')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -216,8 +218,8 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="opisOrgVal" value="#{organizacijaBean.organizacija.tekst}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonOpisOrg" 
@@ -227,11 +229,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editOpis(organizacijaBean.organizacija.tekst)"
                                                                                  oncomplete="editField('OpisOrg')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperOpisOrg"><td colspan="2" style="padding-right: 0px;">
                                                                 <b:inputTextarea id="opisOrg"
                                                                                  placeholder="Kratko opišite svoju organizaciju" 
@@ -255,8 +257,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px"
                                                                           onclick="closeField('OpisOrg')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -273,8 +275,8 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="oblastDelovanjaVal" value="#{organizacijaBean.organizacija.oblastDelovanja.naziv}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonOblastDelovanja" 
@@ -284,11 +286,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editOblastDelovanja(organizacijaBean.organizacija.oblastDelovanja.naziv)"
                                                                                  oncomplete="editField('OblastDelovanja')"/>
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperOblastDelovanja"><td colspan="2" style="padding-right: 0px;">
                                                                 <b:inputText id="oblastDelovanja"
                                                                              styleClass="#{izmenaPodataka.oblastDelovanjaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
@@ -314,8 +316,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px"
                                                                           onclick="closeField('OblastDelovanja')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -334,8 +336,8 @@
                                                             <h:outputText id="webAdresaVal" value="#{organizacijaBean.organizacija.webAdresa}" />
                                                         </a>
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonWebAdresa" 
@@ -345,11 +347,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editWebAdresa(organizacijaBean.organizacija.webAdresa)"
                                                                                  oncomplete="editField('WebAdresa')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperWebAdresa"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
                                                                 <b:inputText id="webAdresa"
                                                                              styleClass="#{izmenaPodataka.webAdresaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
@@ -379,8 +381,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
                                                                           onclick="closeField('WebAdresa')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -399,8 +401,8 @@
                                                         <h:outputText value=", " />
                                                         <h:outputText id="ulicaVal" value="#{organizacijaBean.organizacija.ulica.naziv}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonMestoUlica" 
@@ -410,11 +412,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editMestoUlica(organizacijaBean.organizacija.mesto.naziv, organizacijaBean.organizacija.ulica.naziv)"
                                                                                  oncomplete="editField('MestoUlica')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperMestoUlica"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
                                                                 <div class="row edit-place-fields-container">
                                                                     <div class="col-md-6">
@@ -461,8 +463,8 @@
                                                                     </div>
                                                                 </div>
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -479,8 +481,8 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="kontaktOsobaVal" value="#{organizacijaBean.organizacija.kontaktOsoba}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonKontaktOsoba" 
@@ -490,11 +492,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editKontaktOsoba(organizacijaBean.organizacija.kontaktOsoba)"
                                                                                  oncomplete="editField('KontaktOsoba')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperKontaktOsoba"><td colspan="2" style="padding-right: 0px;">
                                                                 <b:inputText id="kontaktOsoba"
                                                                              styleClass="#{izmenaPodataka.kontaktOsobaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
@@ -519,8 +521,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px"
                                                                           onclick="closeField('KontaktOsoba')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -537,8 +539,8 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="telefoniVal" value="#{organizacijaBean.organizacija.telefoni}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil"
                                                                                  id="editButtonTelefoni" 
@@ -548,11 +550,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editTelefoni(organizacijaBean.organizacija.telefoni)"
                                                                                  oncomplete="editField('Telefoni')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperTelefoni"><td colspan="2" style="padding-right: 0px;">
 
                                                                 <h:panelGroup id="telefoniWrapper">
@@ -603,8 +605,8 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px"
                                                                           onclick="closeField('Telefoni')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
@@ -621,8 +623,8 @@
                                                     <td style="width: 100%">
                                                         <h:outputText id="emailVal" value="#{organizacijaBean.organizacija.email}" />
                                                     </td>
-                                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                             <td>
                                                                 <b:commandButton icon="pencil" 
                                                                                  id="editButtonEmail" 
@@ -632,11 +634,11 @@
                                                                                  onclick="ajax:izmenaPodataka.editEmail(organizacijaBean.organizacija.email)"
                                                                                  oncomplete="editField('Email')" />
                                                             </td>     
-                                                        </c:if>
-                                                    </c:if>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
                                                 </tr>
-                                                <c:if test="#{korisnikBean.korisnik != null}">
-                                                    <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                                    <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme or korisnikBean.korisnik.tip == 1}">
                                                         <tr class="field-wrapper" id="fieldWrapperEmail"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
                                                                 <b:inputText id="email"
                                                                              styleClass="#{izmenaPodataka.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
@@ -666,13 +668,13 @@
                                                                           styleClass="form-step-button-sm" style="margin-left: 5px; margin-top: 10px"
                                                                           onclick="closeField('Email')" />
                                                             </td></tr> 
-                                                    </c:if>
-                                                </c:if>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
                                             </table>
                                         </div>
                                     </div>
-                                    <c:if test="#{korisnikBean.korisnik != null}">
-                                        <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
                                             <div class="custom-div-separator"></div>
 
                                             <div class="row">
@@ -685,7 +687,7 @@
                                                             <td style="width: 100%">
                                                                 &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
                                                             </td>
-                                                            <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                            <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
                                                                 <td>
                                                                     <b:commandButton icon="pencil" 
                                                                                      id="editButtonLozinka" 
@@ -695,9 +697,9 @@
                                                                                      onclick="ajax:izmenaPodataka.editLozinka()"
                                                                                      oncomplete="editField('Lozinka')" />
                                                                 </td>     
-                                                            </c:if>
+                                                            </h:panelGroup>
                                                         </tr>
-                                                        <c:if test="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
+                                                        <h:panelGroup rendered="#{organizacijaBean.organizacija.korisnickoIme == korisnikBean.korisnik.korisnickoIme}">
                                                             <tr class="field-wrapper" id="fieldWrapperLozinka"><td colspan="2" style="padding-right: 0px; padding-top: 5px">
                                                                     <h:outputText value="Stara lozinka:" styleClass="login-form-label" />
                                                                     <b:inputSecret id="staraLozinka"
@@ -739,12 +741,12 @@
                                                                               styleClass="form-step-button-sm" style="margin-left: 5px;"
                                                                               onclick="closeField('Lozinka')" />
                                                                 </td></tr> 
-                                                        </c:if>
+                                                        </h:panelGroup>
                                                     </table>
                                                 </div>
                                             </div>
-                                        </c:if>
-                                    </c:if>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
                                 </div>
                             </h:panelGroup>
 
@@ -774,22 +776,24 @@
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                                <c:if test="#{organizacijaBean.vesti.size() == 0}">
+                                <h:panelGroup rendered="#{organizacijaBean.vesti.size() == 0}">
+
                                     <div class="col-md-12 no-content">
                                         Nisu pronađene vesti korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik != null}">
-                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                        <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
                                                 <br/>
                                                 <b:commandButton action="nova_vest?faces-redirect=true"
                                                                  onclick="ajax:novaVest.reset()"
                                                                  value="Kreirajte vest" 
                                                                  styleClass="form-step-button-sm"
                                                                  style="background-color: #4c4c4c !important; margin-top: 5px;" />
-                                            </c:if>
-                                        </c:if>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
                                     </div>
-                                </c:if>
-                                <ui:repeat varStatus="status" value="#{organizacijaBean.setVestiToListFeatured()}" var="vest">
+
+                                </h:panelGroup>
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.vesti}" var="vest">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink">
                                             <h:panelGroup rendered="#{vest.arhivirana == 1}">
@@ -814,8 +818,9 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
-                                <c:if test="#{korisnikBean.korisnik != null}">
-                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.vesti.size() != 0}">
+                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.vesti.size() != 0}">
                                         <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
                                             <b:commandButton action="nova_vest?faces-redirect=true"
                                                              onclick="ajax:novaVest.reset()"
@@ -824,8 +829,9 @@
                                                              style="background-color: #4c4c4c !important;" />
 
                                         </div>
-                                    </c:if>
-                                </c:if>
+                                    </h:panelGroup>
+
+                                </h:panelGroup>
                             </h:form>
                         </div>
 
@@ -843,22 +849,24 @@
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                                <c:if test="#{organizacijaBean.dogadjaji.size() == 0}">
+                                <h:panelGroup rendered="#{organizacijaBean.dogadjaji.size() == 0}">
+
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni događaji korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik != null}">
-                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                        <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
                                                 <br/>
                                                 <b:commandButton action="nov_dogadjaj?faces-redirect=true"
                                                                  onclick="ajax:novDogadjaj.reset()"
                                                                  value="Kreirajte događaj" 
                                                                  styleClass="form-step-button-sm"
                                                                  style="background-color: #4c4c4c !important; margin-top: 5px;" />
-                                            </c:if>
-                                        </c:if>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
                                     </div>
-                                </c:if>
-                                <ui:repeat varStatus="status" value="#{organizacijaBean.setDogadjajiToListFeatured()}" var="dogadjaj">
+
+                                </h:panelGroup>
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.dogadjaji}" var="dogadjaj">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
                                             <h:panelGroup rendered="#{dogadjaj.arhiviran}">
@@ -894,8 +902,10 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
-                                <c:if test="#{korisnikBean.korisnik != null}">
-                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.dogadjaji.size() != 0}">
+
+                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.dogadjaji.size() != 0}">
+
                                         <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
 
                                             <b:commandButton action="nov_dogadjaj?faces-redirect=true"
@@ -905,8 +915,9 @@
                                                              style="background-color: #4c4c4c !important;" />
 
                                         </div>
-                                    </c:if>
-                                </c:if>
+
+                                    </h:panelGroup>
+                                </h:panelGroup>
                             </h:form>
                         </div>
 
@@ -916,27 +927,31 @@
                                     <div class="stripe-line-header-link"><h:outputText value="Oglasi" /></div>
                                     <f:setPropertyActionListener target="#{pretragaOglasa.organizacija}" value="#{organizacijaBean.organizacija}" />
                                     <f:setPropertyActionListener target="#{pretragaOglasa.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaOglasa.currentPage}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaOglasa.numOfShowedItems}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaOglasa.numOfTotalItems}" value="0" />
                                 </b:commandLink>
                             </h:form>
                         </div>
                         <div class="row news-category-front-page" style="padding-bottom: 0px !important">
                             <h:form>
-                                <c:if test="#{organizacijaBean.oglasi.size() == 0}">
+                                <h:panelGroup rendered="#{organizacijaBean.oglasi.size() == 0}">
                                     <div class="col-md-12 no-content">
                                         Nisu pronađeni oglasi korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
-                                        <c:if test="#{korisnikBean.korisnik != null}">
-                                            <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                        <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
                                                 <br/>
                                                 <b:commandButton action="nov_oglas?faces-redirect=true"
                                                                  onclick="ajax:novOglas.reset()"
                                                                  value="Kreirajte oglas" 
                                                                  styleClass="form-step-button-sm"
                                                                  style="background-color: #4c4c4c !important; margin-top: 5px;" />
-                                            </c:if>
-                                        </c:if>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
                                     </div>
-                                </c:if>
-                                <ui:repeat varStatus="status" value="#{organizacijaBean.setOglasiToListFeatured()}" var="oglas">
+                                </h:panelGroup>
+
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.oglasi}" var="oglas">
                                     <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
                                         <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink">
                                             <h:panelGroup rendered="#{oglas.arhiviran}">
@@ -973,8 +988,10 @@
                                         </b:commandLink>
                                     </div>
                                 </ui:repeat>
-                                <c:if test="#{korisnikBean.korisnik != null}">
-                                    <c:if test="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.oglasi.size() != 0}">
+
+                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.oglasi.size() != 0}">
+
                                         <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
                                             <b:commandButton action="nov_oglas?faces-redirect=true"
                                                              onclick="ajax:novOglas.reset()"
@@ -982,8 +999,9 @@
                                                              styleClass="form-step-button-sm"
                                                              style="background-color: #4c4c4c !important;" />
                                         </div>
-                                    </c:if>
-                                </c:if>
+
+                                    </h:panelGroup>
+                                </h:panelGroup>
                             </h:form>
                         </div>
 

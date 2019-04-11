@@ -132,6 +132,24 @@ public class PretragaDogadjaja {
     }
 
     public List<StavkeSifarnika> getKategorijeDogadjaja() {
+        kategorijeDogadjaja = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(2).getStavkeSifarnikas());
+        Collections.sort(kategorijeDogadjaja, new PretragaDogadjaja.SortByIdSifarnik());
+        
+        Map<StavkeSifarnika, Boolean> checkMapOld = checkMap;
+        checkMap = new HashMap<StavkeSifarnika, Boolean>();
+        for (StavkeSifarnika kategorija : kategorijeDogadjaja) {
+            checkMap.put(kategorija, Boolean.FALSE);
+        }
+
+        for (Map.Entry<StavkeSifarnika, Boolean> entry : checkMap.entrySet()) {
+            for (Map.Entry<StavkeSifarnika, Boolean> entry2 : checkMapOld.entrySet()) {
+                if (entry2.getKey().getIdStavka() == entry.getKey().getIdStavka()) {
+                    entry.setValue(entry2.getValue());
+                    break;
+                }
+            }
+        }
+        
         return kategorijeDogadjaja;
     }
 

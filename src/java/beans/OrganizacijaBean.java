@@ -164,9 +164,12 @@ public class OrganizacijaBean {
     }
 
     public List<Dogadjaji> getDogadjaji() {
-        //dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
+        /*//dogadjaji = dogadjajiHelper.getDogadjajiByKorisnik(organizacija.getKorisnici());
         dogadjaji = new ArrayList<Dogadjaji>(organizacija.getKorisnici().getDogadjajis());
         Collections.sort(dogadjaji, new OrganizacijaBean.SortDogadjajiByDatumDescending());
+        return dogadjaji;
+         */
+        dogadjaji = dogadjajiHelper.getFeaturedDogadjajiByKorisnik(organizacija.getKorisnici());
         return dogadjaji;
     }
 
@@ -176,8 +179,11 @@ public class OrganizacijaBean {
 
     public List<Vesti> getVesti() {
         //vesti = vestiHelper.getVestiByKorisnik(organizacija.getKorisnici());
-        vesti = new ArrayList<Vesti>(organizacija.getKorisnici().getVestis());
+        /*vesti = new ArrayList<Vesti>(organizacija.getKorisnici().getVestis());
         Collections.sort(vesti, new OrganizacijaBean.SortVestiByDatumDescending());
+        return vesti;
+         */
+        vesti = vestiHelper.getFeaturedVestiByKorisnik(organizacija.getKorisnici());
         return vesti;
     }
 
@@ -186,9 +192,12 @@ public class OrganizacijaBean {
     }
 
     public List<Oglasi> getOglasi() {
-        //oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
+        /*//oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
         oglasi = new ArrayList<Oglasi>(organizacija.getKorisnici().getOglasis());
         Collections.sort(oglasi, new OrganizacijaBean.SortOglasiByDatumDescending());
+        return oglasi;
+         */
+        oglasi = oglasiHelper.getFeaturedOglasiByKorisnik(organizacija.getKorisnici());
         return oglasi;
     }
 

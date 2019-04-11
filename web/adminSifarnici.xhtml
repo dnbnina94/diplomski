@@ -14,7 +14,6 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
-        <h:outputScript library="js" name="customCheckbox.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
@@ -126,7 +125,7 @@
                                                                  look="primary" 
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content sifarnici:stavka_input sifarnici:close_modal_script kategorije_vesti"
+                                                                 update="sifarnici:stavke_sifarnika_content sifarnici:stavka_input sifarnici:close_modal_script kategorije_vesti pretraga_vesti pretraga_dogadjaja"
                                                                  onclick="ajax:admin.izmeniStavku();" />
                                             </div>
                                             <div class="col-md-6">
@@ -162,7 +161,7 @@
                                                                  look="primary" 
                                                                  styleClass="big-red-button"
                                                                  ajax="true"
-                                                                 update="sifarnici:stavke_sifarnika_content kategorije_vesti"
+                                                                 update="sifarnici:stavke_sifarnika_content kategorije_vesti pretraga_vesti pretraga_dogadjaja"
                                                                  onclick="ajax:admin.obrisiStavku();"
                                                                  oncomplete="$('#sifarnici\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
                                             </div>
@@ -182,7 +181,9 @@
                                                              update="@form @(.content)"
                                                              style="#{sifarnik.idSifarnik == admin.pageSifarnici ? 'background-color: orangered; color: white !important;' : ''}"
                                                              onclick="ajax:admin.setPageSifarnici(sifarnik.idSifarnik);"
-                                                             styleClass="pillLinkButton" />
+                                                             styleClass="pillLinkButton" >
+                                                <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
+                                            </b:commandButton>
                                         </ui:repeat>
                                     </b:pillLinks>
                                 </b:panel>
@@ -195,9 +196,8 @@
                                                      striped="false" 
                                                      info="false"
                                                      styleClass="admin-datatable"
-                                                     page-length="20"
-                                                     page-length-menu="20" 
-                                                     onpage='$("html, body").animate({ scrollTop: 0 }, "slow");' >
+                                                     paginated="false"
+                                                     searching="false">
                                             <b:dataTableColumn label="Stavka šifarnika" orderable="false" style="cursor: pointer !important" >
                                                 <div class="row" style="margin: auto;">
                                                     <div class="col-md-6" style="padding: 0px; line-height: 26px">
@@ -220,6 +220,7 @@
                                                                 <f:setPropertyActionListener target="#{admin.stavkaGreska}" value="" />
                                                                 <f:setPropertyActionListener target="#{admin.thumbnailName}" value="#{stavka.ikonica}" />
                                                                 <f:setPropertyActionListener target="#{admin.menjanThumbnail}" value="#{false}" />
+                                                                <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
                                                             </b:commandButton>
                                                         </div>
                                                         <div style="display: inline-block">
@@ -230,12 +231,54 @@
                                                                              ajax="true"
                                                                              onclick="ajax:admin.proveriBrisanje(stavka)"
                                                                              oncomplete="$('#sifarnici\\:amodal_brisanje').modal('show');">
+                                                                <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
                                                             </b:commandButton>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </b:dataTableColumn>
                                         </b:dataTable>
+
+                                        <h:inputHidden id="pageLength" value="#{admin.pageLength}" />
+                                        <h:inputHidden id="currentPage" value="#{admin.currentPage}" />
+                                        <h:inputHidden id="numOfShowedItems" value="#{admin.numOfShowedItems}" />
+                                        <h:inputHidden id="numOfTotalItems" value="#{admin.numOfTotalItems}" />
+
+                                        <h:panelGroup rendered="#{admin.numOfTotalItems != 0}">
+                                            <div id="bottom" style="text-align: center;">
+                                                <div style="font-family: BebasNeueRegular; font-size: 16px">
+                                                    <h:outputText value="Prikazano " />
+                                                    <h:outputText value="#{admin.numOfShowedItems}" />
+                                                    <h:outputText value=" od " />
+                                                    <h:outputText value="#{admin.numOfTotalItems}" />
+                                                    <h:outputText value=" rezultata" />
+                                                </div>
+                                                <b:progressBar id="progressBar" min="0" max="#{admin.numOfTotalItems.toString()}" value="#{admin.numOfShowedItems.toString()}" />
+
+                                                <b:commandButton id="loadMoreButton" 
+                                                                 actionListener="#{admin.currentPageIncrement()}"
+                                                                 ajax="true"
+                                                                 update="@form"
+                                                                 value="Prikaži još vesti"
+                                                                 styleClass="read-more-button"
+                                                                 style="padding-left: 50px !important; 
+                                                                 padding-right: 50px !important; 
+                                                                 background-color: #4c4c4c !important;
+                                                                 #{admin.numOfShowedItems != admin.numOfTotalItems and admin.numOfTotalItems > 0 ? '' : 'display: none'}">
+                                                    <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
+                                                    <f:ajax/>
+                                                </b:commandButton>
+
+                                            </div>
+                                        </h:panelGroup>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                var width = $("#sifarnici\\:loadMoreButton").width();
+                                                $("#sifarnici\\:progressBar").width(width + 100);
+                                            });
+                                        </script>
+
 
                                         <h:outputText value="Dodajte stavku šifarnika:" styleClass="login-form-label" />
                                         <b:inputText id="novaStavka"
@@ -247,9 +290,10 @@
                                                                  icon="plus" 
                                                                  styleClass="add-field-button" 
                                                                  ajax="true" 
-                                                                 update="@form kategorije_vesti" 
+                                                                 update="@form kategorije_vesti pretraga_vesti pretraga_dogadjaja insertSuccessfulScript" 
                                                                  onclick="ajax:admin.dodajStavku();" 
-                                                                 style="border: 1px solid #4c4c4c; #{admin.novaStavkaGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
+                                                                 style="border: 1px solid #4c4c4c; #{admin.novaStavkaGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" >
+                                                </b:commandButton>
                                             </f:facet>
                                         </b:inputText>
                                         <div id="novaStavkaGreska" class="#{admin.novaStavkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
@@ -258,6 +302,12 @@
 
                                         <h:panelGroup id="sifarniciValidacija">
                                             <h:outputScript library="js" name="sifarniciValidacija.js" />
+                                        </h:panelGroup>
+                                        
+                                        <h:panelGroup id="insertSuccessfulScript">
+                                            <h:outputScript>
+                                                #{admin.insertSuccessfulScript}
+                                            </h:outputScript>
                                         </h:panelGroup>
 
                                     </b:column>

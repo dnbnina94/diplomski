@@ -152,6 +152,9 @@ and open the template in the editor.
                              action="oglasi?faces-redirect=true"
                              style="margin-top: 5px; color: white" >
                 <f:setPropertyActionListener target="#{pretragaOglasa.tipPretrage}" value="1" />
+                <f:setPropertyActionListener target="#{pretragaOglasa.currentPage}" value="0" />
+                <f:setPropertyActionListener target="#{pretragaOglasa.numOfShowedItems}" value="0" />
+                <f:setPropertyActionListener target="#{pretragaOglasa.numOfTotalItems}" value="0" />
             </b:commandButton>
         </h:form>
     </h:body>

@@ -70,6 +70,12 @@ public class Admin {
     private boolean menjanThumbnail;
     private List<Obavestenja> obavestenja;
 
+    private int currentPage;
+    private int pageLength = 10;
+    private int numOfShowedItems;
+    private long numOfTotalItems;
+    private String insertSuccessfulScript = "";
+
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private VestiHelper vestiHelper = new VestiHelper();
@@ -104,9 +110,9 @@ public class Admin {
         }
 
     }
-    
+
     class SortObavestenjaByDatum implements Comparator<Obavestenja> {
-        
+
         @Override
         public int compare(Obavestenja a, Obavestenja b) {
             return a.getDatum().compareTo(b.getDatum());
@@ -121,10 +127,17 @@ public class Admin {
         Collections.sort(sifarnici, new Admin.SortSifarniciById());
 
         pageSifarnici = sifarnici.get(0).getIdSifarnik();
-
-        stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
-        Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
         
+        currentPage = 0;
+        numOfShowedItems = 0;
+        numOfTotalItems = stavkeHelper.pretragaSifarnikaTotalCount(pageSifarnici);
+        stavkeSifarnika = new ArrayList<StavkeSifarnika>();
+        stavkeSifarnika.addAll(stavkeHelper.pretragaSifarnika(pageSifarnici, currentPage, pageLength, numOfShowedItems));
+        numOfShowedItems = stavkeSifarnika.size();
+
+        /*stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
+        Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());*/
+
         obavestenja = new ArrayList<Obavestenja>(obavestenjaHelper.getSvaObavestenja());
         Collections.sort(obavestenja, new Admin.SortObavestenjaByDatum());
     }
@@ -297,10 +310,25 @@ public class Admin {
     }
 
     public void setPageSifarnici(int pageSifarnici) {
-        this.pageSifarnici = pageSifarnici;
+        /*this.pageSifarnici = pageSifarnici;
 
         stavkeSifarnika = new ArrayList<StavkeSifarnika>(stavkeHelper.getStavkeByIdSifarnik(pageSifarnici).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new SortStavkeSifarnikaById());
+         */
+        
+        this.pageSifarnici = pageSifarnici;
+        
+        numOfTotalItems = 0;
+        numOfShowedItems = 0;
+        currentPage = 0;
+        
+        if (numOfTotalItems == 0) {
+            numOfTotalItems = stavkeHelper.pretragaSifarnikaTotalCount(pageSifarnici);
+            stavkeSifarnika = new ArrayList<StavkeSifarnika>();
+            stavkeSifarnika.addAll(stavkeHelper.pretragaSifarnika(pageSifarnici, currentPage, pageLength, numOfShowedItems));
+            numOfShowedItems = stavkeSifarnika.size();
+            currentPage++;
+        }
     }
 
     public List<StavkeSifarnika> getStavkeSifarnika() {
@@ -408,7 +436,7 @@ public class Admin {
                     selectedStavkaSifarnikaIzmena.setNaziv(stavka);
 
                     if (menjanThumbnail) {
-                        if (selectedStavkaSifarnikaIzmena.getIkonica()!= null) {
+                        if (selectedStavkaSifarnikaIzmena.getIkonica() != null) {
                             File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsIkonice"));
                             File file = new File(uploads, selectedStavkaSifarnikaIzmena.getIkonica());
 
@@ -430,7 +458,7 @@ public class Admin {
                                     } catch (IOException ex) {
                                         Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
                                     }
-                                    
+
                                     selectedStavkaSifarnikaIzmena.setIkonica(newThumbnailName);
                                 } else {
                                     selectedStavkaSifarnikaIzmena.setIkonica(null);
@@ -455,15 +483,15 @@ public class Admin {
                                 } catch (IOException ex) {
                                     Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                
+
                                 selectedStavkaSifarnikaIzmena.setIkonica(newThumbnailName);
                             } else {
                                 selectedStavkaSifarnikaIzmena.setIkonica(null);
                             }
                         }
                     }
-                    
-                    for (int i=0; i < stavkeSifarnika.size(); i++) {
+
+                    for (int i = 0; i < stavkeSifarnika.size(); i++) {
                         if (stavkeSifarnika.get(i).getIdStavka() == selectedStavkaSifarnikaIzmena.getIdStavka()) {
                             stavkeSifarnika.remove(i);
                             stavkeSifarnika.add(i, selectedStavkaSifarnikaIzmena);
@@ -507,6 +535,9 @@ public class Admin {
     public void obrisiStavku() {
         if (getSelectedStavkaSifarnikaBrisanje() != null) {
             stavkeHelper.obrisiStavku(selectedStavkaSifarnikaBrisanje);
+            
+            numOfShowedItems--;
+            numOfTotalItems--;
 
             for (StavkeSifarnika stavka : stavkeSifarnika) {
                 if (stavka.getIdStavka() == selectedStavkaSifarnikaBrisanje.getIdStavka()) {
@@ -572,23 +603,35 @@ public class Admin {
                 novaStavka.setNaziv(this.novaStavka);
 
                 stavkeHelper.insertStavka(novaStavka);
+                numOfShowedItems++;
+                numOfTotalItems++;
 
                 this.novaStavka = "";
                 novaStavkaGreska = "";
+                setInsertSuccessfulScript("$('html, body').animate({ scrollTop: 0 }, 'slow');");
+                
+                if (stavkeSifarnika != null) {
+                    stavkeSifarnika.add(0, novaStavka);
+                } else {
+                    stavkeSifarnika = new ArrayList<StavkeSifarnika>();
+                    stavkeSifarnika.add(novaStavka);
+                }
 
-                if (sifarnik != null) {
+                /*if (sifarnik != null) {
                     stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnik.getStavkeSifarnikas());
                     Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
-                }
+                }*/
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste dodali stavku šifarnika.", null);
                 FacesContext.getCurrentInstance().addMessage("sifarnici:growl-success", message);
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
             } else {
                 novaStavkaGreska = "Stavka šifarnika sa zadatim nazivom već postoji.";
+                setInsertSuccessfulScript("");
             }
         } else {
             novaStavkaGreska = stavkaGreska;
+            setInsertSuccessfulScript("");
         }
     }
 
@@ -740,19 +783,20 @@ public class Admin {
     public void setObavestenja(List<Obavestenja> obavestenja) {
         this.obavestenja = obavestenja;
     }
-    
+
     public int brNovihObavestenja() {
         if (obavestenja != null) {
             int br = 0;
             for (Obavestenja o : obavestenja) {
-                if (!o.isProcitano())
+                if (!o.isProcitano()) {
                     br++;
+                }
             }
             return br;
         }
         return 0;
     }
-    
+
     public void procitajObavestenja() {
         if (obavestenja != null) {
             for (Obavestenja o : obavestenja) {
@@ -760,6 +804,52 @@ public class Admin {
                 obavestenjaHelper.updateObavestenje(o);
             }
         }
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPageLength() {
+        return pageLength;
+    }
+
+    public void setPageLength(int pageLength) {
+        this.pageLength = pageLength;
+    }
+
+    public int getNumOfShowedItems() {
+        return numOfShowedItems;
+    }
+
+    public void setNumOfShowedItems(int numOfShowedItems) {
+        this.numOfShowedItems = numOfShowedItems;
+    }
+
+    public long getNumOfTotalItems() {
+        return numOfTotalItems;
+    }
+
+    public void setNumOfTotalItems(long numOfTotalItems) {
+        this.numOfTotalItems = numOfTotalItems;
+    }
+    
+    public void currentPageIncrement() {
+        stavkeSifarnika.addAll(stavkeHelper.pretragaSifarnika(pageSifarnici, currentPage, pageLength, numOfShowedItems));
+        numOfShowedItems = stavkeSifarnika.size();
+        currentPage++;
+    }
+
+    public String getInsertSuccessfulScript() {
+        return insertSuccessfulScript;
+    }
+
+    public void setInsertSuccessfulScript(String insertSuccessfulScript) {
+        this.insertSuccessfulScript = insertSuccessfulScript;
     }
 
 }

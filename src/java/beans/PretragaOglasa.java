@@ -30,6 +30,10 @@ public class PretragaOglasa {
 
     // 1 - za pretragu oglasa, 2 - za oglase organizacije
     private int tipPretrage;
+    private int currentPage = 0;
+    private int pageLength = 5;
+    private int numOfShowedItems = 0;
+    private long numOfTotalItems = 0;
 
     private Organizacije organizacija;
     private Oglasi oglas;
@@ -75,13 +79,30 @@ public class PretragaOglasa {
     }
 
     public List<Oglasi> getOglasi() {
+        if (tipPretrage == 1) {
+            if (numOfTotalItems == 0) {
+                numOfTotalItems = oglasiHelper.pretragaOglasaTotalCount(kljucneReci, kreatorOglasa, sortiranje);
+                oglasi = new ArrayList<Oglasi>();
+                oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength));
+                numOfShowedItems = oglasi.size();
+                currentPage++;
+            }
+        }
         if (tipPretrage == 2) {
-            oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
+            /*oglasi = oglasiHelper.getOglasiByKorisnik(organizacija.getKorisnici());
             Collections.sort(oglasi, new PretragaOglasa.SortOglasiByDatumDescending());
             return oglasi;
             //return setToList(organizacija.getKorisnici().getOglasis());
+             */
+            if (numOfTotalItems == 0) {
+                numOfTotalItems = oglasiHelper.pretragaOglasaTotalCount(organizacija.getKorisnici());
+                oglasi = new ArrayList<Oglasi>();
+                oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength));
+                numOfShowedItems = oglasi.size();
+                currentPage++;
+            }
         }
-        this.pretraziOglase();
+        //this.pretraziOglase();
         return oglasi;
     }
 
@@ -145,10 +166,54 @@ public class PretragaOglasa {
         this.sortiranje = sortiranje;
     }
 
-    public void pretraziOglase() {
+    /*public void pretraziOglase() {
         //oglasi = new ArrayList<Oglasi>();
         oglasi = oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje);
         tipPretrage = 1;
+    }*/
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getPageLength() {
+        return pageLength;
+    }
+
+    public void setPageLength(int pageLength) {
+        this.pageLength = pageLength;
+    }
+
+    public int getNumOfShowedItems() {
+        return numOfShowedItems;
+    }
+
+    public void setNumOfShowedItems(int numOfShowedItems) {
+        this.numOfShowedItems = numOfShowedItems;
+    }
+
+    public long getNumOfTotalItems() {
+        return numOfTotalItems;
+    }
+
+    public void setNumOfTotalItems(long numOfTotalItems) {
+        this.numOfTotalItems = numOfTotalItems;
+    }
+    
+    public void currentPageIncrement() {
+        if (tipPretrage == 1) {
+            oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength));
+            numOfShowedItems = oglasi.size();
+        }
+        if (tipPretrage == 2) {
+            oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength));
+            numOfShowedItems = oglasi.size();
+        }
+        currentPage++;
     }
 
 }

@@ -171,12 +171,23 @@ public class PretragaVesti {
     }
 
     public List<StavkeSifarnika> getKategorijeVesti() {
-        /*kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
+        kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
         Collections.sort(kategorijeVesti, new PretragaVesti.SortByIdSifarnik());
 
+        Map<StavkeSifarnika, Boolean> checkMapOld = checkMap;
+        checkMap = new HashMap<StavkeSifarnika, Boolean>();
         for (StavkeSifarnika kategorija : kategorijeVesti) {
             checkMap.put(kategorija, Boolean.FALSE);
-        }*/
+        }
+
+        for (Map.Entry<StavkeSifarnika, Boolean> entry : checkMap.entrySet()) {
+            for (Map.Entry<StavkeSifarnika, Boolean> entry2 : checkMapOld.entrySet()) {
+                if (entry2.getKey().getIdStavka() == entry.getKey().getIdStavka()) {
+                    entry.setValue(entry2.getValue());
+                    break;
+                }
+            }
+        }
 
         return kategorijeVesti;
     }
@@ -236,7 +247,6 @@ public class PretragaVesti {
         tipPretrage = 3;
         return;
     }*/
-
     public String getKljucneReci() {
         return kljucneReci;
     }
