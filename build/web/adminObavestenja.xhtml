@@ -32,8 +32,8 @@
                 margin-top: 0px !important;
             }
 
-            .table > thead > tr > th {
-                border-bottom: 1px solid #ddd !important;
+            .table > thead {
+                display: none !important;
             }
 
             .dataTables_empty {
@@ -56,6 +56,12 @@
 
                 <div class="row page-content">
                     <div class="col-md-9">
+                        <div class="stripe-line-header news-category-header">
+                            <div>
+                                Obaveštenja
+                            </div>                           
+                        </div>
+                        
                         <h:form id="obavestenja" >
 
                             <h:panelGroup id="obavestenja_content">
@@ -68,10 +74,8 @@
                                                      border="false"
                                                      striped="false" 
                                                      info="false"
-                                                     styleClass="admin-datatable"
-                                                     page-length="20"
-                                                     page-length-menu="20" 
-                                                     onpage='$("html, body").animate({ scrollTop: 0 }, "slow");' >
+                                                     styleClass="admin-datatable" 
+                                                     paginated="false" >
                                             <b:dataTableColumn label="Obaveštenja" orderable="false" style="cursor: pointer !important" >
                                                 <div class="row" style="margin: auto; background-color: #{!obavestenje.procitano ? '#fef3ec' : ''}">
                                                     <div class="col-md-12" style="padding: 0px; line-height: 26px">
@@ -109,6 +113,46 @@
                                                 </div>
                                             </b:dataTableColumn>
                                         </b:dataTable>
+
+                                        <h:inputHidden id="pageLength" value="#{admin.pageLength}" />
+                                        <h:inputHidden id="currentPage" value="#{admin.currentPage}" />
+                                        <h:inputHidden id="numOfShowedItems" value="#{admin.numOfShowedItems}" />
+                                        <h:inputHidden id="numOfTotalItems" value="#{admin.numOfTotalItems}" />
+
+                                        <h:panelGroup rendered="#{admin.numOfTotalItems != 0}">
+                                            <div id="bottom" style="text-align: center;">
+                                                <div style="font-family: BebasNeueRegular; font-size: 16px">
+                                                    <h:outputText value="Prikazano " />
+                                                    <h:outputText value="#{admin.numOfShowedItems}" />
+                                                    <h:outputText value=" od " />
+                                                    <h:outputText value="#{admin.numOfTotalItems}" />
+                                                    <h:outputText value=" rezultata" />
+                                                </div>
+                                                <b:progressBar id="progressBar" min="0" max="#{admin.numOfTotalItems.toString()}" value="#{admin.numOfShowedItems.toString()}" />
+
+                                                <b:commandButton id="loadMoreButton" 
+                                                                 actionListener="#{admin.currentPageObavestenjaIncrement()}"
+                                                                 ajax="true"
+                                                                 update="@form admin_meni"
+                                                                 value="Prikaži više obaveštenja"
+                                                                 styleClass="read-more-button"
+                                                                 style="padding-left: 50px !important; 
+                                                                 padding-right: 50px !important; 
+                                                                 background-color: #4c4c4c !important;
+                                                                 #{admin.numOfShowedItems != admin.numOfTotalItems and admin.numOfTotalItems > 0 ? '' : 'display: none'}">
+                                                    <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
+                                                    <f:ajax/>
+                                                </b:commandButton>
+
+                                            </div>
+                                        </h:panelGroup>
+
+                                        <script>
+                                            $(document).ready(function () {
+                                                var width = $("#obavestenja\\:loadMoreButton").width();
+                                                $("#obavestenja\\:progressBar").width(width + 100);
+                                            });
+                                        </script>
                                     </b:column>
                                 </b:row>
                             </h:panelGroup>

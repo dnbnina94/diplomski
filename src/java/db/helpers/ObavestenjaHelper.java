@@ -13,6 +13,9 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -157,6 +160,91 @@ public class ObavestenjaHelper {
             }
             
             session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Obavestenja> getObavestenja(int currentPage, int pageLength) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            c.addOrder(Order.desc("datum"));
+            
+            c.setFirstResult(currentPage*pageLength);
+            c.setMaxResults(pageLength);
+            
+            List<Obavestenja> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public long getObavestenjaTotalCount() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            
+            c.setProjection(Projections.rowCount());
+            Long count = (Long) c.uniqueResult();
+            
+            session.getTransaction().commit();
+            
+            return count;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public long getBrNovihObavestenja() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            c.add(Restrictions.eq("procitano", false));
+            
+            c.setProjection(Projections.rowCount());
+            long count = (Long) c.uniqueResult();
+            
+            session.getTransaction().commit();
+            
+            return count;
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

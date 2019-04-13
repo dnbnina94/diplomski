@@ -17,6 +17,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -457,6 +458,77 @@ public class KorisniciHelper {
             List l = c.list();
             session.getTransaction().commit();
             return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Korisnici> getKorisnici(String tipKorisnika, int currentPage, int pageLength, int numOfShowedItems) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("tip", 2));
+            
+            if (tipKorisnika.equals("adminNeodobreni.xhtml")) {
+                c.add(Restrictions.eq("odobren", false));
+            }
+            if (tipKorisnika.equals("adminOdobreni.xhtml")) {
+                c.add(Restrictions.eq("odobren", true));
+            }
+            
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
+            c.setMaxResults(pageLength);
+            
+            List l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public long getKorisniciTotalCount(String tipKorisnika) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        
+        try {
+            session.getTransaction().begin();
+
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("tip", 2));
+            
+            if (tipKorisnika.equals("adminNeodobreni.xhtml")) {
+                c.add(Restrictions.eq("odobren", false));
+            }
+            if (tipKorisnika.equals("adminOdobreni.xhtml")) {
+                c.add(Restrictions.eq("odobren", true));
+            }
+            
+            c.setProjection(Projections.rowCount());
+            Long count = (Long) c.uniqueResult();
+            
+            session.getTransaction().commit();
+            
+            return count;
+            
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

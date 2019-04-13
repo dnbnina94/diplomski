@@ -42,28 +42,37 @@ and open the template in the editor.
                             </h:form>
                         </c:if>
                         <c:if test="#{korisnikBean.korisnik.tip == 1}">
-                            <h:form>
+                            <h:form id="admin_meni">
                                 <div class="pull-left">
                                     <ul class="list-inline">
                                         <li>
                                             <b:commandLink action="adminObavestenja?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
                                                            style="font-weight: normal"
-                                                           onclick="ajax:admin.procitajObavestenja()">
+                                                           onclick="ajax:admin.redirectToObavestenja()"
+                                                           ajax="true">
                                                 <h:outputText value="Obaveštenja " />
 
                                                 <div style="display: inline-block; background-color: #4C4C4C; padding-left: 5px; padding-right: 5px; border-radius: 2px">
-                                                    <h:outputText value="#{admin.brNovihObavestenja()}" style="font-weight: bold" />
+                                                    <h:outputText value="#{admin.brNovihObavestenja}" style="font-weight: bold" />
                                                 </div>
                                             </b:commandLink>
                                         </li>
                                         <li>
-                                            <b:commandLink action="adminSifarnici?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                            <b:commandLink action="adminSifarnici?faces-redirect=true" 
+                                                           styleClass="top-nav-link" 
+                                                           style="font-weight: normal"
+                                                           ajax="true"
+                                                           onclick="ajax:admin.redirectToSifarnici();">
                                                 <h:outputText value="Šifarnici" />
                                             </b:commandLink>
                                         </li>
                                         <li>
-                                            <b:commandLink action="adminKorisnici?faces-redirect=true" styleClass="top-nav-link" style="font-weight: normal">
+                                            <b:commandLink action="adminKorisnici?faces-redirect=true" 
+                                                           styleClass="top-nav-link" 
+                                                           style="font-weight: normal"
+                                                           ajax="true"
+                                                           onclick="ajax:admin.redirectToKorisnici();">
                                                 <h:outputText value="Korisnici" />
                                             </b:commandLink>
                                         </li>

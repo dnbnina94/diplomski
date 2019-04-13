@@ -137,6 +137,7 @@ public class StavkeSifarnikaHelper {
             session.getTransaction().begin();
 
             Criteria c = session.createCriteria(Sifarnici.class);
+            c.addOrder(Order.asc("idSifarnik"));
             List<Sifarnici> l = c.list();
 
             session.getTransaction().commit();

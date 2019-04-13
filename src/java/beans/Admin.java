@@ -44,7 +44,7 @@ import javax.servlet.http.Part;
 public class Admin {
 
     private List<Korisnici> korisnici;
-    private String page = "adminNeodobreni.xhtml";
+    private String page;
     private Korisnici selektovanKorisnikBrisanje;
     private Korisnici selektovanKorisnikPrihvatanje;
     private Dogadjaji selektovanDogadjajBrisanje;
@@ -71,10 +71,12 @@ public class Admin {
     private List<Obavestenja> obavestenja;
 
     private int currentPage;
-    private int pageLength = 10;
+    private int pageLength = 3;
     private int numOfShowedItems;
     private long numOfTotalItems;
     private String insertSuccessfulScript = "";
+    
+    private long brNovihObavestenja = 0;
 
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
@@ -120,37 +122,28 @@ public class Admin {
     }
 
     public Admin() {
-        korisnici = korisniciHelper.getNeodobreniKorisnici();
-        Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
-
-        sifarnici = stavkeHelper.getSifarnici();
-        Collections.sort(sifarnici, new Admin.SortSifarniciById());
-
-        pageSifarnici = sifarnici.get(0).getIdSifarnik();
-        
         currentPage = 0;
         numOfShowedItems = 0;
-        numOfTotalItems = stavkeHelper.pretragaSifarnikaTotalCount(pageSifarnici);
-        stavkeSifarnika = new ArrayList<StavkeSifarnika>();
-        stavkeSifarnika.addAll(stavkeHelper.pretragaSifarnika(pageSifarnici, currentPage, pageLength, numOfShowedItems));
-        numOfShowedItems = stavkeSifarnika.size();
+        numOfTotalItems = 0;
+
+        page = "adminNeodobreni.xhtml";
+
+        sifarnici = stavkeHelper.getSifarnici();
+        pageSifarnici = sifarnici.get(0).getIdSifarnik();
 
         /*stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());*/
-
-        obavestenja = new ArrayList<Obavestenja>(obavestenjaHelper.getSvaObavestenja());
-        Collections.sort(obavestenja, new Admin.SortObavestenjaByDatum());
     }
 
     public List<Korisnici> getKorisnici() {
-        /*if (page.equals("adminOdobreni.xhtml")) {
-            korisnici = korisniciHelper.getOdobreniKorisnici();
-            Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
+        if (numOfTotalItems == 0) {
+            numOfTotalItems = korisniciHelper.getKorisniciTotalCount(page);
+            korisnici = new ArrayList<Korisnici>();
+            korisnici.addAll(korisniciHelper.getKorisnici(page, currentPage, pageLength, numOfShowedItems));
+            numOfShowedItems = korisnici.size();
+            currentPage++;
         }
-        if (page.equals("adminNeodobreni.xhtml")) {
-            korisnici = korisniciHelper.getNeodobreniKorisnici();
-            Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
-        }*/
+
         return korisnici;
     }
 
@@ -165,6 +158,10 @@ public class Admin {
     public void setPage(String page) {
         this.page = page;
 
+        numOfTotalItems = 0;
+        numOfShowedItems = 0;
+        currentPage = 0;
+        /*
         if (page.equals("adminNeodobreni.xhtml")) {
             korisnici = korisniciHelper.getNeodobreniKorisnici();
             Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
@@ -173,7 +170,8 @@ public class Admin {
             korisnici = korisniciHelper.getOdobreniKorisnici();
             Collections.sort(korisnici, new Admin.SortKorisniciByKorIme());
         }
-        /*if (page.equals("adminAdmini.xhtml")) {
+         */
+ /*if (page.equals("adminAdmini.xhtml")) {
             korisnici = korisniciHelper.getSviAdmini();
         }*/
     }
@@ -182,7 +180,15 @@ public class Admin {
         if (selektovanKorisnikBrisanje != null) {
             korisniciHelper.obrisiKorisnika(selektovanKorisnikBrisanje);
 
-            this.setPage(page);
+            numOfShowedItems--;
+            numOfTotalItems--;
+            
+            for (Korisnici korisnik : korisnici) {
+                if (korisnik.getKorisnickoIme().equals(selektovanKorisnikBrisanje.getKorisnickoIme())) {
+                    korisnici.remove(korisnik);
+                    break;
+                }
+            }
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali korisnika.", null);
             FacesContext.getCurrentInstance().addMessage("izmena_podataka:growl-success", message);
@@ -214,8 +220,18 @@ public class Admin {
         if (selektovanKorisnikPrihvatanje != null) {
             selektovanKorisnikPrihvatanje.setOdobren(true);
             korisniciHelper.updateKorisnikOdobren(selektovanKorisnikPrihvatanje);
+            
+            numOfShowedItems--;
+            numOfTotalItems--;
 
-            this.setPage(page);
+            for (Korisnici korisnik : korisnici) {
+                if (korisnik.getKorisnickoIme().equals(selektovanKorisnikPrihvatanje.getKorisnickoIme())) {
+                    korisnici.remove(korisnik);
+                    break;
+                }
+            }
+
+            //this.setPage(page);
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste odobrili korisnikov zahtev za registraciju.", null);
             FacesContext.getCurrentInstance().addMessage("izmena_podataka:growl-success", message);
@@ -315,13 +331,15 @@ public class Admin {
         stavkeSifarnika = new ArrayList<StavkeSifarnika>(stavkeHelper.getStavkeByIdSifarnik(pageSifarnici).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new SortStavkeSifarnikaById());
          */
-        
+
         this.pageSifarnici = pageSifarnici;
-        
+
         numOfTotalItems = 0;
         numOfShowedItems = 0;
         currentPage = 0;
-        
+    }
+
+    public List<StavkeSifarnika> getStavkeSifarnika() {
         if (numOfTotalItems == 0) {
             numOfTotalItems = stavkeHelper.pretragaSifarnikaTotalCount(pageSifarnici);
             stavkeSifarnika = new ArrayList<StavkeSifarnika>();
@@ -329,9 +347,7 @@ public class Admin {
             numOfShowedItems = stavkeSifarnika.size();
             currentPage++;
         }
-    }
 
-    public List<StavkeSifarnika> getStavkeSifarnika() {
         return stavkeSifarnika;
     }
 
@@ -535,7 +551,7 @@ public class Admin {
     public void obrisiStavku() {
         if (getSelectedStavkaSifarnikaBrisanje() != null) {
             stavkeHelper.obrisiStavku(selectedStavkaSifarnikaBrisanje);
-            
+
             numOfShowedItems--;
             numOfTotalItems--;
 
@@ -609,7 +625,7 @@ public class Admin {
                 this.novaStavka = "";
                 novaStavkaGreska = "";
                 setInsertSuccessfulScript("$('html, body').animate({ scrollTop: 0 }, 'slow');");
-                
+
                 if (stavkeSifarnika != null) {
                     stavkeSifarnika.add(0, novaStavka);
                 } else {
@@ -621,7 +637,6 @@ public class Admin {
                     stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnik.getStavkeSifarnikas());
                     Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());
                 }*/
-
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste dodali stavku šifarnika.", null);
                 FacesContext.getCurrentInstance().addMessage("sifarnici:growl-success", message);
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -777,13 +792,22 @@ public class Admin {
     }
 
     public List<Obavestenja> getObavestenja() {
+        if (numOfTotalItems == 0) {
+            numOfTotalItems = obavestenjaHelper.getObavestenjaTotalCount();
+            obavestenja = new ArrayList<Obavestenja>();
+            obavestenja.addAll(obavestenjaHelper.getObavestenja(currentPage, pageLength));
+            numOfShowedItems = obavestenja.size();
+            currentPage++;
+        }
+        
         return obavestenja;
     }
 
     public void setObavestenja(List<Obavestenja> obavestenja) {
         this.obavestenja = obavestenja;
     }
-
+    
+    /*
     public int brNovihObavestenja() {
         if (obavestenja != null) {
             int br = 0;
@@ -796,14 +820,15 @@ public class Admin {
         }
         return 0;
     }
+    */
 
     public void procitajObavestenja() {
-        if (obavestenja != null) {
+        /*if (obavestenja != null) {
             for (Obavestenja o : obavestenja) {
                 o.setProcitano(true);
                 obavestenjaHelper.updateObavestenje(o);
             }
-        }
+        }*/
     }
 
     public int getCurrentPage() {
@@ -837,10 +862,22 @@ public class Admin {
     public void setNumOfTotalItems(long numOfTotalItems) {
         this.numOfTotalItems = numOfTotalItems;
     }
-    
+
     public void currentPageIncrement() {
         stavkeSifarnika.addAll(stavkeHelper.pretragaSifarnika(pageSifarnici, currentPage, pageLength, numOfShowedItems));
         numOfShowedItems = stavkeSifarnika.size();
+        currentPage++;
+    }
+
+    public void currentPageKorisniciIncrement() {
+        korisnici.addAll(korisniciHelper.getKorisnici(page, currentPage, pageLength, numOfShowedItems));
+        numOfShowedItems = korisnici.size();
+        currentPage++;
+    }
+
+    public void currentPageObavestenjaIncrement() {
+        obavestenja.addAll(obavestenjaHelper.getObavestenja(currentPage, pageLength));
+        numOfShowedItems = obavestenja.size();
         currentPage++;
     }
 
@@ -851,5 +888,34 @@ public class Admin {
     public void setInsertSuccessfulScript(String insertSuccessfulScript) {
         this.insertSuccessfulScript = insertSuccessfulScript;
     }
+
+    public void redirectToKorisnici() {
+        numOfTotalItems = 0;
+        numOfShowedItems = 0;
+        currentPage = 0;
+        page = "adminNeodobreni.xhtml";
+    }
+
+    public void redirectToSifarnici() {
+        numOfShowedItems = 0;
+        numOfTotalItems = 0;
+        currentPage = 0;
+        pageSifarnici = sifarnici.get(0).getIdSifarnik();
+    }
+
+    public void redirectToObavestenja() {
+        numOfShowedItems = 0;
+        numOfTotalItems = 0;
+        currentPage = 0;
+    }
+    
+    public long getBrNovihObavestenja() {
+        return obavestenjaHelper.getBrNovihObavestenja();
+    }
+
+    public void setBrNovihObavestenja(long brNovihObavestenja) {
+        this.brNovihObavestenja = brNovihObavestenja;
+    }
+    
 
 }

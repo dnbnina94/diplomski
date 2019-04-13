@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2019 at 06:17 PM
+-- Generation Time: Apr 13, 2019 at 10:44 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -121,7 +121,12 @@ INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) 
 ('admin', 0xe53197da3a954069670e74083f305c3f541e71ce662c959c8abf014ab628f6a8d5cce06cb57963b9e276353548d3d7c9f87cafae04349b1fd80f384768c56006, 0xb77185db910f62b15a3d6bcf252e2ff4, 1, 1),
 ('etf_org', 0x2ecc97f986bc88dff9704aa1caeae3415debba1ebc85f4227c31f9e837f8b5d0a2ce9e0818f884d3412538c08ced6c225953ffe01e1800eaf440335403231215, 0x53a07065c8afb37b995edc2b5b3d63d2, 2, 1),
 ('nina_org', 0xb009206e47a9ff12b07e4d2b0949b0bafd3b01a41acb54cbf5a746374ec602d59a49dea0b7e466b54cf9b232480fd906944c352b7dd0972f484e365cae43f045, 0xd57097cc3bd46e89c133215fb46634a4, 2, 1),
-('ORCA', 0xb5e7d8e57329da237af182ca2257374132df85860ac832bf64a814f89f64d9c922536b904ebec5dee410eccc57db44c3d8d470e38bff4017eda42956d35b5e46, 0x52a7acd395cd5775e2f52594d4acbdac, 2, 1);
+('ORCA', 0xb5e7d8e57329da237af182ca2257374132df85860ac832bf64a814f89f64d9c922536b904ebec5dee410eccc57db44c3d8d470e38bff4017eda42956d35b5e46, 0x52a7acd395cd5775e2f52594d4acbdac, 2, 1),
+('testKorisnik5', 0x64d3eff1e2f3d0c3df8f4df9b882105acef142a6d53142636efcb51d36a34c74dfe61c1347a091fc022bfacd9474e483ca6b18d7a5d9ea227f8bac6270a9241e, 0x4f19f3c2673dadbf34f8f0dc1b19e8c0, 2, 1),
+('testKorisnik6', 0x17e060da8895bb2f255d8a65731b257741c929bced386b8e943549d43c398bdd0ea774d1ec35b929b9d9dab39523f48b1dd4e56f2da1102fba3a8fa8736d8372, 0xcc34383547ae11b32a0b65d2c61b5af5, 2, 1),
+('testKorisnik7', 0xb68dd165aea14cc45bb40dcb4723438d0dc370b11df9890cd12568081a2e12270cb2910fc2133d6b2851046d28a3a63c32c9f564876934434fe083ca8ee32559, 0x61287e4b90bb959dceb7ec5ac833d538, 2, 1),
+('testKorisnik8', 0xf079ca723d05973c6b125446b89298e72fdbc6a954c81baf95d7e2290c2f41887ca646a1c9eff3097f1c6c38c739ae0a816ad62e2dc8471396d097a788d6417b, 0xce20e5d6e518eb45f52b66402e08eafc, 2, 1),
+('testKorisnik9', 0xfb1f410262c01cca3939460a0b122a58b3caded3f41e4a2915c0614ca4fed2fab9b2545794abc9c7c25c12e3e959629243dbc81a22208af3126db495263a61b7, 0x9c1772b781a674a859bc442ce2ba127d, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -139,6 +144,20 @@ CREATE TABLE `obavestenja` (
   `id_oglas` int(11) DEFAULT NULL,
   `procitano` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `obavestenja`
+--
+
+INSERT INTO `obavestenja` (`id_obavestenje`, `korisnicko_ime`, `datum`, `tekst`, `id_vest`, `id_dogadjaj`, `id_oglas`, `procitano`) VALUES
+(1, 'etf_org', '2019-04-12 21:20:25', 'Korisnik je poslao zahtev za brisanje vesti:', 21, NULL, NULL, 0),
+(2, 'etf_org', '2019-04-12 21:20:28', 'Korisnik je poslao zahtev za brisanje vesti:', 20, NULL, NULL, 0),
+(3, 'etf_org', '2019-04-12 21:20:31', 'Korisnik je poslao zahtev za brisanje vesti:', 19, NULL, NULL, 0),
+(4, 'etf_org', '2019-04-12 21:20:36', 'Korisnik je poslao zahtev za brisanje vesti:', 18, NULL, NULL, 0),
+(5, 'etf_org', '2019-04-12 21:20:40', 'Korisnik je poslao zahtev za brisanje vesti:', 17, NULL, NULL, 0),
+(6, 'etf_org', '2019-04-12 21:20:46', 'Korisnik je poslao zahtev za brisanje vesti:', 16, NULL, NULL, 0),
+(7, 'etf_org', '2019-04-12 21:20:50', 'Korisnik je poslao zahtev za brisanje vesti:', 15, NULL, NULL, 0),
+(8, 'etf_org', '2019-04-12 21:20:55', 'Korisnik je arhivirao vest:', 17, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,12 @@ CREATE TABLE `organizacije` (
 INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`, `mesto`, `ulica`, `telefoni`) VALUES
 ('etf_org', 'Elektrotehnički fakultet Univerziteta u Beogradu', 'Nina Grujić', 'opsta_sluzba@etf.bg.ac.rs', 'Razvoj Elektrotehničkog fakulteta u bliskoj je vezi sa istorijom univerzitetskog obrazovanja u Srbiji. Prvo visokoškolsko predavanje iz oblasti elektrotehnike održano je davne 1894. Profesor Stevan Marković bio je prvi predavač i osnivač Elektrotehničke katedre Inženjerskog odeljenja Velike škole u Beogradu. Stevan Marković Samo četiri godine kasnije, profesor Marković je osnovao i elektroinženjersku laboratoriju. Od tada, elektrotehničke teme su se izučavale na Velikoj školi, a zatim i na beogradskom Univerzitetu koji je iz nje nastao 1905. Prve diplome dodeljene su 1922 godine.', 18, 'http://www.etf.bg.ac.rs', 8, 22, '0113226760'),
 ('nina_org', 'Ninina organizacija', 'Nina Grujić', 'ninaorg@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet dui at magna hendrerit aliquet. Ut consectetur scelerisque orci, non faucibus nunc laoreet eget. Aenean condimentum nisl a tortor faucibus, non malesuada nisl rhoncus. Nam non bibendum est. Sed aliquam elit non mauris dapibus, eu vestibulum libero consectetur. Proin nec urna dui. Nulla sed nisi nec ex cursus vulputate interdum vel augue. Pellentesque suscipit faucibus lorem. Aenean ultricies a purus in bibendum. In id erat vitae augue posuere pharetra. Maecenas augue orci, scelerisque vestibulum nulla at, mattis rutrum massa. Curabitur maximus lorem ac eros hendrerit, in rutrum nisi suscipit. Sed nisl risus, ornare non est non, fringilla rhoncus magna. Praesent posuere fermentum orci, sit amet dapibus sem. Donec sodales, nunc sed placerat hendrerit, quam ante luctus felis, a commodo urna augue id justo.', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
-('ORCA', 'ORCA', 'Dragana Taaar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj.\n\nSvoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 31, 'http://www.orca.rs', 8, 32, '0112438653');
+('ORCA', 'ORCA', 'Dragana Taaar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj.\n\nSvoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 31, 'http://www.orca.rs', 8, 32, '0112438653'),
+('testKorisnik5', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
+('testKorisnik6', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
+('testKorisnik7', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
+('testKorisnik8', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
+('testKorisnik9', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595');
 
 -- --------------------------------------------------------
 
@@ -291,8 +315,7 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (58, 5, 'Visnjicka 16', NULL),
 (59, 5, 'Visnjicka 17', NULL),
 (60, 5, 'Visnjicka 18', NULL),
-(61, 5, 'Visnjicka 19', NULL),
-(62, 3, 'sdadas', NULL);
+(61, 5, 'Visnjicka 19', NULL);
 
 -- --------------------------------------------------------
 
@@ -331,13 +354,13 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (12, 'nina_org', 1, 'Jesenji Odjeci Beogradskog Šopen festa: U slavu Poljske', '<p>Tradicionalni kulturni program Jesenji Odjeci 7. Beogradskog Šopen festa biće održan u ponedeljak, 26. novembra od 18.00, u sali Jevrejske opštine (Kralja Petra 71a).</p><p>Šopen fest i Ambasada Poljske organizuju muzičko-poetsko veče sa pratećom istorijskom izložbom „Očevi nezavisnosti“.</p><p>Dela Betovena, Lista, Šopena i Paderevskog, izvešće pijanističke zvezde u usponu Lazar Torbica i Dragana Teparić.</p><p>Devetnaestogodišnji pijanista iz Šapca, Lazar Torbica, student je druge godine Akademije umetnosti u Novom Sadu, u klasi renomirane pijanistkinje i prof. Rite Kinke. Dobitnik je više od 40 nagrada na domaćim i međunarodnim takmičenjima.</p><p>Pijanistkinja sa karijerom u usponu, Dragana Teparić diplomirala je i završila master studije na FMU. Dobitnici je najznačajnijih nagrada i laureat je takmičenja u zemlji i inostranstvu.</p><p>Kao gosti večeri, nastupiće studenti Departmana drame FSU, Đorđe Jovičić, Nađa Ristić i Lazar Tešić i govoriće poeziju poljskih pesnika. Koordinator poetskog programa je prof. Biljana Đurović.</p>', '2018-12-02 00:15:00', NULL, 0, 0),
 (13, 'nina_org', 1, 'SKC: Oleg Kirejev i džez 1960-tih', '<p>U petak, 30. novembra od 20.00, u Studentskom kulturnom centru nastupiće saksofonista Oleg Kirejev koji će predstaviti džez šezdesetih.</p><p>To je zlatni period super zvezda o kojima i do danas kruže legende. Velikani Čarli Parker i Džon Koltrejn su već izveli svoje muzičke revolucije i inicirali nove stilove; Majls Dejvis je već proglašen za velikog muzičara, a budući titani Kit Džeret i Čik Korija su započeli svoj uspon.</p><p>Na desetine ogranaka, eksperimenti, eksplozija novih ideja… Šezdesete godine su ispunjene inspiracijom, slobodom i novim mislima. Kul džez, bosa-nova i, naravno, tradicionalni džez – sve to ćete moći da čujete na koncertu Olega Kirejeva i njegovog ansambla.</p><p>Oleg Kirejev je priznati saksofonista koji je izvanredno upoznat sa tom epohom i ne samo na rečima. Oleg je bio učenik samog Bada Šenka, poznatog predstavnika „west coast“ džeza.</p>', '2018-12-02 05:00:00', NULL, 0, 0),
 (14, 'nina_org', 1, 'Koncert: Neno Belan & Fiumens sviraju pesme Đavola', '<p>U četvrtak, 22. novembra od 21.00, u sali Amerikana Doma omladine Beograda Neno Belan & Fiumens sviraće pesme legendarne splitske grupe Đavoli.</p><p>– To je poseban koncert koji ću posvetiti opusu moje nekadašnje grupe Đavoli. Taj format zovemo double retro show jer nas vraća u slatki zvuk šezdesetih. Neće to biti običan koncert nego pravi muzičko-scenski događaj – najavljuje Neno Belan.</p><p>Koncert „Neno Belan & Fuimens sviraju pesme grupe Đavoli“ posvećen je jednoj od najvažnijih rok grupa na prostoru bivše Jugoslavije, jedinstvenoj i prepoznatljivoj po mešavini ranog rokenrola i tvista uz specifičan mediteranski ‘začin’ i razrađen imidž.</p><p>Neno Belan & Fiumens uživo će proći kroz sva četiri studijska albuma Đavola objavljena od 1986. do 1998. godine: „Ljubav i moda“, „Halo Lulu 22“, „Ostani uz mene“ i „Space Twist“.</p>', '2018-12-01 13:06:00', NULL, 0, 0),
-(15, 'etf_org', 2, 'dsadadaa', '<p>dasdsadadsadas ddasd d</p><p>d dadas dadad</p>', '2019-02-15 03:16:45', NULL, 0, 0),
-(16, 'etf_org', 1, 'sdadsadasada', '<p>dasdasdassada aa sdas dvas</p><p>dadasdas dgaf dagdfas h</p>', '2019-02-15 03:32:23', '16.jpeg', 0, 0),
-(17, 'etf_org', 2, 'fgffh', '<p>gg dfd f dgf fgfg</p><p>gd fd f f fg</p>', '2019-02-15 03:48:02', NULL, 0, 0),
-(18, 'etf_org', 1, 'adsdasdsada dgasd faghdfagdf agdfa gdfagdf adfagdfaghd agdfaghdfagdfa hdfagdf agdf agdf agdfagdfagdfagd fagdf aghd aghdfaghd fagdf aghdf agdfashgdfa gsh', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p><ol><li>asdf</li><li>asdf2</li><li>asdf3</li></ol>', '2019-02-15 03:49:49', '18.jpg', 0, 0),
-(19, 'etf_org', 1, 'ssASAdasdsadasadad', '<h1>sdasdasdsdsdsad</h1><p>dasdsadsd sgdfsa dfsdsadfasd asdagsd <u>fagsdf </u>agh dfhag dga dagh da</p><p>dasd <em>afdasgdfasdasdagdfggads</em></p><p>dasd afdadad asf f dad asfd agd a <strong>da</strong></p><ul><li><strong>ddasd</strong></li><li><strong>dasdasdd</strong></li><li><strong>dasdsaas</strong></li></ul>', '2019-02-15 03:50:46', '19.jpg', 0, 0),
-(20, 'etf_org', 1, 'dasdsadas', '<p>sadsadadasdasd</p>', '2019-04-05 23:05:08', NULL, 0, 0),
-(21, 'etf_org', 1, 'dsadadada', '<p>dadsadada dasdada dagdfahgd afhgd fahgdf agd afh</p>', '2019-04-06 00:17:16', NULL, 0, 0);
+(15, 'etf_org', 2, 'dsadadaa', '<p>dasdsadadsadas ddasd d</p><p>d dadas dadad</p>', '2019-02-15 03:16:45', NULL, 0, 1),
+(16, 'etf_org', 1, 'sdadsadasada', '<p>dasdasdassada aa sdas dvas</p><p>dadasdas dgaf dagdfas h</p>', '2019-02-15 03:32:23', '16.jpeg', 0, 1),
+(17, 'etf_org', 2, 'fgffh', '<p>gg dfd f dgf fgfg</p><p>gd fd f f fg</p>', '2019-02-15 03:48:02', NULL, 1, 1),
+(18, 'etf_org', 1, 'adsdasdsada dgasd faghdfagdf agdfa gdfagdf adfagdfaghd agdfaghdfagdfa hdfagdf agdf agdf agdfagdfagdfagd fagdf aghd aghdfaghd fagdf aghdf agdfashgdfa gsh', '<p>dasdadasdasdas dgasdasgdas</p><p>dasdas dafdga sdasfd</p><ol><li>asdf</li><li>asdf2</li><li>asdf3</li></ol>', '2019-02-15 03:49:49', '18.jpg', 0, 1),
+(19, 'etf_org', 1, 'ssASAdasdsadasadad', '<h1>sdasdasdsdsdsad</h1><p>dasdsadsd sgdfsa dfsdsadfasd asdagsd <u>fagsdf </u>agh dfhag dga dagh da</p><p>dasd <em>afdasgdfasdasdagdfggads</em></p><p>dasd afdadad asf f dad asfd agd a <strong>da</strong></p><ul><li><strong>ddasd</strong></li><li><strong>dasdasdd</strong></li><li><strong>dasdsaas</strong></li></ul>', '2019-02-15 03:50:46', '19.jpg', 0, 1),
+(20, 'etf_org', 1, 'dasdsadas', '<p>sadsadadasdasd</p>', '2019-04-05 23:05:08', NULL, 1, 1),
+(21, 'etf_org', 1, 'dsadadada', '<p>dadsadada dasdada dagdfahgd afhgd fahgdf agd afh</p>', '2019-04-06 00:17:16', NULL, 0, 1);
 
 --
 -- Indexes for dumped tables

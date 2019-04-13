@@ -1770,3 +1770,39 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 #sifarnici\:progressBar > .progress-bar > span {
     display: none;
 }
+
+#korisnici\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#korisnici\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#korisnici\:progressBar > .progress-bar > span {
+    display: none;
+}
+
+#obavestenja\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#obavestenja\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#obavestenja\:progressBar > .progress-bar > span {
+    display: none;
+}
