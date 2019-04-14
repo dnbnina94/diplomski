@@ -22,7 +22,17 @@ public class Obavestenja {
     private boolean procitano;
     
     public Obavestenja() {
-        
+    }
+    
+    public Obavestenja(Obavestenja ob) {
+        this.idObavestenje = ob.getIdObavestenje();
+        this.korisnici = ob.korisnici;
+        this.datum = ob.datum;
+        this.tekst = ob.tekst;
+        this.vesti = ob.vesti;
+        this.dogadjaji = ob.dogadjaji;
+        this.oglasi = ob.oglasi;
+        this.procitano = ob.procitano;
     }
     
     public Obavestenja(int idObavestenje, Korisnici korisnici, Date datum, String tekst, boolean procitano) {

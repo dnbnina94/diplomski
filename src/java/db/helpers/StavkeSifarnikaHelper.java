@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -339,7 +340,7 @@ public class StavkeSifarnikaHelper {
         }
     }
     
-    public List<StavkeSifarnika> pretragaSifarnika(int idSifarnika, int currentPage, int pageLength, int numOfShowedItems) {
+    public List<StavkeSifarnika> pretragaSifarnika(int idSifarnika, String kljucneReci, int currentPage, int pageLength, int numOfShowedItems) {
         Sifarnici sifarnik = this.getStavkeByIdSifarnik(idSifarnika);
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -351,6 +352,11 @@ public class StavkeSifarnikaHelper {
             
             Criteria c = session.createCriteria(StavkeSifarnika.class);
             c.add(Restrictions.eq("sifarnici", sifarnik));
+            
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.like("naziv", kljucneReci, MatchMode.ANYWHERE));
+            }
+            
             c.addOrder(Order.desc("idStavka"));
             
             c.setFirstResult(currentPage*pageLength + (numOfShowedItems-currentPage*pageLength));
@@ -370,7 +376,7 @@ public class StavkeSifarnikaHelper {
         }
     }
     
-    public long pretragaSifarnikaTotalCount(int idSifarnika) {
+    public long pretragaSifarnikaTotalCount(int idSifarnika, String kljucneReci) {
         Sifarnici sifarnik = this.getStavkeByIdSifarnik(idSifarnika);
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -382,6 +388,10 @@ public class StavkeSifarnikaHelper {
             
             Criteria c = session.createCriteria(StavkeSifarnika.class);
             c.add(Restrictions.eq("sifarnici", sifarnik));
+            
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.like("naziv", kljucneReci, MatchMode.ANYWHERE));
+            }
             
             c.setProjection(Projections.rowCount());
             Long count = (Long) c.uniqueResult();

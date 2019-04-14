@@ -61,7 +61,7 @@
                                 Obaveštenja
                             </div>                           
                         </div>
-                        
+
                         <h:form id="obavestenja" >
 
                             <h:panelGroup id="obavestenja_content">
@@ -77,9 +77,13 @@
                                                      styleClass="admin-datatable" 
                                                      paginated="false" >
                                             <b:dataTableColumn label="Obaveštenja" orderable="false" style="cursor: pointer !important" >
-                                                <div class="row" style="margin: auto; background-color: #{!obavestenje.procitano ? '#fef3ec' : ''}">
+                                                <div class="row" style="margin: auto; background-color:">
                                                     <div class="col-md-12" style="padding: 0px; line-height: 26px">
-                                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                        <h:panelGroup rendered="#{!obavestenje.procitano}">
+                                                            <h:outputText value="New!" style="font-family: BebasNeueRegular;; color: orangered" />
+                                                            &nbsp;
+                                                        </h:panelGroup>
+                                                        <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: #4c4c4c !important; font-weight: bold">
                                                             <h:outputText value="#{obavestenje.korisnici.korisnickoIme}" />
                                                             <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{obavestenje.korisnici.organizacije}" />
                                                         </b:commandLink>
@@ -87,19 +91,19 @@
                                                         <h:outputText value="#{obavestenje.tekst}" />
                                                         <h:outputText value=" " />
                                                         <h:panelGroup rendered="#{obavestenje.vesti != null}">
-                                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                            <b:commandLink action="vest?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: #4c4c4c !important; font-weight: bold">
                                                                 <h:outputText value="#{obavestenje.vesti.naslov}" />
                                                                 <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{obavestenje.vesti}" />
                                                             </b:commandLink>
                                                         </h:panelGroup>
                                                         <h:panelGroup rendered="#{obavestenje.dogadjaji != null}">
-                                                            <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                            <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: #4c4c4c !important; font-weight: bold">
                                                                 <h:outputText value="#{obavestenje.dogadjaji.naslov}" />
                                                                 <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{obavestenje.dogadjaji}" />
                                                             </b:commandLink>
                                                         </h:panelGroup>
                                                         <h:panelGroup rendered="#{obavestenje.oglasi != null}">
-                                                            <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: orangered !important; font-weight: bold">
+                                                            <b:commandLink action="oglas?faces-redirect=true" styleClass="customNewsLink" style="font-weight: normal; color: #4c4c4c !important; font-weight: bold">
                                                                 <h:outputText value="#{obavestenje.oglasi.naslov}" />
                                                                 <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{obavestenje.oglasi}" />
                                                             </b:commandLink>

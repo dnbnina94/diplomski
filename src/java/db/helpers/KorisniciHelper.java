@@ -16,6 +16,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -466,7 +467,7 @@ public class KorisniciHelper {
         }
     }
     
-    public List<Korisnici> getKorisnici(String tipKorisnika, int currentPage, int pageLength, int numOfShowedItems) {
+    public List<Korisnici> getKorisnici(String tipKorisnika, String kljucneReci, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -484,6 +485,10 @@ public class KorisniciHelper {
             }
             if (tipKorisnika.equals("adminOdobreni.xhtml")) {
                 c.add(Restrictions.eq("odobren", true));
+            }
+            
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.like("korisnickoIme", kljucneReci, MatchMode.ANYWHERE));
             }
             
             c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
@@ -502,7 +507,7 @@ public class KorisniciHelper {
         }
     }
     
-    public long getKorisniciTotalCount(String tipKorisnika) {
+    public long getKorisniciTotalCount(String tipKorisnika, String kljucneReci) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -520,6 +525,10 @@ public class KorisniciHelper {
             }
             if (tipKorisnika.equals("adminOdobreni.xhtml")) {
                 c.add(Restrictions.eq("odobren", true));
+            }
+            
+            if (!kljucneReci.isEmpty()) {
+                c.add(Restrictions.like("korisnickoIme", kljucneReci, MatchMode.ANYWHERE));
             }
             
             c.setProjection(Projections.rowCount());

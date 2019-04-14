@@ -189,7 +189,30 @@
                                 </b:panel>
                                 <b:row style="padding-top: 10px !important">
                                     <b:column span="12" class="content">
+
+                                        <table style="width: 100%; height: 31px;">
+                                            <tr>
+                                                <td style="width: 100%">
+                                                    <b:inputText id="pretraga" 
+                                                                 styleClass="login-form-input"
+                                                                 style="width: 100%"
+                                                                 value="#{admin.kljucneReci}"
+                                                                 placeholder="Unesite ključne reči" />
+                                                </td>
+                                                <td>
+                                                    <b:commandButton value="Pretraga" 
+                                                                     styleClass="big-red-button"
+                                                                     style="background-color: #4c4c4c !important; color: white; font-size: 16px !important; margin-top: -4px !important"
+                                                                     ajax="true"
+                                                                     update="@form insertSuccessfulScript"
+                                                                     onclick="ajax:admin.pretraga();"
+                                                                     />
+                                                </td>
+                                            </tr>
+                                        </table>
+
                                         <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
+
                                         <b:dataTable value="#{admin.stavkeSifarnika}" 
                                                      var="stavka"
                                                      border="false"
@@ -303,7 +326,7 @@
                                         <h:panelGroup id="sifarniciValidacija">
                                             <h:outputScript library="js" name="sifarniciValidacija.js" />
                                         </h:panelGroup>
-                                        
+
                                         <h:panelGroup id="insertSuccessfulScript">
                                             <h:outputScript>
                                                 #{admin.insertSuccessfulScript}

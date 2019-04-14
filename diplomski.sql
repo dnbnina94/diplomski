@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2019 at 10:44 AM
+-- Generation Time: Apr 14, 2019 at 01:28 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -123,10 +123,7 @@ INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) 
 ('nina_org', 0xb009206e47a9ff12b07e4d2b0949b0bafd3b01a41acb54cbf5a746374ec602d59a49dea0b7e466b54cf9b232480fd906944c352b7dd0972f484e365cae43f045, 0xd57097cc3bd46e89c133215fb46634a4, 2, 1),
 ('ORCA', 0xb5e7d8e57329da237af182ca2257374132df85860ac832bf64a814f89f64d9c922536b904ebec5dee410eccc57db44c3d8d470e38bff4017eda42956d35b5e46, 0x52a7acd395cd5775e2f52594d4acbdac, 2, 1),
 ('testKorisnik5', 0x64d3eff1e2f3d0c3df8f4df9b882105acef142a6d53142636efcb51d36a34c74dfe61c1347a091fc022bfacd9474e483ca6b18d7a5d9ea227f8bac6270a9241e, 0x4f19f3c2673dadbf34f8f0dc1b19e8c0, 2, 1),
-('testKorisnik6', 0x17e060da8895bb2f255d8a65731b257741c929bced386b8e943549d43c398bdd0ea774d1ec35b929b9d9dab39523f48b1dd4e56f2da1102fba3a8fa8736d8372, 0xcc34383547ae11b32a0b65d2c61b5af5, 2, 1),
-('testKorisnik7', 0xb68dd165aea14cc45bb40dcb4723438d0dc370b11df9890cd12568081a2e12270cb2910fc2133d6b2851046d28a3a63c32c9f564876934434fe083ca8ee32559, 0x61287e4b90bb959dceb7ec5ac833d538, 2, 1),
-('testKorisnik8', 0xf079ca723d05973c6b125446b89298e72fdbc6a954c81baf95d7e2290c2f41887ca646a1c9eff3097f1c6c38c739ae0a816ad62e2dc8471396d097a788d6417b, 0xce20e5d6e518eb45f52b66402e08eafc, 2, 1),
-('testKorisnik9', 0xfb1f410262c01cca3939460a0b122a58b3caded3f41e4a2915c0614ca4fed2fab9b2545794abc9c7c25c12e3e959629243dbc81a22208af3126db495263a61b7, 0x9c1772b781a674a859bc442ce2ba127d, 2, 1);
+('testKorisnik6', 0x17e060da8895bb2f255d8a65731b257741c929bced386b8e943549d43c398bdd0ea774d1ec35b929b9d9dab39523f48b1dd4e56f2da1102fba3a8fa8736d8372, 0xcc34383547ae11b32a0b65d2c61b5af5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -150,14 +147,14 @@ CREATE TABLE `obavestenja` (
 --
 
 INSERT INTO `obavestenja` (`id_obavestenje`, `korisnicko_ime`, `datum`, `tekst`, `id_vest`, `id_dogadjaj`, `id_oglas`, `procitano`) VALUES
-(1, 'etf_org', '2019-04-12 21:20:25', 'Korisnik je poslao zahtev za brisanje vesti:', 21, NULL, NULL, 0),
-(2, 'etf_org', '2019-04-12 21:20:28', 'Korisnik je poslao zahtev za brisanje vesti:', 20, NULL, NULL, 0),
-(3, 'etf_org', '2019-04-12 21:20:31', 'Korisnik je poslao zahtev za brisanje vesti:', 19, NULL, NULL, 0),
-(4, 'etf_org', '2019-04-12 21:20:36', 'Korisnik je poslao zahtev za brisanje vesti:', 18, NULL, NULL, 0),
-(5, 'etf_org', '2019-04-12 21:20:40', 'Korisnik je poslao zahtev za brisanje vesti:', 17, NULL, NULL, 0),
-(6, 'etf_org', '2019-04-12 21:20:46', 'Korisnik je poslao zahtev za brisanje vesti:', 16, NULL, NULL, 0),
-(7, 'etf_org', '2019-04-12 21:20:50', 'Korisnik je poslao zahtev za brisanje vesti:', 15, NULL, NULL, 0),
-(8, 'etf_org', '2019-04-12 21:20:55', 'Korisnik je arhivirao vest:', 17, NULL, NULL, 0);
+(1, 'etf_org', '2019-04-12 21:20:25', 'Korisnik je poslao zahtev za brisanje vesti:', 21, NULL, NULL, 1),
+(2, 'etf_org', '2019-04-12 21:20:28', 'Korisnik je poslao zahtev za brisanje vesti:', 20, NULL, NULL, 1),
+(3, 'etf_org', '2019-04-12 21:20:31', 'Korisnik je poslao zahtev za brisanje vesti:', 19, NULL, NULL, 1),
+(4, 'etf_org', '2019-04-12 21:20:36', 'Korisnik je poslao zahtev za brisanje vesti:', 18, NULL, NULL, 1),
+(5, 'etf_org', '2019-04-12 21:20:40', 'Korisnik je poslao zahtev za brisanje vesti:', 17, NULL, NULL, 1),
+(6, 'etf_org', '2019-04-12 21:20:46', 'Korisnik je poslao zahtev za brisanje vesti:', 16, NULL, NULL, 1),
+(7, 'etf_org', '2019-04-12 21:20:50', 'Korisnik je poslao zahtev za brisanje vesti:', 15, NULL, NULL, 1),
+(8, 'etf_org', '2019-04-12 21:20:55', 'Korisnik je arhivirao vest:', 17, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -218,10 +215,7 @@ INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`,
 ('nina_org', 'Ninina organizacija', 'Nina Grujić', 'ninaorg@gmail.com', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet dui at magna hendrerit aliquet. Ut consectetur scelerisque orci, non faucibus nunc laoreet eget. Aenean condimentum nisl a tortor faucibus, non malesuada nisl rhoncus. Nam non bibendum est. Sed aliquam elit non mauris dapibus, eu vestibulum libero consectetur. Proin nec urna dui. Nulla sed nisi nec ex cursus vulputate interdum vel augue. Pellentesque suscipit faucibus lorem. Aenean ultricies a purus in bibendum. In id erat vitae augue posuere pharetra. Maecenas augue orci, scelerisque vestibulum nulla at, mattis rutrum massa. Curabitur maximus lorem ac eros hendrerit, in rutrum nisi suscipit. Sed nisl risus, ornare non est non, fringilla rhoncus magna. Praesent posuere fermentum orci, sit amet dapibus sem. Donec sodales, nunc sed placerat hendrerit, quam ante luctus felis, a commodo urna augue id justo.', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
 ('ORCA', 'ORCA', 'Dragana Taaar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj.\n\nSvoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 31, 'http://www.orca.rs', 8, 32, '0112438653'),
 ('testKorisnik5', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
-('testKorisnik6', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
-('testKorisnik7', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
-('testKorisnik8', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595'),
-('testKorisnik9', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595');
+('testKorisnik6', 'testKorisnik3', 'Test Korinisnik', 'testkorisni3@gmail.com', 'tesko korisnik 3', 17, 'http://www.mojaorg.com', 8, 22, '0601844595');
 
 -- --------------------------------------------------------
 
@@ -313,9 +307,7 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (56, 5, 'Visnjicka 14', NULL),
 (57, 5, 'Visnjicka 15', NULL),
 (58, 5, 'Visnjicka 16', NULL),
-(59, 5, 'Visnjicka 17', NULL),
-(60, 5, 'Visnjicka 18', NULL),
-(61, 5, 'Visnjicka 19', NULL);
+(59, 5, 'Visnjicka 17', NULL);
 
 -- --------------------------------------------------------
 

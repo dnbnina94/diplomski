@@ -254,4 +254,27 @@ public class ObavestenjaHelper {
         }
     }
     
+    public void setObavestenjeProcitano(Obavestenja obavestenje) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            obavestenje.setProcitano(true);
+            session.update(obavestenje);
+            
+            session.getTransaction().commit();
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
 }
