@@ -9,6 +9,7 @@ import db.HibernateUtil;
 import db.Dogadjaji;
 import db.KarakteristikeProstora;
 import db.Korisnici;
+import db.Obavestenja;
 import db.Oglasi;
 import db.StavkeSifarnika;
 import java.text.SimpleDateFormat;
@@ -519,11 +520,24 @@ public class DogadjajiHelper {
             session.getTransaction().begin();
 
             for (KarakteristikeProstora karakteristika : (Set<KarakteristikeProstora>) dogadjaj.getKarakteristikeProstoras()) {
-                String hqlUpdate = "Delete KarakteristikeProstora c where c.idKarakteristika = :idKarakteristika";
-                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idKarakteristika", karakteristika.getIdKarakteristika()).executeUpdate();
+                session.delete(karakteristika);
+                /*String hqlUpdate = "Delete KarakteristikeProstora c where c.idKarakteristika = :idKarakteristika";
+                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idKarakteristika", karakteristika.getIdKarakteristika()).executeUpdate();*/
             }
-            String hqlUpdate = "Delete Dogadjaji c where c.idDogadjaj = :idDogadjaj";
-            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            c.add(Restrictions.eq("dogadjaji.idDogadjaj", dogadjaj.getIdDogadjaj()));
+            
+            List<Obavestenja> obavestenja = c.list();
+            
+            for (Obavestenja o : obavestenja) {
+                session.delete(o);
+            }
+            
+            /*String hqlUpdate = "Delete Dogadjaji c where c.idDogadjaj = :idDogadjaj";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();*/
+            
+            session.delete(dogadjaj);
 
             session.getTransaction().commit();
         } catch (RuntimeException e) {

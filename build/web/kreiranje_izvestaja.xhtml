@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{korisnikBean.proveriAdminPrivilegije()}" />
+
+        <style>
+            .panel-group {
+                margin-bottom: 0px !important;
+            }
+
+            .panel-body {
+                padding: 10px !important;
+            }
+
+            table.dataTable {
+                margin-top: 0px !important;
+            }
+
+            .table > thead > tr > th {
+                padding-top: 0px !important;
+            }
+
+            .dataTables_empty {
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
+
+            .dataTables_wrapper {
+                margin-top: 0px !important;
+            }
+        </style>
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <div class="stripe-line-header news-category-header">
+                            <div>Izveštaj</div>     
+                        </div>
+
+                        <h:form id="kreiranje_izvestaja" enctype="">
+
+                            <h:panelGroup rendered='#{kreiranjeIzvestaja.selectedIzvestajSlanje != null}'>
+                                <b:modal id="slanje_izvestaja" styleClass="modalPseudoClass">
+
+                                    <div class="stripe-line-header">
+                                        <div class="stripe-line-header-content">Slanje izveštaja</div>
+                                    </div>
+
+                                    <h:panelGroup id="email_input">
+                                        <div style="margin-top: 20px; margin-bottom: 20px">
+
+                                            <h:outputText value="Izveštaj:" styleClass="login-form-label" />
+                                            <br/>
+                                            <b:icon value="file" style="color: orangered" />
+                                            <h:outputText value=" #{kreiranjeIzvestaja.selectedIzvestajSlanje}" style="color: orangered" />
+                                            <br/>
+                                            
+                                            <div style="height: 5px"></div>
+                                            <h:outputText value="Email:" styleClass="login-form-label" />
+                                            <br/>
+                                            <b:inputText id="email"
+                                                         value="#{kreiranjeIzvestaja.email}" 
+                                                         styleClass="#{kreiranjeIzvestaja.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                         placeholder="Npr. email@kulturiska.com">
+                                            </b:inputText>
+                                            <h:panelGroup id="emailGreskaWrapper" >
+                                                <div id="emailGreska" class="#{kreiranjeIzvestaja.emailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                    <h:outputText value="#{kreiranjeIzvestaja.emailGreska}" />
+                                                </div>
+                                            </h:panelGroup>
+                                            
+                                            <h:outputScript>
+                                                #{kreiranjeIzvestaja.mailToScript}
+                                            </h:outputScript>
+
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#kreiranje_izvestaja\\:slanje_izvestaja").removeAttr("tabindex");
+                                        });
+                                    </script>
+
+                                    <f:facet name="footer">
+                                        <div class="row modal-buttons-wrapper">
+                                            <div class="col-md-6">
+                                                <b:commandButton value="Pošalji izveštaj" 
+                                                                 look="primary" 
+                                                                 styleClass="big-red-button"
+                                                                 update="@form:email_input"
+                                                                 ajax="true"
+                                                                 onclick="ajax:kreiranjeIzvestaja.posaljiIzvestaj();" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                            </div>
+                                        </div>
+                                    </f:facet>
+                                </b:modal>
+                            </h:panelGroup>
+
+                            <h:panelGroup id="izvestaji_content">
+
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important;" />
+
+                                <div class="container-w-red-header-header" style="margin-top: 20px">
+                                    Kreirajte izveštaj
+                                </div>
+                                <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; padding-bottom: 20px; margin-bottom: 15px !important" >
+                                    <div class="col-md-12" style="padding: 0px !important">
+                                        <h:outputText value="Naziv izveštaja:" styleClass="login-form-label" />
+                                        <b:inputText id="naziv"
+                                                     styleClass="#{kreiranjeIzvestaja.nazivGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                     value="#{kreiranjeIzvestaja.naziv}"
+                                                     placeholder="Unesite naziv izveštaja" />
+                                        <div id="nazivGreska" class="#{kreiranjeIzvestaja.nazivGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                            <h:outputText value="#{kreiranjeIzvestaja.nazivGreska}" />
+                                        </div>
+
+                                        <div class="row edit-place-fields-container">
+
+                                            <div class="col-md-6">
+                                                <h:outputText value="Početak perioda: " styleClass="login-form-label" />
+                                                <div style="height: 5px"></div>
+                                                <b:datepicker id="datumPocetka"
+                                                              mode='popup-icon' 
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{kreiranjeIzvestaja.datumPocetkaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{kreiranjeIzvestaja.datumiGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                              placeholder='Izaberite početak perioda za izveštaj'
+                                                              value="#{kreiranjeIzvestaja.datumPocetka}" />
+                                                <div id="datumPocetkaGreska" class="#{kreiranjeIzvestaja.datumPocetkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                     style="margin-top: 5px; margin-bottom: 0px">
+                                                    <h:outputText value="#{kreiranjeIzvestaja.datumPocetkaGreska}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <h:outputText value="Kraj perioda: " styleClass="login-form-label" />
+                                                <div style="height: 5px"></div>
+                                                <b:datepicker id="datumKraja"
+                                                              mode='popup-icon' 
+                                                              styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{kreiranjeIzvestaja.datumKrajaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}
+                                                              #{kreiranjeIzvestaja.datumiGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                              placeholder='Izaberite kraj perioda za izveštaj'
+                                                              value="#{kreiranjeIzvestaja.datumKraja}" />
+                                                <div id="datumKrajaGreska" class="#{kreiranjeIzvestaja.datumKrajaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                     style="margin-top: 5px; margin-bottom: 0px">
+                                                    <h:outputText value="#{kreiranjeIzvestaja.datumKrajaGreska}" />
+                                                </div>
+                                            </div>
+
+                                            <div id="datumiGreska" class="col-md-12 #{kreiranjeIzvestaja.datumiGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px; margin-bottom: 0px">
+                                                <h:outputText id="datumiGreskaVal" value="#{kreiranjeIzvestaja.datumiGreska}" />
+                                            </div>
+
+                                        </div>
+
+                                        <div style="height: 10px"></div>
+                                        <h:outputText value="Stavke izveštaja:" styleClass="login-form-label" />
+                                        <div id="sifarniciIzvestaj" class="row search-type-option #{kreiranjeIzvestaja.sifarniciIzvestajGreska == '' ? '' : ' error'}" style="padding-top: 10px; padding-bottom: 15px; margin-top: 5px;">
+                                            <ui:repeat value="#{kreiranjeIzvestaja.sifarniciIzvestaj}" var="sifarnikIzvestaj">
+                                                <div class="col-md-3 event-type-option">
+                                                    <div class="custom-checkbox #{kreiranjeIzvestaja.sifarniciIzvestajCheckMap[sifarnikIzvestaj] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
+                                                        <b:selectBooleanCheckbox value="#{kreiranjeIzvestaja.sifarniciIzvestajCheckMap[sifarnikIzvestaj]}" styleClass="custom-checkbox-bootsfaces checkbox-izvestaj" />
+                                                    </div><br/>
+                                                    #{sifarnikIzvestaj.naziv}
+                                                </div>
+                                            </ui:repeat>
+                                        </div>
+                                        <div id="sifarniciIzvestajGreska" class="#{kreiranjeIzvestaja.sifarniciIzvestajGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px;">
+                                            <h:outputText value="#{kreiranjeIzvestaja.sifarniciIzvestajGreska}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row form-step-buttons-row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <b:carouselControl >
+                                            <b:commandButton value="Kreirajte izveštaj"
+                                                             styleClass="form-step-button"
+                                                             style="background-color: #4c4c4c !important; margin-right: 15px"
+                                                             update="@form"
+                                                             ajax="true"
+                                                             onclick="ajax:kreiranjeIzvestaja.kreirajIzvestaj();"
+                                                             />
+                                        </b:carouselControl>
+                                    </div>
+                                </div>
+
+                                <b:dataTable value="#{kreiranjeIzvestaja.izvestaji}" 
+                                             var="izvestaj"
+                                             border="false"
+                                             striped="false" 
+                                             info="false"
+                                             styleClass="admin-datatable"
+                                             searching="false"
+                                             paginated="false" >
+                                    <b:dataTableColumn label="Prethodno kreirani izveštaji:" orderable="false">
+                                        <div class="row" style="margin: auto;">
+                                            <div class="col-md-6" style="padding: 0px; line-height: 26px; color: orangered">
+                                                <h:outputLink value="/izvestaji/#{izvestaj}" target="_blank" styleClass="customNewsLink">
+                                                    <b:icon value="file" style="color: orangered" />
+                                                    <h:outputText value=" #{izvestaj}" style="color: orangered" />
+                                                </h:outputLink>
+                                            </div>
+                                            <div class="col-md-6" style="text-align:right; padding: 0px">
+                                                <div style="display: inline-block">
+                                                    <b:commandButton icon="envelope" 
+                                                                     styleClass="edit-info-button delete-button"
+                                                                     id="mail_button"
+                                                                     ajax="true"
+                                                                     update="@form"
+                                                                     oncomplete="$('#kreiranje_izvestaja\\:slanje_izvestaja').modal('show');">
+                                                        <f:setPropertyActionListener target="#{kreiranjeIzvestaja.selectedIzvestajSlanje}" value="#{izvestaj}" />
+                                                        <f:setPropertyActionListener target="#{kreiranjeIzvestaja.email}" value="" />
+                                                        <f:setPropertyActionListener target="#{kreiranjeIzvestaja.emailGreska}" value="" />
+                                                    </b:commandButton>
+                                                </div>
+                                                <div style="display: inline-block">
+                                                    <b:commandButton icon="trash" 
+                                                                     styleClass="edit-info-button delete-button"
+                                                                     id="brisanje_button" 
+                                                                     ajax="true"
+                                                                     update="@form"
+                                                                     actionListener="#{kreiranjeIzvestaja.obrisiIzvestaj(izvestaj)}">
+                                                    </b:commandButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+
+                            </h:panelGroup>
+
+                            <h:panelGroup id="kreiranjeIzvestajaValidacija">
+                                <h:outputScript library="js" name="kreiranjeIzvestajaValidacija.js" />
+                            </h:panelGroup>
+
+                            <h:panelGroup id="customCheckbox">
+                                <h:outputScript library="js" name="customCheckbox.js" />
+                            </h:panelGroup>
+
+                            <h:panelGroup id="kreiranjeIzvestajaSuccessScript">
+                                <h:outputScript>
+                                    #{kreiranjeIzvestaja.kreiranjeIzvestajaSuccessScript}
+                                </h:outputScript>
+                            </h:panelGroup>
+
+                            <h:outputScript library="js" name="datepickerMonths.js" />
+                        </h:form>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

@@ -19,6 +19,8 @@
     </h:head>
     <h:body>
         
+        <f:event type="preRenderView" listener="#{korisnikBean.proveriAdminPrivilegije()}" />
+        
         <style>
             .panel-group {
                 margin-bottom: 0px !important;

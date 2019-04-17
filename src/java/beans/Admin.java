@@ -5,19 +5,23 @@
  */
 package beans;
 
+import db.AdminLog;
 import db.Dogadjaji;
 import db.Korisnici;
 import db.Obavestenja;
 import db.Oglasi;
 import db.Organizacije;
 import db.Sifarnici;
+import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
 import db.Vesti;
+import db.helpers.AdminLogHelper;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KarakteristikeProstoraHelper;
 import db.helpers.KorisniciHelper;
 import db.helpers.ObavestenjaHelper;
 import db.helpers.OglasiHelper;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
 import java.io.File;
@@ -27,6 +31,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -88,6 +93,8 @@ public class Admin {
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
     private KarakteristikeProstoraHelper karakteristikeHelper = new KarakteristikeProstoraHelper();
     private ObavestenjaHelper obavestenjaHelper = new ObavestenjaHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
+    private AdminLogHelper adminLogHelper = new AdminLogHelper();
 
     class SortKorisniciByKorIme implements Comparator<Korisnici> {
 
@@ -164,7 +171,7 @@ public class Admin {
         numOfTotalItems = 0;
         numOfShowedItems = 0;
         currentPage = 0;
-        
+
         kljucneReci = "";
         /*
         if (page.equals("adminNeodobreni.xhtml")) {
@@ -184,6 +191,30 @@ public class Admin {
     public void obrisiKorisnika() {
         if (selektovanKorisnikBrisanje != null) {
             korisniciHelper.obrisiKorisnika(selektovanKorisnikBrisanje);
+
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanKorisnikBrisanje.getKorisnickoIme());
+            stavkeIzvestaj.setDatum(new Date());
+            
+            if (page.equals("adminNeodobreni.xhtml"))
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(2));
+            else
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(3));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+            
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            
+            if (page.equals("adminNeodobreni.xhtml"))
+                adminLog.setTekst("Odbijen korisnik " + selektovanKorisnikBrisanje.getKorisnickoIme());
+            else
+                adminLog.setTekst("Obrisan korisnik " + selektovanKorisnikBrisanje.getKorisnickoIme());
+            
+            adminLog.setDatum(new Date());
+            
+            adminLogHelper.insertLog(adminLog);
 
             numOfShowedItems--;
             numOfTotalItems--;
@@ -226,6 +257,13 @@ public class Admin {
             selektovanKorisnikPrihvatanje.setOdobren(true);
             korisniciHelper.updateKorisnikOdobren(selektovanKorisnikPrihvatanje);
 
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Odobren korisnik " + selektovanKorisnikPrihvatanje.getKorisnickoIme());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
+
             numOfShowedItems--;
             numOfTotalItems--;
 
@@ -256,6 +294,21 @@ public class Admin {
         if (selektovanDogadjajBrisanje != null) {
             dogadjajiHelper.obrisiDogadjaj(selektovanDogadjajBrisanje);
 
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanDogadjajBrisanje.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(8));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Obrisan događaj " + selektovanDogadjajBrisanje.getNaslov());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali događaj.", null);
             FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -273,6 +326,21 @@ public class Admin {
     public void obrisiVest() {
         if (selektovanaVestBrisanje != null) {
             vestiHelper.obrisiVest(selektovanaVestBrisanje);
+
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanaVestBrisanje.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(6));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Obrisana vest " + selektovanaVestBrisanje.getNaslov());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
@@ -293,6 +361,21 @@ public class Admin {
             selektovanaVestArhiviranje.setArhivirana(1);
             vestiHelper.arhiviranjeVesti(selektovanaVestArhiviranje);
 
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanaVestArhiviranje.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(5));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Arhivirana vest " + selektovanaVestArhiviranje.getNaslov());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste arhivirali vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -310,6 +393,21 @@ public class Admin {
     public void obrisiOglas() {
         if (selektovanOglasBrisanje != null) {
             oglasiHelper.obrisiOglas(selektovanOglasBrisanje);
+
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanOglasBrisanje.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(10));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Obrisan oglas " + selektovanOglasBrisanje.getNaslov());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali oglas.", null);
             FacesContext.getCurrentInstance().addMessage("oglas:growl-success", message);
@@ -341,7 +439,7 @@ public class Admin {
         numOfTotalItems = 0;
         numOfShowedItems = 0;
         currentPage = 0;
-        
+
         kljucneReci = "";
     }
 
@@ -558,6 +656,21 @@ public class Admin {
         if (getSelectedStavkaSifarnikaBrisanje() != null) {
             stavkeHelper.obrisiStavku(selectedStavkaSifarnikaBrisanje);
 
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selectedStavkaSifarnikaBrisanje.getSifarnici().getNaziv() + ": " + selectedStavkaSifarnikaBrisanje.getNaziv());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(12));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+            adminLog.setTekst("Obrisana stavka " + selectedStavkaSifarnikaBrisanje.getNaziv() + " iz šifarnika " + selectedStavkaSifarnikaBrisanje.getSifarnici().getNaziv());
+            adminLog.setDatum(new Date());
+
+            adminLogHelper.insertLog(adminLog);
+
             numOfShowedItems--;
             numOfTotalItems--;
 
@@ -625,6 +738,22 @@ public class Admin {
                 novaStavka.setNaziv(this.novaStavka);
 
                 stavkeHelper.insertStavka(novaStavka);
+
+                StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                stavkeIzvestaj.setNaziv(novaStavka.getSifarnici().getNaziv() + ": " + novaStavka.getNaziv());
+                stavkeIzvestaj.setDatum(new Date());
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+
+                stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Dodata stavka " + novaStavka.getNaziv() + " u šifarnik " + novaStavka.getSifarnici().getNaziv());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+
                 numOfShowedItems++;
                 numOfTotalItems++;
 

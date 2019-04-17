@@ -6,7 +6,9 @@
 package beans;
 
 import db.Oglasi;
+import db.StavkeIzvestaj;
 import db.helpers.OglasiHelper;
+import db.helpers.StavkeIzvestajHelper;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +36,7 @@ public class NovOglas {
     private String datumIsticanjaGreska = "";
 
     private OglasiHelper oglasiHelper = new OglasiHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     public NovOglas() {
     }
@@ -157,6 +160,14 @@ public class NovOglas {
             oglas.setKorisnici(korisnikBean.getKorisnik());
 
             oglasiHelper.insertOglas(oglas);
+            
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(oglas.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(9));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             
             PretragaOglasa pretragaOglasaBean = (PretragaOglasa) elContext.getELResolver().getValue(elContext, null, "pretragaOglasa");
             pretragaOglasaBean.setOglas(oglas);

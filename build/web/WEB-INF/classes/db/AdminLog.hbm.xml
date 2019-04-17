@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 16, 2019 6:39:02 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.AdminLog" table="admin_log" catalog="diplomski" optimistic-lock="version">
+        <id name="idLog" type="int">
+            <column name="id_log" />
+            <generator class="assigned" />
+        </id>
+        <property name="tekst" type="string">
+            <column name="tekst" length="256" not-null="true" />
+        </property>
+        <property name="datum" type="timestamp">
+            <column name="datum" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

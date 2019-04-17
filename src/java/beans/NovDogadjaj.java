@@ -7,9 +7,11 @@ package beans;
 
 import db.Dogadjaji;
 import db.KarakteristikeProstora;
+import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KarakteristikeProstoraHelper;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.io.File;
 import java.io.IOException;
@@ -86,6 +88,7 @@ public class NovDogadjaj {
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
     private KarakteristikeProstoraHelper karakteristikeProstoraHelper = new KarakteristikeProstoraHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     public NovDogadjaj() {
         karakteristikeProstora = new ArrayList<StavkeSifarnika>();
@@ -395,6 +398,14 @@ public class NovDogadjaj {
             novDogadjaj.setKorisnici(korisnikBean.getKorisnik());
 
             dogadjajiHelper.insertDogadjaj(novDogadjaj);
+            
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(novDogadjaj.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(7));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             
             if (!karakteristikeProstora.isEmpty()) {
                 int karakteristikeId = karakteristikeProstoraHelper.getMaxId()+1;

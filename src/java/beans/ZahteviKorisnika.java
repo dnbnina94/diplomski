@@ -8,10 +8,12 @@ package beans;
 import db.Dogadjaji;
 import db.Obavestenja;
 import db.Oglasi;
+import db.StavkeIzvestaj;
 import db.Vesti;
 import db.helpers.DogadjajiHelper;
 import db.helpers.ObavestenjaHelper;
 import db.helpers.OglasiHelper;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.VestiHelper;
 import java.util.Date;
 import javax.el.ELContext;
@@ -33,6 +35,7 @@ public class ZahteviKorisnika {
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private OglasiHelper oglasiHelper = new OglasiHelper();
     private ObavestenjaHelper obavestenjaHelper = new ObavestenjaHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     public ZahteviKorisnika() {
     }
@@ -98,6 +101,14 @@ public class ZahteviKorisnika {
         if (selektovanaVestArhiviranje != null) {
             selektovanaVestArhiviranje.setArhivirana(1);
             vestiHelper.arhiviranjeVesti(selektovanaVestArhiviranje);
+            
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(selektovanaVestArhiviranje.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(5));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             
             Obavestenja obavestenje = new Obavestenja();
             obavestenje.setIdObavestenje(obavestenjaHelper.getMaxId()+1);

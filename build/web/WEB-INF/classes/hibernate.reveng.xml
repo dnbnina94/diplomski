@@ -41,6 +41,7 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="diplomski"/>
+  <table-filter match-name="admin_log"/>
   <table-filter match-name="stavke_sifarnika"/>
   <table-filter match-name="korisnici"/>
   <table-filter match-name="vesti"/>
@@ -50,4 +51,6 @@ Contributor(s):
   <table-filter match-name="oglasi"/>
   <table-filter match-name="karakteristike_prostora"/>
   <table-filter match-name="obavestenja"/>
+  <table-filter match-name="sifarnici_izvestaj"/>
+  <table-filter match-name="stavke_izvestaj"/>
 </hibernate-reverse-engineering>

@@ -1,0 +1,12 @@
+izvestajcina
+
+(Izveštaj za period od 16.04.2019 00:00:00 do 24.04.2019 23:59:59)
+
+-- Obrisane vesti: 1
+       - dsadadaa
+
+-- Odbijeni korisnici: 3
+       - asdf
+       - asdf1
+       - asdf123
+

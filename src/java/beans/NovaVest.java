@@ -5,8 +5,10 @@
  */
 package beans;
 
+import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
 import db.Vesti;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.VestiHelper;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,6 +47,7 @@ public class NovaVest {
     private Part submittedThumbnail = null;
 
     private VestiHelper vestiHelper = new VestiHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     public NovaVest() {
     }
@@ -222,6 +225,14 @@ public class NovaVest {
             novaVest.setArhivirana(0);
 
             vestiHelper.insertVest(novaVest);
+
+            StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+            stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+            stavkeIzvestaj.setNaziv(novaVest.getNaslov());
+            stavkeIzvestaj.setDatum(new Date());
+            stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(4));
+
+            stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
 
             PretragaVesti pretragaVestiBean = (PretragaVesti) elContext.getELResolver().getValue(elContext, null, "pretragaVesti");
             pretragaVestiBean.setVest(novaVest);

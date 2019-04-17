@@ -4,6 +4,7 @@ import db.Dogadjaji;
 import db.HibernateUtil;
 import db.KarakteristikeProstora;
 import db.Korisnici;
+import db.Obavestenja;
 import db.Oglasi;
 import db.Organizacije;
 import db.StavkeSifarnika;
@@ -601,29 +602,69 @@ public class KorisniciHelper {
             session.getTransaction().begin();
 
             for (Oglasi oglas : (Set<Oglasi>) korisnik.getOglasis()) {
-                String hqlUpdate = "Delete Oglasi c where c.idOglas = :idOglas";
-                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();
+                Criteria c = session.createCriteria(Obavestenja.class);
+                c.add(Restrictions.eq("oglasi.idOglas", oglas.getIdOglas()));
+                
+                List<Obavestenja> obavestenja = c.list();
+                
+                for (Obavestenja o : obavestenja) {
+                    session.delete(o);
+                }
+                
+                session.delete(oglas);
+                
+                /*String hqlUpdate = "Delete Oglasi c where c.idOglas = :idOglas";
+                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();*/
             }
 
             for (Vesti vest : (Set<Vesti>) korisnik.getVestis()) {
-                String hqlUpdate = "Delete Vesti c where c.idVest = :idVest";
-                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idVest", vest.getIdVest()).executeUpdate();
+                Criteria c = session.createCriteria(Obavestenja.class);
+                c.add(Restrictions.eq("vesti.idVest", vest.getIdVest()));
+                
+                List<Obavestenja> obavestenja = c.list();
+                
+                for (Obavestenja o : obavestenja) {
+                    session.delete(o);
+                }
+                
+                /*String hqlUpdate = "Delete Vesti c where c.idVest = :idVest";
+                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idVest", vest.getIdVest()).executeUpdate();*/
+                
+                session.delete(vest);
             }
 
             for (Dogadjaji dogadjaj : (Set<Dogadjaji>) korisnik.getDogadjajis()) {
-                for (KarakteristikeProstora karakteristika : (Set<KarakteristikeProstora>) dogadjaj.getKarakteristikeProstoras()) {
-                    String hqlUpdate = "Delete KarakteristikeProstora c where c.idKarakteristika = :idKarakteristika";
-                    int updatedEntities = session.createQuery(hqlUpdate).setInteger("idKarakteristika", karakteristika.getIdKarakteristika()).executeUpdate();
+                Criteria c = session.createCriteria(Obavestenja.class);
+                c.add(Restrictions.eq("dogadjaji.idDogadjaj", dogadjaj.getIdDogadjaj()));
+                
+                List<Obavestenja> obavestenja = c.list();
+                
+                for (Obavestenja o : obavestenja) {
+                    session.delete(o);
                 }
-                String hqlUpdate = "Delete Dogadjaji c where c.idDogadjaj = :idDogadjaj";
-                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();
+                
+                for (KarakteristikeProstora karakteristika : (Set<KarakteristikeProstora>) dogadjaj.getKarakteristikeProstoras()) {
+                    /*String hqlUpdate = "Delete KarakteristikeProstora c where c.idKarakteristika = :idKarakteristika";
+                    int updatedEntities = session.createQuery(hqlUpdate).setInteger("idKarakteristika", karakteristika.getIdKarakteristika()).executeUpdate();*/
+                    
+                    session.delete(karakteristika);
+                }
+                
+                /*String hqlUpdate = "Delete Dogadjaji c where c.idDogadjaj = :idDogadjaj";
+                int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();*/
+                
+                session.delete(dogadjaj);
             }
 
-            String hqlUpdate = "Delete Organizacije c where c.korisnickoIme = :korisnickoIme";
-            int updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();
+            /*String hqlUpdate = "Delete Organizacije c where c.korisnickoIme = :korisnickoIme";
+            int updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();*/
             
-            hqlUpdate = "Delete Korisnici c where c.korisnickoIme = :korisnickoIme";
-            updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();
+            session.delete(korisnik.getOrganizacije());
+            
+            /*hqlUpdate = "Delete Korisnici c where c.korisnickoIme = :korisnickoIme";
+            updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();*/
+            
+            session.delete(korisnik);
 
             session.getTransaction().commit();
         } catch (RuntimeException e) {

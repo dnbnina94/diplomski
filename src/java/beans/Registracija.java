@@ -7,8 +7,10 @@ package beans;
 
 import db.Korisnici;
 import db.Organizacije;
+import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
 import db.helpers.KorisniciHelper;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,6 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,9 +37,10 @@ import net.bootsfaces.utils.FacesMessages;
  * @author Nina
  */
 public class Registracija {
-    
+
     private KorisniciHelper korHelper = new KorisniciHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     private List<String> telefoni;
     private String telefon;
@@ -77,7 +81,7 @@ public class Registracija {
 
     private String ponovljenaLozinka;
     private String ponovljenaLozinkaGreska = "";
-    
+
     private String poruka = "";
 
     public Registracija() {
@@ -95,30 +99,30 @@ public class Registracija {
 
     public void addTelefon() {
         boolean valid = telefonValidacija(telefon);
-        
-        for (int i=0; i<telefoni.size(); i++) {
+
+        for (int i = 0; i < telefoni.size(); i++) {
             if (telefoni.get(i).equals(telefon)) {
                 telefonGreska = "Već ste uneli zadati telefon.";
                 valid = false;
                 break;
             }
         }
-        
+
         if (telefoni.size() == 5) {
             telefonGreska = "Možete uneti maksimalno 5 brojeva telefona.";
             valid = false;
         }
-        
+
         if (valid) {
             telefoni.add(telefon);
             telefon = "";
         }
-        
+
     }
 
     public void removeTelefon(int status) {
         telefoni.remove(status);
-        
+
         if (!telefon.matches("[0-9]+") && !telefon.isEmpty()) {
             telefonGreska = "Telefon mora sadržati između 7 i 15 numeričkih karaktera.";
         }
@@ -142,16 +146,20 @@ public class Registracija {
 
     public void prethodnaStavka() {
         if (nextIndex == 0) {
-            if (!nazivOrg.isEmpty())
+            if (!nazivOrg.isEmpty()) {
                 nazivOrgValidacija();
-            if (!opisOrg.isEmpty())
+            }
+            if (!opisOrg.isEmpty()) {
                 opisOrgValidacija();
-            if (!oblastDelovanja.isEmpty())
+            }
+            if (!oblastDelovanja.isEmpty()) {
                 oblastDelovanjaValidacija();
-            if (!webStranica.isEmpty())
+            }
+            if (!webStranica.isEmpty()) {
                 webStranicaValidacija();
+            }
         }
-        
+
         if (nextIndex > 0) {
             nextIndex--;
             script = "$('.wizardPseudoClass').carousel(" + nextIndex + ");$('.wizardPseudoClass').carousel('pause');";
@@ -196,8 +204,7 @@ public class Registracija {
     public boolean webStranicaValidacija() {
         try {
             URL url = new URL(webStranica);
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             webStranicaGreska = "Web stranica koju ste uneli ne odgovara URL formatu.";
             return false;
         }
@@ -211,7 +218,7 @@ public class Registracija {
             mestoGreska = "Polje 'Mesto' ne sme ostati prazno.";
             return false;
         }
-        
+
         if (!mestoOrg.matches("[a-zA-ZčćšđžČĆŠĐŽ ]+")) {
             mestoGreska = "Polje 'Mesto' ne sme sadržati numerike i specijalne karaktere.";
             return false;
@@ -226,7 +233,7 @@ public class Registracija {
             ulicaGreska = "Polje 'Ulica' ne sme ostati prazno.";
             return false;
         }
-        
+
         if (!ulicaOrg.matches("[a-zA-ZčćšđžČĆŠĐŽ0-9 ]+")) {
             ulicaGreska = "Polje 'Ulica' sme sadržati samo slova i numeričke karaktere.";
             return false;
@@ -241,7 +248,7 @@ public class Registracija {
             kontaktOsobaGreska = "Polje 'Kontakt osoba' ne sme ostati prazno.";
             return false;
         }
-        
+
         if (!kontaktOsoba.matches("[a-zA-ZčćšđžČĆŠĐŽ ]+")) {
             kontaktOsobaGreska = "Polje 'Kontakt osoba' ne sme sadržati numerike i specijalne karaktere.";
             return false;
@@ -276,12 +283,12 @@ public class Registracija {
             emailGreska = "Polje 'Email adresa' ne sme ostati prazno.";
             return false;
         }
-        
+
         if (!email.matches("\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+")) {
             emailGreska = "Email adresa koju ste uneli ne odgovara email formatu.";
             return false;
         }
-        
+
         if (korHelper.getOrganizacijaByEmail(email) != null) {
             emailGreska = "Email adresa koju ste uneli je već navedena od strane druge organizacije.";
             return false;
@@ -296,14 +303,14 @@ public class Registracija {
             korImeGreska = "Polje 'Korisničko ime' ne sme ostati prazno.";
             return false;
         }
-        
+
         Pattern pattern = Pattern.compile("\\s");
         Matcher matcher = pattern.matcher(korIme);
-        if(matcher.find()) {
+        if (matcher.find()) {
             korImeGreska = "Korisničko ime ne sme sadržati blanko karaktere.";
             return false;
         }
-        
+
         if (korHelper.getKorisnikByKorisnickoIme(korIme) != null) {
             korImeGreska = "Korisničko ime koje ste uneli je zauzeto.";
             return false;
@@ -318,19 +325,19 @@ public class Registracija {
             lozinkaGreska = "Polje 'Lozinka' ne sme ostati prazno.";
             return false;
         }
-        
+
         Pattern pattern = Pattern.compile("\\s");
         Matcher matcher = pattern.matcher(lozinka);
-        if(matcher.find()) {
+        if (matcher.find()) {
             lozinkaGreska = "Lozinka ne sme sadržati blanko karaktere.";
             return false;
         }
-        
+
         if (lozinka.length() < 8) {
             lozinkaGreska = "Lozinka mora biti minimalne dužine od 8 karaktera.";
             return false;
         }
-        
+
         if (!lozinka.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|[^\\w])).+$")) {
             lozinkaGreska = "Lozinka mora sadržati makar jedno veliko slovo, makar 1 malo slovo, makar jedan numerik i makar jedan specijalan karakter.";
             return false;
@@ -345,7 +352,7 @@ public class Registracija {
             ponovljenaLozinkaGreska = "Polje 'Ponovljena lozinka' ne sme ostati prazno.";
             return false;
         }
-        
+
         if (!lozinka.equals(ponovljenaLozinka)) {
             ponovljenaLozinkaGreska = "Lozinka i ponovljena lozinka se ne poklapaju.";
             return false;
@@ -432,32 +439,56 @@ public class Registracija {
                     SecureRandom random = new SecureRandom();
                     byte[] salt = new byte[16];
                     random.nextBytes(salt);
-                    
+
                     MessageDigest md = MessageDigest.getInstance("SHA-512");
                     md.update(salt);
-                    
+
                     byte[] hashedPassword = md.digest(lozinka.getBytes(StandardCharsets.UTF_8));
-                    
+
                     Korisnici noviKorisnik = new Korisnici(korIme, hashedPassword, salt, 2, false);
-                    
+
                     StavkeSifarnika oblDelovanja = stavkeHelper.getStavkaByNaziv(oblastDelovanja);
                     if (oblDelovanja == null) {
-                        oblDelovanja = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(6), oblastDelovanja, null);
+                        oblDelovanja = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(6), oblastDelovanja, null);
                         stavkeHelper.insertStavka(oblDelovanja);
+
+                        StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                        stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                        stavkeIzvestaj.setNaziv(oblDelovanja.getSifarnici().getNaziv() + ": " + oblDelovanja.getNaziv());
+                        stavkeIzvestaj.setDatum(new Date());
+                        stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+
+                        stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
                     }
-                    
+
                     StavkeSifarnika mesto = stavkeHelper.getStavkaByNaziv(mestoOrg);
                     if (mesto == null) {
-                        mesto = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(3), mestoOrg, null);
+                        mesto = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(3), mestoOrg, null);
                         stavkeHelper.insertStavka(mesto);
+                        
+                        StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                        stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                        stavkeIzvestaj.setNaziv(mesto.getSifarnici().getNaziv() + ": " + mesto.getNaziv());
+                        stavkeIzvestaj.setDatum(new Date());
+                        stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+
+                        stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
                     }
-                    
+
                     StavkeSifarnika ulica = stavkeHelper.getStavkaByNaziv(ulicaOrg);
                     if (ulica == null) {
-                        ulica = new StavkeSifarnika(stavkeHelper.getMaxId()+1, stavkeHelper.getStavkeByIdSifarnik(5), ulicaOrg, null);
+                        ulica = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(5), ulicaOrg, null);
                         stavkeHelper.insertStavka(ulica);
+                        
+                        StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                        stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                        stavkeIzvestaj.setNaziv(ulica.getSifarnici().getNaziv() + ": " + ulica.getNaziv());
+                        stavkeIzvestaj.setDatum(new Date());
+                        stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+
+                        stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
                     }
-                    
+
                     Organizacije organizacije = new Organizacije();
                     organizacije.setKorisnici(noviKorisnik);
                     organizacije.setNaziv(nazivOrg);
@@ -465,11 +496,12 @@ public class Registracija {
                     organizacije.setEmail(email);
                     organizacije.setTekst(opisOrg);
                     organizacije.setOblastDelovanja(oblDelovanja);
-                    if (!webStranica.isEmpty())
+                    if (!webStranica.isEmpty()) {
                         organizacije.setWebAdresa(webStranica);
+                    }
                     organizacije.setMesto(mesto);
                     organizacije.setUlica(ulica);
-                    
+
                     /*Set<Telefoni> telefoniOrganizacije = new HashSet<Telefoni>(0);
                     int id = telefoniHelper.getMaxId()+1;
                     for (String telefon : telefoni) {
@@ -477,35 +509,43 @@ public class Registracija {
                         telefoniOrganizacije.add(noviTelefon);
                     }
                     organizacije.setTelefonis(telefoniOrganizacije);*/
-                    
                     String telefoniOrg = "";
-                    for (int i=0; i<telefoni.size(); i++) {
+                    for (int i = 0; i < telefoni.size(); i++) {
                         telefoniOrg += telefoni.get(i);
-                        if (i != (telefoni.size()-1))
+                        if (i != (telefoni.size() - 1)) {
                             telefoniOrg += ", ";
+                        }
                     }
                     organizacije.setTelefoni(telefoniOrg);
-                    
+
                     noviKorisnik.setOrganizacije(organizacije);
-                    
+
                     korHelper.insertKorisnik(noviKorisnik);
-                    
+
+                    StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                    stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                    stavkeIzvestaj.setNaziv(noviKorisnik.getKorisnickoIme());
+                    stavkeIzvestaj.setDatum(new Date());
+                    stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(1));
+
+                    stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
                     try {
-                        
+
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste podneli zahtev za registraciju. Nakon što administrator odobri Vaš zahtev, moći ćete da se prijavite na sistem korišćenjem Vašeg korisničkog imena i lozinke.", null);
                         FacesContext.getCurrentInstance().addMessage("neregistrovani-korisnici:growl-success", message);
                         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                         FacesContext.getCurrentInstance().getExternalContext().redirect("prijava.xhtml");
                         FacesContext.getCurrentInstance().responseComplete();
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(Registracija.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(Registracija.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         }
 
@@ -713,11 +753,11 @@ public class Registracija {
     public void setPonovljenaLozinkaGreska(String ponovljenaLozinkaGreska) {
         this.ponovljenaLozinkaGreska = ponovljenaLozinkaGreska;
     }
-    
+
     public String getPoruka() {
         return poruka;
     }
-    
+
     public void setPoruka(String poruka) {
         this.poruka = poruka;
     }

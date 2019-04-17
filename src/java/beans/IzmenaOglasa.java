@@ -5,7 +5,9 @@
  */
 package beans;
 
+import db.AdminLog;
 import db.Oglasi;
+import db.helpers.AdminLogHelper;
 import db.helpers.OglasiHelper;
 import java.io.IOException;
 import java.util.Calendar;
@@ -35,6 +37,7 @@ public class IzmenaOglasa {
     private String datumIsticanjaGreska = "";
 
     private OglasiHelper oglasiHelper = new OglasiHelper();
+    private AdminLogHelper adminLogHelper = new AdminLogHelper();
 
     public IzmenaOglasa() {
     }
@@ -154,6 +157,13 @@ public class IzmenaOglasa {
             oglas.setDatumIsticanja(datumIsticanja);
             
             oglasiHelper.updateOglas(oglas);
+            
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+            adminLog.setTekst("Izmenjen oglas " + oglas.getNaslov());
+            adminLog.setDatum(new Date());
+            
+            adminLogHelper.insertLog(adminLog);
             
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaOglasa pretragaOglasaBean = (PretragaOglasa) elContext.getELResolver().getValue(elContext, null, "pretragaOglasa");

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 16, 2019 4:40:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.StavkeIzvestaj" table="stavke_izvestaj" catalog="diplomski" optimistic-lock="version">
+        <id name="idStavka" type="int">
+            <column name="id_stavka" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sifarniciIzvestaj" class="db.SifarniciIzvestaj" fetch="select">
+            <column name="id_sifarnik" not-null="true" />
+        </many-to-one>
+        <property name="naziv" type="string">
+            <column name="naziv" length="256" not-null="true" />
+        </property>
+        <property name="datum" type="timestamp">
+            <column name="datum" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

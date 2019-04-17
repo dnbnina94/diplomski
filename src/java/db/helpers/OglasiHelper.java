@@ -7,6 +7,7 @@ package db.helpers;
 
 import db.HibernateUtil;
 import db.Korisnici;
+import db.Obavestenja;
 import db.Oglasi;
 import db.Organizacije;
 import db.Vesti;
@@ -275,9 +276,20 @@ public class OglasiHelper {
         }
         try {
             session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            c.add(Restrictions.eq("oglasi.idOglas", oglas.getIdOglas()));
+            
+            List<Obavestenja> obavestenja = c.list();
+            
+            for (Obavestenja o : obavestenja) {
+                session.delete(o);
+            }
 
-            String hqlUpdate = "Delete Oglasi c where c.idOglas = :idOglas";
-            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();
+            /*String hqlUpdate = "Delete Oglasi c where c.idOglas = :idOglas";
+            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idOglas", oglas.getIdOglas()).executeUpdate();*/
+            
+            session.delete(oglas);
 
             session.getTransaction().commit();
         } catch (RuntimeException e) {

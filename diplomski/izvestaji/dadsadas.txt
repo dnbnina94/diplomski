@@ -1,0 +1,16 @@
+dadsadas
+
+(Izveštaj za period od 16.04.2019 00:00:00 do 18.04.2019 23:59:59)
+
+-- Odbijeni korisnici: 3
+       - asdf
+       - asdf1
+       - asdf123
+
+-- Registrovani korisnici: 5
+       - asdf
+       - asdf1
+       - asdf12
+       - asdf123
+       - asdf
+

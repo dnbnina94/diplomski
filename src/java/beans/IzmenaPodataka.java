@@ -5,10 +5,14 @@
  */
 package beans;
 
+import db.AdminLog;
 import db.Korisnici;
 import db.Organizacije;
+import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
+import db.helpers.AdminLogHelper;
 import db.helpers.KorisniciHelper;
+import db.helpers.StavkeIzvestajHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +43,8 @@ public class IzmenaPodataka {
 
     private KorisniciHelper korHelper = new KorisniciHelper();
     private StavkeSifarnikaHelper stavkeHelper = new StavkeSifarnikaHelper();
+    private AdminLogHelper adminLogHelper = new AdminLogHelper();
+    private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     private String nazivOrg;
     private String nazivOrgGreska = "";
@@ -368,6 +375,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaNaziv(nazivOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Izmenjen naziv organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -399,6 +415,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaOpis(opisOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
+
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Izmenjen opis organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -428,6 +453,14 @@ public class IzmenaPodataka {
             if (oblDelovanja == null) {
                 oblDelovanja = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(6), oblastDelovanja, null);
                 stavkeHelper.insertStavka(oblDelovanja);
+                
+                StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId()+1);
+                stavkeIzvestaj.setNaziv(oblDelovanja.getSifarnici().getNaziv() + ": " + oblDelovanja.getNaziv());
+                stavkeIzvestaj.setDatum(new Date());
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+                
+                stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             }
 
             KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
@@ -442,6 +475,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaOblastDelovanja(oblDelovanja, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+                adminLog.setTekst("Izmenjena oblast delovanja organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+                
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -476,6 +518,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaWebAdresa(webAdresa, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+                adminLog.setTekst("Izmenjena web adresa organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+                
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -513,6 +564,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaKontaktOsoba(kontaktOsoba, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+                adminLog.setTekst("Izmenjena kontakt osoba organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+                
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -556,6 +616,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaEmail(email, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+                adminLog.setTekst("Izmenjen email organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+                
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 
@@ -606,6 +675,14 @@ public class IzmenaPodataka {
             if (mesto == null) {
                 mesto = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(3), this.mesto, null);
                 stavkeHelper.insertStavka(mesto);
+                
+                StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                stavkeIzvestaj.setNaziv(mesto.getSifarnici().getNaziv() + ": " + mesto.getNaziv());
+                stavkeIzvestaj.setDatum(new Date());
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+                
+                stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             }
 
             if (korisnikBean.getKorisnik().getTip() != 1) {
@@ -614,6 +691,15 @@ public class IzmenaPodataka {
 
             organizacijaBean.getOrganizacija().setMesto(mesto);
             korHelper.updateOrganizacijaMesto(mesto, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Izmenjeno mesto organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+            }
         }
 
         if (ulicaValid) {
@@ -621,6 +707,14 @@ public class IzmenaPodataka {
             if (ulica == null) {
                 ulica = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(5), this.ulica, null);
                 stavkeHelper.insertStavka(ulica);
+                
+                StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+                stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+                stavkeIzvestaj.setNaziv(ulica.getSifarnici().getNaziv() + ": " + ulica.getNaziv());
+                stavkeIzvestaj.setDatum(new Date());
+                stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(11));
+                
+                stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
             }
 
             if (korisnikBean.getKorisnik().getTip() != 1) {
@@ -629,6 +723,15 @@ public class IzmenaPodataka {
 
             organizacijaBean.getOrganizacija().setUlica(ulica);
             korHelper.updateOrganizacijaUlica(ulica, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Izmenjena ulica organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+            }
         }
 
         if (korisnikBean.getKorisnik().getTip() != 1) {
@@ -679,6 +782,15 @@ public class IzmenaPodataka {
             elContext.getELResolver().setValue(elContext, null, "organizacijaBean", organizacijaBean);
 
             korHelper.updateOrganizacijaTelefoni(telefoniOrg, organizacijaBean.getOrganizacija().getKorisnickoIme());
+            
+            if (korisnikBean.getKorisnik().getTip() == 1) {
+                AdminLog adminLog = new AdminLog();
+                adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+                adminLog.setTekst("Izmenjeni telefoni organizacije " + organizacijaBean.getOrganizacija().getKorisnickoIme());
+                adminLog.setDatum(new Date());
+
+                adminLogHelper.insertLog(adminLog);
+            }
         }
     }
 

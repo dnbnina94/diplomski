@@ -66,9 +66,6 @@ public class PretragaVesti {
         for (StavkeSifarnika kategorija : kategorijeVesti) {
             checkMap.put(kategorija, Boolean.FALSE);
         }
-
-        organizacije = korisniciHelper.getSveOdobreneOrganizacije();
-        Collections.sort(organizacije, new PretragaVesti.SortOrganizacijeByKorIme());
     }
 
     class SortOrganizacijeByKorIme implements Comparator<Organizacije> {
@@ -213,6 +210,8 @@ public class PretragaVesti {
     }
 
     public List<Organizacije> getOrganizacije() {
+        organizacije = korisniciHelper.getSveOdobreneOrganizacije();
+        Collections.sort(organizacije, new PretragaVesti.SortOrganizacijeByKorIme());
         return organizacije;
     }
 

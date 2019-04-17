@@ -5,8 +5,10 @@
  */
 package beans;
 
+import db.AdminLog;
 import db.StavkeSifarnika;
 import db.Vesti;
+import db.helpers.AdminLogHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
 import java.io.File;
@@ -16,6 +18,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +56,7 @@ public class IzmenaVesti {
 
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     private VestiHelper vestiHelper = new VestiHelper();
+    private AdminLogHelper adminLogHelper = new AdminLogHelper();
 
     public IzmenaVesti() {
         kategorijeVesti = new ArrayList<StavkeSifarnika>(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
@@ -309,6 +313,13 @@ public class IzmenaVesti {
                     }
                 }
             }
+            
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+            adminLog.setTekst("Izmenjena vest " + vest.getNaslov());
+            adminLog.setDatum(new Date());
+            
+            adminLogHelper.insertLog(adminLog);
             
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaVesti pretragaVestiBean = (PretragaVesti) elContext.getELResolver().getValue(elContext, null, "pretragaVesti");

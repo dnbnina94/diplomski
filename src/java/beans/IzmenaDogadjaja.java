@@ -5,9 +5,11 @@
  */
 package beans;
 
+import db.AdminLog;
 import db.Dogadjaji;
 import db.KarakteristikeProstora;
 import db.StavkeSifarnika;
+import db.helpers.AdminLogHelper;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KarakteristikeProstoraHelper;
 import db.helpers.StavkeSifarnikaHelper;
@@ -75,6 +77,7 @@ public class IzmenaDogadjaja {
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     private KarakteristikeProstoraHelper karakteristikeHelper = new KarakteristikeProstoraHelper();
+    private AdminLogHelper adminLogHelper = new AdminLogHelper();
     
     public IzmenaDogadjaja() {
     }
@@ -718,6 +721,13 @@ public class IzmenaDogadjaja {
             dogadjaj.setKarakteristikeProstoras(karakteristikeHelper.getKarakteristikeByDogadjaj(dogadjaj));
             
             dogadjajiHelper.updateDogadjaj(dogadjaj);
+            
+            AdminLog adminLog = new AdminLog();
+            adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+            adminLog.setTekst("Izmenjen događaj " + dogadjaj.getNaslov());
+            adminLog.setDatum(new Date());
+            
+            adminLogHelper.insertLog(adminLog);
             
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaDogadjaja pretragaDogadjajaBean = (PretragaDogadjaja) elContext.getELResolver().getValue(elContext, null, "pretragaDogadjaja");

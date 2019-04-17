@@ -30,7 +30,7 @@ public class KorisnikBean {
     public void setKorisnik(Korisnici korisnik) {
         this.korisnik = korisnik;
     }
-    
+
     public void logout() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -39,6 +39,42 @@ public class KorisnikBean {
             context.responseComplete();
         } catch (IOException ex) {
             Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void proveriAdminPrivilegije() {
+        if (korisnik == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            if (korisnik.getTip() == 2) {
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public void proveriOrganizacijaPrivilegiju() {
+        if (korisnik == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            if (korisnik.getTip() == 1) {
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 

@@ -13,7 +13,7 @@ and open the template in the editor.
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
 
     <h:body>
-
+        
         <nav id="top-nav">
             <div class="container">
                 <div class="pull-left">
@@ -74,6 +74,13 @@ and open the template in the editor.
                                                            ajax="true"
                                                            onclick="ajax:admin.redirectToKorisnici();">
                                                 <h:outputText value="Korisnici" />
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
+                                            <b:commandLink action="kreiranje_izvestaja?faces-redirect=true" 
+                                                           styleClass="top-nav-link" 
+                                                           style="font-weight: normal">
+                                                <h:outputText value="Izveštaji" />
                                             </b:commandLink>
                                         </li>
                                         <li>

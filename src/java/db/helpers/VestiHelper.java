@@ -447,9 +447,17 @@ public class VestiHelper {
         }
         try {
             session.getTransaction().begin();
-
-            String hqlUpdate = "Delete Vesti c where c.idVest = :idVest";
-            int updatedEntities = session.createQuery(hqlUpdate).setInteger("idVest", vest.getIdVest()).executeUpdate();
+            
+            Criteria c = session.createCriteria(Obavestenja.class);
+            c.add(Restrictions.eq("vesti.idVest", vest.getIdVest()));
+            
+            List<Obavestenja> obavestenja = c.list();
+            
+            for (Obavestenja o : obavestenja) {
+                session.delete(o);
+            }
+            
+            session.delete(vest);
 
             session.getTransaction().commit();
         } catch (RuntimeException e) {
