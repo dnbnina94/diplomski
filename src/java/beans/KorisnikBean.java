@@ -77,5 +77,15 @@ public class KorisnikBean {
             }
         }
     }
+    
+    public void proveriOrganizacijaIAdminPrivilegiju() {
+        if (korisnik == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(KorisnikBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 }

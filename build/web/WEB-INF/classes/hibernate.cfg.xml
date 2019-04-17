@@ -58,5 +58,8 @@ Contributor(s):
     <mapping resource="db/SifarniciIzvestaj.hbm.xml"/>
     <mapping resource="db/StavkeIzvestaj.hbm.xml"/>
     <mapping resource="db/AdminLog.hbm.xml"/>
+    <mapping resource="db/Ankete.hbm.xml"/>
+    <mapping resource="db/Pitanja.hbm.xml"/>
+    <mapping resource="db/PonudjeniOdgovori.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

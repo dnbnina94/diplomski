@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2019 at 05:15 PM
+-- Generation Time: Apr 17, 2019 at 07:14 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -74,6 +74,19 @@ INSERT INTO `admin_log` (`id_log`, `tekst`, `datum`) VALUES
 (35, 'Izmenjen događaj Kišobran žurka – 10 godina // 01. avgust 2019. // Drugstore', '2019-04-17 18:41:38'),
 (36, 'Izmenjen oglas Novinar/novinarka', '2019-04-17 19:09:35'),
 (37, 'Izmenjen oglas Novinar/novinarka', '2019-04-17 19:09:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ankete`
+--
+
+CREATE TABLE `ankete` (
+  `id_anketa` int(11) NOT NULL,
+  `kreator` varchar(50) NOT NULL,
+  `naziv` varchar(256) NOT NULL,
+  `nivo_vidljivosti` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -238,6 +251,31 @@ INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`,
 ('ORCA', 'ORCA', 'Dragana Tar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj. Svoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 26, 'https://www.orca.rs', 15, 27, '0601844595'),
 ('ticketVision', 'Ticket Vision d.o.o.', 'Pavle Leverda', 'office@tickets.rs', 'Ticket Vision d.o.o. je registrovano preduzeće za elektronsko štampanje, distribuciju i prodaju ulaznica zasve vrste događaja putem interneta i mreže prodajnih mesta, prisutno na srpskom tržištu od 2005. godine.\nU ovom trenutku Ticket Vision d.o.o. ima mrežu sa više od 150 prodajnih mesta širom Srbije sa glavnim blagajnama u Beogradu – TC Ušće, blagajna u Domu omladine Beograda, blagajna Beogradske Arene i Bilet centar, prodaju putem webshopa na portalu tickets.rs, call center 0900 11 00 11 (cena poziva iz fiksne i mobilne mreže MTS-a iznosi 48,00 din/min. Porez je uračunat u cenu poziva).\nTicket Vision d.o.o. sistem za prodaju ulaznica je sveobuhvatan, sa jednostavnim i funkcionalnim prikazom prodaje i rezervacije ulaznica za muzičke, sportske, kulturne i druge događaje.', 28, 'https://www.tickets.rs', 15, 29, '0900110011'),
 ('TobOrg', 'Turistička organizacija Beograda', 'Miodrag Popović', 'tobsekretarica@tob.rs', 'Turistička organizacija Beograda je javna služba Skupštine grada Beograda, osnovana sa idejom da obavlja poslove razvoja, očuvanja i zaštite turističkih vrednosti na teritoriji Beograda.\nKao destinacijska menadžment organizacija, TOB u promociji Beograda, kao turističkog odredišta, objedinjuje turističke usluge hotela, restorana, turističkih agencija, proizvođača suvenira i starih zanata, organizatora manifestacija i svih drugih delatnosti koje pružaju usluge turistima koji posećuju Beograd.\nNaša misija je promocija Beograda kao atraktivnog turističkog odredišta, očuvanje i razvoj turističkih, kulturnih i poslovnih vrednosti i potencijala grada.', 30, 'http://www.tob.rs', 15, 31, '0113625060, 0113625064');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pitanja`
+--
+
+CREATE TABLE `pitanja` (
+  `id_pitanje` int(11) NOT NULL,
+  `id_anketa` int(11) NOT NULL,
+  `pitanje` varchar(256) NOT NULL,
+  `tip` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ponudjeni_odgovori`
+--
+
+CREATE TABLE `ponudjeni_odgovori` (
+  `id_odgovor` int(11) NOT NULL,
+  `id_pitanje` int(11) NOT NULL,
+  `odgovor` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -497,6 +535,12 @@ ALTER TABLE `admin_log`
   ADD PRIMARY KEY (`id_log`);
 
 --
+-- Indexes for table `ankete`
+--
+ALTER TABLE `ankete`
+  ADD PRIMARY KEY (`id_anketa`);
+
+--
 -- Indexes for table `dogadjaji`
 --
 ALTER TABLE `dogadjaji`
@@ -546,6 +590,20 @@ ALTER TABLE `organizacije`
   ADD KEY `oblast_delovanja` (`oblast_delovanja`),
   ADD KEY `mesto` (`mesto`),
   ADD KEY `ulica` (`ulica`);
+
+--
+-- Indexes for table `pitanja`
+--
+ALTER TABLE `pitanja`
+  ADD PRIMARY KEY (`id_pitanje`),
+  ADD KEY `id_anketa` (`id_anketa`);
+
+--
+-- Indexes for table `ponudjeni_odgovori`
+--
+ALTER TABLE `ponudjeni_odgovori`
+  ADD PRIMARY KEY (`id_odgovor`),
+  ADD KEY `id_pitanje` (`id_pitanje`);
 
 --
 -- Indexes for table `sifarnici`
@@ -625,6 +683,18 @@ ALTER TABLE `organizacije`
   ADD CONSTRAINT `FK_mesto_organizacija` FOREIGN KEY (`mesto`) REFERENCES `stavke_sifarnika` (`id_stavka`),
   ADD CONSTRAINT `FK_oblast_organizacija` FOREIGN KEY (`oblast_delovanja`) REFERENCES `stavke_sifarnika` (`id_stavka`),
   ADD CONSTRAINT `FK_ulica_organizacija` FOREIGN KEY (`ulica`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+
+--
+-- Constraints for table `pitanja`
+--
+ALTER TABLE `pitanja`
+  ADD CONSTRAINT `FK_anketa_pitanje` FOREIGN KEY (`id_anketa`) REFERENCES `ankete` (`id_anketa`);
+
+--
+-- Constraints for table `ponudjeni_odgovori`
+--
+ALTER TABLE `ponudjeni_odgovori`
+  ADD CONSTRAINT `FK_pitanje_odgovor` FOREIGN KEY (`id_pitanje`) REFERENCES `pitanja` (`id_pitanje`);
 
 --
 -- Constraints for table `stavke_izvestaj`

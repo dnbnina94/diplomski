@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 17, 2019 7:40:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Ankete" table="ankete" catalog="diplomski" optimistic-lock="version">
+        <id name="idAnketa" type="int">
+            <column name="id_anketa" />
+            <generator class="assigned" />
+        </id>
+        <property name="kreator" type="string">
+            <column name="kreator" length="50" not-null="true" />
+        </property>
+        <property name="naziv" type="string">
+            <column name="naziv" length="256" not-null="true" />
+        </property>
+        <property name="nivoVidljivosti" type="int">
+            <column name="nivo_vidljivosti" not-null="true" />
+        </property>
+        <set name="pitanjas" table="pitanja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_anketa" not-null="true" />
+            </key>
+            <one-to-many class="db.Pitanja" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{korisnikBean.proveriOrganizacijaIAdminPrivilegiju()}" />
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <div class="stripe-line-header news-category-header">
+                            <div>Ankete</div>     
+                        </div>
+
+                        <h:form id="nova_anketa" enctype="">
+
+                            <div class="container-w-red-header-header" style="margin-top: 20px">
+                                Kreirajte novu anketu
+                            </div>
+                            <div class="row bordered-container-red-bottom" style="margin-top: 0px !important; padding-top: 15px; padding-bottom: 20px; margin-bottom: 15px !important" >
+                                <div class="col-md-12" style="padding: 0px !important">
+                                    <h:outputText value="Naziv ankete:" styleClass="login-form-label" />
+                                    <b:inputText id="naziv"
+                                                 styleClass="#{kreiranjeAnkete.nazivGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                 value="#{kreiranjeAnkete.naziv}"
+                                                 placeholder="Unesite naziv ankete" />
+                                    <div id="nazivGreska" class="#{kreiranjeAnkete.nazivGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <h:outputText value="#{kreiranjeAnkete.nazivGreska}" />
+                                    </div>
+
+                                    <h:outputText value="Nivo vidljivosti ankete:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <b:selectOneMenu id="nivoVidljivosti" value="#{kreiranjeAnkete.nivoVidljivosti}" styleClass="place-select" select2="true">
+                                        <f:selectItem itemLabel="Izaberite nivo vidljivosti ankete" itemValue="0" />
+                                        <f:selectItem itemLabel="Svi korisnici" itemValue="1" />
+                                        <f:selectItem itemLabel="Isključivo organizacije" itemValue="2" />
+                                    </b:selectOneMenu>
+                                    <h:panelGroup id="nivoVidljivostiGreskaWrapper">
+                                        <div id="nivoVidljivostiGreska" class="#{kreiranjeAnkete.nivoVidljivostiGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{kreiranjeAnkete.nivoVidljivostiGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+                                    <c:if test="#{kreiranjeAnkete.nivoVidljivostiGreska != ''}">
+                                        <style>
+                                            #nova_anketa\:nivoVidljivosti {
+                                                border: 1px solid #DC3545;
+                                            }
+                                        </style>
+                                    </c:if>
+
+                                    <h:panelGroup rendered="#{kreiranjeAnkete.pitanja.size() != 0}">
+                                        <div style="border: 1px solid #eee; margin-top: 20px;">
+                                            <div style="padding: 5px 10px; 
+                                                 font-family: BebasNeueRegular; 
+                                                 font-size: 16px; 
+                                                 background-color: #4c4c4c; 
+                                                 color: white;">
+                                                Kreirana pitanja:
+                                            </div>
+                                            <div style="padding: 10px 15px;">
+                                                <ui:repeat value="#{kreiranjeAnkete.pitanja}" var="pitanje">
+                                                    <h:outputText value="Pitanje: " style="font-weight: bold" />
+                                                    #{pitanje.pitanje}
+                                                    <br/>
+                                                    <h:outputText value="Tip pitanja: " style="font-weight: bold" />
+                                                    <h:panelGroup rendered="#{pitanje.tip == 1}">
+                                                        Jedan odgovor
+                                                    </h:panelGroup>
+                                                    <h:panelGroup rendered="#{pitanje.tip == 2}">
+                                                        Više odgovora
+                                                    </h:panelGroup>
+                                                    <br/>
+                                                    <h:outputText value="Ponuđeni odgovori: " style="font-weight: bold" />
+                                                    <br/>
+
+                                                    <ul>
+                                                        <ui:repeat value="#{pitanje.ponudjeniOdgovori}" var="ponOdg">
+                                                            <li>
+                                                                #{ponOdg.odgovor}
+                                                            </li>
+                                                        </ui:repeat>
+                                                    </ul>
+
+                                                    <div style="border-top: 1px solid #eee; margin-bottom: 10px"></div>
+                                                </ui:repeat>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                    <div style="padding: 5px 10px; 
+                                         font-family: BebasNeueRegular; 
+                                         font-size: 16px; 
+                                         background-color: #4c4c4c; 
+                                         color: white;
+                                         margin-top: 20px">
+                                        Kreirajte pitanje
+                                    </div>
+                                    <div style="padding: 15px; border: 1px solid #ddd;">
+
+                                        <h:outputText value="Pitanje:" styleClass="login-form-label" />
+                                        <b:inputText id="pitanje"
+                                                     styleClass="#{kreiranjeAnkete.pitanjeGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                     value="#{kreiranjeAnkete.pitanje}"
+                                                     placeholder="Unesite tekst pitanja" />
+                                        <div id="nazivGreska" class="#{kreiranjeAnkete.pitanjeGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                            <h:outputText value="#{kreiranjeAnkete.pitanjeGreska}" />
+                                        </div>
+
+                                        <h:outputText value="Tip pitanja:" styleClass="login-form-label" />
+                                        <div style="height: 5px"></div>
+                                        <b:selectOneMenu id="tipPitanja" value="#{kreiranjeAnkete.tipPitanja}" styleClass="place-select" select2="true">
+                                            <f:selectItem itemLabel="Izaberite tip pitanja" itemValue="0" />
+                                            <f:selectItem itemLabel="Jedan odgovor" itemValue="1" />
+                                            <f:selectItem itemLabel="Više odgovora" itemValue="2" />
+                                        </b:selectOneMenu>
+                                        <h:panelGroup id="tipPitanjaGreskaWrapper">
+                                            <div id="tipPitanjaGreska" class="#{kreiranjeAnkete.tipPitanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                 style="margin-top: 5px; margin-bottom: 0px">
+                                                <h:outputText value="#{kreiranjeAnkete.tipPitanjaGreska}" />
+                                            </div>
+                                        </h:panelGroup>
+                                        <c:if test="#{kreiranjeAnkete.tipPitanjaGreska != ''}">
+                                            <style>
+                                                #nova_anketa\:tipPitanja {
+                                                    border: 1px solid #DC3545;
+                                                }
+                                            </style>
+                                        </c:if>
+
+                                        <div style="height: 10px"></div>
+                                        <h:outputText value="Ponuđeni odgovori:" styleClass="login-form-label" />
+                                        <span data-toggle="tooltip" 
+                                              data-html="true" 
+                                              title="Nakon što unesete ponuđeni odgovor, kliknite na znak ''+''. Možete navesti maksimalno 10 ponuđenih odgovora." 
+                                              class="custom-tooltip">
+                                            ?
+                                        </span>
+                                        <br/>
+                                        <h:panelGroup id="ponudjeniOdgovoriWrapper">
+                                            <ui:repeat id="ponudjeniOdgovori" value="#{kreiranjeAnkete.ponudjeniOdgovori}" var="ponudjeniOdgovor" varStatus="status">
+                                                <div class="custom-tag">
+                                                    <h:outputText value="#{ponudjeniOdgovor}" />
+
+                                                    <b:commandButton id="removeButton"
+                                                                     icon="remove" 
+                                                                     styleClass="remove-field-button" 
+                                                                     ajax="true"
+                                                                     update="@form:ponudjeniOdgovor @form:ponudjeniOdgovoriWrapper @form:ponudjeniOdgovorGreskaWrapper"
+                                                                     onclick="ajax:kreiranjeAnkete.removePonudjeniOdgovor(status.index)" />
+                                                </div>
+                                            </ui:repeat>
+                                        </h:panelGroup>
+
+                                        <b:inputText id="ponudjeniOdgovor"
+                                                     value="#{kreiranjeAnkete.ponudjenOdgovor}" 
+                                                     styleClass="#{kreiranjeAnkete.ponudjenOdgovorGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" 
+                                                     placeholder="Unesite ponuđeni odgovor">
+                                            <f:facet name="append">
+                                                <b:commandButton id="plusButton"
+                                                                 icon="plus" 
+                                                                 styleClass="add-field-button" 
+                                                                 ajax="true" 
+                                                                 update="ponudjeniOdgovor ponudjeniOdgovorGreskaWrapper ponudjeniOdgovoriWrapper" 
+                                                                 onclick="ajax:kreiranjeAnkete.addPonudjeniOdgovor();" 
+                                                                 style="border: 1px solid #4c4c4c; #{kreiranjeAnkete.ponudjenOdgovorGreska == '' ? 'margin-top: -5px' : 'margin-top: 0px'}" />
+                                            </f:facet>
+                                        </b:inputText>
+                                        <h:panelGroup id="ponudjeniOdgovorGreskaWrapper" >
+                                            <div id="telefonGreska" class="#{kreiranjeAnkete.ponudjenOdgovorGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                <h:outputText value="#{kreiranjeAnkete.ponudjenOdgovorGreska}" />
+                                            </div>
+                                        </h:panelGroup>
+
+                                        <div style='text-align: right'>
+                                            <b:commandButton value="Kreirajte pitanje"
+                                                             styleClass="form-step-button"
+                                                             style="background-color: #4c4c4c !important; margin-top: 5px;
+                                                             padding: 5px 10px !important;"
+                                                             ajax='true'
+                                                             update='@form'
+                                                             onclick='ajax:kreiranjeAnkete.kreirajPitanje();'
+                                                             />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row form-step-buttons-row">
+                                <div class="col-md-6">
+                                    <b:carouselControl >
+                                        <b:commandButton value="Nazad na profil"
+                                                         styleClass="form-step-button"
+                                                         action="organizacija?faces-redirect=true"
+                                                         ajax="true" >
+                                        </b:commandButton>
+                                    </b:carouselControl>
+                                </div>
+                                <div class="col-md-6">
+                                    <b:carouselControl >
+                                        <b:commandButton value="Kreirajte oglas"
+                                                         styleClass="form-step-button"
+                                                         style="background-color: #4c4c4c !important; margin-right: 15px"
+                                                         />
+                                    </b:carouselControl>
+                                </div>
+                            </div>
+
+                        </h:form>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

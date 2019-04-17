@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 17, 2019 7:40:19 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Pitanja" table="pitanja" catalog="diplomski" optimistic-lock="version">
+        <id name="idPitanje" type="int">
+            <column name="id_pitanje" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ankete" class="db.Ankete" fetch="select">
+            <column name="id_anketa" not-null="true" />
+        </many-to-one>
+        <property name="pitanje" type="string">
+            <column name="pitanje" length="256" not-null="true" />
+        </property>
+        <property name="tip" type="int">
+            <column name="tip" not-null="true" />
+        </property>
+        <set name="ponudjeniOdgovoris" table="ponudjeni_odgovori" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pitanje" not-null="true" />
+            </key>
+            <one-to-many class="db.PonudjeniOdgovori" />
+        </set>
+    </class>
+</hibernate-mapping>

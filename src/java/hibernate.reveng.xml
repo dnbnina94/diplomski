@@ -53,4 +53,7 @@ Contributor(s):
   <table-filter match-name="obavestenja"/>
   <table-filter match-name="sifarnici_izvestaj"/>
   <table-filter match-name="stavke_izvestaj"/>
+  <table-filter match-name="ankete" />
+  <table-filter match-name="pitanja" />
+  <table-filter match-name="ponudjeni_odgovori" />
 </hibernate-reverse-engineering>
