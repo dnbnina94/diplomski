@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
@@ -58,7 +59,7 @@ public class IzmenaDogadjaja {
     private boolean menjanThumbnail;
     private Date datumIVremeKraja;
     private Date datumIVremePocetka;
-    
+
     private String naslovGreska = "";
     private String tekstGreska = "";
     private String kategorijaGreska = "";
@@ -73,12 +74,12 @@ public class IzmenaDogadjaja {
     private String uzrastGreska = "";
     private String karakteristikeProstoraGreska = "";
     private String thumbnailGreska = "";
-    
+
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private StavkeSifarnikaHelper stavkeSifarnikaHelper = new StavkeSifarnikaHelper();
     private KarakteristikeProstoraHelper karakteristikeHelper = new KarakteristikeProstoraHelper();
     private AdminLogHelper adminLogHelper = new AdminLogHelper();
-    
+
     public IzmenaDogadjaja() {
     }
 
@@ -296,7 +297,7 @@ public class IzmenaDogadjaja {
 
     public void setKarakteristikeProstoraList(List<KarakteristikeProstora> karakteristikeProstoraList) {
         this.karakteristikeProstoraList = karakteristikeProstoraList;
-        
+
         karakteristikeProstora = new ArrayList<StavkeSifarnika>();
         for (KarakteristikeProstora karakteristika : karakteristikeProstoraList) {
             karakteristikeProstora.add(karakteristika.getStavkeSifarnika());
@@ -318,7 +319,7 @@ public class IzmenaDogadjaja {
     public void setThumbnail(Part thumbnail) {
         this.thumbnail = thumbnail;
     }
-    
+
     public void removeThumbnail() {
         thumbnailGreska = "";
         thumbnail = null;
@@ -326,7 +327,7 @@ public class IzmenaDogadjaja {
         menjanThumbnail = true;
         thumbnailName = null;
     }
-    
+
     public void uploadThumbnail() {
         try (InputStream input = thumbnail.getInputStream()) {
             try {
@@ -372,7 +373,7 @@ public class IzmenaDogadjaja {
     public void setMenjanThumbnail(boolean menjanThumbnail) {
         this.menjanThumbnail = menjanThumbnail;
     }
-    
+
     public boolean karakteristikaValidacija() {
         if (karakteristikaProstora == null) {
             karakteristikeProstoraGreska = "Polje 'Karakteristika prostora' ne sme ostati prazno.";
@@ -382,7 +383,7 @@ public class IzmenaDogadjaja {
         karakteristikeProstoraGreska = "";
         return true;
     }
-    
+
     public void addKarakteristika() {
         boolean valid = karakteristikaValidacija();
 
@@ -401,13 +402,13 @@ public class IzmenaDogadjaja {
             karakteristikaProstora = null;
         }
     }
-    
+
     public void removeKarakteristika(int status) {
         karakteristikeProstora.remove(status);
 
         karakteristikeProstoraGreska = "";
     }
-    
+
     public boolean naslovValidacija() {
         if (naslov.isEmpty()) {
             naslovGreska = "Polje 'Naslov događaja' ne sme ostati prazno.";
@@ -417,7 +418,7 @@ public class IzmenaDogadjaja {
         naslovGreska = "";
         return true;
     }
-    
+
     public boolean kategorijaValidacija() {
         if (kategorija == null) {
             kategorijaGreska = "Polje 'Kategorija događaja' ne sme ostati prazno.";
@@ -427,7 +428,7 @@ public class IzmenaDogadjaja {
         kategorijaGreska = "";
         return true;
     }
-    
+
     public boolean tekstValidacija() {
         if (tekst.isEmpty()) {
             tekstGreska = "Polje 'Tekst događaja' ne sme ostati prazno.";
@@ -437,7 +438,7 @@ public class IzmenaDogadjaja {
         tekstGreska = "";
         return true;
     }
-    
+
     public boolean mestoValidacija() {
         if (mesto.isEmpty()) {
             mestoGreska = "Polje 'Mesto' ne sme ostati prazno.";
@@ -452,7 +453,7 @@ public class IzmenaDogadjaja {
         mestoGreska = "";
         return true;
     }
-    
+
     public boolean ulicaValidacija() {
         if (ulica.isEmpty()) {
             ulicaGreska = "Polje 'Ulica' ne sme ostati prazno.";
@@ -467,7 +468,7 @@ public class IzmenaDogadjaja {
         ulicaGreska = "";
         return true;
     }
-    
+
     public boolean datumPocetkaValidacija() {
         if (getDatumPocetka() == null) {
             datumPocetkaGreska = "Polje 'Datum početka' ne sme ostati prazno.";
@@ -477,7 +478,7 @@ public class IzmenaDogadjaja {
         datumPocetkaGreska = "";
         return true;
     }
-    
+
     public boolean datumKrajaValidacija() {
         if (getDatumKraja() == null) {
             datumKrajaGreska = "Polje 'Datum kraja' ne sme ostati prazno.";
@@ -487,7 +488,7 @@ public class IzmenaDogadjaja {
         datumKrajaGreska = "";
         return true;
     }
-    
+
     public boolean vremePocetkaValidacija() {
         if (vremePocetka == null) {
             vremePocetkaGreska = "Polje 'Vreme početka' ne sme ostati prazno.";
@@ -505,7 +506,7 @@ public class IzmenaDogadjaja {
         vremeKrajaGreska = "";
         return true;
     }
-    
+
     public boolean uzrastValidacija() {
         if (uzrast == null) {
             uzrastGreska = "Polje 'Uzrast' ne sme ostati prazno.";
@@ -515,7 +516,7 @@ public class IzmenaDogadjaja {
         uzrastGreska = "";
         return true;
     }
-    
+
     public boolean datumiValidacija() {
         if (getDatumIVremeKraja().before(getDatumIVremePocetka())) {
             datumIVremeKrajaGreska = "Datum i vreme kraja događaja ne sme biti pre datuma i vremena početka događaja.";
@@ -525,7 +526,7 @@ public class IzmenaDogadjaja {
         datumIVremeKrajaGreska = "";
         return true;
     }
-    
+
     private Date getDatumIVreme(Date datum, Date vreme) {
         Calendar calDatum = Calendar.getInstance();
         calDatum.setTime(datum);
@@ -544,10 +545,10 @@ public class IzmenaDogadjaja {
 
         return calDatumIVreme.getTime();
     }
-    
+
     public void izmeniDogadjaj() {
         boolean valid = true;
-        
+
         if (!naslovValidacija()) {
             valid = false;
         }
@@ -563,7 +564,7 @@ public class IzmenaDogadjaja {
         if (!ulicaValidacija()) {
             valid = false;
         }
-        
+
         boolean formiranDatumPocetak = true;
         if (!datumPocetkaValidacija()) {
             valid = false;
@@ -573,7 +574,7 @@ public class IzmenaDogadjaja {
             valid = false;
             formiranDatumPocetak = false;
         }
-        
+
         datumIVremePocetka = null;
         if (formiranDatumPocetak) {
             datumIVremePocetka = getDatumIVreme(datumPocetka, vremePocetka);
@@ -584,7 +585,7 @@ public class IzmenaDogadjaja {
             datumIVremePocetkaGreska = "";
             datumIVremePocetka = null;
         }
-        
+
         boolean formiranDatumKraj = true;
         if (!datumKrajaValidacija()) {
             valid = false;
@@ -617,12 +618,12 @@ public class IzmenaDogadjaja {
         if (!uzrastValidacija()) {
             valid = false;
         }
-        
+
         if (valid) {
             dogadjaj.setNaslov(naslov);
             dogadjaj.setKategorija(kategorija);
             dogadjaj.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
-            
+
             if (menjanThumbnail) {
                 if (dogadjaj.getThumbnail() != null) {
                     File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsDogadjaji"));
@@ -632,7 +633,8 @@ public class IzmenaDogadjaja {
                         boolean result = Files.deleteIfExists(file.toPath());
 
                         if (submittedThumbnail != null) {
-                            String newThumbnailName = dogadjaj.getIdDogadjaj()+ ".";
+                            UUID uid = UUID.randomUUID();
+                            String newThumbnailName = uid + ".";
                             int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                             if (i > 0) {
                                 newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
@@ -645,7 +647,7 @@ public class IzmenaDogadjaja {
                             } catch (IOException ex) {
                                 Logger.getLogger(IzmenaDogadjaja.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            
+
                             dogadjaj.setThumbnail(newThumbnailName);
                         } else {
                             dogadjaj.setThumbnail(null);
@@ -655,12 +657,13 @@ public class IzmenaDogadjaja {
                     }
                 } else {
                     if (submittedThumbnail != null) {
-                        String newThumbnailName = dogadjaj.getIdDogadjaj()+ ".";
+                        UUID uid = UUID.randomUUID();
+                        String newThumbnailName = uid + ".";
                         int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                         if (i > 0) {
                             newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
                         }
-                        
+
                         File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsDogadjaji"));
                         File file = new File(uploads, newThumbnailName);
 
@@ -669,47 +672,47 @@ public class IzmenaDogadjaja {
                         } catch (IOException ex) {
                             Logger.getLogger(IzmenaDogadjaja.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
+
                         dogadjaj.setThumbnail(newThumbnailName);
                     } else {
                         dogadjaj.setThumbnail(null);
                     }
                 }
             }
-            
+
             StavkeSifarnika mestoDog = stavkeSifarnikaHelper.getStavkaByNaziv(mesto);
             if (mestoDog == null) {
                 mestoDog = new StavkeSifarnika(stavkeSifarnikaHelper.getMaxId() + 1, stavkeSifarnikaHelper.getStavkeByIdSifarnik(3), mesto, null);
                 stavkeSifarnikaHelper.insertStavka(mestoDog);
             }
             dogadjaj.setMesto(mestoDog);
-            
+
             StavkeSifarnika ulicaDog = stavkeSifarnikaHelper.getStavkaByNaziv(ulica);
             if (ulicaDog == null) {
                 ulicaDog = new StavkeSifarnika(stavkeSifarnikaHelper.getMaxId() + 1, stavkeSifarnikaHelper.getStavkeByIdSifarnik(5), ulica, null);
                 stavkeSifarnikaHelper.insertStavka(ulicaDog);
             }
             dogadjaj.setUlica(ulicaDog);
-            
+
             dogadjaj.setDatumDogadjaja(datumIVremePocetka);
             dogadjaj.setDatumIsticanja(datumIVremeKraja);
-            
+
             dogadjaj.setUzrast(uzrast);
-            
+
             List<KarakteristikeProstora> stareKarakteristikeList = dogadjaj.karakteristikeToList();
             List<StavkeSifarnika> stareKarakteristike = new ArrayList<StavkeSifarnika>();
-            
+
             for (KarakteristikeProstora karakteristika : stareKarakteristikeList) {
                 stareKarakteristike.add(karakteristika.getStavkeSifarnika());
             }
-            
+
             for (KarakteristikeProstora karakteristika : stareKarakteristikeList) {
                 if (!karakteristikeProstora.contains(karakteristika.getStavkeSifarnika())) {
                     karakteristikeHelper.deleteKarakteristika(karakteristika);
                 }
             }
-            
-            int karakteristikeId = karakteristikeHelper.getMaxId()+1;
+
+            int karakteristikeId = karakteristikeHelper.getMaxId() + 1;
             for (StavkeSifarnika karakteristika : karakteristikeProstora) {
                 if (!stareKarakteristike.contains(karakteristika)) {
                     KarakteristikeProstora novaKarakteristika = new KarakteristikeProstora(karakteristikeId, dogadjaj, karakteristika);
@@ -717,27 +720,27 @@ public class IzmenaDogadjaja {
                     karakteristikeId++;
                 }
             }
-            
+
             dogadjaj.setKarakteristikeProstoras(karakteristikeHelper.getKarakteristikeByDogadjaj(dogadjaj));
-            
+
             dogadjajiHelper.updateDogadjaj(dogadjaj);
-            
+
             AdminLog adminLog = new AdminLog();
-            adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
             adminLog.setTekst("Izmenjen događaj " + dogadjaj.getNaslov());
             adminLog.setDatum(new Date());
-            
+
             adminLogHelper.insertLog(adminLog);
-            
+
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaDogadjaja pretragaDogadjajaBean = (PretragaDogadjaja) elContext.getELResolver().getValue(elContext, null, "pretragaDogadjaja");
             pretragaDogadjajaBean.setDogadjaj(dogadjaj);
             elContext.getELResolver().setValue(elContext, null, "pretragaDogadjaja", pretragaDogadjajaBean);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste izmenili događaj.", null);
             FacesContext.getCurrentInstance().addMessage("dogadjaj:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            
+
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("dogadjaj.xhtml");
                 FacesContext.getCurrentInstance().responseComplete();
@@ -747,7 +750,7 @@ public class IzmenaDogadjaja {
         } else {
             thumbnail = submittedThumbnail;
         }
-        
+
     }
 
     public Date getDatumIVremeKraja() {
@@ -765,5 +768,5 @@ public class IzmenaDogadjaja {
     public void setDatumIVremePocetka(Date datumIVremePocetka) {
         this.datumIVremePocetka = datumIVremePocetka;
     }
-    
+
 }

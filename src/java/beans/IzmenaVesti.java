@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
@@ -251,7 +252,7 @@ public class IzmenaVesti {
             vestiHelper.updateVestNaslov(vest, naslov);
             vestiHelper.updateVestTekst(vest, Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
             vestiHelper.updateVestKategorija(vest, kategorija);
-            
+
             vest.setNaslov(naslov);
             vest.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new Document.OutputSettings().prettyPrint(false)));
             vest.setKategorija(kategorija);
@@ -265,7 +266,8 @@ public class IzmenaVesti {
                         boolean result = Files.deleteIfExists(file.toPath());
 
                         if (submittedThumbnail != null) {
-                            String newThumbnailName = vest.getIdVest() + ".";
+                            UUID uid = UUID.randomUUID();
+                            String newThumbnailName = uid + ".";
                             int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                             if (i > 0) {
                                 newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
@@ -278,7 +280,7 @@ public class IzmenaVesti {
                             } catch (IOException ex) {
                                 Logger.getLogger(IzmenaVesti.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            
+
                             vestiHelper.updateVestThumbnail(vest, newThumbnailName);
                             vest.setThumbnail(newThumbnailName);
                         } else {
@@ -290,12 +292,13 @@ public class IzmenaVesti {
                     }
                 } else {
                     if (submittedThumbnail != null) {
-                        String newThumbnailName = vest.getIdVest() + ".";
+                        UUID uid = UUID.randomUUID();
+                        String newThumbnailName = uid + ".";
                         int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                         if (i > 0) {
                             newThumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
                         }
-                        
+
                         File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsVesti"));
                         File file = new File(uploads, newThumbnailName);
 
@@ -304,7 +307,7 @@ public class IzmenaVesti {
                         } catch (IOException ex) {
                             Logger.getLogger(IzmenaVesti.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
+
                         vestiHelper.updateVestThumbnail(vest, newThumbnailName);
                         vest.setThumbnail(newThumbnailName);
                     } else {
@@ -313,23 +316,23 @@ public class IzmenaVesti {
                     }
                 }
             }
-            
+
             AdminLog adminLog = new AdminLog();
-            adminLog.setIdLog(adminLogHelper.getMaxId()+1);
+            adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
             adminLog.setTekst("Izmenjena vest " + vest.getNaslov());
             adminLog.setDatum(new Date());
-            
+
             adminLogHelper.insertLog(adminLog);
-            
+
             ELContext elContext = FacesContext.getCurrentInstance().getELContext();
             PretragaVesti pretragaVestiBean = (PretragaVesti) elContext.getELResolver().getValue(elContext, null, "pretragaVesti");
             pretragaVestiBean.setVest(vest);
             elContext.getELResolver().setValue(elContext, null, "pretragaVesti", pretragaVestiBean);
-            
+
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste izmenili vest.", null);
             FacesContext.getCurrentInstance().addMessage("vest:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            
+
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("vest.xhtml");
                 FacesContext.getCurrentInstance().responseComplete();

@@ -205,4 +205,14 @@ public class OrganizacijaBean {
         this.oglasi = oglasi;
     }
 
+    public void proveriPostojanostOrg() {
+        if (organizacija == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }

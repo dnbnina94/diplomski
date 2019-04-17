@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import net.bootsfaces.utils.FacesMessages;
@@ -531,6 +532,10 @@ public class Registracija {
                     stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
 
                     try {
+                        
+                        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+                        Registracija registracija = new Registracija();
+                        elContext.getELResolver().setValue(elContext, null, "registracija", registracija);
 
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste podneli zahtev za registraciju. Nakon što administrator odobri Vaš zahtev, moći ćete da se prijavite na sistem korišćenjem Vašeg korisničkog imena i lozinke.", null);
                         FacesContext.getCurrentInstance().addMessage("neregistrovani-korisnici:growl-success", message);

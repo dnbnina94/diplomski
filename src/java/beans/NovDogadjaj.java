@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
@@ -348,7 +349,8 @@ public class NovDogadjaj {
 
             String thumbnailName = null;
             if (submittedThumbnail != null) {
-                thumbnailName = idDogadjaj + ".";
+                UUID uid = UUID.randomUUID();
+                thumbnailName = uid + ".";
                 int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                 if (i > 0) {
                     thumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);

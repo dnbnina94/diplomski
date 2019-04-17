@@ -55,7 +55,7 @@ public class PretragaVesti {
     private Date datum;
 
     // 1 - vesti kategorije, 2 - vesti korisnika, 3 - rezultat pretrage
-    private int tipPretrage;
+    private int tipPretrage = 3;
     private Map<StavkeSifarnika, Boolean> checkMap;
 
     public PretragaVesti() {
@@ -118,7 +118,7 @@ public class PretragaVesti {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = vestiHelper.pretragaVestiTotalCount(kategorijaVesti);
                 vesti = new ArrayList<Vesti>();
-                vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, currentPage, pageLength));
+                vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = vesti.size();
                 currentPage++;
             }
@@ -133,7 +133,7 @@ public class PretragaVesti {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = vestiHelper.pretragaVestiTotalCount(organizacija.getKorisnici());
                 vesti = new ArrayList<Vesti>();
-                vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), currentPage, pageLength));
+                vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = vesti.size();
                 currentPage++;
             }
@@ -142,7 +142,7 @@ public class PretragaVesti {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = vestiHelper.pretragaVestiTotalCount(kljucneReci, checkMap, kreatorVesti, sortiranje, datum);
                 vesti = new ArrayList<Vesti>();
-                vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum, currentPage, pageLength));
+                vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum, currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = vesti.size();
                 currentPage++;
             }
@@ -288,15 +288,15 @@ public class PretragaVesti {
 
     public void currentPageIncrement() {
         if (tipPretrage == 1) {
-            vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, currentPage, pageLength));
+            vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         if (tipPretrage == 2) {
-            vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), currentPage, pageLength));
+            vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         if (tipPretrage == 3) {
-            vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum, currentPage, pageLength));
+            vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum, currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         currentPage++;
@@ -324,6 +324,16 @@ public class PretragaVesti {
 
     public void setNumOfTotalItems(long numOfTotalItems) {
         this.numOfTotalItems = numOfTotalItems;
+    }
+    
+    public void proveriPostojanostVesti() {
+        if (vest == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

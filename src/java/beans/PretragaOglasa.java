@@ -29,7 +29,7 @@ public class PretragaOglasa {
     private List<Oglasi> oglasi;
 
     // 1 - za pretragu oglasa, 2 - za oglase organizacije
-    private int tipPretrage;
+    private int tipPretrage = 1;
     private int currentPage = 0;
     private int pageLength = 5;
     private int numOfShowedItems = 0;
@@ -38,20 +38,18 @@ public class PretragaOglasa {
     private Organizacije organizacija;
     private Oglasi oglas;
 
-    private String kljucneReci;
+    private String kljucneReci = "";
 
-    private String kreatorOglasa;
+    private String kreatorOglasa = "";
     private List<Organizacije> organizacije;
     private KorisniciHelper korisniciHelper = new KorisniciHelper();
 
     private OglasiHelper oglasiHelper = new OglasiHelper();
 
     // 1 - datum kreiranja, 2 - rok isteka
-    private int sortiranje;
+    private int sortiranje = 1;
 
     public PretragaOglasa() {
-        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
-        Collections.sort(organizacije, new PretragaOglasa.SortOrganizacijeByName());
     }
 
     class SortOrganizacijeByName implements Comparator<Organizacije> {
@@ -151,6 +149,8 @@ public class PretragaOglasa {
     }
 
     public List<Organizacije> getOrganizacije() {
+        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
+        Collections.sort(organizacije, new PretragaOglasa.SortOrganizacijeByName());
         return organizacije;
     }
 
@@ -214,6 +214,16 @@ public class PretragaOglasa {
             numOfShowedItems = oglasi.size();
         }
         currentPage++;
+    }
+    
+    public void proveriPostojanostOglasa() {
+        if (oglas == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

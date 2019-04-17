@@ -96,202 +96,220 @@
                             </h:panelGroup>
                             <h:panelGroup id="dogadjaj_content">
                                 <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
-                                <b:dataTable id="dataTable" 
-                                             value="#{pretragaDogadjaja.dogadjaji}" 
-                                             var="dogadjaj" 
-                                             styleClass="news-data-table" 
-                                             info="false" 
-                                             paginated="false"
-                                             searching="false">
-                                    <b:dataTableColumn>
-                                        <div>
-                                            <h:panelGroup rendered="#{dogadjaj.arhiviran}">
-                                                <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
-                                                    <div style="position: absolute; z-index: 100; left: 5px;">
-                                                        <div style="position: relative; top: 10px;">
-                                                            <h:graphicImage library="img" name="arhivirano.png" style="width: 95px" />
-                                                        </div>
-                                                    </div>
-                                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
-                                                </b:commandLink>
-                                            </h:panelGroup>
 
-                                            <h:panelGroup styleClass="#{dogadjaj.arhiviran ? 'expired' : ''}">
-                                                <div class="news-date">
-                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
-                                                    <h:outputText value="#{dogadjaj.datumKreiranja}" >
-                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                    </h:outputText>
-                                                    &nbsp;
-                                                    <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
-                                                    <h:outputText value="#{dogadjaj.datumKreiranja}" >
-                                                        <f:convertDateTime pattern=" HH:mm" />
-                                                    </h:outputText>
-                                                    &nbsp;
-                                                    <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
-                                                        <h:outputText value=" #{dogadjaj.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
-                                                            <f:convertDateTime pattern="dd.MM.yyyy." />
-                                                        </h:outputText>
-                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{dogadjaj.kategorija}" />
-                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
-                                                    </b:commandLink>
-                                                </div>
-                                                <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
-                                                    <div class="news-thumbnail-container" style="background-image: #{dogadjaj.getThumbnailUrl()}"></div>
-                                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
-                                                </b:commandLink>
-                                                <div class="news-content-sm-devices">
+                                <h:panelGroup rendered="#{pretragaDogadjaja.dogadjaji.size() == 0}">
+                                    <div style="width: 100%; 
+                                         margin-top: 20px; 
+                                         text-align: center; 
+                                         color: orangered; 
+                                         font-family: BebasNeueRegular; 
+                                         font-size: 22px;
+                                         padding-top: 50px;
+                                         padding-bottom: 50px;
+                                         border: 1px solid #eee">
+                                        <h:graphicImage library="img" name="gentleman3.png" style="width: 80px; padding-bottom: 10px" /> <br/>
+                                        Nema rezultata za željene događaje.
+                                    </div>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{pretragaDogadjaja.dogadjaji.size() != 0}">
+                                    <b:dataTable id="dataTable" 
+                                                 value="#{pretragaDogadjaja.dogadjaji}" 
+                                                 var="dogadjaj" 
+                                                 styleClass="news-data-table" 
+                                                 info="false" 
+                                                 paginated="false"
+                                                 searching="false">
+                                        <b:dataTableColumn>
+                                            <div>
+                                                <h:panelGroup rendered="#{dogadjaj.arhiviran}">
                                                     <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
-                                                        <h:outputText value="#{dogadjaj.naslov}" styleClass="news-heading" /> <br/>
-                                                        <div style="height: 10px"></div>
-                                                        <div class="row event-dates-container">
-                                                            <div class="col-md-5">
-                                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
-                                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                                </h:outputText>
-                                                                &nbsp;
-                                                                <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                                                <h:outputText value="#{dogadjaj.datumDogadjaja}" >
-                                                                    <f:convertDateTime pattern=" HH:mm" />
-                                                                </h:outputText>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                &mdash;
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                                                <h:outputText value="#{dogadjaj.datumIsticanja}" >
-                                                                    <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                                </h:outputText>
-                                                                &nbsp;
-                                                                <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                                                <h:outputText value="#{dogadjaj.datumIsticanja}" >
-                                                                    <f:convertDateTime pattern=" HH:mm" />
-                                                                </h:outputText>
+                                                        <div style="position: absolute; z-index: 100; left: 5px;">
+                                                            <div style="position: relative; top: 10px;">
+                                                                <h:graphicImage library="img" name="arhivirano.png" style="width: 95px" />
                                                             </div>
                                                         </div>
-                                                        <div class="event-mesto-container">
-                                                            <strong>Mesto:</strong>
-                                                            &nbsp;
-                                                            <h:outputText value="#{dogadjaj.mesto.naziv}" />
-                                                        </div>
-                                                        <ui:repeat value="#{dogadjaj.karakteristikeToList()}" var="karakteristika">
-                                                            <div style="height: 25px; width: 25px; display: inline-block; margin-bottom: 10px; margin-top: 5px">
-                                                                <img title="#{karakteristika.stavkeSifarnika.naziv}" src="#{karakteristika.stavkeSifarnika.getThumbnailSrc()}" style="height: 100%; width: 100%;" />
-                                                            </div>
-                                                        </ui:repeat>
-                                                        <div>
-                                                            <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" />
-                                                        </div> <br/>
-                                                        <b:button styleClass="read-more-button" value="Pročitaj još" />
                                                         <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
                                                     </b:commandLink>
-                                                    <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == dogadjaj.korisnici.korisnickoIme}">
-                                                        <div style="display: inline-block;">
-                                                            <b:commandButton styleClass="read-more-button" 
-                                                                             value="#{dogadjaj.zahtevBrisanje ? 'Obriši - poslat zahtev' : 'Obriši'}"
-                                                                             ajax="true"
-                                                                             update="@form"
-                                                                             disabled="#{dogadjaj.zahtevBrisanje}"
-                                                                             oncomplete="$('#dogadjaj\\:amodal').modal('show');"
-                                                                             style="background-color: #ccc !important">
-                                                                <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
-                                                            </b:commandButton>
-                                                        </div>
-                                                    </h:panelGroup>
-                                                    <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
-                                                        <div style="display: inline-block;">
-                                                            <b:commandButton styleClass="read-more-button" 
-                                                                             value="Obriši"
-                                                                             ajax="true"
-                                                                             update="@form"
-                                                                             oncomplete="$('#dogadjaj\\:amodal').modal('show');"
-                                                                             style="background-color: #ccc !important">
-                                                                <f:setPropertyActionListener target="#{admin.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
-                                                            </b:commandButton>
-                                                        </div>
-                                                    </h:panelGroup>
-                                                </div>
-                                            </h:panelGroup>
-                                        </div>
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <div class="#{dogadjaj.arhiviran ? 'expired' : ''}">
-                                            <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
-                                                <h:outputText value="#{dogadjaj.naslov}" styleClass="news-heading" /> <br/>
-                                                <div style="height: 10px"></div>
-                                                <div class="row event-dates-container">
-                                                    <div class="col-md-5">
-                                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                                        <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                </h:panelGroup>
+
+                                                <h:panelGroup styleClass="#{dogadjaj.arhiviran ? 'expired' : ''}">
+                                                    <div class="news-date">
+                                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                                        <h:outputText value="#{dogadjaj.datumKreiranja}" >
                                                             <f:convertDateTime pattern=" dd.MM.yyyy." />
                                                         </h:outputText>
                                                         &nbsp;
-                                                        <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                                        <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                                        <h:outputText value="#{dogadjaj.datumKreiranja}" >
                                                             <f:convertDateTime pattern=" HH:mm" />
-                                                        </h:outputText>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        &mdash;
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
-                                                        <h:outputText value="#{dogadjaj.datumIsticanja}" >
-                                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
                                                         </h:outputText>
                                                         &nbsp;
-                                                        <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
-                                                        <h:outputText value="#{dogadjaj.datumIsticanja}" >
-                                                            <f:convertDateTime pattern=" HH:mm" />
-                                                        </h:outputText>
+                                                        <b:commandLink action="dogadjaji?faces-redirect=true" styleClass="customNewsLink">
+                                                            <h:outputText value=" #{dogadjaj.kategorija.naziv}" style="text-transform: uppercase; font-weight: bold">
+                                                                <f:convertDateTime pattern="dd.MM.yyyy." />
+                                                            </h:outputText>
+                                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.kategorijaDogadjaja}" value="#{dogadjaj.kategorija}" />
+                                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.tipPretrage}" value="1" />
+                                                        </b:commandLink>
                                                     </div>
-                                                </div>
-                                                <div class="event-mesto-container">
-                                                    <strong>Mesto:</strong>
-                                                    &nbsp;
-                                                    <h:outputText value="#{dogadjaj.mesto.naziv}" />
-                                                </div>
-                                                <ui:repeat value="#{dogadjaj.karakteristikeToList()}" var="karakteristika">
-                                                    <div style="height: 25px; width: 25px; display: inline-block; margin-bottom: 10px; margin-top: 5px">
-                                                        <img title="#{karakteristika.stavkeSifarnika.naziv}" src="#{karakteristika.stavkeSifarnika.getThumbnailSrc()}" style="height: 100%; width: 100%;"/>
+                                                    <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
+                                                        <div class="news-thumbnail-container" style="background-image: #{dogadjaj.getThumbnailUrl()}"></div>
+                                                        <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
+                                                    </b:commandLink>
+                                                    <div class="news-content-sm-devices">
+                                                        <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
+                                                            <h:outputText value="#{dogadjaj.naslov}" styleClass="news-heading" /> <br/>
+                                                            <div style="height: 10px"></div>
+                                                            <div class="row event-dates-container">
+                                                                <div class="col-md-5">
+                                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                                                    <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                                    </h:outputText>
+                                                                    &nbsp;
+                                                                    <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                                                    <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                                        <f:convertDateTime pattern=" HH:mm" />
+                                                                    </h:outputText>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    &mdash;
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                                                    <h:outputText value="#{dogadjaj.datumIsticanja}" >
+                                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                                    </h:outputText>
+                                                                    &nbsp;
+                                                                    <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                                                    <h:outputText value="#{dogadjaj.datumIsticanja}" >
+                                                                        <f:convertDateTime pattern=" HH:mm" />
+                                                                    </h:outputText>
+                                                                </div>
+                                                            </div>
+                                                            <div class="event-mesto-container">
+                                                                <strong>Mesto:</strong>
+                                                                &nbsp;
+                                                                <h:outputText value="#{dogadjaj.mesto.naziv}" />
+                                                            </div>
+                                                            <ui:repeat value="#{dogadjaj.karakteristikeToList()}" var="karakteristika">
+                                                                <div style="height: 25px; width: 25px; display: inline-block; margin-bottom: 10px; margin-top: 5px">
+                                                                    <img title="#{karakteristika.stavkeSifarnika.naziv}" src="#{karakteristika.stavkeSifarnika.getThumbnailSrc()}" style="height: 100%; width: 100%;" />
+                                                                </div>
+                                                            </ui:repeat>
+                                                            <div>
+                                                                <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" />
+                                                            </div> <br/>
+                                                            <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                            <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
+                                                        </b:commandLink>
+                                                        <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == dogadjaj.korisnici.korisnickoIme}">
+                                                            <div style="display: inline-block;">
+                                                                <b:commandButton styleClass="read-more-button" 
+                                                                                 value="#{dogadjaj.zahtevBrisanje ? 'Obriši - poslat zahtev' : 'Obriši'}"
+                                                                                 ajax="true"
+                                                                                 update="@form"
+                                                                                 disabled="#{dogadjaj.zahtevBrisanje}"
+                                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('show');"
+                                                                                 style="background-color: #ccc !important">
+                                                                    <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
+                                                                </b:commandButton>
+                                                            </div>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
+                                                            <div style="display: inline-block;">
+                                                                <b:commandButton styleClass="read-more-button" 
+                                                                                 value="Obriši"
+                                                                                 ajax="true"
+                                                                                 update="@form"
+                                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('show');"
+                                                                                 style="background-color: #ccc !important">
+                                                                    <f:setPropertyActionListener target="#{admin.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
+                                                                </b:commandButton>
+                                                            </div>
+                                                        </h:panelGroup>
                                                     </div>
-                                                </ui:repeat>
-                                                <div>
-                                                    <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" /> 
-                                                </div><br/>
-                                                <b:button styleClass="read-more-button" value="Pročitaj još" />
-                                                <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
-                                            </b:commandLink>
-                                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == dogadjaj.korisnici.korisnickoIme}">
-                                                <div style="display: inline-block;">
-                                                    <b:commandButton styleClass="read-more-button" 
-                                                                     value="#{dogadjaj.zahtevBrisanje ? 'Obriši - poslat zahtev' : 'Obriši'}"
-                                                                     ajax="true"
-                                                                     update="@form"
-                                                                     disabled="#{dogadjaj.zahtevBrisanje}"
-                                                                     oncomplete="$('#dogadjaj\\:amodal').modal('show');"
-                                                                     style="background-color: #ccc !important">
-                                                        <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
-                                                    </b:commandButton>
-                                                </div>
-                                            </h:panelGroup>
-                                            <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
-                                                <div style="display: inline-block;">
-                                                    <b:commandButton styleClass="read-more-button" 
-                                                                     value="Obriši"
-                                                                     ajax="true"
-                                                                     update="@form"
-                                                                     oncomplete="$('#dogadjaj\\:amodal').modal('show');"
-                                                                     style="background-color: #ccc !important">
-                                                        <f:setPropertyActionListener target="#{admin.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
-                                                    </b:commandButton>
-                                                </div>
-                                            </h:panelGroup>
-                                        </div>
-                                    </b:dataTableColumn>
-                                </b:dataTable>
+                                                </h:panelGroup>
+                                            </div>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn>
+                                            <div class="#{dogadjaj.arhiviran ? 'expired' : ''}">
+                                                <b:commandLink action="dogadjaj?faces-redirect=true" styleClass="customNewsLink">
+                                                    <h:outputText value="#{dogadjaj.naslov}" styleClass="news-heading" /> <br/>
+                                                    <div style="height: 10px"></div>
+                                                    <div class="row event-dates-container">
+                                                        <div class="col-md-5">
+                                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                                            <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                            </h:outputText>
+                                                            &nbsp;
+                                                            <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                                            <h:outputText value="#{dogadjaj.datumDogadjaja}" >
+                                                                <f:convertDateTime pattern=" HH:mm" />
+                                                            </h:outputText>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            &mdash;
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 13px;"></span>
+                                                            <h:outputText value="#{dogadjaj.datumIsticanja}" >
+                                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                            </h:outputText>
+                                                            &nbsp;
+                                                            <span class="glyphicon glyphicon-time" style="font-size: 13px;"></span>
+                                                            <h:outputText value="#{dogadjaj.datumIsticanja}" >
+                                                                <f:convertDateTime pattern=" HH:mm" />
+                                                            </h:outputText>
+                                                        </div>
+                                                    </div>
+                                                    <div class="event-mesto-container">
+                                                        <strong>Mesto:</strong>
+                                                        &nbsp;
+                                                        <h:outputText value="#{dogadjaj.mesto.naziv}" />
+                                                    </div>
+                                                    <ui:repeat value="#{dogadjaj.karakteristikeToList()}" var="karakteristika">
+                                                        <div style="height: 25px; width: 25px; display: inline-block; margin-bottom: 10px; margin-top: 5px">
+                                                            <img title="#{karakteristika.stavkeSifarnika.naziv}" src="#{karakteristika.stavkeSifarnika.getThumbnailSrc()}" style="height: 100%; width: 100%;"/>
+                                                        </div>
+                                                    </ui:repeat>
+                                                    <div>
+                                                        <h:outputText value="#{dogadjaj.getTekstShort()}" styleClass="news-text" /> 
+                                                    </div><br/>
+                                                    <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                    <f:setPropertyActionListener target="#{pretragaDogadjaja.dogadjaj}" value="#{dogadjaj}" />
+                                                </b:commandLink>
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == dogadjaj.korisnici.korisnickoIme}">
+                                                    <div style="display: inline-block;">
+                                                        <b:commandButton styleClass="read-more-button" 
+                                                                         value="#{dogadjaj.zahtevBrisanje ? 'Obriši - poslat zahtev' : 'Obriši'}"
+                                                                         ajax="true"
+                                                                         update="@form"
+                                                                         disabled="#{dogadjaj.zahtevBrisanje}"
+                                                                         oncomplete="$('#dogadjaj\\:amodal').modal('show');"
+                                                                         style="background-color: #ccc !important">
+                                                            <f:setPropertyActionListener target="#{zahteviKorisnika.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
+                                                        </b:commandButton>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
+                                                    <div style="display: inline-block;">
+                                                        <b:commandButton styleClass="read-more-button" 
+                                                                         value="Obriši"
+                                                                         ajax="true"
+                                                                         update="@form"
+                                                                         oncomplete="$('#dogadjaj\\:amodal').modal('show');"
+                                                                         style="background-color: #ccc !important">
+                                                            <f:setPropertyActionListener target="#{admin.selektovanDogadjajBrisanje}" value="#{dogadjaj}" />
+                                                        </b:commandButton>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </div>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </h:panelGroup>
 
                                 <h:inputHidden id="pageLength" value="#{pretragaDogadjaja.pageLength}" />
                                 <h:inputHidden id="currentPage" value="#{pretragaDogadjaja.currentPage}" />
@@ -313,7 +331,7 @@
                                                          actionListener="#{pretragaDogadjaja.currentPageIncrement()}"
                                                          ajax="true"
                                                          update="@form"
-                                                         value="Prikaži još vesti"
+                                                         value="Prikaži još događaja"
                                                          styleClass="read-more-button"
                                                          style="padding-left: 50px !important; 
                                                          padding-right: 50px !important; 

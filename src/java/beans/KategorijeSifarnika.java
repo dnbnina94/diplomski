@@ -65,6 +65,7 @@ public class KategorijeSifarnika implements Serializable {
     }
 
     public List<StavkeSifarnika> getVestiKategorije() {
+        vestiKategorije = setToList(stavkeSifarnikaHelper.getStavkeByIdSifarnik(1).getStavkeSifarnikas());
         return vestiKategorije;
     }
 

@@ -11,6 +11,7 @@ import db.StavkeSifarnika;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KorisniciHelper;
 import db.helpers.StavkeSifarnikaHelper;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -20,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -39,17 +43,17 @@ public class PretragaDogadjaja {
     private Dogadjaji dogadjaj;
     private List<Dogadjaji> dogadjaji;
     private Organizacije organizacija;
-    private int sortiranje;
+    private int sortiranje = 1;
     private Date datumDogadjaja;
     private List<StavkeSifarnika> selectedKarakteristikeProstora;
-    private String kreatorDogadjaja;
+    private String kreatorDogadjaja = "";
     private List<Organizacije> organizacije;
     private String dateScript = "";
 
     private Map<StavkeSifarnika, Boolean> checkMap = new HashMap<StavkeSifarnika, Boolean>();
 
     //1 - pretraga po kategoriji, 2 - dogadjaji korisnika, 3 - rezultat pretrage
-    private int tipPretrage;
+    private int tipPretrage = 3;
 
     private int currentPage = 0;
     private int pageLength = 5;
@@ -86,9 +90,6 @@ public class PretragaDogadjaja {
         Collections.sort(karakteristikeProstora, new PretragaDogadjaja.SortByIdSifarnik());
 
         selectedKarakteristikeProstora = new ArrayList<StavkeSifarnika>();
-
-        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
-        Collections.sort(organizacije, new PretragaDogadjaja.SortOrganizacijeByName());
     }
 
     class SortOrganizacijeByName implements Comparator<Organizacije> {
@@ -369,6 +370,8 @@ public class PretragaDogadjaja {
     }
 
     public List<Organizacije> getOrganizacije() {
+        organizacije = new ArrayList<Organizacije>(korisniciHelper.getSveOdobreneOrganizacije());
+        Collections.sort(organizacije, new PretragaDogadjaja.SortOrganizacijeByName());
         return organizacije;
     }
 
@@ -438,6 +441,16 @@ public class PretragaDogadjaja {
             numOfShowedItems = dogadjaji.size();
         }
         currentPage++;
+    }
+    
+    public void proveriPostojanostDogadjaja() {
+        if (dogadjaj == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

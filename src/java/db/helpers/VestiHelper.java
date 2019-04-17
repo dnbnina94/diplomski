@@ -180,7 +180,7 @@ public class VestiHelper {
         return c;
     }
 
-    public List<Vesti> pretragaVesti(String kljucneReci, Map<StavkeSifarnika, Boolean> checkMap, String kreatorVesti, int sortiranje, Date datum, int currentPage, int pageLength) {
+    public List<Vesti> pretragaVesti(String kljucneReci, Map<StavkeSifarnika, Boolean> checkMap, String kreatorVesti, int sortiranje, Date datum, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -191,7 +191,7 @@ public class VestiHelper {
 
             Criteria c = pretragaVesti(session, kljucneReci, checkMap, kreatorVesti, sortiranje, datum);
 
-            c.setFirstResult(pageLength * currentPage);
+            c.setFirstResult(pageLength*currentPage + (numOfShowedItems-currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -356,7 +356,7 @@ public class VestiHelper {
         }
     }
 
-    public List<Vesti> getVestiByKategorija(StavkeSifarnika kategorija, int currentPage, int pageLength) {
+    public List<Vesti> getVestiByKategorija(StavkeSifarnika kategorija, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -370,7 +370,7 @@ public class VestiHelper {
             c.add(Restrictions.eq("arhivirana", 0));
             c.addOrder(Order.desc("datum"));
 
-            c.setFirstResult(currentPage * pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -386,7 +386,7 @@ public class VestiHelper {
         }
     }
 
-    public List<Vesti> getVestiByKorisnik(Korisnici korisnik, int currentPage, int pageLength) {
+    public List<Vesti> getVestiByKorisnik(Korisnici korisnik, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -399,7 +399,7 @@ public class VestiHelper {
             c.add(Restrictions.eq("korisnici", korisnik));
             c.addOrder(Order.desc("datum"));
 
-            c.setFirstResult(currentPage * pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems-currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();

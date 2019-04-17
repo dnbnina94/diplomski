@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Date;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.el.ELContext;
@@ -191,7 +192,8 @@ public class NovaVest {
 
             String thumbnailName = null;
             if (submittedThumbnail != null) {
-                thumbnailName = vestId + ".";
+                UUID uid = UUID.randomUUID();
+                thumbnailName = uid + ".";
                 int i = submittedThumbnail.getSubmittedFileName().lastIndexOf('.');
                 if (i > 0) {
                     thumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);

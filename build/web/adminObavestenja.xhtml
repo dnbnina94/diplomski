@@ -20,6 +20,7 @@
     <h:body>
         
         <f:event type="preRenderView" listener="#{korisnikBean.proveriAdminPrivilegije()}" />
+        <f:event type="preRenderView" listener="#{admin.redirectToObavestenja()}" />
 
         <style>
             .panel-group {
