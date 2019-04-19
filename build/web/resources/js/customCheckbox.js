@@ -16,4 +16,15 @@ $(document).ready(function () {
             labelParent.addClass("custom-checkbox-unchecked");
         }
     });
+    
+    $(".custom-radiobutton-bootsfaces > label > input").change(function (event) {
+        var parent = $(this).parent().parent().parent();
+        
+        $(".custom-radiobutton").removeClass("custom-radiobutton-checked");
+        $(".custom-radiobutton").addClass("custom-radiobutton-unchecked");
+        
+        parent.removeClass("custom-radiobutton-unchecked");
+        parent.addClass("custom-radiobutton-checked");
+    });
+    
 });

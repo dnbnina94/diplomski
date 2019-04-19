@@ -37,6 +37,8 @@
                         </div>
 
                         <h:form id="nova_anketa" enctype="">
+                            
+                            <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
 
                             <div class="container-w-red-header-header" style="margin-top: 20px">
                                 Kreirajte novu anketu
@@ -56,8 +58,8 @@
                                     <div style="height: 5px"></div>
                                     <b:selectOneMenu id="nivoVidljivosti" value="#{kreiranjeAnkete.nivoVidljivosti}" styleClass="place-select" select2="true">
                                         <f:selectItem itemLabel="Izaberite nivo vidljivosti ankete" itemValue="0" />
-                                        <f:selectItem itemLabel="Svi korisnici" itemValue="1" />
-                                        <f:selectItem itemLabel="Isključivo organizacije" itemValue="2" />
+                                        <f:selectItem itemLabel="Gosti i registrovani korisnici" itemValue="1" />
+                                        <f:selectItem itemLabel="Registrovani korisnici" itemValue="2" />
                                     </b:selectOneMenu>
                                     <h:panelGroup id="nivoVidljivostiGreskaWrapper">
                                         <div id="nivoVidljivostiGreska" class="#{kreiranjeAnkete.nivoVidljivostiGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
@@ -73,6 +75,19 @@
                                         </style>
                                     </c:if>
 
+                                    <div style="height: 10px"></div>
+                                    <h:outputText value="Datum zatvaranja ankete: " styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <b:datepicker id="datumIsticanja"
+                                                  mode='popup-icon' 
+                                                  styleClass="custom-datepicker-bootsfaces custom-datetimepicker-bootsfaces #{kreiranjeAnkete.datumIsticanjaGreska == '' ? '' : 'custom-datetimepicker-bootsfaces-error'}"
+                                                  placeholder='Izaberite datum zatvaranja ankete'
+                                                  value="#{kreiranjeAnkete.datumIsticanja}" />
+                                    <div id="datumIsticanjaGreska" class="#{kreiranjeAnkete.datumIsticanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                         style="margin-top: 5px; margin-bottom: 0px">
+                                        <h:outputText value="#{kreiranjeAnkete.datumIsticanjaGreska}" />
+                                    </div>
+
                                     <h:panelGroup rendered="#{kreiranjeAnkete.pitanja.size() != 0}">
                                         <div style="border: 1px solid #eee; margin-top: 20px;">
                                             <div style="padding: 5px 10px; 
@@ -83,31 +98,50 @@
                                                 Kreirana pitanja:
                                             </div>
                                             <div style="padding: 10px 15px;">
-                                                <ui:repeat value="#{kreiranjeAnkete.pitanja}" var="pitanje">
-                                                    <h:outputText value="Pitanje: " style="font-weight: bold" />
-                                                    #{pitanje.pitanje}
-                                                    <br/>
-                                                    <h:outputText value="Tip pitanja: " style="font-weight: bold" />
-                                                    <h:panelGroup rendered="#{pitanje.tip == 1}">
-                                                        Jedan odgovor
-                                                    </h:panelGroup>
-                                                    <h:panelGroup rendered="#{pitanje.tip == 2}">
-                                                        Više odgovora
-                                                    </h:panelGroup>
-                                                    <br/>
-                                                    <h:outputText value="Ponuđeni odgovori: " style="font-weight: bold" />
-                                                    <br/>
+                                                <table style="width: 100%">
+                                                    <ui:repeat value="#{kreiranjeAnkete.pitanja}" var="pitanje" varStatus="index">
+                                                        <tr>
+                                                            <td style="width: 100%">
+                                                                <h:outputText value="Pitanje: " style="font-weight: bold" />
+                                                                #{pitanje.pitanje}
+                                                                <br/>
+                                                                <h:outputText value="Tip pitanja: " style="font-weight: bold" />
+                                                                <h:panelGroup rendered="#{pitanje.tip == 1}">
+                                                                    Jedan odgovor
+                                                                </h:panelGroup>
+                                                                <h:panelGroup rendered="#{pitanje.tip == 2}">
+                                                                    Više odgovora
+                                                                </h:panelGroup>
+                                                                <br/>
+                                                                <h:outputText value="Ponuđeni odgovori: " style="font-weight: bold" />
+                                                                <br/>
 
-                                                    <ul>
-                                                        <ui:repeat value="#{pitanje.ponudjeniOdgovori}" var="ponOdg">
-                                                            <li>
-                                                                #{ponOdg.odgovor}
-                                                            </li>
-                                                        </ui:repeat>
-                                                    </ul>
-
-                                                    <div style="border-top: 1px solid #eee; margin-bottom: 10px"></div>
-                                                </ui:repeat>
+                                                                <ul>
+                                                                    <ui:repeat value="#{pitanje.ponudjeniOdgovori}" var="ponOdg">
+                                                                        <li>
+                                                                            #{ponOdg.odgovor}
+                                                                        </li>
+                                                                    </ui:repeat>
+                                                                </ul>
+                                                                
+                                                            </td>
+                                                            <td style="vertical-align: top">
+                                                                <b:commandButton icon="trash" 
+                                                                                 styleClass="edit-info-button"
+                                                                                 id="brisanje_button"
+                                                                                 ajax="true"
+                                                                                 update="@form"
+                                                                                 actionListener="#{kreiranjeAnkete.izbrisiPitanje(index.index)}">
+                                                                </b:commandButton>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div style="border-top: 1px solid #eee; margin-bottom: 10px"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </ui:repeat>
+                                                </table>
                                             </div>
                                         </div>
                                     </h:panelGroup>
@@ -120,7 +154,7 @@
                                          margin-top: 20px">
                                         Kreirajte pitanje
                                     </div>
-                                    <div style="padding: 15px; border: 1px solid #ddd;">
+                                    <div style="padding: 15px; #{kreiranjeAnkete.pitanjaGreska == '' ? 'border: 1px solid #ddd;' : 'border: 1px solid #DC3545;'}">
 
                                         <h:outputText value="Pitanje:" styleClass="login-form-label" />
                                         <b:inputText id="pitanje"
@@ -209,6 +243,11 @@
 
                                     </div>
 
+                                    <div id="pitanjaGreska" class="#{kreiranjeAnkete.pitanjaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}" style="margin-top: 5px">
+                                        <h:outputText value="#{kreiranjeAnkete.pitanjaGreska}" />
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -224,13 +263,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <b:carouselControl >
-                                        <b:commandButton value="Kreirajte oglas"
+                                        <b:commandButton value="Kreirajte anketu"
                                                          styleClass="form-step-button"
                                                          style="background-color: #4c4c4c !important; margin-right: 15px"
+                                                         ajax="true"
+                                                         update="@form"
+                                                         onclick="ajax:kreiranjeAnkete.kreirajAnketu();"
                                                          />
                                     </b:carouselControl>
                                 </div>
                             </div>
+                            
+                            <h:outputScript>
+                                #{kreiranjeAnkete.anketaCreationSuccess}
+                            </h:outputScript>
 
                         </h:form>
 

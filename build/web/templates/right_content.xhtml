@@ -103,24 +103,24 @@ and open the template in the editor.
             </b:commandButton>
 
             <h:outputScript>
-              
-                    $(document).ready(function () {
-                        $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker({
-                            altField: "#pretraga_dogadjaja\\:datum_dogadjaja_input",
-                            setDate: null,
-                            defaultDate: null
-                        });
 
-                        $("#pretraga_dogadjaja\\:clear_date_btn").click(function () {
-                            $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker('setDate', null);
-                            $(".ui-state-active").removeClass("ui-state-active");
-                        });
-                        
-                        #{pretragaDogadjaja.dateScript}
-                    });
-                
+                $(document).ready(function () {
+                $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker({
+                altField: "#pretraga_dogadjaja\\:datum_dogadjaja_input",
+                setDate: null,
+                defaultDate: null
+                });
+
+                $("#pretraga_dogadjaja\\:clear_date_btn").click(function () {
+                $("#pretraga_dogadjaja\\:datum_dogadjaja").datepicker('setDate', null);
+                $(".ui-state-active").removeClass("ui-state-active");
+                });
+
+                #{pretragaDogadjaja.dateScript}
+                });
+
             </h:outputScript>
-            
+
         </h:form>
 
         <div class="stripe-line-header events-calendar" style="margin-top: 40px; margin-bottom: 20px">
@@ -157,6 +157,42 @@ and open the template in the editor.
                 <f:setPropertyActionListener target="#{pretragaOglasa.numOfTotalItems}" value="0" />
             </b:commandButton>
         </h:form>
+        
+        <div class="stripe-line-header events-calendar" style="margin-top: 40px; margin-bottom: 20px">
+            <div>Ankete</div>
+        </div>
+
+        <h:form id="pretraga_anketa">
+            <span style="font-family: BebasNeueRegular; font-size: 18px;">Ključne reči:</span>
+            <b:inputText id="kljucne_reci" placeholder="Unesite ključne reči" styleClass="login-form-input" value="#{pretragaAnketa.kljucneReci}" style="margin-top: 0px" />
+            <div class="custom-select">
+                <span>Kreator:</span>
+                <b:selectOneMenu id="kreator" value="#{pretragaAnketa.kreator}" styleClass="place-select" select2="true">
+                    <f:selectItem itemLabel="Svi korisnici" itemValue="#{null}" />
+                    <f:selectItems value="#{pretragaAnketa.korisnici}" var="kreator" itemLabel="#{kreator.tip != 1 ? kreator.korisnickoIme : 'Administrator'}" itemValue="#{kreator}" />
+                </b:selectOneMenu>
+            </div>
+            <div class="custom-select">
+                <span>Sortiraj po:</span>
+                <b:selectOneMenu id="sortiranje" value="#{pretragaAnketa.sortiranje}" styleClass="place-select">
+                    <f:selectItem itemLabel="Datumu kreiranja - novije" itemValue="1" />
+                    <f:selectItem itemLabel="Datumu kreiranja - starije" itemValue="2" />
+                    <f:selectItem itemLabel="Ankete koje uskoro ističu" itemValue="3" />
+                    <f:selectItem itemLabel="Ankete koje najkasnije ističu" itemValue="4" />
+                </b:selectOneMenu>
+            </div>
+            <b:commandButton value="Pretraga" 
+                             styleClass="big-red-button" 
+                             ajax="true"
+                             action="ankete?faces-redirect=true"
+                             style="margin-top: 5px; color: white" >
+                <f:setPropertyActionListener target="#{pretragaAnketa.tipPretrage}" value="1" />
+                <f:setPropertyActionListener target="#{pretragaAnketa.currentPage}" value="0" />
+                <f:setPropertyActionListener target="#{pretragaAnketa.numOfShowedItems}" value="0" />
+                <f:setPropertyActionListener target="#{pretragaAnketa.numOfTotalItems}" value="0" />
+            </b:commandButton>
+        </h:form>
+
     </h:body>
 
 </html>

@@ -32,6 +32,32 @@ public class KorisniciHelper {
 
     public KorisniciHelper() {
     }
+    
+    public List<Korisnici> getSviOdobreniKorisniciIAdmin() {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Korisnici.class);
+            c.add(Restrictions.eq("odobren", true));
+            
+            List<Korisnici> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
 
     public Korisnici getKorisnikByKorisnickoIme(String korisnickoIme) {
         try {

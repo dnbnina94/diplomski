@@ -1,7 +1,8 @@
 package db;
-// Generated Apr 17, 2019 7:40:18 PM by Hibernate Tools 4.3.1
+// Generated Apr 18, 2019 12:51:16 AM by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,26 +13,32 @@ public class Ankete  implements java.io.Serializable {
 
 
      private int idAnketa;
-     private String kreator;
+     private Korisnici korisnici;
      private String naziv;
      private int nivoVidljivosti;
+     private Date datumIsticanja;
+     private Date datumKreiranja;
      private Set pitanjas = new HashSet(0);
 
     public Ankete() {
     }
 
 	
-    public Ankete(int idAnketa, String kreator, String naziv, int nivoVidljivosti) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja) {
         this.idAnketa = idAnketa;
-        this.kreator = kreator;
+        this.korisnici = korisnici;
         this.naziv = naziv;
         this.nivoVidljivosti = nivoVidljivosti;
+        this.datumIsticanja = datumIsticanja;
+        this.datumKreiranja = datumKreiranja;
     }
-    public Ankete(int idAnketa, String kreator, String naziv, int nivoVidljivosti, Set pitanjas) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja, Set pitanjas) {
        this.idAnketa = idAnketa;
-       this.kreator = kreator;
+       this.korisnici = korisnici;
        this.naziv = naziv;
        this.nivoVidljivosti = nivoVidljivosti;
+       this.datumIsticanja = datumIsticanja;
+       this.datumKreiranja = datumKreiranja;
        this.pitanjas = pitanjas;
     }
    
@@ -42,12 +49,12 @@ public class Ankete  implements java.io.Serializable {
     public void setIdAnketa(int idAnketa) {
         this.idAnketa = idAnketa;
     }
-    public String getKreator() {
-        return this.kreator;
+    public Korisnici getKorisnici() {
+        return this.korisnici;
     }
     
-    public void setKreator(String kreator) {
-        this.kreator = kreator;
+    public void setKorisnici(Korisnici korisnici) {
+        this.korisnici = korisnici;
     }
     public String getNaziv() {
         return this.naziv;
@@ -63,6 +70,13 @@ public class Ankete  implements java.io.Serializable {
     public void setNivoVidljivosti(int nivoVidljivosti) {
         this.nivoVidljivosti = nivoVidljivosti;
     }
+    public Date getDatumIsticanja() {
+        return this.datumIsticanja;
+    }
+    
+    public void setDatumIsticanja(Date datumIsticanja) {
+        this.datumIsticanja = datumIsticanja;
+    }
     public Set getPitanjas() {
         return this.pitanjas;
     }
@@ -70,9 +84,20 @@ public class Ankete  implements java.io.Serializable {
     public void setPitanjas(Set pitanjas) {
         this.pitanjas = pitanjas;
     }
+    
+    public boolean zatvorena() {
+        if (datumIsticanja.before(new Date()))
+            return true;
+        return false;
+    }
 
+    public Date getDatumKreiranja() {
+        return datumKreiranja;
+    }
 
-
+    public void setDatumKreiranja(Date datumKreiranja) {
+        this.datumKreiranja = datumKreiranja;
+    }
 
 }
 

@@ -1810,3 +1810,56 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 .error {
     border: 1px solid #DC3545;
 }
+
+.questionNumberContainer {
+    background-color: orangered;
+    color: white;
+    font-family: BebasNeueRegular;
+    font-size: 16px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+}
+
+.custom-radiobutton {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-radiobutton-unchecked {
+    background-color: #eee;
+}
+
+.custom-radiobutton-unchecked:hover {
+    background-color: #ccc;
+}
+
+.custom-radiobutton-checked {
+    border: 8px solid orangered;
+    background-color: white;
+}
+
+.custom-radiobutton-bootsfaces {
+    position: absolute !important;
+    width: 25px;
+    height: 25px;
+    margin-top: 0px !important;
+}
+
+.custom-radiobutton-bootsfaces > label {
+    width: 25px !important;
+    height: 25px !important;
+    padding-left: 25px !important;
+    cursor: pointer !important;
+}
+
+.radio input[type="radio"], 
+.radio-inline input[type="radio"] {
+    cursor: pointer !important;
+    /*visibility: hidden;*/
+}

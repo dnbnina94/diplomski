@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+
+                        <div class="stripe-line-header news-category-header">
+                            <div>
+                                <c:if test="#{pretragaAnketa.tipPretrage eq 1}">
+                                    <h:outputText value="Ankete - rezultati pretrage" />
+                                </c:if>
+                                <c:if test="#{pretragaAnketa.tipPretrage eq 2}">
+                                    <h:form>
+                                        <h:outputText value="Ankete &nbsp;korisnika &nbsp;" />
+                                        <h:panelGroup rendered="#{pretragaAnketa.korisnik.tip == 2}">
+                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                <h:outputText value="#{pretragaAnketa.korisnik.korisnickoIme}" style="color: orangered" />
+                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{pretragaAnketa.korisnik.organizacije}" />
+                                            </b:commandLink>
+                                        </h:panelGroup>
+                                    </h:form>
+                                </c:if>
+                            </div>                           
+                        </div>
+
+                        <h:form id="anketa">
+                            <h:panelGroup id="anketa_content">
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+
+                                <h:panelGroup rendered="#{pretragaAnketa.ankete.size() == 0}">
+                                    <div style="width: 100%; 
+                                         margin-top: 20px; 
+                                         text-align: center; 
+                                         color: orangered; 
+                                         font-family: BebasNeueRegular; 
+                                         font-size: 22px;
+                                         padding-top: 50px;
+                                         padding-bottom: 50px;
+                                         border: 1px solid #eee">
+                                        <h:graphicImage library="img" name="gentleman3.png" style="width: 80px; padding-bottom: 10px" /> <br/>
+                                        Nema rezultata za željene ankete.
+                                    </div>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{pretragaAnketa.ankete.size() != 0}">
+                                    <b:dataTable value="#{pretragaAnketa.ankete}" 
+                                                 var="anketa" 
+                                                 styleClass="news-data-table" 
+                                                 info="false" 
+                                                 paginated="false"
+                                                 searching="false">
+                                        <b:dataTableColumn>
+                                            <div>
+                                                <h:panelGroup styleClass="#{anketa.zatvorena() ? 'expired' : ''}">
+                                                    <div class="news-date" style="margin-bottom: 10px">
+                                                        <h:panelGroup rendered="#{anketa.korisnici.tip != 1}">
+                                                            <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                                <h:outputText value=" #{anketa.korisnici.korisnickoIme}" />
+                                                                <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{anketa.korisnici.organizacije}" />
+                                                            </b:commandLink>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup rendered="#{anketa.korisnici.tip == 1}">
+                                                            <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                            <h:outputText value=" Administrator" />
+                                                        </h:panelGroup>
+                                                        &nbsp;
+                                                        <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                                        <h:outputText value="#{anketa.datumKreiranja}" >
+                                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                        </h:outputText>
+                                                        &nbsp;
+                                                        <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                                        <h:outputText value="#{anketa.datumKreiranja}" >
+                                                            <f:convertDateTime pattern=" HH:mm" />
+                                                        </h:outputText>
+                                                    </div>
+
+                                                    <b:commandLink action="anketa?faces-redirect=true" styleClass="customNewsLink">
+                                                        <h:outputText value="#{anketa.naziv}" styleClass="news-heading" /> <br/>
+                                                        <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
+                                                            <h:outputText value="Datum zatvaranja: " style="color: orangered" />
+                                                            &nbsp;
+                                                            <h:outputText value="#{anketa.datumIsticanja}" >
+                                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                            </h:outputText>
+                                                        </div>
+                                                        <b:button styleClass="read-more-button" value="Popuni anketu" />
+                                                        <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
+                                                        <f:setPropertyActionListener target="#{popunjavanjeAnkete.anketa}" value="#{anketa}" />
+                                                    </b:commandLink>
+                                                    
+                                                </h:panelGroup>
+                                            </div>
+                                        </b:dataTableColumn>
+
+                                    </b:dataTable>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:form>
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

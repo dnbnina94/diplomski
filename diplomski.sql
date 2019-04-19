@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2019 at 07:14 PM
+-- Generation Time: Apr 19, 2019 at 08:17 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -73,7 +73,11 @@ INSERT INTO `admin_log` (`id_log`, `tekst`, `datum`) VALUES
 (34, 'Odobren korisnik kisobran', '2019-04-17 18:03:12'),
 (35, 'Izmenjen događaj Kišobran žurka – 10 godina // 01. avgust 2019. // Drugstore', '2019-04-17 18:41:38'),
 (36, 'Izmenjen oglas Novinar/novinarka', '2019-04-17 19:09:35'),
-(37, 'Izmenjen oglas Novinar/novinarka', '2019-04-17 19:09:44');
+(37, 'Izmenjen oglas Novinar/novinarka', '2019-04-17 19:09:44'),
+(38, 'Dodata stavka nova kategorija u šifarnik Kategorije vesti', '2019-04-17 23:03:53'),
+(39, 'Obrisana stavka nova kategorija iz šifarnika Kategorije vesti', '2019-04-17 23:04:21'),
+(40, 'Kreirana anketa: Moja prva anketa', '2019-04-18 01:32:16'),
+(41, 'Kreirana anketa: Moja druga anketa', '2019-04-18 01:35:05');
 
 -- --------------------------------------------------------
 
@@ -85,8 +89,18 @@ CREATE TABLE `ankete` (
   `id_anketa` int(11) NOT NULL,
   `kreator` varchar(50) NOT NULL,
   `naziv` varchar(256) NOT NULL,
-  `nivo_vidljivosti` int(11) NOT NULL
+  `nivo_vidljivosti` int(11) NOT NULL,
+  `datum_isticanja` datetime NOT NULL,
+  `datum_kreiranja` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ankete`
+--
+
+INSERT INTO `ankete` (`id_anketa`, `kreator`, `naziv`, `nivo_vidljivosti`, `datum_isticanja`, `datum_kreiranja`) VALUES
+(1, 'admin', 'Moja prva anketa', 2, '2019-04-30 23:59:59', '2019-04-18 00:00:00'),
+(2, 'admin', 'Moja druga anketa', 1, '2019-04-24 23:59:59', '2019-04-18 04:00:00');
 
 -- --------------------------------------------------------
 
@@ -265,6 +279,15 @@ CREATE TABLE `pitanja` (
   `tip` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `pitanja`
+--
+
+INSERT INTO `pitanja` (`id_pitanje`, `id_anketa`, `pitanje`, `tip`) VALUES
+(1, 1, 'Moje pitanje', 1),
+(2, 1, 'Moje drugo pitanje', 2),
+(3, 2, 'Da li Vam se dopada moj diplomski rad?', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -276,6 +299,22 @@ CREATE TABLE `ponudjeni_odgovori` (
   `id_pitanje` int(11) NOT NULL,
   `odgovor` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ponudjeni_odgovori`
+--
+
+INSERT INTO `ponudjeni_odgovori` (`id_odgovor`, `id_pitanje`, `odgovor`) VALUES
+(1, 1, 'Moj prvi odgovor'),
+(2, 1, 'Moj drugi odgovor'),
+(3, 2, 'Moj prvi odgovor na moje drugo pitanje'),
+(4, 2, 'Moj drugi odgovor na moje drugo pitanje'),
+(5, 2, 'Moj treci odgovor'),
+(6, 3, 'Ne, nimalo!'),
+(7, 3, 'Pa, moglo bi bolje'),
+(8, 3, 'Ok je'),
+(9, 3, 'Sviđa mi se'),
+(10, 3, 'Oduševljen/a sam!');
 
 -- --------------------------------------------------------
 
@@ -328,7 +367,9 @@ INSERT INTO `sifarnici_izvestaj` (`id_sifarnik`, `naziv`) VALUES
 (9, 'Kreirani oglasi'),
 (10, 'Obrisani oglasi'),
 (11, 'Dodate stavke'),
-(12, 'Obrisane stavke');
+(12, 'Obrisane stavke'),
+(13, 'Kreirane ankete'),
+(14, 'Popunjene ankete');
 
 -- --------------------------------------------------------
 
@@ -420,7 +461,11 @@ INSERT INTO `stavke_izvestaj` (`id_stavka`, `naziv`, `datum`, `id_sifarnik`) VAL
 (70, 'Udobno i atraktivno krstarenje Drinom', '2019-04-17 18:55:42', 4),
 (71, 'Content writer', '2019-04-17 19:08:14', 9),
 (72, 'Novinar/novinarka', '2019-04-17 19:09:04', 9),
-(73, 'Prodavac', '2019-04-17 19:13:50', 9);
+(73, 'Prodavac', '2019-04-17 19:13:50', 9),
+(74, 'Kategorije vesti: nova kategorija', '2019-04-17 23:03:53', 11),
+(75, 'Kategorije vesti: nova kategorija', '2019-04-17 23:04:21', 12),
+(76, 'Moja prva anketa', '2019-04-18 01:32:16', 13),
+(77, 'Moja druga anketa', '2019-04-18 01:35:05', 13);
 
 -- --------------------------------------------------------
 
@@ -538,7 +583,8 @@ ALTER TABLE `admin_log`
 -- Indexes for table `ankete`
 --
 ALTER TABLE `ankete`
-  ADD PRIMARY KEY (`id_anketa`);
+  ADD PRIMARY KEY (`id_anketa`),
+  ADD KEY `kreator` (`kreator`);
 
 --
 -- Indexes for table `dogadjaji`
@@ -642,6 +688,12 @@ ALTER TABLE `vesti`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `ankete`
+--
+ALTER TABLE `ankete`
+  ADD CONSTRAINT `FK_korisnik_anketa` FOREIGN KEY (`kreator`) REFERENCES `korisnici` (`korisnicko_ime`);
 
 --
 -- Constraints for table `dogadjaji`

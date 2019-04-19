@@ -1,0 +1,103 @@
+Izvestaj
+
+(Izveštaj za period od 01.04.2019 00:00:00 do 30.04.2019 23:59:59)
+
+-- Kreirane vesti: 17
+       - Blazin’ Quartet promoviše novi album
+       - Novi album: Daft Punk – Random Access Memories
+       - Novi album: Zaz – Recto Verso
+       - Novi album: Depeche Mode – Delta Machine
+       - NOVA STARA PRI?A: Stigao prvi zvani?ni trejler filma "Kralj lavova"
+       - NOVO POGLAVLJE U SAGI: Stiže nastavak "Ratova zvezda"
+       - Novi album: Kelly Clarkson – Stronger
+       - Novi album: Decontrolled – The Circle
+       - Narodni muzej: „Beogradska mumija“ u stalnoj postavci
+       - Dan žena 2019: Besplatan ulaz u muzeje
+       - Kalemegdan: Prvi Kineski festival svetla
+       - Coffee Room: Vaš miran kutak u centru Beograda!
+       - Restoran Enso: Goût de France – Ukusi Francuske
+       - O.U.R. Pub: ?eška pivnica u srcu Beograda
+       - Upoznaj Srbiju, svrati na Zlatibor!
+       - Vikend van Beograda: Zašto baš Niš?
+       - Udobno i atraktivno krstarenje Drinom
+
+-- Obrisani doga?aji: 0
+
+-- Kreirani doga?aji: 8
+       - 16. No? muzeja u Srbiji: Vudstok, Tuluz-Lotrek i Neispri?ane pri?e
+       - BINA 2019 – 14. Beogradska internacionalna nedelja arhitekture
+       - KC „?ukarica“: 78 dana…
+       - Kišobran žurka // 09. jun 2019. // Drugstore
+       - Kišobran žurka – 10 godina // 01. avgust 2019. // Drugstore
+       - Kišobran žurka // Subota 13. oktobar, 23h // Kc Grad
+       - Musicology: Nik Vest
+       - Orthodox Celts tradicionalno u Domu omladine
+
+-- Kreirani oglasi: 3
+       - Content writer
+       - Novinar/novinarka
+       - Prodavac
+
+-- Obrisani oglasi: 0
+
+-- Registrovani korisnici: 5
+       - ORCA
+       - ticketVision
+       - TobOrg
+       - arsCreativa
+       - kisobran
+
+-- Dodate stavke: 38
+       - Kategorije vesti: Muzika
+       - Kategorije vesti: Film
+       - Kategorije vesti: Pozorište
+       - Kategorije vesti: Umetnost
+       - Kategorije vesti: Književnost
+       - Kategorije vesti: Turizam
+       - Kategorije doga?aja: Koncerti
+       - Kategorije doga?aja: Clubbing
+       - Kategorije doga?aja: Festivali
+       - Kategorije doga?aja: Sajmovi
+       - Kategorije doga?aja: Radionice
+       - Kategorije doga?aja: Izložbe
+       - Kategorije doga?aja: Pozorišta
+       - Kategorije doga?aja: Bioskop
+       - Mesta: Beograd
+       - Mesta: Novi Sad
+       - Mesta: Kragujevac
+       - Uzrast: Deca
+       - Uzrast: Odrasli
+       - Uzrast: Deca
+       - Uzrast: Tinejdžeri
+       - Uzrast: Odrasli
+       - Uzrast: Penzioneri
+       - Karakteristike prostora: WiFi
+       - Karakteristike prostora: Parking
+       - Karakteristike prostora: Pet friendly
+       - Karakteristike prostora: Prilago?eno invalidima
+       - Oblasti delovanja: Zaštita životinja
+       - Ulice: Stjepana Filipovi?a 29
+       - Oblasti delovanja: Prodaja ulaznica
+       - Ulice: Bulevar Arsenija ?arnojevi?a 58
+       - Oblasti delovanja: Turisti?ka organizacija
+       - Ulice: Francuska 24
+       - Oblasti delovanja: Izvo?a?ka umetnost
+       - Ulice: Bulevar Umetnosti 3
+       - Oblasti delovanja: Promocija nezavisne kulture i umetnosti
+       - Ulice: Cetinjska 15
+       - Kategorije vesti: nova kategorija
+
+-- Obrisane stavke: 4
+       - Kategorije vesti: Pozorište
+       - Uzrast: Deca
+       - Uzrast: Odrasli
+       - Kategorije vesti: nova kategorija
+
+-- Obrisani korisnici: 0
+
+-- Arhivirane vesti: 0
+
+-- Obrisane vesti: 0
+
+-- Odbijeni korisnici: 0
+

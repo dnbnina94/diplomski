@@ -12,14 +12,17 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/nov_oglas.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/kreiranjeAnkete.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/nova_vest.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/Pitanja.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/KreiranjeAnkete.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/KorisnikBean.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/registracija.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Registracija.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/kreiranjeAnkete.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/resources/js/customCheckbox.js</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/db/Ankete.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/templates/right_content.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/oglas.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/anketa.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/beans/PopunjavanjeAnkete.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/templates/header.xhtml</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/resources/css/style.css</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/beans/PretragaAnketa.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/web/ankete.xhtml</file>
         </group>
     </open-files>
 </project-private>
