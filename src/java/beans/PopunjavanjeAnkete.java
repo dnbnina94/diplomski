@@ -26,7 +26,7 @@ public class PopunjavanjeAnkete {
     
     private AnketeHelper anketeHelper = new AnketeHelper();
     
-    private Map<Pitanja, String> radiobuttonOdgovori = new HashMap<Pitanja, String>();
+    private Map<Pitanja, Integer> radiobuttonOdgovori = new HashMap<Pitanja, Integer>();
     private Map<Pitanja, Map<PonudjeniOdgovori, Boolean>> checkboxOdgovori = new HashMap<Pitanja, Map<PonudjeniOdgovori, Boolean>>();
     private Map<Pitanja, String> odgovoriGreske = new HashMap<Pitanja, String>();
     
@@ -74,14 +74,14 @@ public class PopunjavanjeAnkete {
     public void setAnketa(Ankete anketa) {
         this.anketa = anketa;
         
-        setRadiobuttonOdgovori(new HashMap<Pitanja, String>());
+        setRadiobuttonOdgovori(new HashMap<Pitanja, Integer>());
         setCheckboxOdgovori(new HashMap<Pitanja, Map<PonudjeniOdgovori, Boolean>>());
         setOdgovoriGreske(new HashMap<Pitanja, String>());
         
         for (Pitanja pitanje : convertSetToListPitanja()) {
             getOdgovoriGreske().put(pitanje, "");
             if (pitanje.getTip() == 1) {
-                getRadiobuttonOdgovori().put(pitanje, "0");
+                getRadiobuttonOdgovori().put(pitanje, 0);
             }
             if (pitanje.getTip() == 2) {
                 Map<PonudjeniOdgovori, Boolean> ponudjeniOdgPitanja = new HashMap<PonudjeniOdgovori, Boolean>();
@@ -98,11 +98,11 @@ public class PopunjavanjeAnkete {
         return;
     }
 
-    public Map<Pitanja, String> getRadiobuttonOdgovori() {
+    public Map<Pitanja, Integer> getRadiobuttonOdgovori() {
         return radiobuttonOdgovori;
     }
 
-    public void setRadiobuttonOdgovori(Map<Pitanja, String> radiobuttonOdgovori) {
+    public void setRadiobuttonOdgovori(Map<Pitanja, Integer> radiobuttonOdgovori) {
         this.radiobuttonOdgovori = radiobuttonOdgovori;
     }
 
@@ -122,16 +122,10 @@ public class PopunjavanjeAnkete {
         this.odgovoriGreske = odgovoriGreske;
     }
 
-    /**
-     * @return the radioOdg
-     */
     public String getRadioOdg() {
         return radioOdg;
     }
-
-    /**
-     * @param radioOdg the radioOdg to set
-     */
+    
     public void setRadioOdg(String radioOdg) {
         this.radioOdg = radioOdg;
     }

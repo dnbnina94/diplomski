@@ -7,7 +7,7 @@
 $(document).ready(function () {
     $(".custom-checkbox-bootsfaces").change(function (event) {
         var labelParent = $(this).parent().parent().parent().parent();
-        
+
         if ($(this).is(':checked')) {
             labelParent.removeClass("custom-checkbox-unchecked");
             labelParent.addClass("custom-checkbox-checked");
@@ -16,15 +16,23 @@ $(document).ready(function () {
             labelParent.addClass("custom-checkbox-unchecked");
         }
     });
-    
-    $(".custom-radiobutton-bootsfaces > label > input").change(function (event) {
-        var parent = $(this).parent().parent().parent();
-        
-        $(".custom-radiobutton").removeClass("custom-radiobutton-checked");
-        $(".custom-radiobutton").addClass("custom-radiobutton-unchecked");
-        
-        parent.removeClass("custom-radiobutton-unchecked");
-        parent.addClass("custom-radiobutton-checked");
+
+    $(".custom-radiobutton").click(function (event) {
+        var idPitanje = $(this).attr("idPitanje");
+        var indexOdgovor = $(this).attr("indexOdgovor");
+
+        $("[idPitanje=" + idPitanje + "]").removeClass("custom-radiobutton-checked");
+        $("[idPitanje=" + idPitanje + "]").addClass("custom-radiobutton-unchecked");
+
+        $(".pitanje"+idPitanje + " > tbody > tr > td").each(function (i, obj) {
+            if (indexOdgovor == i) {
+                var child = $(this).find("input");
+                $(child).prop('checked', true);
+            }
+        });
+
+        $(this).removeClass("custom-radiobutton-unchecked");
+        $(this).addClass("custom-radiobutton-checked");
     });
-    
+
 });
