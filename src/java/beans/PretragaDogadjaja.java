@@ -222,7 +222,7 @@ public class PretragaDogadjaja {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = dogadjajiHelper.pretragaDogadjajaTotalCount(kategorijaDogadjaja);
                 dogadjaji = new ArrayList<Dogadjaji>();
-                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength));
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = dogadjaji.size();
                 currentPage++;
             }
@@ -236,7 +236,7 @@ public class PretragaDogadjaja {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = dogadjajiHelper.pretragaDogadjajaTotalCount(organizacija.getKorisnici());
                 dogadjaji = new ArrayList<Dogadjaji>();
-                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength));
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = dogadjaji.size();
                 currentPage++;
             }
@@ -246,7 +246,7 @@ public class PretragaDogadjaja {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = dogadjajiHelper.PretragaDogadjajaTotalCount(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje);
                 dogadjaji = new ArrayList<Dogadjaji>();
-                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength));
+                dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = dogadjaji.size();
                 currentPage++;
             }
@@ -429,15 +429,15 @@ public class PretragaDogadjaja {
 
     public void currentPageIncrement() {
         if (tipPretrage == 1) {
-            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength));
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(kategorijaDogadjaja, currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = dogadjaji.size();
         }
         if (tipPretrage == 2) {
-            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength));
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = dogadjaji.size();
         }
         if (tipPretrage == 3) {
-            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength));
+            dogadjaji.addAll(dogadjajiHelper.pretragaDogadjaja(datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje, currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = dogadjaji.size();
         }
         currentPage++;
@@ -451,6 +451,19 @@ public class PretragaDogadjaja {
                 Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void ukloniDogadjajIzListe(Dogadjaji dogadjaj) {
+        numOfShowedItems--;
+        numOfTotalItems--;
+        
+        for (Dogadjaji dog : dogadjaji) {
+            if (dog.getIdDogadjaj() == dogadjaj.getIdDogadjaj()) {
+                dogadjaji.remove(dog);
+                return;
+            }
+        }
+        
     }
 
 }

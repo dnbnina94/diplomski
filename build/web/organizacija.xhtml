@@ -18,7 +18,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:event type="preRenderView" listener="#{organizacijaBean.proveriPostojanostOrg()}" />
 
         <div class="content">
@@ -1000,6 +1000,93 @@
                                                              value="Kreirajte oglas" 
                                                              styleClass="form-step-button-sm"
                                                              style="background-color: #4c4c4c !important;" />
+                                        </div>
+
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+
+                        <div class="stripe-line-header news-category-header">
+                            <h:form>
+                                <b:commandLink action="ankete?faces-redirect=true" styleClass="customNewsLink">
+                                    <div class="stripe-line-header-link"><h:outputText value="Ankete" /></div>
+                                    <f:setPropertyActionListener target="#{pretragaAnketa.korisnik}" value="#{organizacijaBean.organizacija.korisnici}" />
+                                    <f:setPropertyActionListener target="#{pretragaAnketa.tipPretrage}" value="2" />
+                                    <f:setPropertyActionListener target="#{pretragaAnketa.currentPage}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaAnketa.numOfShowedItems}" value="0" />
+                                    <f:setPropertyActionListener target="#{pretragaAnketa.numOfTotalItems}" value="0" />
+                                </b:commandLink>
+                            </h:form>
+                        </div>
+                        <div class="row news-category-front-page" style="padding-bottom: 0px !important">
+                            <h:form>
+                                <h:panelGroup rendered="#{organizacijaBean.ankete.size() == 0}">
+                                    <div class="col-md-12 no-content">
+                                        Nisu pronađene ankete korisnika <h:outputText style="font-weight: bold; color: #4c4c4c" value="#{organizacijaBean.organizacija.korisnickoIme}." />
+                                        <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                            <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme}">
+                                                <br/>
+                                                <b:commandButton action="kreiranjeAnkete?faces-redirect=true"
+                                                                 onclick="ajax:kreiranjeAnkete.reset()"
+                                                                 value="Kreirajte anketu" 
+                                                                 styleClass="form-step-button-sm"
+                                                                 style="background-color: #4c4c4c !important; margin-top: 5px;" />
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </div>
+                                </h:panelGroup>
+
+                                <ui:repeat varStatus="status" value="#{organizacijaBean.ankete}" var="anketa">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px">
+                                        <b:commandLink action="#{pretragaAnketa.popunjavanjeIliRezultati(anketa)}" styleClass="customNewsLink">
+                                            <h:panelGroup rendered="#{anketa.zatvorena()}">
+                                                <div style="position: absolute; width: 100%; z-index: 100; right: 0px; top: -10px">
+                                                    <div style="position: relative; text-align: right;">
+                                                        <h:graphicImage library="img" name="arhivirano.png" style="width: 30%" />
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup styleClass="#{anketa.zatvorena() ? 'expired' : ''}">
+                                                <div class="news-header-container-front-page" style="margin-top: 0px !important; border-bottom: 1px solid #ddd;">
+                                                    #{anketa.nazivShort}
+                                                </div>
+                                                <div class="news-content-container-front-page">
+                                                    <h:outputText value="#{anketa.opisShort}" />
+                                                </div>
+                                                <div style="margin-top: 5px; font-size: 12px">
+                                                    Datum zatvaranja:
+                                                </div>
+                                                <div class="date-container" style="margin-bottom: 0px">
+                                                    <span class="glyphicon glyphicon-bookmark" style="font-size: 12px;"></span>
+                                                    <h:outputText value="#{anketa.datumIsticanja}" >
+                                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                    </h:outputText>
+                                                </div>
+                                            </h:panelGroup>
+                                        </b:commandLink>
+                                    </div>
+                                </ui:repeat>
+
+                                <h:panelGroup rendered="#{korisnikBean.korisnik != null}">
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == organizacijaBean.organizacija.korisnickoIme and organizacijaBean.ankete.size() != 0}">
+
+                                        <div class="col-md-12" style="text-align: right; padding-bottom: 15px">
+                                            <b:commandButton action="ankete?faces-redirect=true"
+                                                             value="Popunjene ankete" 
+                                                             styleClass="form-step-button-sm"
+                                                             style="background-color: orangered !important;" >
+                                                <f:setPropertyActionListener target="#{pretragaAnketa.tipPretrage}" value="3" />
+                                                <f:setPropertyActionListener target="#{pretragaAnketa.currentPage}" value="0" />
+                                                <f:setPropertyActionListener target="#{pretragaAnketa.numOfShowedItems}" value="0" />
+                                                <f:setPropertyActionListener target="#{pretragaAnketa.numOfTotalItems}" value="0" />
+                                            </b:commandButton>
+                                            <b:commandButton action="kreiranjeAnkete?faces-redirect=true"
+                                                             onclick="ajax:kreiranjeAnkete.reset()"
+                                                             value="Kreirajte anketu" 
+                                                             styleClass="form-step-button-sm"
+                                                             style="background-color: #4c4c4c !important; margin-left: 5px" />
                                         </div>
 
                                     </h:panelGroup>

@@ -134,8 +134,9 @@
                                                                  ajax="true"
                                                                  update="vest_content"
                                                                  rendered='#{korisnikBean.korisnik.tip == 1}'
-                                                                 onclick="ajax:admin.obrisiVest();"
+                                                                 action="#{admin.obrisiVest()}"
                                                                  oncomplete="$('#vest\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" >
+                                                    <f:actionListener binding="#{pretragaVesti.ukloniVestIzListe(admin.selektovanaVestBrisanje)}" />
                                                 </b:commandButton>
                                             </div>
                                             <div class="col-md-6">

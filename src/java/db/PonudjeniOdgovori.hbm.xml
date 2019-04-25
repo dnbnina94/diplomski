@@ -14,5 +14,11 @@
         <property name="odgovor" type="string">
             <column name="odgovor" length="256" not-null="true" />
         </property>
+        <set name="odgovoris" table="odgovori" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ponudjeni_odgovor" not-null="true" />
+            </key>
+            <one-to-many class="db.Odgovori" />
+        </set>
     </class>
 </hibernate-mapping>

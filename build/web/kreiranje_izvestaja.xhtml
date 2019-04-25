@@ -80,7 +80,7 @@
                                             <b:icon value="file" style="color: orangered" />
                                             <h:outputText value=" #{kreiranjeIzvestaja.selectedIzvestajSlanje}" style="color: orangered" />
                                             <br/>
-                                            
+
                                             <div style="height: 5px"></div>
                                             <h:outputText value="Email:" styleClass="login-form-label" />
                                             <br/>
@@ -94,7 +94,7 @@
                                                     <h:outputText value="#{kreiranjeIzvestaja.emailGreska}" />
                                                 </div>
                                             </h:panelGroup>
-                                            
+
                                             <h:outputScript>
                                                 #{kreiranjeIzvestaja.mailToScript}
                                             </h:outputScript>
@@ -229,10 +229,10 @@
                                     <b:dataTableColumn label="Prethodno kreirani izveštaji:" orderable="false">
                                         <div class="row" style="margin: auto;">
                                             <div class="col-md-6" style="padding: 0px; line-height: 26px; color: orangered">
-                                                <h:outputLink value="/izvestaji/#{izvestaj}" target="_blank" styleClass="customNewsLink">
+                                                <a href="/izvestaji/#{izvestaj}" class="customNewsLink" download="">
                                                     <b:icon value="file" style="color: orangered" />
                                                     <h:outputText value=" #{izvestaj}" style="color: orangered" />
-                                                </h:outputLink>
+                                                </a>
                                             </div>
                                             <div class="col-md-6" style="text-align:right; padding: 0px">
                                                 <div style="display: inline-block">
@@ -274,6 +274,10 @@
                             <h:panelGroup id="kreiranjeIzvestajaSuccessScript">
                                 <h:outputScript>
                                     #{kreiranjeIzvestaja.kreiranjeIzvestajaSuccessScript}
+                                </h:outputScript>
+
+                                <h:outputScript>
+                                    
                                 </h:outputScript>
                             </h:panelGroup>
 

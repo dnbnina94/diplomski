@@ -257,7 +257,8 @@ public class DogadjajiHelper {
             String kreatorDogadjaja,
             int sortiranje,
             int currentPage,
-            int pageLength) {
+            int pageLength,
+            int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -268,7 +269,7 @@ public class DogadjajiHelper {
 
             Criteria c = pretragaDogadjaja(session, datumDogadjaja, checkMap, mesto, uzrast, kljucneReci, selectedKarakteristikeProstora, kreatorDogadjaja, sortiranje);
             
-            c.setFirstResult(currentPage*pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -285,7 +286,7 @@ public class DogadjajiHelper {
         }
     }
     
-    public List<Dogadjaji> pretragaDogadjaja(StavkeSifarnika kategorijaDogadjaja, int currentPage, int pageLength) {
+    public List<Dogadjaji> pretragaDogadjaja(StavkeSifarnika kategorijaDogadjaja, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -301,7 +302,7 @@ public class DogadjajiHelper {
             c.add(Restrictions.gt("datumIsticanja", danas));
             c.addOrder(Order.desc("datumKreiranja"));
 
-            c.setFirstResult(currentPage * pageLength);
+            c.setFirstResult(currentPage * pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -318,7 +319,7 @@ public class DogadjajiHelper {
         }
     }
 
-    public List<Dogadjaji> pretragaDogadjaja(Korisnici korisnik, int currentPage, int pageLength) {
+    public List<Dogadjaji> pretragaDogadjaja(Korisnici korisnik, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -331,7 +332,7 @@ public class DogadjajiHelper {
             c.add(Restrictions.eq("korisnici", korisnik));
             c.addOrder(Order.desc("datumKreiranja"));
 
-            c.setFirstResult(currentPage * pageLength);
+            c.setFirstResult(currentPage * pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();

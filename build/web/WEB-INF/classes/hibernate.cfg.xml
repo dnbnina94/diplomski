@@ -61,5 +61,7 @@ Contributor(s):
     <mapping resource="db/Ankete.hbm.xml"/>
     <mapping resource="db/Pitanja.hbm.xml"/>
     <mapping resource="db/PonudjeniOdgovori.hbm.xml"/>
+    <mapping resource="db/PopunjeneAnkete.hbm.xml"/>
+    <mapping resource="db/Odgovori.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

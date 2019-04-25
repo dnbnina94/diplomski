@@ -1717,6 +1717,42 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
     display: none;
 }
 
+#anketa\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#anketa\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#anketa\:progressBar > .progress-bar > span {
+    display: none;
+}
+
+#nova_anketa\:progressBar {
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 15px;
+    background-color: #eee;
+    box-shadow: none;
+    height: 5px;
+    border-radius: 5px;
+}
+
+#nova_anketa\:progressBar > .progress-bar {
+    background-color: #4C4C4C !important;
+}
+
+#nova_anketa\:progressBar > .progress-bar > span {
+    display: none;
+}
+
 #dogadjaj\:progressBar {
     border-radius: 0px;
     margin: auto;
@@ -1840,4 +1876,8 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 .custom-radiobutton-checked {
     background-color: white;
     border: 8px solid orangered;
+}
+
+.progress-bar-user-answer {
+    background-color: orangered !important;
 }

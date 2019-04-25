@@ -15,31 +15,36 @@ public class Ankete  implements java.io.Serializable {
      private int idAnketa;
      private Korisnici korisnici;
      private String naziv;
+     private String opis;
      private int nivoVidljivosti;
      private Date datumIsticanja;
      private Date datumKreiranja;
+     private Set popunjeneAnketes = new HashSet(0);
      private Set pitanjas = new HashSet(0);
 
     public Ankete() {
     }
 
 	
-    public Ankete(int idAnketa, Korisnici korisnici, String naziv, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja) {
         this.idAnketa = idAnketa;
         this.korisnici = korisnici;
         this.naziv = naziv;
+        this.opis = opis;
         this.nivoVidljivosti = nivoVidljivosti;
         this.datumIsticanja = datumIsticanja;
         this.datumKreiranja = datumKreiranja;
     }
-    public Ankete(int idAnketa, Korisnici korisnici, String naziv, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja, Set pitanjas) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja, Set pitanjas, Set popunjeneAnketes) {
        this.idAnketa = idAnketa;
        this.korisnici = korisnici;
        this.naziv = naziv;
+       this.opis = opis;
        this.nivoVidljivosti = nivoVidljivosti;
        this.datumIsticanja = datumIsticanja;
        this.datumKreiranja = datumKreiranja;
        this.pitanjas = pitanjas;
+       this.popunjeneAnketes = popunjeneAnketes;
     }
    
     public int getIdAnketa() {
@@ -97,6 +102,33 @@ public class Ankete  implements java.io.Serializable {
 
     public void setDatumKreiranja(Date datumKreiranja) {
         this.datumKreiranja = datumKreiranja;
+    }
+
+    public Set getPopunjeneAnketes() {
+        return popunjeneAnketes;
+    }
+
+    public void setPopunjeneAnketes(Set popunjeneAnketes) {
+        this.popunjeneAnketes = popunjeneAnketes;
+    }
+    
+    public String getNazivShort() {
+        if (naziv.length() <= 40)
+            return naziv;
+        else 
+            return naziv.substring(0, Math.min(naziv.length(), 40))+"...";
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+    
+    public String getOpisShort() {
+        return opis.substring(0, Math.min(opis.length(), 150))+"...";
     }
 
 }

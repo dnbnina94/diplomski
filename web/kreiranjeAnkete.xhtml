@@ -22,6 +22,33 @@
 
         <f:event type="preRenderView" listener="#{korisnikBean.proveriOrganizacijaIAdminPrivilegiju()}" />
 
+        <style>
+            .panel-group {
+                margin-bottom: 0px !important;
+            }
+
+            .panel-body {
+                padding: 10px !important;
+            }
+
+            table.dataTable {
+                margin-top: 0px !important;
+            }
+
+            .table > thead {
+                display: none !important;
+            }
+
+            .dataTables_empty {
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
+
+            .dataTables_wrapper {
+                margin-top: 10px !important;
+            }
+        </style>
+
         <div class="content">
 
             <ui:insert name="header">
@@ -37,7 +64,7 @@
                         </div>
 
                         <h:form id="nova_anketa" enctype="">
-                            
+
                             <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
 
                             <div class="container-w-red-header-header" style="margin-top: 20px">
@@ -52,6 +79,15 @@
                                                  placeholder="Unesite naziv ankete" />
                                     <div id="nazivGreska" class="#{kreiranjeAnkete.nazivGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
                                         <h:outputText value="#{kreiranjeAnkete.nazivGreska}" />
+                                    </div>
+
+                                    <h:outputText value="Opis ankete:" styleClass="login-form-label" />
+                                    <b:inputText id="opis"
+                                                 styleClass="#{kreiranjeAnkete.opisGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                 value="#{kreiranjeAnkete.opis}"
+                                                 placeholder="Unesite kratak opis ankete" />
+                                    <div id="opisGreska" class="#{kreiranjeAnkete.opisGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                        <h:outputText value="#{kreiranjeAnkete.opisGreska}" />
                                     </div>
 
                                     <h:outputText value="Nivo vidljivosti ankete:" styleClass="login-form-label" />
@@ -123,7 +159,7 @@
                                                                         </li>
                                                                     </ui:repeat>
                                                                 </ul>
-                                                                
+
                                                             </td>
                                                             <td style="vertical-align: top">
                                                                 <b:commandButton icon="trash" 
@@ -253,13 +289,15 @@
 
                             <div class="row form-step-buttons-row">
                                 <div class="col-md-6">
-                                    <b:carouselControl >
-                                        <b:commandButton value="Nazad na profil"
-                                                         styleClass="form-step-button"
-                                                         action="organizacija?faces-redirect=true"
-                                                         ajax="true" >
-                                        </b:commandButton>
-                                    </b:carouselControl>
+                                    <h:panelGroup rendered="#{korisnikBean.korisnik.tip != 1}">
+                                        <b:carouselControl >
+                                            <b:commandButton value="Nazad na profil"
+                                                             styleClass="form-step-button"
+                                                             action="organizacija?faces-redirect=true"
+                                                             ajax="true" >
+                                            </b:commandButton>
+                                        </b:carouselControl>
+                                    </h:panelGroup>
                                 </div>
                                 <div class="col-md-6">
                                     <b:carouselControl >
@@ -273,10 +311,103 @@
                                     </b:carouselControl>
                                 </div>
                             </div>
-                            
-                            <h:outputScript>
-                                #{kreiranjeAnkete.anketaCreationSuccess}
-                            </h:outputScript>
+
+                            <h:panelGroup id="admin_panel" rendered="#{korisnikBean.korisnik.tip == 1}">
+                                <b:panel look="primary" id="sifarnici-admin-menu" styleClass="adminMenu" style="margin-top: 15px">
+                                    <b:pillLinks>
+                                        <b:commandButton value="Kreirane ankete"
+                                                         update="admin_panel"
+                                                         style="#{admin.pageAnkete == 1 ? 'background-color: orangered; color: white !important;' : ''}"
+                                                         onclick="ajax:admin.setPageAnkete(1);"
+                                                         styleClass="pillLinkButton" >
+                                        </b:commandButton>
+                                        <b:commandButton value="Popunjene ankete"
+                                                         update="admin_panel"
+                                                         style="#{admin.pageAnkete == 2 ? 'background-color: orangered; color: white !important;' : ''}"
+                                                         onclick="ajax:admin.setPageAnkete(2);"
+                                                         styleClass="pillLinkButton" >
+                                        </b:commandButton>
+                                    </b:pillLinks>
+                                </b:panel>
+                                <b:row style="padding-top: 10px !important">
+                                    <b:column span="12" class="content">
+
+                                        <b:dataTable value="#{admin.ankete}" 
+                                                     var="anketa"
+                                                     border="false"
+                                                     striped="false" 
+                                                     info="false"
+                                                     styleClass="admin-datatable"
+                                                     paginated="false"
+                                                     searching="false">
+                                            <b:dataTableColumn label="Anketa" orderable="false" style="cursor: pointer !important" >
+                                                <div class="row" style="margin: auto;">
+                                                    <div class="col-md-6" style="padding: 0px; line-height: 26px">
+                                                        <b:commandLink action="anketa_rezultati?faces-redirect=true" styleClass="customNewsLink">
+                                                            <h:outputText value=" #{anketa.naziv}" style="color: orangered !important" />
+                                                            <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
+                                                            <f:setPropertyActionListener target="#{rezultatiAnkete.anketa}" value="#{anketa}" />
+                                                        </b:commandLink>
+                                                    </div>
+                                                    <div class="col-md-6" style="text-align:right; padding: 0px">
+                                                        <div style="display: inline-block">
+                                                            <b:commandButton icon="trash" 
+                                                                             styleClass="edit-info-button delete-button"
+                                                                             id="brisanje_button"
+                                                                             ajax="true"
+                                                                             update="nova_anketa:admin_panel"
+                                                                             action="#{admin.obrisiAnketu(anketa)}">
+                                                                <f:actionListener binding="#{admin.ukloniAnketuIzListe(anketa)}" />
+                                                            </b:commandButton>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+                                        
+                                        <h:inputHidden id="pageLength" value="#{admin.pageLength}" />
+                                        <h:inputHidden id="currentPage" value="#{admin.currentPage}" />
+                                        <h:inputHidden id="numOfShowedItems" value="#{admin.numOfShowedItems}" />
+                                        <h:inputHidden id="numOfTotalItems" value="#{admin.numOfTotalItems}" />
+                                        
+                                        <h:panelGroup rendered="#{admin.numOfTotalItems != 0}">
+                                            <div id="bottom" style="text-align: center;">
+                                                <div style="font-family: BebasNeueRegular; font-size: 16px">
+                                                    <h:outputText value="Prikazano " />
+                                                    <h:outputText value="#{admin.numOfShowedItems}" />
+                                                    <h:outputText value=" od " />
+                                                    <h:outputText value="#{admin.numOfTotalItems}" />
+                                                    <h:outputText value=" rezultata" />
+                                                </div>
+                                                <b:progressBar id="progressBar" min="0" max="#{admin.numOfTotalItems.toString()}" value="#{admin.numOfShowedItems.toString()}" />
+
+                                                <b:commandButton id="loadMoreButton" 
+                                                                 actionListener="#{admin.currentPageAnketeIncrement()}"
+                                                                 ajax="true"
+                                                                 update="admin_panel"
+                                                                 value="Prikaži još anketa"
+                                                                 styleClass="read-more-button"
+                                                                 style="padding-left: 50px !important; 
+                                                                 padding-right: 50px !important; 
+                                                                 background-color: #4c4c4c !important;
+                                                                 #{admin.numOfShowedItems != admin.numOfTotalItems and admin.numOfTotalItems > 0 ? '' : 'display: none'}">
+                                                    <f:setPropertyActionListener target="#{admin.insertSuccessfulScript}" value="" />
+                                                    <f:ajax/>
+                                                </b:commandButton>
+
+                                            </div>
+                                        </h:panelGroup>
+                                        
+                                        <script>
+                                            $(document).ready(function () {
+                                                var width = $("#nova_anketa\\:loadMoreButton").width();
+                                                $("#nova_anketa\\:progressBar").width(width + 100);
+                                            });
+                                        </script>
+
+                                    </b:column>
+                                </b:row>
+                            </h:panelGroup>
 
                         </h:form>
 

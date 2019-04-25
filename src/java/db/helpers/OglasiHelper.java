@@ -112,7 +112,7 @@ public class OglasiHelper {
         return c;
     }
 
-    public List<Oglasi> pretragaOglasa(String kljucneReci, String kreatorOglasa, int sortiranje, int currentPage, int pageLength) {
+    public List<Oglasi> pretragaOglasa(String kljucneReci, String kreatorOglasa, int sortiranje, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -123,7 +123,7 @@ public class OglasiHelper {
 
             Criteria c = pretragaOglasa(session, kljucneReci, kreatorOglasa, sortiranje);
             
-            c.setFirstResult(currentPage*pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
 
             List l = c.list();
@@ -211,7 +211,7 @@ public class OglasiHelper {
         }
     }
     
-    public List<Oglasi> pretragaOglasa(Korisnici korisnik, int currentPage, int pageLength) {
+    public List<Oglasi> pretragaOglasa(Korisnici korisnik, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -225,7 +225,7 @@ public class OglasiHelper {
             
             c.addOrder(Order.desc("datumKreiranja"));
             
-            c.setFirstResult(currentPage*pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - currentPage*pageLength));
             c.setMaxResults(pageLength);
             
             List l = c.list();

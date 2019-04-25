@@ -1,12 +1,17 @@
 package db.helpers;
 
+import db.Ankete;
 import db.Dogadjaji;
 import db.HibernateUtil;
 import db.KarakteristikeProstora;
 import db.Korisnici;
 import db.Obavestenja;
+import db.Odgovori;
 import db.Oglasi;
 import db.Organizacije;
+import db.Pitanja;
+import db.PonudjeniOdgovori;
+import db.PopunjeneAnkete;
 import db.StavkeSifarnika;
 import db.Vesti;
 import java.util.ArrayList;
@@ -680,6 +685,34 @@ public class KorisniciHelper {
                 int updatedEntities = session.createQuery(hqlUpdate).setInteger("idDogadjaj", dogadjaj.getIdDogadjaj()).executeUpdate();*/
                 
                 session.delete(dogadjaj);
+            }
+            
+            for (PopunjeneAnkete popAnketa : (Set<PopunjeneAnkete>) korisnik.getPopunjeneAnketes()) {
+                for (Odgovori odg : (Set<Odgovori>)popAnketa.getOdgovoris()) {
+                    session.delete(odg);
+                }
+                
+                session.delete(popAnketa);
+            }
+            
+            for (Ankete anketa : (Set<Ankete>)korisnik.getAnketes()) {
+                for (PopunjeneAnkete popAnketa : (Set<PopunjeneAnkete>)anketa.getPopunjeneAnketes()) {
+                    for (Odgovori odg : (Set<Odgovori>)popAnketa.getOdgovoris()) {
+                        session.delete(odg);
+                    }
+                    
+                    session.delete(popAnketa);
+                }
+                
+                for (Pitanja pitanje : (Set<Pitanja>)anketa.getPitanjas()) {
+                    for (PonudjeniOdgovori ponOdg : (Set<PonudjeniOdgovori>) pitanje.getPonudjeniOdgovoris()) {
+                        session.delete(ponOdg);
+                    }
+                    
+                    session.delete(pitanje);
+                }
+                
+                session.delete(anketa);
             }
 
             /*String hqlUpdate = "Delete Organizacije c where c.korisnickoIme = :korisnickoIme";

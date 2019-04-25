@@ -1,0 +1,132 @@
+Izveštaj za april mesec
+
+(Izveštaj za period od 01.04.2019 00:00:00 do 30.04.2019 23:59:59)
+
+-- Popunjene ankete: 8
+       - Moja prva anketa
+       - Moja prva anketa
+       - Moja prva anketa
+       - Moja druga anketa
+       - Moja prva anketa
+       - Kisobran anketa
+       - test anketa
+       - anketa
+
+-- Obrisane ankete: 5
+       - Moja prva anketa
+       - Kisobran anketa
+       - test anketa
+       - Moja druga anketa
+       - anketa
+
+-- Obrisane stavke: 4
+       - Kategorije vesti: Pozorište
+       - Uzrast: Deca
+       - Uzrast: Odrasli
+       - Kategorije vesti: nova kategorija
+
+-- Registrovani korisnici: 6
+       - ORCA
+       - ticketVision
+       - TobOrg
+       - arsCreativa
+       - kisobran
+       - test
+
+-- Obrisani korisnici: 1
+       - test
+
+-- Kreirani događaji: 9
+       - 16. Noć muzeja u Srbiji: Vudstok, Tuluz-Lotrek i Neispričane priče
+       - BINA 2019 – 14. Beogradska internacionalna nedelja arhitekture
+       - KC „Čukarica“: 78 dana…
+       - Kišobran žurka // 09. jun 2019. // Drugstore
+       - Kišobran žurka – 10 godina // 01. avgust 2019. // Drugstore
+       - Kišobran žurka // Subota 13. oktobar, 23h // Kc Grad
+       - Musicology: Nik Vest
+       - Orthodox Celts tradicionalno u Domu omladine
+       - dadssa
+
+-- Kreirani oglasi: 4
+       - Content writer
+       - Novinar/novinarka
+       - Prodavac
+       - DSDA
+
+-- Odbijeni korisnici: 0
+
+-- Obrisani oglasi: 0
+
+-- Kreirane vesti: 18
+       - Blazin’ Quartet promoviše novi album
+       - Novi album: Daft Punk – Random Access Memories
+       - Novi album: Zaz – Recto Verso
+       - Novi album: Depeche Mode – Delta Machine
+       - NOVA STARA PRIČA: Stigao prvi zvanični trejler filma "Kralj lavova"
+       - NOVO POGLAVLJE U SAGI: Stiže nastavak "Ratova zvezda"
+       - Novi album: Kelly Clarkson – Stronger
+       - Novi album: Decontrolled – The Circle
+       - Narodni muzej: „Beogradska mumija“ u stalnoj postavci
+       - Dan žena 2019: Besplatan ulaz u muzeje
+       - Kalemegdan: Prvi Kineski festival svetla
+       - Coffee Room: Vaš miran kutak u centru Beograda!
+       - Restoran Enso: Goût de France – Ukusi Francuske
+       - O.U.R. Pub: Češka pivnica u srcu Beograda
+       - Upoznaj Srbiju, svrati na Zlatibor!
+       - Vikend van Beograda: Zašto baš Niš?
+       - Udobno i atraktivno krstarenje Drinom
+       - asdsadsa
+
+-- Arhivirane vesti: 0
+
+-- Dodate stavke: 38
+       - Kategorije vesti: Muzika
+       - Kategorije vesti: Film
+       - Kategorije vesti: Pozorište
+       - Kategorije vesti: Umetnost
+       - Kategorije vesti: Književnost
+       - Kategorije vesti: Turizam
+       - Kategorije događaja: Koncerti
+       - Kategorije događaja: Clubbing
+       - Kategorije događaja: Festivali
+       - Kategorije događaja: Sajmovi
+       - Kategorije događaja: Radionice
+       - Kategorije događaja: Izložbe
+       - Kategorije događaja: Pozorišta
+       - Kategorije događaja: Bioskop
+       - Mesta: Beograd
+       - Mesta: Novi Sad
+       - Mesta: Kragujevac
+       - Uzrast: Deca
+       - Uzrast: Odrasli
+       - Uzrast: Deca
+       - Uzrast: Tinejdžeri
+       - Uzrast: Odrasli
+       - Uzrast: Penzioneri
+       - Karakteristike prostora: WiFi
+       - Karakteristike prostora: Parking
+       - Karakteristike prostora: Pet friendly
+       - Karakteristike prostora: Prilagođeno invalidima
+       - Oblasti delovanja: Zaštita životinja
+       - Ulice: Stjepana Filipovića 29
+       - Oblasti delovanja: Prodaja ulaznica
+       - Ulice: Bulevar Arsenija Čarnojevića 58
+       - Oblasti delovanja: Turistička organizacija
+       - Ulice: Francuska 24
+       - Oblasti delovanja: Izvođačka umetnost
+       - Ulice: Bulevar Umetnosti 3
+       - Oblasti delovanja: Promocija nezavisne kulture i umetnosti
+       - Ulice: Cetinjska 15
+       - Kategorije vesti: nova kategorija
+
+-- Obrisane vesti: 0
+
+-- Obrisani događaji: 0
+
+-- Kreirane ankete: 5
+       - Moja prva anketa
+       - test anketa
+       - Kisobran anketa
+       - DASD
+       - anketa
+

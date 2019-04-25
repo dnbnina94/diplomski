@@ -19,7 +19,7 @@
     </h:head>
     <h:body>
 
-        <f:event type="preRenderView" listener="#{pretragaAnketa.proveriPostojanostAnkete()}" />
+        <f:event type="preRenderView" listener="#{pretragaAnketa.dozvoljenPristupAnketi()}" />
 
         <div class="content">
 
@@ -37,13 +37,29 @@
                             </div>
                         </div>
                         <h:form id="anketa">
-                            <h:panelGroup id="anketa_content" style="margin-top: 0px">
-                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
-                                <div>
+
+                            <h:panelGroup id="popunjavanje_ankete" style="margin-top: 0px">
+
+                                <h:outputScript library="js" name="customCheckbox.js" />
+                                
+                                <div style="margin-top: 20px">
                                     <h:panelGroup styleClass="#{pretragaAnketa.anketa.zatvorena() ? 'expired' : ''}">
                                         <h:outputText styleClass="news-title-news-page" value="#{pretragaAnketa.anketa.naziv}" />
+                                        
+                                        <div style="font-size: 14px; color: #4C4C4C; margin-top: 5px">
+                                            <h:outputText value="#{pretragaAnketa.anketa.opis}" />
+                                            <br/>
+                                            <h:panelGroup rendered="#{pretragaAnketa.anketa.nivoVidljivosti == 1}">
+                                                <h:outputText value="Nivo vidljivosti: " style="font-weight: bold" />
+                                                <h:outputText value="Gosti i registrovani korisnici" />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{pretragaAnketa.anketa.nivoVidljivosti == 2}">
+                                                <h:outputText value="Nivo vidljivosti: " style="font-weight: bold" />
+                                                <h:outputText value="Registrovani korisnici" />
+                                            </h:panelGroup>
+                                        </div>
 
-                                        <div class="news-parameters-news-page" style="margin-top: 20px">
+                                        <div class="news-parameters-news-page" style="margin-top: 20px; margin-bottom: 10px">
                                             <h:panelGroup rendered="#{pretragaAnketa.anketa.korisnici.tip == 2}">
                                                 <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
                                                     <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
@@ -70,24 +86,24 @@
                                         <!-- OVDE TREBA DA IDE FORMA ZA POPUNJAVANJE -->
                                         <ui:repeat value="#{popunjavanjeAnkete.convertSetToListPitanja()}" var="pitanje" varStatus="status">
                                             <table style="width: 100%">
-                                                <tr>
-                                                    <td style="vertical-align: top">
+                                                <tr style="#{popunjavanjeAnkete.odgovoriGreske[pitanje] == '' ? '' : 'background-color: #FFC7C7'}">
+                                                    <td style="vertical-align: top; padding-top: 5px; padding-bottom: 5px; padding-left: 5px">
                                                         <div class="questionNumberContainer">
                                                             #{status.index + 1}
                                                         </div>
                                                     </td>
-                                                    <td style="width: 100%; vertical-align: middle; padding-left: 15px; font-weight: bold">
+                                                    <td style="width: 100%; vertical-align: middle; padding-left: 10px; font-weight: bold; padding-top: 5px; padding-bottom: 5px">
                                                         #{pitanje.pitanje}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" style="padding-top: 15px; ">
+                                                    <td colspan="2" style="padding-top: 10px; ">
                                                         <h:panelGroup rendered="#{pitanje.tip == 1}">
-                                                            <table style="width: 100%; margin-left: 5px">
+                                                            <table style="width: 100%; margin-left: 15px">
                                                                 <ui:repeat value="#{popunjavanjeAnkete.convertSetToListPonudjeniOdgovori(pitanje)}" var="ponudjeniOdgovor" varStatus="status">
                                                                     <tr>
                                                                         <td style="padding-bottom: 5px;">
-                                                                            <div class="custom-radiobutton custom-radiobutton-unchecked" 
+                                                                            <div class="custom-radiobutton #{popunjavanjeAnkete.radiobuttonOdgovori[pitanje] == ponudjeniOdgovor.idOdgovor ? 'custom-radiobutton-checked' : 'custom-radiobutton-unchecked'}" 
                                                                                  idPitanje="#{pitanje.idPitanje}"
                                                                                  indexOdgovor="#{status.index}">
                                                                             </div>
@@ -98,16 +114,16 @@
                                                                     </tr>
                                                                 </ui:repeat>
                                                             </table>
-                                                            <h:selectOneRadio styleClass="pitanje#{pitanje.idPitanje}" value="#{popunjavanjeAnkete.radiobuttonOdgovori[pitanje]}" style="display: none;"> 
+                                                            <h:selectOneRadio styleClass="pitanje#{pitanje.idPitanje}" value="#{popunjavanjeAnkete.radiobuttonOdgovori[pitanje]}" style="display: none"> 
                                                                 <f:selectItems value="#{popunjavanjeAnkete.convertSetToListPonudjeniOdgovori(pitanje)}" var="ponudjeniOdgovor" itemValue="#{ponudjeniOdgovor.idOdgovor}" itemLabel="#{ponudjeniOdgovor.odgovor}" />
                                                             </h:selectOneRadio>
                                                         </h:panelGroup>
                                                         <h:panelGroup rendered="#{pitanje.tip == 2}">
                                                             <ui:repeat value="#{popunjavanjeAnkete.convertSetToListPonudjeniOdgovori(pitanje)}" var="ponudjeniOdgovor">
-                                                                <table style="width: 100%; margin-left: 5px">
+                                                                <table style="width: 100%; margin-left: 15px">
                                                                     <tr>
                                                                         <td>
-                                                                            <div class="custom-checkbox custom-checkbox-unchecked">
+                                                                            <div class="custom-checkbox #{popunjavanjeAnkete.checkboxOdgovori[pitanje][ponudjeniOdgovor] ? 'custom-checkbox-checked' : 'custom-checkbox-unchecked'}">
                                                                                 <b:selectBooleanCheckbox value="#{popunjavanjeAnkete.checkboxOdgovori[pitanje][ponudjeniOdgovor]}" styleClass="custom-checkbox-bootsfaces" />
                                                                             </div>
                                                                         </td>
@@ -117,6 +133,12 @@
                                                                     </tr>
                                                                 </table>
                                                             </ui:repeat>
+                                                        </h:panelGroup>
+
+                                                        <h:panelGroup rendered="#{popunjavanjeAnkete.odgovoriGreske[pitanje] != ''}">
+                                                            <div style="color: #DC3545; margin-top: 5px">
+                                                                *#{popunjavanjeAnkete.odgovoriGreske[pitanje]}
+                                                            </div>
                                                         </h:panelGroup>
                                                     </td>
                                                 </tr>

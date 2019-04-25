@@ -335,5 +335,18 @@ public class PretragaVesti {
             }
         }
     }
+    
+    public void ukloniVestIzListe(Vesti vest) {
+        numOfTotalItems--;
+        numOfShowedItems--;
+        
+        for (Vesti v : vesti) {
+            if (v.getIdVest() == vest.getIdVest()) {
+                vesti.remove(v);
+                return;
+            }
+        }
+        
+    }
 
 }

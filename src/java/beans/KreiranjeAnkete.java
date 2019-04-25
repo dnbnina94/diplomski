@@ -13,10 +13,15 @@ import db.StavkeIzvestaj;
 import db.helpers.AdminLogHelper;
 import db.helpers.AnketeHelper;
 import db.helpers.StavkeIzvestajHelper;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,6 +34,9 @@ public class KreiranjeAnkete {
 
     private String naziv = "";
     private String nazivGreska = "";
+    
+    private String opis = "";
+    private String opisGreska = "";
 
     private int nivoVidljivosti;
     private String nivoVidljivostiGreska = "";
@@ -44,8 +52,6 @@ public class KreiranjeAnkete {
 
     private List<Pitanja> pitanja = new ArrayList<Pitanja>();
     private String pitanjaGreska = "";
-
-    private String anketaCreationSuccess = "";
 
     private List<String> ponudjeniOdgovori = new ArrayList<String>();
     private String ponudjenOdgovor = "";
@@ -184,15 +190,11 @@ public class KreiranjeAnkete {
             ponudjeniOdgovori.add(ponudjenOdgovor);
             ponudjenOdgovor = "";
         }
-        
-        anketaCreationSuccess = "";
 
     }
 
     public void removePonudjeniOdgovor(int status) {
         ponudjeniOdgovori.remove(status);
-        
-        anketaCreationSuccess = "";
     }
 
     boolean tipPitanjaValidacija() {
@@ -260,15 +262,11 @@ public class KreiranjeAnkete {
             tipPitanja = 0;
             ponudjeniOdgovori = new ArrayList<String>();
         }
-        
-        anketaCreationSuccess = "";
 
     }
 
     public void izbrisiPitanje(int index) {
         pitanja.remove(index);
-        
-        anketaCreationSuccess = "";
     }
 
     public boolean nazivValidacija() {
@@ -280,6 +278,16 @@ public class KreiranjeAnkete {
         nazivGreska = "";
         return true;
     }
+    
+    public boolean opisValidacija() {
+        if (opis.isEmpty()) {
+            opisGreska = "Polje 'Opis ankete' ne sme ostati prazno.";
+            return false;
+        }
+
+        opisGreska = "";
+        return true;
+    } 
 
     public boolean nivoVidljivostiValidacija() {
         if (nivoVidljivosti != 1 && nivoVidljivosti != 2) {
@@ -331,6 +339,9 @@ public class KreiranjeAnkete {
         if (!nazivValidacija()) {
             valid = false;
         }
+        if (!opisValidacija()) {
+            valid = false;
+        }
         if (!nivoVidljivostiValidacija()) {
             valid = false;
         }
@@ -345,6 +356,7 @@ public class KreiranjeAnkete {
             Ankete anketa = new Ankete();
             anketa.setIdAnketa(anketeHelper.getMaxId() + 1);
             anketa.setNaziv(naziv);
+            anketa.setOpis(opis);
             anketa.setNivoVidljivosti(nivoVidljivosti);
             anketa.setDatumIsticanja(datumIsticanja);
             anketa.setDatumKreiranja(new Date());
@@ -354,18 +366,23 @@ public class KreiranjeAnkete {
             anketa.setKorisnici(korisnikBean.getKorisnik());
 
             anketeHelper.insertAnketa(anketa);
+            anketa.setPitanjas(new HashSet(0));
 
             for (Pitanja pit : pitanja) {
                 pit.setAnkete(anketa);
                 pit.setIdPitanje(anketeHelper.getMaxIdPitanja() + 1);
 
                 anketeHelper.insertPitanje(pit);
-
+                anketa.getPitanjas().add(pit);
+                
+                pit.setPonudjeniOdgovoris(new HashSet(0));
+                
                 for (PonudjeniOdgovori odg : pit.getPonudjeniOdgovori()) {
                     odg.setIdOdgovor(anketeHelper.getMaxIdPonudjeniOdgovori() + 1);
                     odg.setPitanja(pit);
 
                     anketeHelper.insertPonudjeniOdgovor(odg);
+                    pit.getPonudjeniOdgovoris().add(odg);
                 }
             }
 
@@ -385,15 +402,11 @@ public class KreiranjeAnkete {
 
                 adminLogHelper.insertLog(adminLog);
             }
-            
-            anketaCreationSuccess = "$('html, body').animate({ scrollTop: 0 }, 'slow');";
 
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste kreirali anketu.", null);
-            FacesContext.getCurrentInstance().addMessage("nova_anketa:growl-success", message);
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            
             naziv = "";
             nazivGreska = "";
+            opis = "";
+            opisGreska = "";
             datumIsticanja = null;
             datumIsticanjaGreska = "";
             nivoVidljivosti = 0;
@@ -407,9 +420,26 @@ public class KreiranjeAnkete {
             ponudjenOdgovor = "";
             ponudjenOdgovorGreska = "";
             ponudjeniOdgovori = new ArrayList<String>();
+            
+            PretragaAnketa pretragaAnketa = (PretragaAnketa) elContext.getELResolver().getValue(elContext, null, "pretragaAnketa");
+            pretragaAnketa.setAnketa(anketa);
+            elContext.getELResolver().setValue(elContext, null, "pretragaAnketa", pretragaAnketa);
+            
+            RezultatiAnkete rezultatiAnkete = (RezultatiAnkete) elContext.getELResolver().getValue(elContext, null, "rezultatiAnkete");
+            rezultatiAnkete.setAnketa(anketa);
+            elContext.getELResolver().setValue(elContext, null, "rezultatiAnkete", rezultatiAnkete);
 
-        } else {
-            anketaCreationSuccess = "";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste kreirali anketu.", null);
+            FacesContext.getCurrentInstance().addMessage("anketa:growl-success", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("anketa_rezultati.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(KreiranjeAnkete.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+
         }
 
     }
@@ -438,12 +468,26 @@ public class KreiranjeAnkete {
         this.datumIsticanjaGreska = datumIsticanjaGreska;
     }
 
-    public String getAnketaCreationSuccess() {
-        return anketaCreationSuccess;
+    public void reset() {
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        KreiranjeAnkete kreiranjeAnketeBean = new KreiranjeAnkete();
+        elContext.getELResolver().setValue(elContext, null, "kreiranjeAnkete", kreiranjeAnketeBean);
     }
 
-    public void setAnketaCreationSuccess(String anketaCreationSuccess) {
-        this.anketaCreationSuccess = anketaCreationSuccess;
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public String getOpisGreska() {
+        return opisGreska;
+    }
+
+    public void setOpisGreska(String opisGreska) {
+        this.opisGreska = opisGreska;
     }
 
 }

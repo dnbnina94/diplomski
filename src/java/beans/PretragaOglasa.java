@@ -81,7 +81,7 @@ public class PretragaOglasa {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = oglasiHelper.pretragaOglasaTotalCount(kljucneReci, kreatorOglasa, sortiranje);
                 oglasi = new ArrayList<Oglasi>();
-                oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength));
+                oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = oglasi.size();
                 currentPage++;
             }
@@ -95,7 +95,7 @@ public class PretragaOglasa {
             if (numOfTotalItems == 0) {
                 numOfTotalItems = oglasiHelper.pretragaOglasaTotalCount(organizacija.getKorisnici());
                 oglasi = new ArrayList<Oglasi>();
-                oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength));
+                oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
                 numOfShowedItems = oglasi.size();
                 currentPage++;
             }
@@ -206,11 +206,11 @@ public class PretragaOglasa {
     
     public void currentPageIncrement() {
         if (tipPretrage == 1) {
-            oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength));
+            oglasi.addAll(oglasiHelper.pretragaOglasa(kljucneReci, kreatorOglasa, sortiranje, currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = oglasi.size();
         }
         if (tipPretrage == 2) {
-            oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength));
+            oglasi.addAll(oglasiHelper.pretragaOglasa(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
             numOfShowedItems = oglasi.size();
         }
         currentPage++;
@@ -224,6 +224,19 @@ public class PretragaOglasa {
                 Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void ukloniOglasIzListe(Oglasi oglas) {
+        numOfShowedItems--;
+        numOfTotalItems--;
+        
+        for (Oglasi ogl : oglasi) {
+            if (ogl.getIdOglas() == oglas.getIdOglas()) {
+                oglasi.remove(ogl);
+                return;
+            }
+        }
+        
     }
 
 }

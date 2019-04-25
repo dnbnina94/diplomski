@@ -8,9 +8,12 @@ package beans;
 import db.SifarniciIzvestaj;
 import db.StavkeIzvestaj;
 import db.helpers.StavkeIzvestajHelper;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -55,14 +58,14 @@ public class KreiranjeIzvestaja {
     private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
 
     private List<String> izvestaji;
-    
+
     private String selectedIzvestajSlanje = "";
-    
+
     private String email = "";
     private String emailGreska = "";
-    
+
     private String mailToLink = "#";
-    
+
     private String mailToScript = "";
 
     public KreiranjeIzvestaja() {
@@ -270,7 +273,9 @@ public class KreiranjeIzvestaja {
             File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("izvestaji"));
             File file = new File(uploads, naziv + ".txt");
 
-            Writer writer = new FileWriter(file);
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+
+            //Writer writer = new FileWriter(file);
 
             try {
                 writer.write(text);
@@ -335,14 +340,14 @@ public class KreiranjeIzvestaja {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali izveštaj", null);
             FacesContext.getCurrentInstance().addMessage("kreiranje_izvestaja:growl-success", message);
             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-            
+
             kreiranjeIzvestajaSuccessScript = "$('html, body').animate({ scrollTop: 0 }, 'slow');";
-            
+
         } catch (IOException ex) {
             Logger.getLogger(KreiranjeIzvestaja.class.getName()).log(Level.SEVERE, null, ex);
             kreiranjeIzvestajaSuccessScript = "";
         }
-        
+
     }
 
     public String getSelectedIzvestajSlanje() {
@@ -368,7 +373,7 @@ public class KreiranjeIzvestaja {
     public void setEmailGreska(String emailGreska) {
         this.emailGreska = emailGreska;
     }
-    
+
     public boolean emailValidacija() {
         if (email.isEmpty()) {
             emailGreska = "Polje 'Email adresa' ne sme ostati prazno.";
@@ -383,14 +388,14 @@ public class KreiranjeIzvestaja {
         emailGreska = "";
         return true;
     }
-    
+
     public void posaljiIzvestaj() {
         boolean valid = true;
-        
+
         if (!emailValidacija()) {
             valid = false;
         }
-        
+
         if (valid) {
             mailToLink = "mailto:" + email + "?subject=Izvestaj&body=http://localhost:8080/izvestaji/" + selectedIzvestajSlanje;
             mailToScript = "window.location.href = '" + mailToLink + "';";
@@ -398,7 +403,7 @@ public class KreiranjeIzvestaja {
             mailToLink = "#";
             mailToScript = "";
         }
-        
+
     }
 
     public String getMailToLink() {

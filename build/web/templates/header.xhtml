@@ -84,6 +84,15 @@ and open the template in the editor.
                                             </b:commandLink>
                                         </li>
                                         <li>
+                                            <b:commandLink action="kreiranjeAnkete?faces-redirect=true" 
+                                                           styleClass="top-nav-link" 
+                                                           style="font-weight: normal"
+                                                           ajax="true"
+                                                           onclick="ajax:admin.redirectToAnkete();">
+                                                <h:outputText value="Ankete" />
+                                            </b:commandLink>
+                                        </li>
+                                        <li>
                                             <b:commandLink action="#{korisnikBean.logout()}" styleClass="top-nav-link" style="font-weight: normal">
                                                 <h:outputText value="Izlogujte se" style="font-weight: bold" />
                                             </b:commandLink>
@@ -97,13 +106,7 @@ and open the template in the editor.
                 <div class="pull-right">
                     <ul class="list-inline">
                         <li>
-                            <a href="#" class="top-nav-link" style="font-weight: normal">O nama</a>
-                        </li>
-                        <li>
                             <a href="#" class="top-nav-link" style="font-weight: normal">Pomoć</a>
-                        </li>
-                        <li>
-                            <a href="#" class="top-nav-link" style="font-weight: normal">Kontakt</a>
                         </li>
                     </ul>
                 </div>

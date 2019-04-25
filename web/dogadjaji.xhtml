@@ -84,8 +84,10 @@
                                                                  ajax="true"
                                                                  update="dogadjaj_content"
                                                                  rendered="#{korisnikBean.korisnik.tip == 1}"
-                                                                 onclick="ajax:admin.obrisiDogadjaj();"
-                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                                 action="#{admin.obrisiDogadjaj()}"
+                                                                 oncomplete="$('#dogadjaj\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" >
+                                                    <f:actionListener binding="#{pretragaDogadjaja.ukloniDogadjajIzListe(admin.selektovanDogadjajBrisanje)}" />
+                                                </b:commandButton>
                                             </div>
                                             <div class="col-md-6">
                                                 <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />

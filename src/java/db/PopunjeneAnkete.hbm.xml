@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 21, 2019 2:57:52 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.PopunjeneAnkete" table="popunjene_ankete" catalog="diplomski" optimistic-lock="version">
+        <id name="idPopunjenaAnketa" type="int">
+            <column name="id_popunjena_anketa" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ankete" class="db.Ankete" fetch="select">
+            <column name="id_anketa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="korisnici" class="db.Korisnici" fetch="select">
+            <column name="korisnicko_ime" length="50" />
+        </many-to-one>
+        <property name="cookie" type="string">
+            <column name="cookie" length="36" />
+        </property>
+        <property name="datum" type="timestamp">
+            <column name="datum" length="19" not-null="true" />
+        </property>
+        <set name="odgovoris" table="odgovori" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_popunjena_anketa" not-null="true" />
+            </key>
+            <one-to-many class="db.Odgovori" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -5,11 +5,13 @@
  */
 package beans;
 
+import db.Ankete;
 import db.Dogadjaji;
 import db.Korisnici;
 import db.Oglasi;
 import db.Organizacije;
 import db.Vesti;
+import db.helpers.AnketeHelper;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KorisniciHelper;
 import db.helpers.OglasiHelper;
@@ -35,10 +37,12 @@ public class OrganizacijaBean {
     private VestiHelper vestiHelper = new VestiHelper();
     private DogadjajiHelper dogadjajiHelper = new DogadjajiHelper();
     private OglasiHelper oglasiHelper = new OglasiHelper();
+    private AnketeHelper anketeHelper = new AnketeHelper();
 
     private List<Dogadjaji> dogadjaji;
     private List<Vesti> vesti;
     private List<Oglasi> oglasi;
+    private List<Ankete> ankete;
 
     public OrganizacijaBean() {
     }
@@ -213,6 +217,23 @@ public class OrganizacijaBean {
                 Logger.getLogger(OrganizacijaBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public List<Ankete> getAnkete() {
+        boolean sveAnkete = true;
+        
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+        if (korisnikBean.getKorisnik() == null) {
+            sveAnkete = false;
+        }
+        
+        ankete = anketeHelper.getFeaturedAnketeByKorisnik(organizacija.getKorisnici(), sveAnkete);
+        return ankete;
+    }
+
+    public void setAnkete(List<Ankete> ankete) {
+        this.ankete = ankete;
     }
 
 }

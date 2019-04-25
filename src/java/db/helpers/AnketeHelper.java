@@ -8,8 +8,12 @@ package db.helpers;
 import db.Ankete;
 import db.HibernateUtil;
 import db.Korisnici;
+import db.Odgovori;
 import db.Pitanja;
 import db.PonudjeniOdgovori;
+import db.PopunjeneAnkete;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -181,7 +185,7 @@ public class AnketeHelper {
         }
     }
 
-    public long pretragaAnketaTotalCount(Korisnici korisnik) {
+    public long pretragaAnketaTotalCount(Korisnici korisnik, boolean sveAnkete) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -192,7 +196,10 @@ public class AnketeHelper {
             session.getTransaction().begin();
 
             Criteria c = session.createCriteria(Ankete.class);
-            c.add(Restrictions.eq("korisnik.korisnickoIme", korisnik.getKorisnickoIme()));
+            c.add(Restrictions.eq("korisnici.korisnickoIme", korisnik.getKorisnickoIme()));
+            
+            if (!sveAnkete)
+                c.add(Restrictions.eq("nivoVidljivosti", 1));
 
             c.setProjection(Projections.rowCount());
             Long count = (Long) c.uniqueResult();
@@ -209,7 +216,7 @@ public class AnketeHelper {
         }
     }
 
-    public long pretragaAnketaTotalCount(String kljucneReci, Korisnici kreator, int sortiranje) {
+    public long pretragaAnketaTotalCount(String kljucneReci, Korisnici kreator, int sortiranje, boolean sveAnkete) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -228,6 +235,11 @@ public class AnketeHelper {
             if (!kljucneReci.isEmpty()) {
                 c.add(Restrictions.like("naziv", kljucneReci, MatchMode.ANYWHERE));
             }
+            
+            if (!sveAnkete)
+                c.add(Restrictions.eq("nivoVidljivosti", 1));
+            
+            c.add(Restrictions.gt("datumIsticanja", new Date()));
 
             if (sortiranje == 1) {
                 c.addOrder(Order.desc("datumKreiranja"));
@@ -257,7 +269,7 @@ public class AnketeHelper {
         }
     }
 
-    public List<Ankete> pretragaAnketa(String kljucneReci, Korisnici kreator, int sortiranje, int currentPage, int pageLength, int numOfShowedItems) {
+    public List<Ankete> pretragaAnketa(String kljucneReci, Korisnici kreator, int sortiranje, boolean sveAnkete, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -276,6 +288,11 @@ public class AnketeHelper {
             if (kreator != null) {
                 c.add(Restrictions.eq("korisnici.korisnickoIme", kreator.getKorisnickoIme()));
             }
+            
+            if (!sveAnkete)
+                c.add(Restrictions.eq("nivoVidljivosti", 1));
+            
+            c.add(Restrictions.gt("datumIsticanja", new Date()));
 
             if (sortiranje == 1) {
                 c.addOrder(Order.desc("datumKreiranja"));
@@ -307,7 +324,7 @@ public class AnketeHelper {
         }
     }
 
-    public List<Ankete> pretragaAnketa(Korisnici kreator, int currentPage, int pageLength, int numOfShowedItems) {
+    public List<Ankete> pretragaAnketa(Korisnici kreator, boolean sveAnkete, int currentPage, int pageLength, int numOfShowedItems) {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
         } catch (HibernateException ex) {
@@ -319,6 +336,9 @@ public class AnketeHelper {
 
             Criteria c = session.createCriteria(Ankete.class);
             c.add(Restrictions.eq("korisnici.korisnickoIme", kreator.getKorisnickoIme()));
+            
+            if (!sveAnkete)
+                c.add(Restrictions.eq("nivoVidljivosti", 1));
 
             c.setMaxResults(pageLength);
             c.setFirstResult(currentPage * pageLength + (numOfShowedItems - currentPage * pageLength));
@@ -329,6 +349,136 @@ public class AnketeHelper {
 
             return ankete;
 
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Ankete> getFeaturedAnketeByKorisnik(Korisnici korisnik, boolean sveAnkete) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Ankete.class);
+            c.add(Restrictions.eq("korisnici", korisnik));
+            
+            if (!sveAnkete)
+                c.add(Restrictions.eq("nivoVidljivosti", 1));
+            
+            c.addOrder(Order.desc("datumKreiranja"));
+            c.setMaxResults(8);
+            
+            List<Ankete> l = c.list();
+            
+            session.getTransaction().commit();
+            
+            return l;
+
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void obrisiAnketu(Ankete anketa) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            for (PopunjeneAnkete popAnketa : new ArrayList<PopunjeneAnkete>(anketa.getPopunjeneAnketes())) {
+                for (Odgovori popOdg : new ArrayList<Odgovori>(popAnketa.getOdgovoris())) {
+                    session.delete(popOdg);
+                }
+                
+                session.delete(popAnketa);
+            }
+            
+            for (Pitanja pitanje : new ArrayList<Pitanja>(anketa.getPitanjas())) {
+                for (PonudjeniOdgovori ponOdg : new ArrayList<PonudjeniOdgovori>(pitanje.getPonudjeniOdgovoris())) {
+                    session.delete(ponOdg);
+                }
+                session.delete(pitanje);
+            }
+            
+            session.delete(anketa);
+            
+            session.getTransaction().commit();
+           
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public long pretragaAnketaAdminTotalCount(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Ankete.class);
+            c.add(Restrictions.eq("korisnici.korisnickoIme", korisnik.getKorisnickoIme()));
+            
+            c.setProjection(Projections.rowCount());
+            Long count = (Long) c.uniqueResult();
+            
+            session.getTransaction().commit();
+            
+            return count;
+           
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<Ankete> pretragaAnketaAdmin(Korisnici korisnik, int currentPage, int pageLength, int numOfShowedItems) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            
+            session.getTransaction().begin();
+            
+            Criteria c = session.createCriteria(Ankete.class);
+            c.add(Restrictions.eq("korisnici.korisnickoIme", korisnik.getKorisnickoIme()));
+            
+            c.addOrder(Order.desc("datumKreiranja"));
+            
+            c.setMaxResults(pageLength);
+            c.setFirstResult(currentPage*pageLength + (numOfShowedItems - pageLength*currentPage));
+            
+            List<Ankete> ankete = (List<Ankete>) c.list();
+            
+            session.getTransaction().commit();
+            
+            return ankete;
+           
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;

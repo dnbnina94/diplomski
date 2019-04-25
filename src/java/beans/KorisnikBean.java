@@ -33,6 +33,8 @@ public class KorisnikBean {
 
     public void logout() {
         try {
+            // INVALIDIRAJ I ANKETE
+            
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().redirect("index.xhtml");

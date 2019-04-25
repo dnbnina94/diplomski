@@ -56,4 +56,5 @@ Contributor(s):
   <table-filter match-name="ankete" />
   <table-filter match-name="pitanja" />
   <table-filter match-name="ponudjeni_odgovori" />
+  <table-filter match-name="popunjene_ankete" />
 </hibernate-reverse-engineering>

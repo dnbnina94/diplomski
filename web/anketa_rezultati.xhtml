@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputScript library="js" name="jquery-3.2.1.min.js" />
+        <h:outputScript library="js" name="datepickerMonths.js" />
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{pretragaAnketa.dozvoljenPristupAnketiRezultati()}" />
+
+        <div class="content">
+
+            <ui:insert name="header">
+                <ui:include src="templates/header.xhtml" />
+            </ui:insert>
+
+            <div class="container">
+
+                <div class="row page-content">
+                    <div class="col-md-9">
+                        <div class="stripe-line-header news-category-header">       
+                            <div class="stripe-line-header-link">
+                                <h:outputText value="Anketa - rezultati" />
+                            </div>
+                        </div>
+                        <h:form id="anketa">
+
+                            <style>
+                                .progress {
+                                    border-radius: 0px;
+                                    margin: auto;
+                                    background-color: #eee;
+                                    box-shadow: none;
+                                    height: 7px;
+                                    border-radius: 5px;
+                                }
+
+                                .progress > .progress-bar {
+                                    background-color: #4C4C4C;
+                                }
+
+                                .progress > .progress-bar > span {
+                                    display: none;
+                                }
+                            </style>
+
+                            <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
+
+                            <h:panelGroup id="anketa_rezultati" style="margin-top: 0px">
+
+                                <div style="margin-top: 20px">
+                                    <h:panelGroup rendered="#{pretragaAnketa.anketa.zatvorena()}">
+                                        <div style="position: absolute; width: 100%; text-align: right; right: 0px;">
+                                            <h:graphicImage library="img" name="arhivirano.png" style="width: 150px" />
+                                        </div>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup styleClass="#{rezultatiAnkete.anketa.zatvorena() ? 'expired' : ''}">
+                                        <h:outputText styleClass="news-title-news-page" value="#{rezultatiAnkete.anketa.naziv}" />
+
+                                        <div style="font-size: 14px; color: #4C4C4C; margin-top: 5px">
+                                            <h:outputText value="#{rezultatiAnkete.anketa.opis}" />
+                                            <br/>
+                                            <h:panelGroup rendered="#{rezultatiAnkete.anketa.nivoVidljivosti == 1}">
+                                                <h:outputText value="Nivo vidljivosti: " style="font-weight: bold" />
+                                                <h:outputText value="Gosti i registrovani korisnici" />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{rezultatiAnkete.anketa.nivoVidljivosti == 2}">
+                                                <h:outputText value="Nivo vidljivosti: " style="font-weight: bold" />
+                                                <h:outputText value="Registrovani korisnici" />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{rezultatiAnkete.popunjeneAnkete != null}">
+                                                <span style="color: #DC3545">
+                                                    <br/>
+                                                    *Crvenom bojom označeni su vaši odgovori na pitanje.
+                                                </span>
+                                            </h:panelGroup>
+                                        </div>
+
+                                        <div class="news-parameters-news-page" style="margin-top: 20px; margin-bottom: 10px">
+                                            <h:panelGroup rendered="#{rezultatiAnkete.anketa.korisnici.tip == 2}">
+                                                <b:commandLink action="organizacija?faces-redirect=true" styleClass="customNewsLink">
+                                                    <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                    <h:outputText value=" #{rezultatiAnkete.anketa.korisnici.korisnickoIme}" />
+                                                    <f:setPropertyActionListener target="#{organizacijaBean.organizacija}" value="#{rezultatiAnkete.anketa.korisnici.organizacije}" />
+                                                </b:commandLink>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{rezultatiAnkete.anketa.korisnici.tip == 1}">
+                                                <span class="glyphicon glyphicon-user" style="font-size: 10px"></span>
+                                                <h:outputText value=" Administrator" />
+                                            </h:panelGroup>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-bookmark" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{rezultatiAnkete.anketa.datumKreiranja}" >
+                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                            </h:outputText>
+                                            &nbsp;
+                                            <span class="glyphicon glyphicon-time" style="font-size: 10px;"></span>
+                                            <h:outputText value="#{rezultatiAnkete.anketa.datumKreiranja}" >
+                                                <f:convertDateTime pattern=" HH:mm" />
+                                            </h:outputText>
+                                        </div>
+
+                                        <ui:repeat value="#{rezultatiAnkete.convertSetToListPitanja()}" var="pitanje" varStatus="status">
+                                            <table style="width: 100%">
+                                                <tr>
+                                                    <td style="vertical-align: top; padding-top: 5px; padding-bottom: 5px; padding-left: 5px">
+                                                        <div class="questionNumberContainer">
+                                                            #{status.index + 1}
+                                                        </div>
+                                                    </td>
+                                                    <td style="width: 100%; vertical-align: middle; padding-left: 10px; font-weight: bold; padding-top: 5px; padding-bottom: 5px">
+                                                        #{pitanje.pitanje}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="padding-top: 10px; ">
+                                                        <ui:repeat value="#{rezultatiAnkete.convertSetToListPonudjeniOdgovori(pitanje)}" var="ponudjeniOdgovor">
+                                                            <div style="margin-left: 15px">#{ponudjeniOdgovor.odgovor}</div>
+                                                            <table style="width: 50%; margin-left: 15px; margin-bottom: 10px">
+                                                                <tr>
+                                                                    <td style="width: 100%">
+                                                                        <h:panelGroup rendered="#{rezultatiAnkete.brOdgovoraNaPitanje[pitanje][ponudjeniOdgovor] != 0}">
+                                                                            <b:progressBar min="0" 
+                                                                                           max="#{rezultatiAnkete.ukupanBrojOdgovora(pitanje).toString()}" 
+                                                                                           value="#{rezultatiAnkete.brOdgovoraNaPitanje[pitanje][ponudjeniOdgovor].toString()}"
+                                                                                           contentClass="#{rezultatiAnkete.korisnikovOdgovor(ponudjeniOdgovor) ? 'progress-bar-user-answer' : ''}" />
+                                                                        </h:panelGroup>
+                                                                        <h:panelGroup rendered="#{rezultatiAnkete.brOdgovoraNaPitanje[pitanje][ponudjeniOdgovor] == 0}">
+                                                                            <b:progressBar min="0" 
+                                                                                           max="100" 
+                                                                                           value="0"
+                                                                                           contentClass="#{rezultatiAnkete.korisnikovOdgovor(ponudjeniOdgovor) ? 'progress-bar-user-answer' : ''}"/>
+                                                                        </h:panelGroup>
+                                                                    </td>
+                                                                    <td style="padding-left: 5px; font-size: 10px; width: 15px">
+                                                                        #{rezultatiAnkete.brOdgovoraNaPitanje[pitanje][ponudjeniOdgovor].toString()}
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ui:repeat>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div style="border-top: 1px solid #ddd; margin-top: 10px; margin-bottom: 10px"></div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </ui:repeat>
+                                    </h:panelGroup>
+                                </div>
+
+                                <div class="date-container" style="font-size: 16px; margin-top: 10px">
+                                    <h:outputText value="Datum zatvaranja: " style="color: orangered"/>
+                                    &nbsp;
+                                    <h:outputText value="#{rezultatiAnkete.anketa.datumIsticanja}" >
+                                        <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                    </h:outputText>
+                                </div>
+                            </h:panelGroup>
+
+                        </h:form>
+                    </div>
+                    <div class="col-md-3">
+
+                        <ui:insert name="left_content">
+                            <ui:include src="templates/right_content.xhtml" />
+                        </ui:insert>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <ui:insert name = "footer" >
+            <ui:include src = "templates/footer.xhtml" />
+        </ui:insert>
+
+    </h:body>
+</html>
+

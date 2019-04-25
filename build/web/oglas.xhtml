@@ -72,7 +72,9 @@
                                                                  update="oglas_content"
                                                                  onclick="ajax:admin.obrisiOglas();"
                                                                  rendered="#{korisnikBean.korisnik.tip == 1}"
-                                                                 oncomplete="$('#oglas\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                                 oncomplete="$('#oglas\\:amodal').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" >
+                                                    <f:setPropertyActionListener target="#{pretragaOglasa.oglas}" value="#{null}" />
+                                                </b:commandButton>
                                             </div>
                                             <div class="col-md-6">
                                                 <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />

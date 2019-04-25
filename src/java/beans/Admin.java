@@ -6,21 +6,25 @@
 package beans;
 
 import db.AdminLog;
+import db.Ankete;
 import db.Dogadjaji;
 import db.Korisnici;
 import db.Obavestenja;
 import db.Oglasi;
 import db.Organizacije;
+import db.PopunjeneAnkete;
 import db.Sifarnici;
 import db.StavkeIzvestaj;
 import db.StavkeSifarnika;
 import db.Vesti;
 import db.helpers.AdminLogHelper;
+import db.helpers.AnketeHelper;
 import db.helpers.DogadjajiHelper;
 import db.helpers.KarakteristikeProstoraHelper;
 import db.helpers.KorisniciHelper;
 import db.helpers.ObavestenjaHelper;
 import db.helpers.OglasiHelper;
+import db.helpers.PopunjeneAnketeHelper;
 import db.helpers.StavkeIzvestajHelper;
 import db.helpers.StavkeSifarnikaHelper;
 import db.helpers.VestiHelper;
@@ -74,6 +78,8 @@ public class Admin {
     private String thumbnailName;
     private boolean menjanThumbnail;
     private List<Obavestenja> obavestenja;
+    private int pageAnkete;
+    private List<Ankete> ankete;
 
     // 1 za korisnike, 2 za sifarnike, 3 za obavestenja
     private int adminStrana = 1;
@@ -95,6 +101,8 @@ public class Admin {
     private ObavestenjaHelper obavestenjaHelper = new ObavestenjaHelper();
     private StavkeIzvestajHelper stavkeIzvestajHelper = new StavkeIzvestajHelper();
     private AdminLogHelper adminLogHelper = new AdminLogHelper();
+    private AnketeHelper anketeHelper = new AnketeHelper();
+    private PopunjeneAnketeHelper popunjeneAnketeHelper = new PopunjeneAnketeHelper();
 
     class SortKorisniciByKorIme implements Comparator<Korisnici> {
 
@@ -140,6 +148,8 @@ public class Admin {
 
         sifarnici = stavkeHelper.getSifarnici();
         pageSifarnici = sifarnici.get(0).getIdSifarnik();
+
+        pageAnkete = 1;
 
         /*stavkeSifarnika = new ArrayList<StavkeSifarnika>(sifarnici.get(0).getStavkeSifarnikas());
         Collections.sort(stavkeSifarnika, new Admin.SortStavkeSifarnikaById());*/
@@ -196,24 +206,26 @@ public class Admin {
             stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
             stavkeIzvestaj.setNaziv(selektovanKorisnikBrisanje.getKorisnickoIme());
             stavkeIzvestaj.setDatum(new Date());
-            
-            if (page.equals("adminNeodobreni.xhtml"))
+
+            if (page.equals("adminNeodobreni.xhtml")) {
                 stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(2));
-            else
+            } else {
                 stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(3));
+            }
 
             stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
-            
+
             AdminLog adminLog = new AdminLog();
             adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
-            
-            if (page.equals("adminNeodobreni.xhtml"))
+
+            if (page.equals("adminNeodobreni.xhtml")) {
                 adminLog.setTekst("Odbijen korisnik " + selektovanKorisnikBrisanje.getKorisnickoIme());
-            else
+            } else {
                 adminLog.setTekst("Obrisan korisnik " + selektovanKorisnikBrisanje.getKorisnickoIme());
-            
+            }
+
             adminLog.setDatum(new Date());
-            
+
             adminLogHelper.insertLog(adminLog);
 
             numOfShowedItems--;
@@ -1013,6 +1025,29 @@ public class Admin {
         currentPage++;
     }
 
+    public void currentPageAnketeIncrement() {
+        if (pageAnkete == 1) {
+
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+
+            ankete.addAll(anketeHelper.pretragaAnketaAdmin(korisnikBean.getKorisnik(), currentPage, pageLength, numOfShowedItems));
+            numOfShowedItems = ankete.size();
+            currentPage++;
+        }
+        if (pageAnkete == 2) {
+            
+            ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+            KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+            
+            for (PopunjeneAnkete popAnketa : popunjeneAnketeHelper.getPopunjeneAnketeKorisnika(korisnikBean.getKorisnik(), currentPage, pageLength, numOfShowedItems)) {
+                ankete.add(popAnketa.getAnkete());
+            }
+            numOfShowedItems = ankete.size();
+            currentPage++;
+        }
+    }
+
     public String getInsertSuccessfulScript() {
         return insertSuccessfulScript;
     }
@@ -1037,6 +1072,13 @@ public class Admin {
         currentPage = 0;
         pageSifarnici = sifarnici.get(0).getIdSifarnik();
         kljucneReci = "";
+    }
+
+    public void redirectToAnkete() {
+        pageAnkete = 1;
+        numOfShowedItems = 0;
+        numOfTotalItems = 0;
+        currentPage = 0;
     }
 
     public void redirectToObavestenja() {
@@ -1087,6 +1129,91 @@ public class Admin {
         numOfShowedItems = 0;
         numOfTotalItems = 0;
         currentPage = 0;
+    }
+
+    public void obrisiAnketu(Ankete anketa) {
+        anketeHelper.obrisiAnketu(anketa);
+
+        StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();
+        stavkeIzvestaj.setIdStavka(stavkeIzvestajHelper.getMaxId() + 1);
+        stavkeIzvestaj.setDatum(new Date());
+        stavkeIzvestaj.setNaziv(anketa.getNaziv());
+        stavkeIzvestaj.setSifarniciIzvestaj(stavkeIzvestajHelper.getSifarnikIzvestajById(15));
+
+        stavkeIzvestajHelper.insertStavkaIzvestaj(stavkeIzvestaj);
+
+        AdminLog adminLog = new AdminLog();
+        adminLog.setIdLog(adminLogHelper.getMaxId() + 1);
+        adminLog.setDatum(new Date());
+        adminLog.setTekst("Obrisana anketa " + anketa.getNaziv());
+
+        adminLogHelper.insertLog(adminLog);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste obrisali anketu.", null);
+        FacesContext.getCurrentInstance().addMessage("anketa:growl-success", message);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    }
+
+    public void ukloniAnketuIzListe(Ankete anketa) {
+        numOfShowedItems--;
+        numOfTotalItems--;
+
+        for (Ankete a : ankete) {
+            if (a.getIdAnketa() == anketa.getIdAnketa()) {
+                ankete.remove(a);
+                break;
+            }
+        }
+    }
+
+    public int getPageAnkete() {
+        return pageAnkete;
+    }
+
+    public void setPageAnkete(int pageAnkete) {
+        this.pageAnkete = pageAnkete;
+
+        numOfTotalItems = 0;
+        numOfShowedItems = 0;
+        currentPage = 0;
+    }
+
+    public List<Ankete> getAnkete() {
+        if (pageAnkete == 1) {
+            if (numOfTotalItems == 0) {
+
+                ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+                KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+
+                numOfTotalItems = anketeHelper.pretragaAnketaAdminTotalCount(korisnikBean.getKorisnik());
+                ankete = new ArrayList<Ankete>();
+                ankete.addAll(anketeHelper.pretragaAnketaAdmin(korisnikBean.getKorisnik(), currentPage, pageLength, numOfShowedItems));
+                numOfShowedItems = ankete.size();
+                currentPage++;
+            }
+        }
+        if (pageAnkete == 2) {
+            if (numOfTotalItems == 0) {
+
+                ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+                KorisnikBean korisnikBean = (KorisnikBean) elContext.getELResolver().getValue(elContext, null, "korisnikBean");
+                
+                numOfTotalItems = popunjeneAnketeHelper.getPopunjeneAnketeKorisnikaTotalCount(korisnikBean.getKorisnik());
+                ankete = new ArrayList<Ankete>();
+                
+                for (PopunjeneAnkete popAnketa : popunjeneAnketeHelper.getPopunjeneAnketeKorisnika(korisnikBean.getKorisnik(), currentPage, pageLength, numOfShowedItems)) {
+                    ankete.add(popAnketa.getAnkete());
+                }
+                numOfShowedItems = ankete.size();
+                currentPage++;
+            }
+        }
+
+        return ankete;
+    }
+
+    public void setAnkete(List<Ankete> ankete) {
+        this.ankete = ankete;
     }
 
 }

@@ -20,6 +20,9 @@ public class Korisnici  implements java.io.Serializable {
      private Set oglasis = new HashSet(0);
      private Organizacije organizacije;
      private boolean odobren;
+     private Set popunjeneAnketes = new HashSet(0);
+     private Set obavestenjas = new HashSet(0);
+     private Set anketes = new HashSet(0);
 
     public Korisnici() {
     }
@@ -33,13 +36,16 @@ public class Korisnici  implements java.io.Serializable {
         this.odobren = odobren;
     }
     
-    public Korisnici(String korisnickoIme, byte[] lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis) {
+    public Korisnici(String korisnickoIme, byte[] lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis, Set popunjeneAnketes, Set obavestenjas, Set anketes) {
        this.korisnickoIme = korisnickoIme;
        this.lozinka = lozinka;
        this.tip = tip;
        this.vestis = vestis;
        this.dogadjajis = dogadjajis;
        this.oglasis = oglasis;
+       this.popunjeneAnketes = popunjeneAnketes;
+       this.anketes = anketes;
+       this.obavestenjas = obavestenjas;
     }
    
     public String getKorisnickoIme() {
@@ -110,7 +116,30 @@ public class Korisnici  implements java.io.Serializable {
     public void setOglasis(Set oglasis) {
         this.oglasis = oglasis;
     }
-    
+
+    public Set getPopunjeneAnketes() {
+        return popunjeneAnketes;
+    }
+
+    public void setPopunjeneAnketes(Set popunjeneAnketes) {
+        this.popunjeneAnketes = popunjeneAnketes;
+    }
+
+    public Set getObavestenjas() {
+        return obavestenjas;
+    }
+
+    public void setObavestenjas(Set obavestenjas) {
+        this.obavestenjas = obavestenjas;
+    }
+
+    public Set getAnketes() {
+        return anketes;
+    }
+
+    public void setAnketes(Set anketes) {
+        this.anketes = anketes;
+    }
     
 }
 

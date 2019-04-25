@@ -46,12 +46,15 @@
                                         </h:panelGroup>
                                     </h:form>
                                 </c:if>
+                                <c:if test="#{pretragaAnketa.tipPretrage eq 3}">
+                                    <h:outputText value="Popunjene ankete" />
+                                </c:if>
                             </div>                           
                         </div>
 
                         <h:form id="anketa">
                             <h:panelGroup id="anketa_content">
-                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px" />
+                                <b:messages id="growl-success" severity="info" styleClass="custom-messages" style="margin-top: 20px !important" />
 
                                 <h:panelGroup rendered="#{pretragaAnketa.ankete.size() == 0}">
                                     <div style="width: 100%; 
@@ -77,6 +80,18 @@
                                                  searching="false">
                                         <b:dataTableColumn>
                                             <div>
+                                                <h:panelGroup rendered="#{anketa.zatvorena()}">
+                                                    <b:commandLink action="anketa_rezultati?faces-redirect=true" styleClass="customNewsLink">
+                                                        <div style="position: absolute; z-index: 100; left: 5px; width: 100%">
+                                                            <div style="position: relative; top: 0px; text-align: right;">
+                                                                <h:graphicImage library="img" name="arhivirano.png" style="width: 95px" />
+                                                            </div>
+                                                        </div>
+                                                        <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
+                                                        <f:setPropertyActionListener target="#{rezultatiAnkete.anketa}" value="#{anketa}" />
+                                                    </b:commandLink>
+                                                </h:panelGroup>
+                                                
                                                 <h:panelGroup styleClass="#{anketa.zatvorena() ? 'expired' : ''}">
                                                     <div class="news-date" style="margin-bottom: 10px">
                                                         <h:panelGroup rendered="#{anketa.korisnici.tip != 1}">
@@ -102,26 +117,98 @@
                                                         </h:outputText>
                                                     </div>
 
-                                                    <b:commandLink action="anketa?faces-redirect=true" styleClass="customNewsLink">
-                                                        <h:outputText value="#{anketa.naziv}" styleClass="news-heading" /> <br/>
-                                                        <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
-                                                            <h:outputText value="Datum zatvaranja: " style="color: orangered" />
-                                                            &nbsp;
-                                                            <h:outputText value="#{anketa.datumIsticanja}" >
-                                                                <f:convertDateTime pattern=" dd.MM.yyyy." />
-                                                            </h:outputText>
-                                                        </div>
-                                                        <b:button styleClass="read-more-button" value="Popuni anketu" />
-                                                        <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
-                                                        <f:setPropertyActionListener target="#{popunjavanjeAnkete.anketa}" value="#{anketa}" />
-                                                    </b:commandLink>
-                                                    
+                                                    <h:outputText value="#{anketa.naziv}" styleClass="news-heading" /> <br/>
+                                                    <div class="news-text">
+                                                        <h:outputText value="#{anketa.opis}" styleClass="news-text" />
+                                                    </div>
+                                                    <div style="font-family: BebasNeueRegular; font-size: 16px; margin-top: 5px; margin-bottom: 10px">
+                                                        <h:outputText value="Datum zatvaranja: " style="color: orangered" />
+                                                        &nbsp;
+                                                        <h:outputText value="#{anketa.datumIsticanja}" >
+                                                            <f:convertDateTime pattern=" dd.MM.yyyy." />
+                                                        </h:outputText>
+                                                    </div>
+
+                                                    <h:panelGroup rendered="#{pretragaAnketa.mogucePopunjavanje(anketa)}">
+                                                        <b:commandLink action="anketa?faces-redirect=true" styleClass="customNewsLink" style="margin-right: 5px">
+                                                            <b:button styleClass="read-more-button" value="Popuni anketu" />
+                                                            <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
+                                                            <f:setPropertyActionListener target="#{popunjavanjeAnkete.anketa}" value="#{anketa}" />
+                                                        </b:commandLink>
+                                                    </h:panelGroup>
+
+                                                    <h:panelGroup rendered="#{pretragaAnketa.dostupniRezultati(anketa)}">
+                                                        <b:commandLink action="anketa_rezultati?faces-redirect=true" styleClass="customNewsLink">
+                                                            <b:button styleClass="read-more-button" value="Pogledaj rezultate" style="background-color: #4C4C4C !important" />
+                                                            <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
+                                                            <f:setPropertyActionListener target="#{rezultatiAnkete.anketa}" value="#{anketa}" />
+                                                        </b:commandLink>
+                                                    </h:panelGroup>
+
+                                                    <h:panelGroup rendered="#{korisnikBean.korisnik != null and korisnikBean.korisnik.tip == 1}">
+                                                        <b:commandButton styleClass="read-more-button" 
+                                                                         value="Obriši anketu" 
+                                                                         action="#{admin.obrisiAnketu(anketa)}"
+                                                                         ajax="true"
+                                                                         update="@form"
+                                                                         style="background-color: #ccc !important;
+                                                                         margin-left: 5px" >
+                                                            <f:actionListener binding="#{pretragaAnketa.ukloniAnketuIzListe(anketa)}" />
+                                                        </b:commandButton>
+                                                    </h:panelGroup>
+
                                                 </h:panelGroup>
                                             </div>
                                         </b:dataTableColumn>
 
                                     </b:dataTable>
                                 </h:panelGroup>
+                                
+                                <h:inputHidden id="pageLength" value="#{pretragaAnketa.pageLength}" />
+                                <h:inputHidden id="currentPage" value="#{pretragaAnketa.currentPage}" />
+                                <h:inputHidden id="numOfShowedItems" value="#{pretragaAnketa.numOfShowedItems}" />
+                                <h:inputHidden id="numOfTotalItems" value="#{pretragaAnketa.numOfTotalItems}" />
+                                
+                                <h:panelGroup rendered="#{pretragaAnketa.numOfTotalItems != 0}">
+                                    <div id="bottom" style="text-align: center; margin-top: 5px">
+                                        <div style="font-family: BebasNeueRegular; font-size: 16px">
+                                            <h:outputText value="Prikazano " />
+                                            <h:outputText value="#{pretragaAnketa.numOfShowedItems}" />
+                                            <h:outputText value=" od " />
+                                            <h:outputText value="#{pretragaAnketa.numOfTotalItems}" />
+                                            <h:outputText value=" rezultata" />
+                                        </div>
+                                        <b:progressBar id="progressBar" min="0" max="#{pretragaAnketa.numOfTotalItems.toString()}" value="#{pretragaAnketa.numOfShowedItems.toString()}" />
+
+                                        <b:commandButton id="loadMoreButton" 
+                                                         actionListener="#{pretragaAnketa.currentPageIncrement()}"
+                                                         ajax="true"
+                                                         update="@form"
+                                                         value="Prikaži još anketa"
+                                                         styleClass="read-more-button"
+                                                         style="padding-left: 50px !important; 
+                                                         padding-right: 50px !important; 
+                                                         background-color: #4c4c4c !important;
+                                                         #{pretragaAnketa.numOfShowedItems != pretragaAnketa.numOfTotalItems and pretragaAnketa.numOfTotalItems > 0 ? '' : 'display: none'}">
+                                            <f:ajax/>
+                                        </b:commandButton>
+
+                                    </div>
+                                </h:panelGroup>
+                                
+                                <style>
+                                    #anketa\:growl-success {
+                                        margin-top: 20px;
+                                    }
+                                </style>
+                                
+                                <script>
+                                    $(document).ready(function () {
+                                        var width = $("#anketa\\:loadMoreButton").width();
+                                        $("#anketa\\:progressBar").width(width + 100);
+                                    });
+                                </script>
+                                
                             </h:panelGroup>
                         </h:form>
 

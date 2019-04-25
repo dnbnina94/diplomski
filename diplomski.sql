@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2019 at 08:17 PM
+-- Generation Time: Apr 25, 2019 at 12:28 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -77,7 +77,89 @@ INSERT INTO `admin_log` (`id_log`, `tekst`, `datum`) VALUES
 (38, 'Dodata stavka nova kategorija u šifarnik Kategorije vesti', '2019-04-17 23:03:53'),
 (39, 'Obrisana stavka nova kategorija iz šifarnika Kategorije vesti', '2019-04-17 23:04:21'),
 (40, 'Kreirana anketa: Moja prva anketa', '2019-04-18 01:32:16'),
-(41, 'Kreirana anketa: Moja druga anketa', '2019-04-18 01:35:05');
+(41, 'Kreirana anketa: Moja druga anketa', '2019-04-18 01:35:05'),
+(42, 'Kreirana anketa: test anketa', '2019-04-22 02:11:19'),
+(43, 'Obrisana anketa Moja prva anketa', '2019-04-24 01:48:57'),
+(44, 'Obrisana anketa Kisobran anketa', '2019-04-24 01:50:12'),
+(45, 'Obrisana anketa test anketa', '2019-04-24 01:50:13'),
+(46, 'Obrisana anketa Moja druga anketa', '2019-04-24 01:50:16'),
+(47, 'Odobren korisnik test', '2019-04-24 02:04:36'),
+(48, 'Kreirana anketa: anketa', '2019-04-24 02:07:10'),
+(49, 'Obrisan korisnik test', '2019-04-24 02:07:59'),
+(50, 'Obrisana anketa anketa', '2019-04-24 02:08:12'),
+(51, 'Kreirana anketa: Ninina anketa', '2019-04-24 17:17:28'),
+(52, 'Kreirana anketa: admin anketa', '2019-04-24 17:34:54'),
+(53, 'Kreirana anketa: Jos malo gotovooo', '2019-04-24 17:35:20'),
+(54, 'Obrisana anketa Jos malo gotovooo', '2019-04-24 17:46:57'),
+(55, 'Obrisana anketa admin anketa', '2019-04-24 17:51:09'),
+(56, 'Obrisana anketa Ninina anketa', '2019-04-24 17:52:40'),
+(57, 'Kreirana anketa: sdad', '2019-04-24 17:56:45'),
+(58, 'Kreirana anketa: anketa', '2019-04-24 17:57:02'),
+(59, 'Obrisana anketa anketa', '2019-04-24 17:57:14'),
+(60, 'Obrisana anketa sdad', '2019-04-24 17:57:15'),
+(61, 'Kreirana anketa: Kisobran anketa', '2019-04-24 17:57:30'),
+(62, 'Kreirana anketa: anketa', '2019-04-24 17:57:49'),
+(63, 'Kreirana anketa: Kisobran anketa', '2019-04-24 17:58:06'),
+(64, 'Kreirana anketa: admin anketa', '2019-04-24 17:58:27'),
+(65, 'Kreirana anketa: Jos malo gotovooo', '2019-04-24 17:58:48'),
+(66, 'Kreirana anketa: admin anketa', '2019-04-24 17:59:19'),
+(67, 'Obrisana anketa admin anketa', '2019-04-24 17:59:24'),
+(68, 'Obrisana anketa Kisobran anketa', '2019-04-24 17:59:31'),
+(69, 'Obrisana anketa anketa', '2019-04-24 17:59:35'),
+(70, 'Obrisana anketa admin anketa', '2019-04-24 17:59:36'),
+(71, 'Obrisana anketa Jos malo gotovooo', '2019-04-24 17:59:37'),
+(72, 'Obrisana anketa Kisobran anketa', '2019-04-24 17:59:38'),
+(73, 'Kreirana anketa: Adminova anketa', '2019-04-24 21:01:57'),
+(74, 'Kreirana anketa: Adminova anketa 2', '2019-04-24 21:02:31'),
+(75, 'Kreirana anketa: Adminova anketa 3', '2019-04-24 21:02:52'),
+(76, 'Kreirana anketa: Adminova anketa 4', '2019-04-24 21:03:30'),
+(77, 'Kreirana anketa: Adminova anketa 5', '2019-04-24 21:03:56'),
+(78, 'Kreirana anketa: anketica', '2019-04-24 21:06:58'),
+(79, 'Popunjena anketa Anketa za korisnike', '2019-04-24 21:14:04'),
+(80, 'Popunjena anketa Kisobran anketa za korisnike', '2019-04-24 21:14:15'),
+(81, 'Popunjena anketa Kisobran anketa', '2019-04-24 21:14:21'),
+(82, 'Obrisana anketa Kisobran anketa', '2019-04-24 21:14:35'),
+(83, 'Obrisana anketa Kisobran anketa za korisnike', '2019-04-24 21:14:36'),
+(84, 'Obrisana anketa Anketa za korisnike', '2019-04-24 21:14:38'),
+(85, 'Obrisana anketa anketica', '2019-04-24 21:14:45'),
+(86, 'Obrisana anketa Adminova anketa 3', '2019-04-24 21:14:47'),
+(87, 'Obrisana anketa Adminova anketa 2', '2019-04-24 21:15:01'),
+(88, 'Obrisana anketa Adminova anketa 4', '2019-04-24 21:15:02'),
+(89, 'Obrisana anketa Adminova anketa 5', '2019-04-24 21:15:02'),
+(90, 'Obrisana anketa Adminova anketa', '2019-04-24 21:15:03'),
+(91, 'Arhivirana vest Nova vest od kisobrana', '2019-04-24 22:25:36'),
+(92, 'Obrisana vest Nova vest od kisobrana', '2019-04-24 22:25:48'),
+(93, 'Obrisan događaj Novi Dogadjaj', '2019-04-24 22:29:52'),
+(94, 'Arhivirana vest Nova vest', '2019-04-24 22:31:57'),
+(95, 'Obrisana vest Nova vest', '2019-04-24 22:32:00'),
+(96, 'Obrisan oglas Novi oglas', '2019-04-24 22:32:58'),
+(97, 'Obrisan događaj Novi Dogadjaj', '2019-04-24 22:34:43'),
+(98, 'Arhivirana vest Nova vest', '2019-04-24 22:46:54'),
+(99, 'Obrisana vest Nova vest', '2019-04-24 22:46:56'),
+(100, 'Obrisan događaj Novi Dogadjaj', '2019-04-24 22:47:16'),
+(101, 'Obrisan oglas Oglas 5', '2019-04-24 22:47:42'),
+(102, 'Obrisan oglas Oglas 3', '2019-04-24 22:47:48'),
+(103, 'Obrisan oglas Oglas 7', '2019-04-24 22:47:54'),
+(104, 'Obrisan oglas Oglas 1', '2019-04-24 22:48:04'),
+(105, 'Obrisan oglas Oglas 6', '2019-04-24 22:48:07'),
+(106, 'Obrisan oglas Oglas 4', '2019-04-24 22:48:13'),
+(107, 'Obrisan oglas Oglas 2', '2019-04-24 22:48:16'),
+(108, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:43'),
+(109, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:48'),
+(110, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:49'),
+(111, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:50'),
+(112, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:51'),
+(113, 'Obrisana anketa Kisobran anketa', '2019-04-24 22:48:52'),
+(114, 'Obrisan oglas test oglas', '2019-04-24 23:07:08'),
+(115, 'Obrisana vest Test vest', '2019-04-24 23:10:25'),
+(116, 'Obrisan događaj Test dogadjaj', '2019-04-24 23:10:34'),
+(117, 'Obrisana anketa Kisobran anketa', '2019-04-25 01:19:25'),
+(118, 'Popunjena anketa Najbolji Italijanski sladoled u Beogradu', '2019-04-25 01:53:00'),
+(119, 'Popunjena anketa Popularnost kišobran žurki', '2019-04-25 01:53:29'),
+(120, 'Popunjena anketa Bolje kišobran žurke', '2019-04-25 01:53:58'),
+(121, 'Kreirana anketa: Kvalitet pretrage', '2019-04-25 01:57:26'),
+(122, 'Kreirana anketa: Iskustvo sa administratorom', '2019-04-25 02:06:32'),
+(123, 'Kreirana anketa: Korisnički interfejs portala', '2019-04-25 02:10:59');
 
 -- --------------------------------------------------------
 
@@ -89,6 +171,7 @@ CREATE TABLE `ankete` (
   `id_anketa` int(11) NOT NULL,
   `kreator` varchar(50) NOT NULL,
   `naziv` varchar(256) NOT NULL,
+  `opis` varchar(256) NOT NULL,
   `nivo_vidljivosti` int(11) NOT NULL,
   `datum_isticanja` datetime NOT NULL,
   `datum_kreiranja` datetime NOT NULL
@@ -98,9 +181,14 @@ CREATE TABLE `ankete` (
 -- Dumping data for table `ankete`
 --
 
-INSERT INTO `ankete` (`id_anketa`, `kreator`, `naziv`, `nivo_vidljivosti`, `datum_isticanja`, `datum_kreiranja`) VALUES
-(1, 'admin', 'Moja prva anketa', 2, '2019-04-30 23:59:59', '2019-04-18 00:00:00'),
-(2, 'admin', 'Moja druga anketa', 1, '2019-04-24 23:59:59', '2019-04-18 04:00:00');
+INSERT INTO `ankete` (`id_anketa`, `kreator`, `naziv`, `opis`, `nivo_vidljivosti`, `datum_isticanja`, `datum_kreiranja`) VALUES
+(1, 'kisobran', 'Bolje kišobran žurke', 'Pomozite nam da narednu kišobran žurku učinimo još energičnijom!', 1, '2019-05-17 23:59:59', '2019-04-25 01:31:49'),
+(2, 'kisobran', 'Popularnost kišobran žurki', 'Pomozite nam da ocenimo popularnost kišobran žurki na društvenim mrežama!', 1, '2019-05-15 23:59:59', '2019-04-25 01:40:12'),
+(3, 'TobOrg', 'Najbolji Italijanski sladoled u Beogradu', 'Rezultati ove ankete pokazaće gde se može pronaći najukusniji italijanski sladoled u Beogradu.', 1, '2019-05-10 23:59:59', '2019-04-25 01:47:17'),
+(4, 'admin', 'Kvalitet pretrage', 'Pomozite nam da poboljšamo kvalitet pretrage na portalu.', 1, '2019-05-31 23:59:59', '2019-04-25 01:57:26'),
+(5, 'admin', 'Iskustvo sa administratorom', 'Pomozite nam da ocenimo iskustvo korisnika sa administratorom portala.', 2, '2019-05-24 23:59:59', '2019-04-25 02:06:31'),
+(6, 'admin', 'Korisnički interfejs portala', 'Pomozite nam da poboljšamo korisnički interfejs portala.', 2, '2019-05-18 23:59:59', '2019-04-25 02:10:59'),
+(7, 'kisobran', 'Ocena sadržaja kišobran organizacije', 'Pomozite nam da unapredimo kvalitet sadržaja načih vesti i događaja.', 2, '2019-06-15 23:59:59', '2019-04-25 02:18:21');
 
 -- --------------------------------------------------------
 
@@ -132,11 +220,12 @@ INSERT INTO `dogadjaji` (`id_dogadjaj`, `naslov`, `tekst`, `kategorija`, `mesto`
 (1, '16. Noć muzeja u Srbiji: Vudstok, Tuluz-Lotrek i Neispričane priče', '<p>Širom Srbije u brojnim gradovima i mestima, 18. maja 2019, biće održana nova muzejska avantura, 16. Noć muzeja.</p><p>Od 16.00 do ponoći posetioci će biti u prilici da zavire u muzejske kolekcije, otkriju galerijske priče i otvore vrata brojnih drugih, neretko i sasvim neočekivanih zdanja koja pričaju priču o slobodi.</p><p>Na tragu neprekidne umetničke borbe za slobodne prostore, ove Noći muzeja podsetićemo se na to koliko je sloboda dragocena.</p><h3>16. Noć muzeja u Beogradu…</h3><p>U Beogradu će tokom Noći muzeja publika moći da obiđe oko šezdeset lokacija širom grada, od kojih će mnoge svoja vrata za širu javnost otvoriti samo ove večeri.</p><p>Po svojoj ekskluzivnosti posebno se izdvaja tura „Neispričane priče“, koja se već tradicionalno realizuje. U okviru ove ture posetioci će moći da osete dašak slobode hipi ere i kultnog Vudstoka, biće u prilici da se upoznaju sa Beogradom iz vremena Kraljevine Jugoslavije, preispitaju sve što znaju o jedinstvenim spomenicima kulture – starim prestoničkim kafanama ili pak da uživaju u duhu slobode koji je obojio beogradski noćni život osamdesetih godina prošlog veka.</p><p>Kroz poigravanje sa sujevjerjima, običajima, lepotom i taštinom, posetioci Etnografskog muzeja moći će da istraže raskošni svet ogledala, preispitaju umetničke slobode na sceni Bitef teatar, a nešto drugačije putovanje iza kulisa prirediće i Fakultet muzičke umetnosti.</p>', 12, 15, 36, 19, '2019-04-27 17:00:00', '2019-04-17 18:30:47', 'arsCreativa', '2019-04-28 15:00:00', '932f0eee-503c-4abc-bbcb-0bf638795383.jpg', 0),
 (2, 'BINA 2019 – 14. Beogradska internacionalna nedelja arhitekture', '<p>Od 9. do 30. maja u Beogradu, Novom Sadu i Pančevu biće održana 14. Beogradska internacionalna nedelja arhitekture – BINA 2019.</p><p>Tema manifestacije BINA 2019 pod sloganom „Pozitivno/Aktivno“, skreće pažnju na aktuelne i vanvremenske primere delovanja u urbanističko-arhitektonskoj praksi koje karakteriše pozitivan i proaktivan pristup razumevanju i rešavanju prostornih problema i pruža uvid u vrednosti, savremena tumačenja i naznake mogućih novih namena arhitekture nastale u periodu modernizma, viđena očima „Y“ generacije (milenijalci).</p><p>Kroz različite formate – izložbe, predavanja, filmove i instalacije BINA predstavlja savremenu arhitektonsku praksu koja nastaje u potpuno drugačijem društvenom, političkom i tehnološkom kontekstu, čije su osnovne karakteristike: brzina, diktat kapitala, fleksibilnost i transdisciplinarnost.</p><p>Kako biti profesionalan, ostvariti željene standarde, a istovremeno ostati veran etičkim postulatima struke teme su o kojima će se raspravljati na BINA 2019.</p><p><br></p><p><br></p><h3>BINA 2019 – šetnje, izložbe, predavanja…</h3><p>Program manifestacije je podeljen u pet programskih celina: BINA fokus, izložbe, predavanja i seminari, šetnje i izleti i radionice.</p><p>U <strong>BINA FOKUSU</strong> ove godine je stvaralaštvo i rad uvaženog arhitekte Aleksandra Stjepanovića.</p><p>U okviru ovog programa, na svečanom otvaranju manifestacije, u Artget galeriji Kulturnog centra Beograda, u četvrtak, 9. maja od 20.00, biće otvorena <strong>studijska izložba „Arhitektura Aleksandra Stjepanovića“</strong>, autora Jelice Jovanović, Relje Ivanić i Marka Kažića. U okviru ovog programa biće organizovana i predavanja i šetnja kroz objekte ovog značajnog arhitekte socijalističkih vremena.</p><p><strong>BINA izložbe</strong> koje se tradicionalno održavaju u Likovnoj galeriji Kulturnog centra Beograda i galeriji Artget, a ove godine i u galeriji FLU i Kolektiv, dolaze iz okruženja, Italije, Austrije i Slovenije.</p><p>U okviru gostujuće izložbe iz Južnog Tirola, Austrija, <strong>NEW TRADITION / NOVA TRADICIJA</strong>, predstaviće se sedam arhitektonskih studija i umetnika, a autori i kustosi projekta su David Kalas (arhitektura) i Liza Trokner (vizuelna umetnost).</p><p><strong>MODERNI U BEOGRADU (MuBGD)</strong> okuplja grupu arhitekata (Bekić Iva, Gajić Irena, Dukanac Dalia, Đorđević Stefan, Zlatković Snežana, Ješić Mirjana, Stojanović Hristina, Cigić Petar) sa posebnim interesovanjem i angažmanom u oblasti ilustracije, grafičkog dizajna i likovnih umetnosti.</p><p><strong>ARHITEKTONSKA NAGRADA PIRANEZI</strong>, Piranski dani arhitekture iz Slovenije predstavljaju se u galeriji Kolektiv. Prestižna međunarodna Piranezi nagrada iz oblasti arhitekture, dodeljuje se od 1989. godine i deo je međunarodne konferencije Piran Dani arhitekture (PDA). Nagrađuju se najbolje arhitektonske realizacije sagrađene u centralnoj Evropi u poslednje dve godine, a od 2008. godine takođe i najinovativnije studentske ideje. Fokus nagrade je na renomiranom odnosu savremene arhitekture u prirodnom, kulturnom i istorijskom kontekstu.</p><p><strong>PLASTIKA NEMA GRANICE</strong> je site-specific postavka arhitektonskog kolektiva BASURAMA, Španija, u saradnji sa galerijom Kolektiv, na Trgu Republike, i platou ispred Kulturnog centra Beograda. Basurama je umetnički kolektiv posvećen istraživanju, stvaranju u kulturi i prirodi i produkciji čija se praksa okreće oko odraza smeća, otpada i njihove ponovne upotrebe u svim njegovim oblicima i mogućim značenjima. Njihov cilj je da proučavaju te pojave svojstvene masovnoj proizvodnji realnog i virtuelnog smeća u potrošačkom društvu, pružajući različite tačke gledišta na ovu temu da bi generisati nove misli i stavove.</p><p><strong>ARHITEKTONSKI I URBANISTIČKI KONKURSI i ARHITEKTONSKE NAGRADE</strong> <strong>– sezona 2018-19</strong>, kao i izložba aktuelnih radova arhitektonskih studija URED i AKVS iz Beograda u okviru postavke PONESI SVOJ PROJEKAT, sastavni su deo programa BINA 2019.</p><p>U okviru programa izdvaja se programska celina <strong>SAVREMENA DANSKA ARHITEKTURA</strong>, u okviru koje će se posredstvom izložbe na otovrenom u Knez Mihailovoj ulici i niza predavanja predstaviti arhitektura zemlje koja je u samom vrhu savremene arhitektonske misli i produkcije.</p><p>Na tradicionalnom seminaru <strong>ARHITEKTI, PROJEKTANTI, PRAKTIČARI</strong> predstavljaju se učesnici iz Helsinkija i Beograda. Stogodišnjicu Bauhausa obeležiće predavanje <strong>ŽENE BAUHAUSA</strong>.</p><p><br></p><p><br></p><h3>BINA 2019 – šetnje</h3><p>Beogradska internacionalna nedelja arhitekture poznata je široj javnosti i po <strong>BINA šetnjama</strong> koje organizuje sa ciljem boljeg upoznavanja arhitekture grada Beograda.</p><p><strong>Besplatne tematske šetnje</strong> namenjene najširoj publici su uvek posećeni segment naše manifestacije, a ove godine će&nbsp;se obići zgrada PRIZAD-a (sadašnji Tanjug), Radio Beograd, Udružena banka, staro jezgro Zemuna i naselje Cerak-Vinogradi.</p><p>Pored već tradicionalnih šetnji kroz arhitekturu Beograda (Alejama Novog groblja, Jevrejsko nasleđe i Žene u arhitekturi)i ove godine planirana su <strong>dva izleta</strong>: u okviru izložbe posvećene Aleksandru Stjepanoviću – obilazak Filozofskog fakulteta u Novom Sadu, i izlet za Pančevo.</p><p>I ove godine BINA nastavlja sa projektom <strong>Gradovi deljenja</strong> (Shared Cities Creative Momentum – SCCM), u okviru kog unapređujemo život stanovnika prigradskih naselja, putem edukativnih radionica i kroz male intervencije u javnom prostoru (naselje Ledine).</p><p>SCCM je evropska kulturna platforma koja preispituje savremene urbane izazove evropskih gradova. Na ovogodišnjoj manifestaciji biće prezentovano Urbano čvorište 2 – Multifunkcionalni krug, letnju učionicu i mesto okupljanja. Projekat se realizuje u saradnji sa NVO Škogled i Osnovnom školom „Vlada Obradović Kameni“.</p>', 12, 16, 37, 20, '2019-05-09 00:00:00', '2019-04-17 18:33:48', 'arsCreativa', '2019-05-30 23:00:00', '301af7b9-b535-41ad-bfe2-e5f6c48d6a39.jpg', 0),
 (3, 'KC „Čukarica“: 78 dana…', '<p>Kulturni centar „Čukarica“ je koncipirao i osmislio izuzetno sadržajan program „78 dana…“ povodom obeležavanja 20 godina od NATO bombardovanja.</p><p>Dvadesetogodišnjica NATO agresije na Saveznu Republiku Jugoslaviju, danas Srbiju biće obeležena izložbom fotografija „NATO agresija u 78 slika“, koja će biti otvorena 23. marta od 19.00.</p><p>Pored ciklusa od 20 predavanja „Živa reč za kolektivno pamćenje“ ova ustanova će štampati fotomonografiju „Dvadeseta godišnjica podsećanja na dane otpora, odbrane i stradanja: NATO agresija u 78 slika“.</p><p>Izložba se realizuje u saradnji sa istaknutim fotoreporterima tog vremena i sa osloncem na fototeku i autore kompanije „Novosti“.</p><p>Po zatvaranju izložbe, kompletna postavka se seli u druge gradove Srbije (Niš, Vranje, Kraljevo, Pančevo, Valjevo, Aleksinac, Prokuplje, Zaječar…) i Republike Srpske da bi na kraju, na simboličan način, bila predata u trajno vlasništvo Gardi Vojske Srbije.</p><p>Pošto se obeležava dvadeset godina od NATO agresije predviđen je i ciklus od 20 predavanja veoma kompententnih ličnosti: Živadin Jovanović, Darko Laketić, Momir Bulatović, Vladimir Lazarević, Milivoje Pavlović, Božidar Delić, Nikola Šainović, Vidoje Kovačević…</p><h3>Za 78 dana…</h3><p>Da se podsetimo…</p><ul><li>Tokom agresije izvršeno je oko 2.300 vazdušnih udara na više od hiljadu objekata širom zemlje.</li><li>Bilo je angažavano više od hiljadu borbenih aviona NATO snaga i lansirano više od 400.000 projektila, ukupne težine 22.000 tona.</li><li>Upotrebljeno je više od 1.300 krstarećih raketa ogromne razorne moći.</li><li>Iako je Ženevskom konvencijom zabranjena upotreba kasetnih bombi, izručeno ih je 37.000 za dejstvovanje po živim ciljevima. Samo od njih stradalo je više od 200 civila.</li><li>Tokom NATO agresije poginula su 462 vojnika i više od 2.000 civila, među kojima je bilo 88 dece, na desetine starih osoba i bolesnika na lečenju.</li></ul><p><br></p>', 12, 15, 38, 20, '2019-05-23 19:00:00', '2019-04-17 18:36:42', 'arsCreativa', '2019-05-31 19:00:00', '9f508a0b-48ab-4161-bd1e-d51cc195c291.jpg', 0),
-(4, 'Kišobran žurka // 09. jun 2019. // Drugstore', '<p>Datum je 9. jun, lokacija je Dragstor, start od 23h, zezanje je beskonačno.</p><p>Tu su Disko Buvljak, Do the Math, X-Coast, DJ Flip, Summer Deaths, Spejs Noksi, Nihil, Milković i Yan Dusk.</p><p> Tu smo naravno i mi.</p><p>Karte u pretprodaji u Zaokretu (300rsd). Na ulazu 500. Dođi.</p><p>———-</p><p>Kišobran žurka</p><p> 09. Februar 2019. godine</p><p> Klub Drugstore, Bulevar Despota Stefana 115</p><p>Start: 23h</p><p> Big Room: Kišobran DJs</p><p> Black Room: X-Coast, DJ Flip, Do the Math</p><p> ICB: Disko Buvljak, Zicer Inc. showcase</p><p>Karte: 300 rsd u Zaokretu, 500rsd na ulazu na parti</p><p>———-</p><p>Godina samo što je počela, a mi već imamo spremne nove hitove na koje želimo da vidimo vaše reakcije. Neverovatno je koliko dobrih bendova najavljuje albume u narednom periodu, pa smo prilično sigurni da će 2019. biti godina vrhunskih izdanja.</p><p>X-Coast ima novi EP i dolazi u Beograd u okviru evropske turneje, a društvo mu prave DJ Flip i Do the Math iz Kišobrana koji će ovom prilikom imati ulogu domaćina.</p><p>Zicer Inc. za sebe kažu da su “oskudni hip hop kolektiv”, ali po nama su definitivno ekipa koja donosi novu svežinu na rep scenu. Ubeđeni smo da će 2019. biti godina u kojoj će njihov zvuk eksplodirati. Na čelu sa misterioznim producentom koji se krije iza imena Summer Deaths, ekipu čine Nihil, Milković koji ima hit singl Lisabon, Spejs Noksi i Yan Dusk koji su u decembru 2018. izbacili fantastične albume.</p>', 8, 39, 40, 19, '2019-06-09 23:00:00', '2019-04-17 18:39:45', 'kisobran', '2019-06-10 04:00:00', 'cd9b64d6-0514-4ca4-bc42-2be0307cfdfb.jpg', 0),
+(4, 'Kišobran žurka // 10. mart 2019. // Drugstore', '<p>Datum je 9. jun, lokacija je Dragstor, start od 23h, zezanje je beskonačno.</p><p>Tu su Disko Buvljak, Do the Math, X-Coast, DJ Flip, Summer Deaths, Spejs Noksi, Nihil, Milković i Yan Dusk.</p><p> Tu smo naravno i mi.</p><p>Karte u pretprodaji u Zaokretu (300rsd). Na ulazu 500. Dođi.</p><p>———-</p><p>Kišobran žurka</p><p> 09. Februar 2019. godine</p><p> Klub Drugstore, Bulevar Despota Stefana 115</p><p>Start: 23h</p><p> Big Room: Kišobran DJs</p><p> Black Room: X-Coast, DJ Flip, Do the Math</p><p> ICB: Disko Buvljak, Zicer Inc. showcase</p><p>Karte: 300 rsd u Zaokretu, 500rsd na ulazu na parti</p><p>———-</p><p>Godina samo što je počela, a mi već imamo spremne nove hitove na koje želimo da vidimo vaše reakcije. Neverovatno je koliko dobrih bendova najavljuje albume u narednom periodu, pa smo prilično sigurni da će 2019. biti godina vrhunskih izdanja.</p><p>X-Coast ima novi EP i dolazi u Beograd u okviru evropske turneje, a društvo mu prave DJ Flip i Do the Math iz Kišobrana koji će ovom prilikom imati ulogu domaćina.</p><p>Zicer Inc. za sebe kažu da su “oskudni hip hop kolektiv”, ali po nama su definitivno ekipa koja donosi novu svežinu na rep scenu. Ubeđeni smo da će 2019. biti godina u kojoj će njihov zvuk eksplodirati. Na čelu sa misterioznim producentom koji se krije iza imena Summer Deaths, ekipu čine Nihil, Milković koji ima hit singl Lisabon, Spejs Noksi i Yan Dusk koji su u decembru 2018. izbacili fantastične albume.</p>', 8, 39, 40, 19, '2019-03-10 23:00:00', '2019-04-17 18:39:45', 'kisobran', '2019-03-10 04:00:00', 'cd9b64d6-0514-4ca4-bc42-2be0307cfdfb.jpg', 0),
 (5, 'Kišobran žurka – 10 godina // 01. avgust 2019. // Drugstore', '<p>Kišobran 1. decembra 2018. obeležava 10 godina postojanja i tim povodom pravimo veliku, do sada najveću žurku. Prijatelji sa svih meridijana alternativne scene nam se pridružuju u slavlju osvajajući sve poznate i neke do sada neiskorišćene prostorije Dragstora jer zezanje pravimo na čak 5 bina!</p><p>Pored Kišobran didžejeva koji pripremaju plejadu hitova koje su obeležili žurke u poslednjih 10 godina, u pomoć nam dolaze i njujorški producent Baltra, DJ Brka (Disco Not Disco), Stevie Whisper i Vitanov (YES), Vizelj, Lonče (Pop Depresija), Hidden BG, Kene Beri, Matej Rusmir i Andria (Insolence), Sergio Lounge, lelú, Miško Bilbija, Trifun &amp; Ivan Beloševac i nezaobilazni Disko Buvljak.</p><p>Čak ni Dragstor nije bio dovoljno veliki da uključimo sve ljude koje smo želeli, sve ljude sa kojima smo sarađivali i sve ljude sa kojima smo se družili za ovih 10 godina, ali će svi oni biti sa nama u masi, gde planiramo da slavimo do zore.</p><p>Kišobran kolektiv se tokom godina menjao, bio aktivan na mnogo polja, negde prednjačio, negde pomogao, negde samo podržavao prisustvom, ali jedna konstanta tokom godina uvek je bila Kišobran žurka – okosnica kolektiva i događaj na kome su se svima ukrštali putevi.</p><p>+++++++++++++++++++++++++++++++++++++++</p><p>Deseti rođendan Kišobrana</p><p>Subota, 01. decembar 2018. godine</p><p>Klub Dragstor, Bulevar Despota Stefana 115</p><p>Start: 23h</p><p>Big Room: Kišobran</p><p>Tech Room: Sergio Lounge, Vizelj, DJ Brka, Lonče, Miško Bilbija</p><p>Chambers: Stevie Whisper, Vitanov, Matej Rusmir, ANDRIA</p><p>Black Room: Baltra Baltra, HiddenBG, lelú</p><p>Ice Cream Booth: Disko Buvljak, kene beri, Trifun &amp; Ivan Beloševac</p><p>Prodaja karata u Zaokretu:</p><p>Jako ograničena količina prve ture karata od 03. novembra po ceni od 300 dinara</p><p>Standardna cena u pretprodaji 400 dinara</p><p>Cena karte na ulazu 500 dinara</p><p>+++++++++++++++++++++++++++++++++++++++++</p>', 8, 15, 40, 19, '2019-08-01 23:00:00', '2019-04-17 18:41:17', 'kisobran', '2019-08-02 04:00:00', '4e0bba1a-0ba4-44c0-9bf3-77e0de18628e.jpg', 0),
 (6, 'Kišobran žurka // Subota 13. oktobar, 23h // Kc Grad', '<p>Jedna intimna pred veliko finale i 10. Kišobran rođendan</p><p>Ne postoji bolji osećaj nego kad žurka eksplodira, a vi ste nam da dohvat ruke pa skačemo, vrištimo i grlimo se zajedno. Ovog puta bez velikih bina, bez velikih obećanja, samo mi i vi, jedan podijum dok se ne raznesemo zajedno, pa ko preživi pričaće.</p><p>Subota 13. oktobar, Kc GRAD od 23h, karte u Zaokretu 300, na ulazu 400.</p><p>Vidimo se unutra!</p>', 8, 15, 41, 19, '2019-10-13 23:00:00', '2019-04-17 18:43:31', 'kisobran', '2019-10-14 04:00:00', 'ec1728c3-65d6-4bbd-9951-2d65df827cdf.jpg', 0),
 (7, 'Musicology: Nik Vest', '<p>Američka fank basistkinja, pevačica i štićenica legendarnog Prinsa, <strong>Nik Vest</strong>, nastupiće <strong>26. marta</strong> u Bitefartcafe-u u okviru serijala Musicology.</p><p>Nik Vest je talentovana basistkinja i virtuoz 21. veka, kojoj ne nedostaju ni muzička kreativnost, ni scenski pokret. Specifična je po „čiroki“ frizuri koja je, simbolično – baš u obliku bas ključa.</p><p>Uz biografiju koja uključuje rad sa produkcijom Kvinsi Džons, Prinsom, Džonom Mejerom, Mejsi Grej, Dejvom Stjuartom i mnogim drugim muzičarima, Nik Vest je mnogo više od samo još jednog lepog lica.</p><p>Njene kolege muzičari, kritičari i publika, smatraju je za jednog od najistaknutijih predstavnika nove fank scene i za naslednicu legendarnog Prinsa, čija je štićenica bila i sa kojim je svojevremeno žuta štampa dovodila u vezu.</p>', 7, 15, 42, 20, '2019-05-26 19:00:00', '2019-04-17 18:46:44', 'ticketVision', '2019-05-26 23:00:00', '06d31ea6-fe06-4a6f-9274-b6da0b519fae.jpg', 0),
-(8, 'Orthodox Celts tradicionalno u Domu omladine', '<p>U nedelju, 17. marta od 20.00, u sali Amerikana Doma omladine Beograda tradicionalni koncert održaće grupa Orthodox Celts.</p><p>I ove godine popularni bend će sa svojom vernom publikom proslaviti Dan Svetog Patrika a to će biti 27. samostalni koncert u Beogradu.</p><p>Ovime se nastavlja najduža muzička tradicija koja je zabeležena u srpskom rokenrolu – Orthodox Celts su jedini bend koji, od svog nastanka, svake godine na isti dan održava koncert.</p><p>Poslednji album „<strong>Many Mouths Shut</strong>“ je pored odličnih pesama, obeležio i veoma interesantan omot u stripu, koji je specijalno za Orthodox Celts uradio poznati Valter Venturi, što je bendu predstavljalo posebnu čast. Zato je ove godine naš najveći izdavač stripova „Veseli četvrtak“ odlučio da svi posetioci uz ulaznicu dobiju i strip.</p>', 7, 15, 43, 20, '2019-05-17 22:00:00', '2019-04-17 18:48:19', 'ticketVision', '2019-05-18 02:00:00', 'c44c3609-1f0a-4b65-a67a-62e95fc7d0c7.jpg', 0);
+(8, 'Orthodox Celts tradicionalno u Domu omladine', '<p>U nedelju, 17. marta od 20.00, u sali Amerikana Doma omladine Beograda tradicionalni koncert održaće grupa Orthodox Celts.</p><p>I ove godine popularni bend će sa svojom vernom publikom proslaviti Dan Svetog Patrika a to će biti 27. samostalni koncert u Beogradu.</p><p>Ovime se nastavlja najduža muzička tradicija koja je zabeležena u srpskom rokenrolu – Orthodox Celts su jedini bend koji, od svog nastanka, svake godine na isti dan održava koncert.</p><p>Poslednji album „<strong>Many Mouths Shut</strong>“ je pored odličnih pesama, obeležio i veoma interesantan omot u stripu, koji je specijalno za Orthodox Celts uradio poznati Valter Venturi, što je bendu predstavljalo posebnu čast. Zato je ove godine naš najveći izdavač stripova „Veseli četvrtak“ odlučio da svi posetioci uz ulaznicu dobiju i strip.</p>', 7, 15, 43, 20, '2019-05-17 22:00:00', '2019-04-17 18:48:19', 'ticketVision', '2019-05-18 02:00:00', 'c44c3609-1f0a-4b65-a67a-62e95fc7d0c7.jpg', 0),
+(9, 'Beogradska ultimativna kulturna akcija – Buka! Sada!', '<p>U subotu, 18. maja, u KPGT prostorijama (Stara šećerana, Radnička 3) biće organizovana Beogradska&nbsp;ultimativna&nbsp;kulturna&nbsp;akcija – „Buka! Sada!“.</p><p><strong>„Buka!Sada!“</strong> je jedinstveno muzičko iskustvo jer okuplja neka od najzvučnijih frontmenskih imena iz celog regiona koji će – u jednoj noći, nastupiti u ulozi disk džokeja.</p><p>Posle prošlogodišnjeg, rasprodatog Buka! izdanja, ovog aprila za gramofonima na tri bine smenjivaće se: <strong>Mile Kekin</strong> (Hladno pivo),<strong> Ivan Novak</strong> (Laibach), <strong>Cane</strong> (Partibrejkers, Škrtice), <strong>Jovan Matić</strong> (Del Arno Band), <strong>Žika Todorović</strong> i <strong>Uroš Đurić</strong>, <strong>Dr Pop</strong> (Atheist Rap), <strong>Vukašin Marković</strong> (irieFM), <strong>Maja Cvetković</strong> (E-Play), <strong>Kojot</strong> (Hornsman Coyote, ex Eyesburn), <strong>Vasil Hadžimanov, Igor Perović</strong> (Plejboj), <strong>Bojan Slačala</strong> (Artan Lili, Stuttgart Online),<strong> Constructa &amp; Zoe Kida</strong> (Zemlja gruva), <strong>Boško Mijušković</strong> (Straight Mickey And The Boys, Škrtice)…</p><p>O muzici koju će puštati 13. aprila, <strong>Dr Pop iz benda Atheist Rap</strong> rekao je:</p><p>– Veoma mi je važno da budem deo žurke „Buka!Sada!“, deo sjajne ekipe kolega i koleginica.&nbsp;Puštaću svoje i, nadam se, favorite publike. Možete očekivati Me First and Gimmie Gimmies, Rich Kids on LSD, Bad Brains, Ruts, Gang of Four, NoFX, Kawasaki3P, TBF, Vojko V, Dubioza, Stereo Banana, Novembar i još dosta toga. Radujem se Buci!, već sada!</p><p>A <strong>Maja Cvetković iz benda E-Play</strong> dodaje:</p><p>– Interesantno mi je što sam pozvana da puštam muziku, s obzirom da to ne radim često. Fokusiraću se na ritmove koji su za mene bili revolucionarni – Prodigy, Propellerheads, Chemical Brothers… zatim neke novijie stvari poput Viagra Boys. Bez sporih pesama! Društvo u kome ću se naći vrlo je zanimljivo – verujem da će biti dobre muzike, atmosfere i puno osmeha.</p><p>Posle prošlogodišnje lokacije Kluz u centru Beograda, ovoga puta je zbog velikog interesovanja publike i neočekivano brze prodaje karata, „Buka! Sada!“ smeštena u veći, izuzetno atraktivan prostor pozorišta KPGT, sa bogatom klupskom istorijom.</p><p>Takođe, datum održavanja manifestacije „Buka! Sada!“&nbsp;nije slučajan – on obeležava i Record Store Day (13. april), globalnu manifestaciju koja slavi rokenrol, ploče, ljubav prema slušanju muzike i njenoj selekciji.</p><p>Karte su u prodaji na svim prodajnim mestima&nbsp;tikets.rs:</p><ul><li>promotivni kontigent 300 ulaznica po ceni od <strong>1.100 RSD</strong>;</li><li>regularna cena ulaznice je<strong> 1.300 RSD</strong>;</li><li>cena ulaznice na vratima je <strong>1.500 RSD</strong>.</li></ul>', 7, 15, 44, 19, '2019-05-18 19:00:00', '2019-04-24 22:59:30', 'kisobran', '2019-05-18 23:00:00', 'e295fc2c-53a1-4f48-9866-31401a2294bb.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -166,7 +255,10 @@ INSERT INTO `karakteristike_prostora` (`id_karakteristika`, `id_dogadjaj`, `id_s
 (9, 4, 22),
 (10, 5, 22),
 (11, 6, 22),
-(12, 7, 23);
+(12, 7, 23),
+(13, 9, 23),
+(14, 9, 25),
+(15, 9, 22);
 
 -- --------------------------------------------------------
 
@@ -211,6 +303,83 @@ CREATE TABLE `obavestenja` (
   `procitano` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `obavestenja`
+--
+
+INSERT INTO `obavestenja` (`id_obavestenje`, `korisnicko_ime`, `datum`, `tekst`, `id_vest`, `id_dogadjaj`, `id_oglas`, `procitano`) VALUES
+(1, 'kisobran', '2019-04-24 22:56:21', 'Korisnik je arhivirao vest:', 7, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `odgovori`
+--
+
+CREATE TABLE `odgovori` (
+  `id_odgovor` int(11) NOT NULL,
+  `id_popunjena_anketa` int(11) NOT NULL,
+  `id_ponudjeni_odgovor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `odgovori`
+--
+
+INSERT INTO `odgovori` (`id_odgovor`, `id_popunjena_anketa`, `id_ponudjeni_odgovor`) VALUES
+(1, 1, 32),
+(2, 1, 29),
+(3, 1, 30),
+(4, 1, 37),
+(5, 1, 34),
+(6, 1, 40),
+(7, 2, 21),
+(8, 2, 3),
+(9, 2, 13),
+(10, 2, 10),
+(11, 2, 7),
+(12, 2, 26),
+(13, 2, 17),
+(14, 3, 42),
+(15, 3, 50),
+(16, 3, 47),
+(17, 3, 48),
+(18, 4, 28),
+(19, 4, 40),
+(20, 4, 37),
+(21, 5, 1),
+(22, 5, 26),
+(23, 5, 10),
+(24, 5, 21),
+(25, 5, 18),
+(26, 5, 11),
+(27, 6, 42),
+(28, 6, 53),
+(29, 6, 50),
+(30, 6, 52),
+(31, 6, 56),
+(32, 7, 52),
+(33, 7, 50),
+(34, 7, 56),
+(35, 7, 53),
+(36, 7, 48),
+(37, 7, 47),
+(38, 7, 42),
+(39, 8, 37),
+(40, 8, 40),
+(41, 8, 32),
+(42, 9, 21),
+(43, 9, 3),
+(44, 9, 10),
+(45, 9, 16),
+(46, 9, 12),
+(47, 9, 26),
+(48, 10, 62),
+(49, 10, 72),
+(50, 10, 77),
+(51, 10, 67),
+(52, 10, 57);
+
 -- --------------------------------------------------------
 
 --
@@ -234,7 +403,8 @@ CREATE TABLE `oglasi` (
 INSERT INTO `oglasi` (`id_oglas`, `naslov`, `tekst`, `datum_kreiranja`, `datum_isticanja`, `korisnicko_ime`, `zahtev_brisanje`) VALUES
 (1, 'Content writer', '<p>Requirements:</p><ul><li>Near-native English proficiency</li><li>Work experience is desirable</li><li>Basic understanding of keyword usage and SEO is a plus</li><li>Ability to conduct in-depth research on a variety of topics using the internet</li><li>Working knowledge of Google Docs, Microsoft Word or similar software</li><li>Ability to thrive in a fast-paced, deadline-oriented environment</li></ul><p>Your Responsibilities:</p><p>● Thoroughly researching the topic of the task</p><p>● Writing unique Search Engine Optimized articles</p><p>● Editing your previously written articles according to the recommendations from our proofreaders</p><p>What we offer:</p><p>● Working in a relaxed environment</p><p>● Great prospects for career advancement and valuable work experience for</p><p>people just starting their career.</p><p>● Full-time position</p><p>Please send your CV and cover letter to: career@kisobran.org</p>', '2019-04-17 19:08:13', '2019-06-01 23:59:59', 'kisobran', 0),
 (2, 'Novinar/novinarka', '<p>Potrebna</p><p>Novinarka - novinar</p><p><strong> za snimanje priloga i pripremu TV emisije koja se emituje na Pink 3, KCN-u i jos 40 TV stanica u regionu. </strong></p><p>(youtube <strong> stazetv </strong>)</p><p><strong> Poslati: </strong></p><ul><li>CV</li><li>fotografiju tela i lica</li><li>neki snimak koji ste već objavili</li></ul>', '2019-04-17 19:09:04', '2019-05-17 23:59:59', 'kisobran', 0),
-(3, 'Prodavac', '<h3>Radni zadaci su u sledećim okvirima:</h3><ul><li>Izgrađivanje i održavanje dobrih poslovnih odnosa sa kupcima</li><li>Održavanje urednosti radnog prostora</li><li>Praćenje asortimana proizvoda</li></ul><h3>Kandidati treba da ispunjavaju sledeće zahteve:</h3><ul><li>Računarska pismenost (MS Office, MS Excel)</li><li>Znanje engleskog jezika</li></ul><h3>Profil kandidata:</h3><ul><li>Odlične komunikacione sposobnosti</li><li>Izražene prodajne veštine i veštine prezentacije</li><li>Razvijen osećaj za estetiku</li><li>Ljubaznost, pedantnost i efikasnost u radu</li></ul>', '2019-04-17 19:13:50', '2019-05-25 23:59:59', 'ticketVision', 0);
+(3, 'Prodavac', '<h3>Radni zadaci su u sledećim okvirima:</h3><ul><li>Izgrađivanje i održavanje dobrih poslovnih odnosa sa kupcima</li><li>Održavanje urednosti radnog prostora</li><li>Praćenje asortimana proizvoda</li></ul><h3>Kandidati treba da ispunjavaju sledeće zahteve:</h3><ul><li>Računarska pismenost (MS Office, MS Excel)</li><li>Znanje engleskog jezika</li></ul><h3>Profil kandidata:</h3><ul><li>Odlične komunikacione sposobnosti</li><li>Izražene prodajne veštine i veštine prezentacije</li><li>Razvijen osećaj za estetiku</li><li>Ljubaznost, pedantnost i efikasnost u radu</li></ul>', '2019-04-17 19:13:50', '2019-05-25 23:59:59', 'ticketVision', 0),
+(4, 'Menadžera tima (m/ž)', '<h3>Vaši zadaci obuhvataće:</h3><ul><li>Prijem, pripremanje i prezentaciju robe u skladu sa zadatim uputstvima</li><li>Pripremu robe za prodaju</li><li>Pripremne poslove za akcije</li><li>Odgovornost za promet</li><li>Plan radnog vremena zaposlenih, podsticanje i motivisanje zaposlenih</li><li>Brigu za kupce</li><li>Održavanje čistoće i reda u poslovnici</li><li>Organizaciju i vođenje poslovnice i opšte administrativne poslove</li><li>Sprovođenje internih smernica koncerna</li></ul><h3>Traženi profil:</h3><ul><li>Vrlo dobro znanje engleskog jezika u govoru i pisanju je obavezno</li><li>Višegodišnje radno iskustvo u maloprodaji</li><li>Iskustvo u vođenju ljudi i sposobnost kvalitetnog rešavanja konflikata</li><li>Završeno obrazovanje u struci - maloprodaja ili drugo obrazovanje uz odgovarajuće radno iskustvo</li><li>Zainteresovanost za modu i profesionalan nastup</li><li>Samostalnost u radu i sposobnost timskog rada</li><li>Vremenska fleksibilnost unutar uobičajenog radnog vremena u trgovini</li></ul><h3>Nudimo Vam:</h3><ul><li>Dinamično i brzo rastuće radno okruženje i dugoročnu perspektivu</li><li>Prijatnu radnu klimu i posvećeni tim</li><li>Radni odnos na puno radno vreme unutar uobičajenog radnog vremena u trgovini</li></ul><p>Ukoliko smo Vas zainteresovali za ovo radno mesto, pošaljite nam Vašu potpunu konkursnu dokumentaciju sa slikom na srpskom i engleskom jeziku&nbsp;elektronskim putem <strong>do 25.04.2019.</strong>&nbsp;U obzir ćemo uzeti samo konkursnu dokumentaciju dostavljenu na oba jezika.</p><p>Ovim putem svim kandidatima želimo da zahvalimo na interesovanju za posao u našoj kompaniji. Sve prijave će biti obrađene, a kandidate koji najbolje zadovoljavaju uslove konkursa kontaktiraćemo u vrlo kratkom roku. Ostalim kandidatima zahvaljujemo na iskazanom poverenju i želimo uspešan nastavak profesionalne karijere.</p>', '2019-04-24 23:26:30', '2019-03-25 23:59:59', 'kisobran', 0);
 
 -- --------------------------------------------------------
 
@@ -284,9 +454,32 @@ CREATE TABLE `pitanja` (
 --
 
 INSERT INTO `pitanja` (`id_pitanje`, `id_anketa`, `pitanje`, `tip`) VALUES
-(1, 1, 'Moje pitanje', 1),
-(2, 1, 'Moje drugo pitanje', 2),
-(3, 2, 'Da li Vam se dopada moj diplomski rad?', 1);
+(1, 1, 'Da li vam se dopala prethodna kišobran žurka?', 1),
+(2, 1, 'Šta možemo da učinimo da narednu kišobran žurku učinimo boljom?', 2),
+(3, 1, 'Ocenite repertoar na kišobran žurkama:', 1),
+(4, 1, 'Ocenite obezbeđenje na kišobran žurkama:', 1),
+(5, 1, 'Ocenite izbor pića na kišobran žurkama:', 1),
+(6, 1, 'Da li biste ponovo došli na kišobran žurku?', 1),
+(7, 2, 'Kako ste saznali za kišobran organizaciju?', 2),
+(8, 2, 'Kako ste saznali za prethodnu kišobran žurku?', 2),
+(9, 2, 'Koji je vaš glavni izvor informacija o kišobran žurkama?', 1),
+(10, 3, 'Izaberite poslastičarnicu sa najukusnijim italijanskim sladoledom:', 1),
+(11, 3, 'Izaberite omiljene ukuse:', 2),
+(12, 4, 'Ocenite pretragu vesti na portalu:', 1),
+(13, 4, 'Ocenite pretragu događaja na portalu:', 1),
+(14, 4, 'Ocenite pretragu oglasa na portalu:', 1),
+(15, 4, 'Ocenite pretragu organizacija na portalu:', 1),
+(16, 4, 'Ocenite pretragu anketa na portalu:', 1),
+(17, 5, 'Da li administrator redovno odgovara na vaše zahteve za brisanje vesti/događaja/oglasa?', 1),
+(18, 5, 'Da li je administrator nekada nepravedno obrisao vašu vest/događaj/oglas?', 1),
+(19, 5, 'Da li ste dugo čekali na odobrenje naloga od strane administratora?', 1),
+(20, 6, 'Da li ste zadovoljni korisničkim interfejsom portala?', 1),
+(21, 6, 'Navedite šta vam od ponuđenih odgovora nedostaje na portalu:', 2),
+(22, 7, 'Da li redovno čitate naše post-ove?', 1),
+(23, 7, 'Da li smatrate da našem timu nedostaju profesionalniji novinari?', 1),
+(24, 7, 'Ocenite kvalitet naših vesti u odnosu na vaše?', 1),
+(25, 7, 'Da li biste zaposlili nekoga iz našeg tima?', 1),
+(26, 7, 'Koliko ste bili iskreni u popunjavanju ove ankete?', 1);
 
 -- --------------------------------------------------------
 
@@ -305,16 +498,150 @@ CREATE TABLE `ponudjeni_odgovori` (
 --
 
 INSERT INTO `ponudjeni_odgovori` (`id_odgovor`, `id_pitanje`, `odgovor`) VALUES
-(1, 1, 'Moj prvi odgovor'),
-(2, 1, 'Moj drugi odgovor'),
-(3, 2, 'Moj prvi odgovor na moje drugo pitanje'),
-(4, 2, 'Moj drugi odgovor na moje drugo pitanje'),
-(5, 2, 'Moj treci odgovor'),
-(6, 3, 'Ne, nimalo!'),
-(7, 3, 'Pa, moglo bi bolje'),
-(8, 3, 'Ok je'),
-(9, 3, 'Sviđa mi se'),
-(10, 3, 'Oduševljen/a sam!');
+(1, 1, 'Jedva čekam sledeću!'),
+(2, 1, 'Da, dopala mi se.'),
+(3, 1, 'Neutralan/a sam.'),
+(4, 1, 'Ne, nije moj tip žurki.'),
+(5, 1, 'Neću više nikad doći na kišobran žurku!'),
+(6, 2, 'Veći izbor pića'),
+(7, 2, 'Popularniji repertoar'),
+(8, 2, 'Iskusniji izvođači'),
+(9, 2, 'Veći prostor'),
+(10, 2, 'Zabrana pušenja u prostorijama'),
+(11, 3, '5'),
+(12, 3, '4'),
+(13, 3, '3'),
+(14, 3, '2'),
+(15, 3, '1'),
+(16, 4, '5'),
+(17, 4, '4'),
+(18, 4, '3'),
+(19, 4, '2'),
+(20, 4, '1'),
+(21, 5, '5'),
+(22, 5, '4'),
+(23, 5, '3'),
+(24, 5, '2'),
+(25, 5, '1'),
+(26, 6, 'Da!'),
+(27, 6, 'Ne...'),
+(28, 7, 'Čuo/la sam od prijatelja.'),
+(29, 7, 'Putem Fejsbuka.'),
+(30, 7, 'Putem Instagrama.'),
+(31, 7, 'Pomoću Google pretraživača.'),
+(32, 7, 'Pomoću Kulturiške.'),
+(33, 8, 'Čuo/la sam od prijatelja.'),
+(34, 8, 'Putem Fejsbuka.'),
+(35, 8, 'Putem Instagrama.'),
+(36, 8, 'Pomoću Google pretraživača.'),
+(37, 8, 'Pomoću Kulturiške.'),
+(38, 9, 'Fejsbuk'),
+(39, 9, 'Instagram'),
+(40, 9, 'Kulturiška'),
+(41, 9, 'Web stranica organizacije'),
+(42, 10, 'Poslastičarnica Poslastičarnica'),
+(43, 10, 'Crna Ovca'),
+(44, 10, 'Moritz'),
+(45, 10, 'Flor Gelato'),
+(46, 10, 'Nisam probao/la.'),
+(47, 11, 'vanila'),
+(48, 11, 'čokolada'),
+(49, 11, 'straćatela'),
+(50, 11, 'pistaći'),
+(51, 11, 'badem'),
+(52, 11, 'lešnik'),
+(53, 11, 'višnja'),
+(54, 11, 'mango'),
+(55, 11, 'pomorandža'),
+(56, 11, 'kokos'),
+(57, 12, '5'),
+(58, 12, '4'),
+(59, 12, '3'),
+(60, 12, '2'),
+(61, 12, '1'),
+(62, 13, '5'),
+(63, 13, '4'),
+(64, 13, '3'),
+(65, 13, '2'),
+(66, 13, '1'),
+(67, 14, '5'),
+(68, 14, '4'),
+(69, 14, '3'),
+(70, 14, '2'),
+(71, 14, '1'),
+(72, 15, '5'),
+(73, 15, '4'),
+(74, 15, '3'),
+(75, 15, '2'),
+(76, 15, '1'),
+(77, 16, '5'),
+(78, 16, '4'),
+(79, 16, '3'),
+(80, 16, '2'),
+(81, 16, '1'),
+(82, 17, 'Da'),
+(83, 17, 'Ne'),
+(84, 17, 'Nisam do sada slao/la zahteve za brisanje'),
+(85, 18, 'Da, više puta!'),
+(86, 18, 'Da, jedanput ili dvaput.'),
+(87, 18, 'Ne, nikada!'),
+(88, 19, 'Da, više od nedelju dana.'),
+(89, 19, 'Da, između 3 i 5 radnih dana.'),
+(90, 19, 'Nalog mi je odobren nakon jednog radnog dana.'),
+(91, 19, 'Ne, nalog mi je odobren nakon nekoliko minuta!'),
+(92, 20, 'Da'),
+(93, 20, 'Ne'),
+(94, 21, 'Više kategorija za vesti'),
+(95, 21, 'Više kategorija za događaje'),
+(96, 21, 'Više karakteristika prostora za događaje'),
+(97, 21, 'Više opcija za uzrsat kome je događaj namenjen'),
+(98, 22, 'Da'),
+(99, 22, 'Ponekad'),
+(100, 22, 'Ne'),
+(101, 23, 'Da'),
+(102, 23, 'Ne'),
+(103, 24, '5'),
+(104, 24, '4'),
+(105, 24, '3'),
+(106, 24, '2'),
+(107, 24, '1'),
+(108, 25, 'Da'),
+(109, 25, 'Ne'),
+(110, 26, '5'),
+(111, 26, '4'),
+(112, 26, '3'),
+(113, 26, '2'),
+(114, 26, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `popunjene_ankete`
+--
+
+CREATE TABLE `popunjene_ankete` (
+  `id_popunjena_anketa` int(11) NOT NULL,
+  `id_anketa` int(11) NOT NULL,
+  `korisnicko_ime` varchar(50) DEFAULT NULL,
+  `cookie` varchar(36) DEFAULT NULL,
+  `datum` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `popunjene_ankete`
+--
+
+INSERT INTO `popunjene_ankete` (`id_popunjena_anketa`, `id_anketa`, `korisnicko_ime`, `cookie`, `datum`) VALUES
+(1, 2, 'TobOrg', NULL, '2019-04-25 01:48:18'),
+(2, 1, 'TobOrg', NULL, '2019-04-25 01:49:12'),
+(3, 3, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 01:49:42'),
+(4, 2, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 01:50:26'),
+(5, 1, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 01:51:25'),
+(6, 3, 'kisobran', NULL, '2019-04-25 01:52:19'),
+(7, 3, 'admin', NULL, '2019-04-25 01:53:00'),
+(8, 2, 'admin', NULL, '2019-04-25 01:53:29'),
+(9, 1, 'admin', NULL, '2019-04-25 01:53:58'),
+(10, 4, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 02:19:21');
 
 -- --------------------------------------------------------
 
@@ -369,7 +696,8 @@ INSERT INTO `sifarnici_izvestaj` (`id_sifarnik`, `naziv`) VALUES
 (11, 'Dodate stavke'),
 (12, 'Obrisane stavke'),
 (13, 'Kreirane ankete'),
-(14, 'Popunjene ankete');
+(14, 'Popunjene ankete'),
+(15, 'Obrisane ankete');
 
 -- --------------------------------------------------------
 
@@ -465,7 +793,143 @@ INSERT INTO `stavke_izvestaj` (`id_stavka`, `naziv`, `datum`, `id_sifarnik`) VAL
 (74, 'Kategorije vesti: nova kategorija', '2019-04-17 23:03:53', 11),
 (75, 'Kategorije vesti: nova kategorija', '2019-04-17 23:04:21', 12),
 (76, 'Moja prva anketa', '2019-04-18 01:32:16', 13),
-(77, 'Moja druga anketa', '2019-04-18 01:35:05', 13);
+(77, 'Moja prva anketa', '2019-04-21 22:32:26', 14),
+(78, 'Moja prva anketa', '2019-04-21 23:50:04', 14),
+(79, 'Moja prva anketa', '2019-04-22 01:54:34', 14),
+(80, 'Moja druga anketa', '2019-04-22 01:55:00', 14),
+(81, 'test anketa', '2019-04-22 02:11:19', 13),
+(82, 'Kisobran anketa', '2019-04-23 16:38:07', 13),
+(83, 'Moja prva anketa', '2019-04-23 22:39:31', 14),
+(84, 'Kisobran anketa', '2019-04-24 00:34:08', 14),
+(85, 'test anketa', '2019-04-24 01:26:52', 14),
+(86, 'Moja prva anketa', '2019-04-24 01:48:57', 15),
+(87, 'Kisobran anketa', '2019-04-24 01:50:12', 15),
+(88, 'test anketa', '2019-04-24 01:50:13', 15),
+(89, 'Moja druga anketa', '2019-04-24 01:50:16', 15),
+(90, 'test', '2019-04-24 02:04:28', 1),
+(91, 'asdsadsa', '2019-04-24 02:04:59', 4),
+(92, 'dadssa', '2019-04-24 02:05:36', 7),
+(93, 'DSDA', '2019-04-24 02:05:58', 9),
+(94, 'DASD', '2019-04-24 02:06:27', 13),
+(95, 'anketa', '2019-04-24 02:07:10', 13),
+(96, 'anketa', '2019-04-24 02:07:24', 14),
+(97, 'test', '2019-04-24 02:07:59', 3),
+(98, 'anketa', '2019-04-24 02:08:12', 15),
+(99, 'Ninina anketa', '2019-04-24 17:17:28', 13),
+(100, 'admin anketa', '2019-04-24 17:34:54', 13),
+(101, 'Jos malo gotovooo', '2019-04-24 17:35:19', 13),
+(102, 'Jos malo gotovooo', '2019-04-24 17:46:57', 15),
+(103, 'admin anketa', '2019-04-24 17:51:09', 15),
+(104, 'Ninina anketa', '2019-04-24 17:52:40', 15),
+(105, 'sdad', '2019-04-24 17:56:45', 13),
+(106, 'anketa', '2019-04-24 17:57:02', 13),
+(107, 'anketa', '2019-04-24 17:57:14', 15),
+(108, 'sdad', '2019-04-24 17:57:15', 15),
+(109, 'Kisobran anketa', '2019-04-24 17:57:30', 13),
+(110, 'anketa', '2019-04-24 17:57:49', 13),
+(111, 'Kisobran anketa', '2019-04-24 17:58:06', 13),
+(112, 'admin anketa', '2019-04-24 17:58:27', 13),
+(113, 'Jos malo gotovooo', '2019-04-24 17:58:48', 13),
+(114, 'admin anketa', '2019-04-24 17:59:19', 13),
+(115, 'admin anketa', '2019-04-24 17:59:24', 15),
+(116, 'Kisobran anketa', '2019-04-24 17:59:31', 15),
+(117, 'anketa', '2019-04-24 17:59:35', 15),
+(118, 'admin anketa', '2019-04-24 17:59:36', 15),
+(119, 'Jos malo gotovooo', '2019-04-24 17:59:37', 15),
+(120, 'Kisobran anketa', '2019-04-24 17:59:37', 15),
+(121, 'Adminova anketa', '2019-04-24 21:01:57', 13),
+(122, 'Adminova anketa 2', '2019-04-24 21:02:30', 13),
+(123, 'Adminova anketa 3', '2019-04-24 21:02:52', 13),
+(124, 'Adminova anketa 4', '2019-04-24 21:03:30', 13),
+(125, 'Adminova anketa 5', '2019-04-24 21:03:56', 13),
+(126, 'anketica', '2019-04-24 21:06:58', 13),
+(127, 'Kisobran anketa', '2019-04-24 21:11:24', 13),
+(128, 'Kisobran anketa za korisnike', '2019-04-24 21:12:13', 13),
+(129, 'Anketa za korisnike', '2019-04-24 21:13:34', 13),
+(130, 'Anketa za korisnike', '2019-04-24 21:14:04', 14),
+(131, 'Kisobran anketa za korisnike', '2019-04-24 21:14:15', 14),
+(132, 'Kisobran anketa', '2019-04-24 21:14:21', 14),
+(133, 'Kisobran anketa', '2019-04-24 21:14:35', 15),
+(134, 'Kisobran anketa za korisnike', '2019-04-24 21:14:36', 15),
+(135, 'Anketa za korisnike', '2019-04-24 21:14:38', 15),
+(136, 'anketica', '2019-04-24 21:14:45', 15),
+(137, 'Adminova anketa 3', '2019-04-24 21:14:47', 15),
+(138, 'Adminova anketa 2', '2019-04-24 21:15:01', 15),
+(139, 'Adminova anketa 4', '2019-04-24 21:15:02', 15),
+(140, 'Adminova anketa 5', '2019-04-24 21:15:02', 15),
+(141, 'Adminova anketa', '2019-04-24 21:15:03', 15),
+(142, 'Nova vest od kisobrana', '2019-04-24 22:24:53', 4),
+(143, 'Nova vest od kisobrana', '2019-04-24 22:25:36', 5),
+(144, 'Nova vest od kisobrana', '2019-04-24 22:25:48', 6),
+(145, 'Novi Dogadjaj', '2019-04-24 22:26:42', 7),
+(146, 'Novi oglas', '2019-04-24 22:27:03', 9),
+(147, 'Kisobran anketa', '2019-04-24 22:27:34', 13),
+(148, 'Kisobran anketa', '2019-04-24 22:27:47', 13),
+(149, 'Kisobran anketa', '2019-04-24 22:27:56', 13),
+(150, 'Kisobran anketa', '2019-04-24 22:28:07', 13),
+(151, 'Kisobran anketa', '2019-04-24 22:28:16', 13),
+(152, 'Kisobran anketa', '2019-04-24 22:28:23', 13),
+(153, 'Novi Dogadjaj', '2019-04-24 22:29:52', 8),
+(154, 'Nova vest', '2019-04-24 22:31:33', 4),
+(155, 'Nova vest', '2019-04-24 22:31:57', 5),
+(156, 'Nova vest', '2019-04-24 22:32:00', 6),
+(157, 'Novi oglas', '2019-04-24 22:32:58', 10),
+(158, 'Novi Dogadjaj', '2019-04-24 22:33:42', 7),
+(159, 'Novi Dogadjaj', '2019-04-24 22:34:43', 8),
+(160, 'Nova vest', '2019-04-24 22:43:33', 4),
+(161, 'Novi Dogadjaj', '2019-04-24 22:44:46', 7),
+(162, 'Oglas 1', '2019-04-24 22:45:04', 9),
+(163, 'Oglas 2', '2019-04-24 22:45:24', 9),
+(164, 'Oglas 3', '2019-04-24 22:45:31', 9),
+(165, 'Oglas 4', '2019-04-24 22:45:39', 9),
+(166, 'Oglas 5', '2019-04-24 22:45:47', 9),
+(167, 'Oglas 6', '2019-04-24 22:45:53', 9),
+(168, 'Oglas 7', '2019-04-24 22:45:57', 9),
+(169, 'Nova vest', '2019-04-24 22:46:54', 5),
+(170, 'Nova vest', '2019-04-24 22:46:56', 6),
+(171, 'Novi Dogadjaj', '2019-04-24 22:47:16', 8),
+(172, 'Oglas 5', '2019-04-24 22:47:42', 10),
+(173, 'Oglas 3', '2019-04-24 22:47:48', 10),
+(174, 'Oglas 7', '2019-04-24 22:47:54', 10),
+(175, 'Oglas 1', '2019-04-24 22:48:04', 10),
+(176, 'Oglas 6', '2019-04-24 22:48:07', 10),
+(177, 'Oglas 4', '2019-04-24 22:48:13', 10),
+(178, 'Oglas 2', '2019-04-24 22:48:16', 10),
+(179, 'Kisobran anketa', '2019-04-24 22:48:43', 15),
+(180, 'Kisobran anketa', '2019-04-24 22:48:48', 15),
+(181, 'Kisobran anketa', '2019-04-24 22:48:49', 15),
+(182, 'Kisobran anketa', '2019-04-24 22:48:50', 15),
+(183, 'Kisobran anketa', '2019-04-24 22:48:51', 15),
+(184, 'Kisobran anketa', '2019-04-24 22:48:52', 15),
+(185, 'Novi album: Kelly Clarkson – Stronger', '2019-04-24 22:56:21', 5),
+(186, 'Beogradska ultimativna kulturna akcija – Buka! Sada!', '2019-04-24 22:59:30', 7),
+(187, 'Test vest', '2019-04-24 23:03:41', 4),
+(188, 'Test vest', '2019-04-24 23:03:44', 5),
+(189, 'Test dogadjaj', '2019-04-24 23:04:26', 7),
+(190, 'test oglas', '2019-04-24 23:04:49', 9),
+(191, 'test oglas', '2019-04-24 23:07:08', 10),
+(192, 'Test vest', '2019-04-24 23:10:25', 6),
+(193, 'Test dogadjaj', '2019-04-24 23:10:34', 8),
+(194, 'Kisobran anketa', '2019-04-24 23:19:19', 13),
+(195, 'Menadžera tima (m/ž)', '2019-04-24 23:26:30', 9),
+(196, 'Kisobran anketa', '2019-04-25 01:19:25', 15),
+(197, 'Bolje kišobran žurke', '2019-04-25 01:31:50', 13),
+(198, 'Popularnost kišobran žurki', '2019-04-25 01:40:12', 13),
+(199, 'Najbolji Italijanski sladoled u Beogradu', '2019-04-25 01:47:18', 13),
+(200, 'Popularnost kišobran žurki', '2019-04-25 01:48:18', 14),
+(201, 'Bolje kišobran žurke', '2019-04-25 01:49:12', 14),
+(202, 'Najbolji Italijanski sladoled u Beogradu', '2019-04-25 01:49:42', 14),
+(203, 'Popularnost kišobran žurki', '2019-04-25 01:50:26', 14),
+(204, 'Bolje kišobran žurke', '2019-04-25 01:51:25', 14),
+(205, 'Najbolji Italijanski sladoled u Beogradu', '2019-04-25 01:52:19', 14),
+(206, 'Najbolji Italijanski sladoled u Beogradu', '2019-04-25 01:53:00', 14),
+(207, 'Popularnost kišobran žurki', '2019-04-25 01:53:29', 14),
+(208, 'Bolje kišobran žurke', '2019-04-25 01:53:58', 14),
+(209, 'Kvalitet pretrage', '2019-04-25 01:57:26', 13),
+(210, 'Iskustvo sa administratorom', '2019-04-25 02:06:32', 13),
+(211, 'Korisnički interfejs portala', '2019-04-25 02:10:59', 13),
+(212, 'Ocena sadržaja kišobran organizacije', '2019-04-25 02:18:21', 13),
+(213, 'Kvalitet pretrage', '2019-04-25 02:19:21', 14);
 
 -- --------------------------------------------------------
 
@@ -526,7 +990,8 @@ INSERT INTO `stavke_sifarnika` (`id_stavka`, `id_sifarnik`, `naziv`, `ikonica`) 
 (40, 5, 'Bulevar Despota Stefana 115', NULL),
 (41, 5, 'Braće Krsmanović 4', NULL),
 (42, 5, 'Mitropolita Petra 8', NULL),
-(43, 5, 'Dečanska 6', NULL);
+(43, 5, 'Dečanska 6', NULL),
+(44, 5, 'Radnička 3', NULL);
 
 -- --------------------------------------------------------
 
@@ -557,7 +1022,7 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (4, 'kisobran', 1, 'Novi album: Depeche Mode – Delta Machine', '<p>U izdanju Columbia/Sony/Menart i u Srbiji se pojavio novi album grupe<strong> </strong><a href="https://www.danubeogradu.rs/2012/10/depeche-mode-na-uscu-19-maja-2013/" rel="nofollow"><strong>Depeche Mode</strong></a> pod nazivom „Delta Machine“.</p><p>Trinaesti album jednog od najpopularnijih svetskih bendova spaja smelost i kreativnost koje su osigurale uspeh slavnih prethodnika, albuma „Songs Of Faith And Devotion“ i „Violator“.</p><p>„Prvi put smo zajedno slušali demo snimke i dopao nam se pravac kojim smo krenuli. Puno puta ranije, napravili bismo pesmu koja bi nam se dopala, ali bi onda svako od nas imao svoju ideju u kom smeru bi ta pesma trebalo da ide, da bi bila još bolja. Probali bismo deset različitih načina, a jedan bi bio i rege. Nikada ne funkcioniše, ali mi uvek pokušamo. Ovoga puta nismo to morali da radimo“, uz osmeh priznaje Martin.</p><p>Za više od trideset godina karijere, pioniri elektro popa prodali su više od 100 miliona ploča, rasprodavali karte koncerte na najvećim svetskim stadionima, imali pedesetak singlova na top listama u Americi i Britaniji. Ali, ponekad je i originalnoj inspiraciji potrebno osveženje.</p><p>Ovoga puta, oblik koji su dobijale nove pesme, najviše je vukao ka bluzu:</p><p> „To je uticaj Delta bluza, pomalo usporenog, pomalo ljigavog, pomalo prljavog“, objašnjava Gahan, a Martin dodaje: „Ovo je naša verzija bluza. Sviramo bluz već duže vreme, na naš način. Ako se vratite ploči ‘Violator’, tamo ima pesama koje vuku na bluz, kao i na albumima ‘Songs Of Faith And Devotion’ i ‘Ultra’. Mislim da smo tek sada spremni da taj bluz iskreno prihvatimo i da ga učinimo očiglednijim u naslovu“.</p><p>„Definitivno ima uticaja bluza“, objašnjava Gahan i dodaje: „Ono što spaja sve pesme je poziv za pomoć. To je takođe element bluza. Kao kad kukaš nad svojim problemima, a na kraju te muzika spase“.</p><p>Imali su pomoć, ponovo su angažovali producenta Bena Hilijera. On je bio snaga koja stoji iza dva prethodna albuma, „Playing The Angel“ i „Sounds Of The Universe“.</p><p>„On zna koliko smo uznapredovali i svestan je da ne možemo da se ponavljamo. Zato smo izabrali Bena, da nas usmeri napred, jer smo želeli da ovaj album bude manje opisan, više direktan“, kaže Gor.</p><p>„Delta Machine“ je postigao svoj cilj, usmerio je jedan od najuticajnijih bendova na nov put. Iako su sebi dali ime koje ukazuje na prolaznost i površnost, Depeche Mode, sa karijerom dužom od trideset godina i kreativnošću koja je i dalje na vrhuncu, dokazuju da su sve, samo ne prolazni trend.</p><p>Sva tri formata „Delta Machine“ (regularan CD, Deluxe CD i LP) albuma su u prodaji u našim muzičkim radnjama.</p>', '2019-04-17 18:10:09', 'c747256d-6a00-40ce-817d-b0f9682be027.jpg', 0, 0),
 (5, 'kisobran', 2, 'NOVA STARA PRIČA: Stigao prvi zvanični trejler filma "Kralj lavova"', '<p>Kompanija Dizni objavila je prvi zvanični trejler filma "Kralj lavova", dugo iščekivanog rimejka crtaća iz 1994. godine.</p><p>Premijera filma zakazana je za 19. jul 2019. godine, nakon čega će "Kralj lavova", kako se očekuje, osvojiti ostatak sveta.</p><p>U filmu glasove životinjama pozajmljuju Bijonse (Nala), Donald Glover (Simba), Set Rodžen (Pumba), Bili Ajhner (Timon), Čuetel Edžiofor (Skar) i Džon Oliver (Zazu), a od stare postavke jedino je ostao Džejms Erl Džons koji pozajmljuje glas kralju Mufasi.</p><p>Scenario za film, koji je, kako možemo da naslutimo iz trejlera, vrlo sličan crtaću, napisao je Džef Nejtanson.</p>', '2019-04-17 18:15:40', '796f0c57-11c9-4d31-89ae-f8ecb6485d77.jpg', 0, 0),
 (6, 'kisobran', 2, 'NOVO POGLAVLJE U SAGI: Stiže nastavak "Ratova zvezda"', '<p>Deveti nastavak filmske sage "Ratovi zvezda" dobiće ime "Uspon Skajvokera" i prikazaće povratak zlog imperatora Palpatina, saopštila je kompanija "Volt Dizni".</p><p>Kompanija je u Čikagu, na proslavi povodom "Ratova zvezda", prikazala prve inserte iz filma koji će se u decembru pojaviti u bioskopima, preneo je Rojters.</p><p>Na kraju trejlera se čuje imperatorov zlokoban smeh, a glumac koji je i u prethodnim filmovima igrao ulogu Palpatina, Ijan Makdiarmid, izašao je na scenu dok se prolamao buran aplauz.</p>', '2019-04-17 18:16:37', '2c7e13da-fb2d-4b0f-b8bf-1561824a0563.jpg', 0, 0),
-(7, 'kisobran', 1, 'Novi album: Kelly Clarkson – Stronger', '<p><strong>Pobednica Američkog Idola 2002.godine, Kelly Clarkson poslednjih meseci apsolutno vlada svetskim muzičkim etrom, pa ta manija nije zaobišla ni nas. Nema komercijalne radio stanice u Srbiji koja ne zavrti singl „Stronger (What Doesn’t Kill You)“ bar tri puta dnevno! Na Bilboardovoj listi top 100 najboljih pop pesama, ova pesma se nalazi tri meseca, a već nedeljama je ‘zacementirana’ na mestu prvom mestu.</strong></p><p>Album „Stronger“ (Sony/Menart) se nalazi u prodaji i u našim muzičkim radnjama od kraja 2011. Muzička kritika ocenila ga je kao najbolji rad ove pevačice i kantautorke. Zbog prvog singla sa tog albuma, pesme „Mr. Know It All“, magazin Entertainment Weekly je nazvao Kelly „Samurajem u rušenju muškaraca“.</p><p>I zaista, Kelly Clarkson je stekla milione odanih obožavalaca impulsivnim, direktnim stihovima. Njene hit pesme „Miss Independent“, „Since U Been Gone“, „Walk Away“, „Never Again“, „Mr. Know It All“ i sada „Stronger (What Doesn’t Kill You)“ su glasne, ohrabrujuće himne koje Kelly ume da iznese do kraja svojim moćnim i jakim glasom kao i stabilnom pojavom i držanjem.</p><p>Za rezonantan i muzički raznovrstan album „Stronger“, Klarksonova kaže da je inspirisan muzikom Tine Turner, Princea, Sheryl Crow i Radiohead!</p>', '2019-04-17 18:18:02', NULL, 0, 0),
+(7, 'kisobran', 1, 'Novi album: Kelly Clarkson – Stronger', '<p><strong>Pobednica Američkog Idola 2002.godine, Kelly Clarkson poslednjih meseci apsolutno vlada svetskim muzičkim etrom, pa ta manija nije zaobišla ni nas. Nema komercijalne radio stanice u Srbiji koja ne zavrti singl „Stronger (What Doesn’t Kill You)“ bar tri puta dnevno! Na Bilboardovoj listi top 100 najboljih pop pesama, ova pesma se nalazi tri meseca, a već nedeljama je ‘zacementirana’ na mestu prvom mestu.</strong></p><p>Album „Stronger“ (Sony/Menart) se nalazi u prodaji i u našim muzičkim radnjama od kraja 2011. Muzička kritika ocenila ga je kao najbolji rad ove pevačice i kantautorke. Zbog prvog singla sa tog albuma, pesme „Mr. Know It All“, magazin Entertainment Weekly je nazvao Kelly „Samurajem u rušenju muškaraca“.</p><p>I zaista, Kelly Clarkson je stekla milione odanih obožavalaca impulsivnim, direktnim stihovima. Njene hit pesme „Miss Independent“, „Since U Been Gone“, „Walk Away“, „Never Again“, „Mr. Know It All“ i sada „Stronger (What Doesn’t Kill You)“ su glasne, ohrabrujuće himne koje Kelly ume da iznese do kraja svojim moćnim i jakim glasom kao i stabilnom pojavom i držanjem.</p><p>Za rezonantan i muzički raznovrstan album „Stronger“, Klarksonova kaže da je inspirisan muzikom Tine Turner, Princea, Sheryl Crow i Radiohead!</p>', '2019-04-17 18:18:02', NULL, 1, 0),
 (8, 'kisobran', 1, 'Novi album: Decontrolled – The Circle', '<p><strong>Beogradski modern metal sastav Decontrolled, objaviće album „The Circle“ 16. aprila za online etiketu SMP Music. Album će moći besplatno da se preuzme na stranici </strong><a href="http://www.serbian-metal.org/" rel="nofollow"><strong>Srpskog metal portala</strong></a><strong>.</strong></p><p>Na albumu se nalazi 11 pesama, koje su snimljene u studiju „Chainroom“ u Senti, pod producentskom palicom Marjana Mijića. Muziku i aranžmane potpisuje Mr. Metal (osnivač benda), a tekstove Decontrolled.</p><p>Bend je nastao leta 2003, godine, kao one-man projekat (Mr. Metal Tica). Na nagovor prijatelja da nastavi sa pravljenjem muzike, Marko okuplja ceo bend. Muzika koju Decontrolled svira je varijacija od klasičnog metala, preko modernih metal rešenja, poput Sikth, Meshuggah, In Flames ili Soilwork, do punkrock stila tipa Blink 182, triphop metala (Senser) i elektronike.</p><p>Decontrolled danas čine pevač Mr. Metal, gitaristi Wook i Alexa Jonić, basista Alexa Milošević i bubnjar Tommy 69.</p>', '2019-04-17 18:20:41', '681ada88-9969-4c5c-be95-7c473320b31b.jpg', 0, 0),
 (9, 'arsCreativa', 4, 'Narodni muzej: „Beogradska mumija“ u stalnoj postavci', '<p>Narodni muzej u Beogradu uvrstio je „Beogradsku mumiju“ u svoju stalnu postavku u okviru staroegipatske zbirke.</p><p> </p><p><strong>Od 6. aprila, pa svake naredne subote od 12.00</strong>, staroegipatska mumija biće dostupna posetiocima a o njoj će pričati stručni vodič Ivana Minić.</p><p>Mumiju „<strong>Nesmin</strong>“ kupio je 1888. godine Pavle Riđički i iste godine je poklonio Narodonom muzeju u Beogradu.</p><p>Drveni kovčeg u kojem se nalazi mumija antropoidnog je oblika. Poklopac i dno kovčega oblikovani su od po jednog velikog komada tamariksovog drveta. Na sredini donjeg dela poklopca, vertikalno teče dvostubačni hijeroglifski natpis, poznat kao 191. poglavlje egipatske Knjige mrtvih. Ovaj natpis je veoma redak i poznato je tek dvadesetak primera u svetu.</p><p>Nabavku specijalne vitrine za čuvanje i izlaganje mumije finansirao je Sekretarijat za privredu, a u cilju razvoja turizma i obogaćivanje turističke ponude grada Beograda.</p><p>Pored „Beogradske mumije“ u stalnoj postavci se mogu videti staregipatski kovčeg Nefer renepet, Ušabti figure, Skarabeji, Privesci božanstava, Ogrlica od fajansa i Džed stubovi.</p><p>Uz kupljenu kartu za stalnu postavku muzeja, posetioci neće dodatno plaćati stručno vođenje kroz ovu zbirku, niti je potrebna ranija prijava. <em>(Beoinfo)</em></p>', '2019-04-17 18:24:38', '646d7477-c263-41bf-a9ad-a83bdeb55639.jpg', 0, 0),
 (10, 'arsCreativa', 4, 'Dan žena 2019: Besplatan ulaz u muzeje', '<p>Povodom međunarodnog Dana žena, u petak 8. marta, biće obezbeđen besplatan ulaz u pojedine beogradske muzeje.</p><p><br></p><h3>Narodni muzej i Muzej Vuka i Dositeja</h3><p>Uz razgovor, kafu i druženje sa članicama kolektiva Narodnog muzeja, pored mogućnosti za neposrednije upoznavanje i razgovor, biće organizovano i dodatno stručno vođenje od 14.00 za zainteresovane sugrađanke i gošće Beograda. Čuće se i priče koje se odnose na društveni položaj i prava žene. Podsećajući se zanimljivih prošlosti u autentičnom izložbenom prostoru sa jedinstvenim eksponatima, biće poređenja sa savremenim temama.</p><p><br></p><h3>Istorijski muzej Srbije</h3><p>Besplatan je ulaz za dame i njihove voljene u Istorijskom muzeju Srbije na Trgu Nikole Pašića, gde je u toku izložba „Kraj Velikog rata 1917-1918“.</p><p>Ova izložba upotpunjena je tematskim izložbama „Đorđe Čarapić Fusek, sekretar Kancelarije kraljevskih ordena – Život i delo“ i „Znamenja Prvog svetskog rata iz zbirke Istorijskog muzeja Srbije“, kao i gostujućom izložbom Centra za primenjenu istoriju „Spašavanje Srbije: američka misija i epidemija tifusa u Srbiji 1915“.</p><p><br></p><h3>Etnografski muzej</h3><p>U petak, 8. marta, ulaz će biti besplatan i u Etnografskom muzeju (Studentski trg 13).</p><p>Zainteresovani će moći da pogledaju stalnu izložbu „Narodna kultura Srba u 19. i prvoj polovini 20. veka“, kao i izložbe „Neuništivi muzej 1918-2018“, autorke Vesne Bižić-Omčikus i izložbu „Kalaši – poslednji pagani Hindukuša“, autora Konstantina Novakovića.</p>', '2019-04-17 18:26:04', 'f64ae3c5-fd5d-424a-adb9-8b2de730a6d9.jpg', 0, 0),
@@ -622,6 +1087,14 @@ ALTER TABLE `obavestenja`
   ADD KEY `idOglas` (`id_oglas`);
 
 --
+-- Indexes for table `odgovori`
+--
+ALTER TABLE `odgovori`
+  ADD PRIMARY KEY (`id_odgovor`),
+  ADD KEY `id_popunjena_anketa` (`id_popunjena_anketa`),
+  ADD KEY `id_ponudjeni_odgovor` (`id_ponudjeni_odgovor`);
+
+--
 -- Indexes for table `oglasi`
 --
 ALTER TABLE `oglasi`
@@ -650,6 +1123,14 @@ ALTER TABLE `pitanja`
 ALTER TABLE `ponudjeni_odgovori`
   ADD PRIMARY KEY (`id_odgovor`),
   ADD KEY `id_pitanje` (`id_pitanje`);
+
+--
+-- Indexes for table `popunjene_ankete`
+--
+ALTER TABLE `popunjene_ankete`
+  ADD PRIMARY KEY (`id_popunjena_anketa`),
+  ADD KEY `id_anketa` (`id_anketa`),
+  ADD KEY `korisnicko_ime` (`korisnicko_ime`);
 
 --
 -- Indexes for table `sifarnici`
@@ -722,6 +1203,13 @@ ALTER TABLE `obavestenja`
   ADD CONSTRAINT `FK_obavestenje_vest` FOREIGN KEY (`id_vest`) REFERENCES `vesti` (`id_vest`);
 
 --
+-- Constraints for table `odgovori`
+--
+ALTER TABLE `odgovori`
+  ADD CONSTRAINT `FK_ponudjeni_odgovor_odgovor` FOREIGN KEY (`id_ponudjeni_odgovor`) REFERENCES `ponudjeni_odgovori` (`id_odgovor`),
+  ADD CONSTRAINT `FK_popunjena_anketa_odgovor` FOREIGN KEY (`id_popunjena_anketa`) REFERENCES `popunjene_ankete` (`id_popunjena_anketa`);
+
+--
 -- Constraints for table `oglasi`
 --
 ALTER TABLE `oglasi`
@@ -747,6 +1235,13 @@ ALTER TABLE `pitanja`
 --
 ALTER TABLE `ponudjeni_odgovori`
   ADD CONSTRAINT `FK_pitanje_odgovor` FOREIGN KEY (`id_pitanje`) REFERENCES `pitanja` (`id_pitanje`);
+
+--
+-- Constraints for table `popunjene_ankete`
+--
+ALTER TABLE `popunjene_ankete`
+  ADD CONSTRAINT `FK_anketa_popunjena_anketa` FOREIGN KEY (`id_anketa`) REFERENCES `ankete` (`id_anketa`),
+  ADD CONSTRAINT `FK_korisnik_popunjena_anketa` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`);
 
 --
 -- Constraints for table `stavke_izvestaj`

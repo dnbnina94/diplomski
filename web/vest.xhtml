@@ -72,7 +72,9 @@
                                                                  update="vest_content"
                                                                  rendered="#{korisnikBean.korisnik.tip == 1}"
                                                                  onclick="ajax:admin.obrisiVest();"
-                                                                 oncomplete="$('#vest\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" />
+                                                                 oncomplete="$('#vest\\:amodal_brisanje').modal('hide'); $('html, body').animate({ scrollTop: 0 }, 'slow');" >
+                                                    <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{null}" />
+                                                </b:commandButton>
                                             </div>
                                             <div class="col-md-6">
                                                 <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
