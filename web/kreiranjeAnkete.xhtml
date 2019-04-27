@@ -14,6 +14,7 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -287,7 +288,7 @@
                                 </div>
                             </div>
 
-                            <div class="row form-step-buttons-row">
+                            <div class="row form-step-buttons-row form-step-buttons-row-izmena">
                                 <div class="col-md-6">
                                     <h:panelGroup rendered="#{korisnikBean.korisnik.tip != 1}">
                                         <b:carouselControl >
@@ -364,12 +365,12 @@
                                                 </div>
                                             </b:dataTableColumn>
                                         </b:dataTable>
-                                        
+
                                         <h:inputHidden id="pageLength" value="#{admin.pageLength}" />
                                         <h:inputHidden id="currentPage" value="#{admin.currentPage}" />
                                         <h:inputHidden id="numOfShowedItems" value="#{admin.numOfShowedItems}" />
                                         <h:inputHidden id="numOfTotalItems" value="#{admin.numOfTotalItems}" />
-                                        
+
                                         <h:panelGroup rendered="#{admin.numOfTotalItems != 0}">
                                             <div id="bottom" style="text-align: center;">
                                                 <div style="font-family: BebasNeueRegular; font-size: 16px">
@@ -397,7 +398,7 @@
 
                                             </div>
                                         </h:panelGroup>
-                                        
+
                                         <script>
                                             $(document).ready(function () {
                                                 var width = $("#nova_anketa\\:loadMoreButton").width();
@@ -427,6 +428,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

@@ -14,14 +14,15 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:event type="preRenderView" listener="#{korisnikBean.proveriOrganizacijaPrivilegiju()}" />
-        
+
         <div class="content">
 
             <ui:insert name="header">
@@ -91,7 +92,7 @@
                                 </div>
                             </div>
 
-                            <div class="row form-step-buttons-row">
+                            <div class="row form-step-buttons-row form-step-buttons-row-izmena">
                                 <div class="col-md-6">
                                     <b:carouselControl >
                                         <b:commandButton value="Nazad na profil"
@@ -147,6 +148,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

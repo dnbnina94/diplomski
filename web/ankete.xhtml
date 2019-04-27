@@ -10,9 +10,10 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <h:outputStylesheet library="css" name="bootstrap.css"  />
-        <h:outputStylesheet library="css" name="style.css"  />
-        <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="media_queries.css" />
+        <h:outputStylesheet library="css" name="responsive.css" />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -91,7 +92,7 @@
                                                         <f:setPropertyActionListener target="#{rezultatiAnkete.anketa}" value="#{anketa}" />
                                                     </b:commandLink>
                                                 </h:panelGroup>
-                                                
+
                                                 <h:panelGroup styleClass="#{anketa.zatvorena() ? 'expired' : ''}">
                                                     <div class="news-date" style="margin-bottom: 10px">
                                                         <h:panelGroup rendered="#{anketa.korisnici.tip != 1}">
@@ -131,7 +132,7 @@
 
                                                     <h:panelGroup rendered="#{pretragaAnketa.mogucePopunjavanje(anketa)}">
                                                         <b:commandLink action="anketa?faces-redirect=true" styleClass="customNewsLink" style="margin-right: 5px">
-                                                            <b:button styleClass="read-more-button" value="Popuni anketu" />
+                                                            <b:button styleClass="read-more-button read-more-button-responsive" value="Popuni anketu" />
                                                             <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
                                                             <f:setPropertyActionListener target="#{popunjavanjeAnkete.anketa}" value="#{anketa}" />
                                                         </b:commandLink>
@@ -139,14 +140,14 @@
 
                                                     <h:panelGroup rendered="#{pretragaAnketa.dostupniRezultati(anketa)}">
                                                         <b:commandLink action="anketa_rezultati?faces-redirect=true" styleClass="customNewsLink">
-                                                            <b:button styleClass="read-more-button" value="Pogledaj rezultate" style="background-color: #4C4C4C !important" />
+                                                            <b:button styleClass="read-more-button read-more-button-responsive" value="Pogledaj rezultate" style="background-color: #4C4C4C !important" />
                                                             <f:setPropertyActionListener target="#{pretragaAnketa.anketa}" value="#{anketa}" />
                                                             <f:setPropertyActionListener target="#{rezultatiAnkete.anketa}" value="#{anketa}" />
                                                         </b:commandLink>
                                                     </h:panelGroup>
 
                                                     <h:panelGroup rendered="#{korisnikBean.korisnik != null and korisnikBean.korisnik.tip == 1}">
-                                                        <b:commandButton styleClass="read-more-button" 
+                                                        <b:commandButton styleClass="read-more-button read-more-button-responsive" 
                                                                          value="Obriši anketu" 
                                                                          action="#{admin.obrisiAnketu(anketa)}"
                                                                          ajax="true"
@@ -163,12 +164,12 @@
 
                                     </b:dataTable>
                                 </h:panelGroup>
-                                
+
                                 <h:inputHidden id="pageLength" value="#{pretragaAnketa.pageLength}" />
                                 <h:inputHidden id="currentPage" value="#{pretragaAnketa.currentPage}" />
                                 <h:inputHidden id="numOfShowedItems" value="#{pretragaAnketa.numOfShowedItems}" />
                                 <h:inputHidden id="numOfTotalItems" value="#{pretragaAnketa.numOfTotalItems}" />
-                                
+
                                 <h:panelGroup rendered="#{pretragaAnketa.numOfTotalItems != 0}">
                                     <div id="bottom" style="text-align: center; margin-top: 5px">
                                         <div style="font-family: BebasNeueRegular; font-size: 16px">
@@ -195,20 +196,20 @@
 
                                     </div>
                                 </h:panelGroup>
-                                
+
                                 <style>
                                     #anketa\:growl-success {
                                         margin-top: 20px;
                                     }
                                 </style>
-                                
+
                                 <script>
                                     $(document).ready(function () {
                                         var width = $("#anketa\\:loadMoreButton").width();
                                         $("#anketa\\:progressBar").width(width + 100);
                                     });
                                 </script>
-                                
+
                             </h:panelGroup>
                         </h:form>
 
@@ -228,6 +229,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

@@ -14,6 +14,7 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -208,7 +209,7 @@
                                     <div class="col-md-6">
                                         <b:carouselControl >
                                             <b:commandButton value="Kreirajte izveštaj"
-                                                             styleClass="form-step-button"
+                                                             styleClass="form-step-button create-report-btn"
                                                              style="background-color: #4c4c4c !important; margin-right: 15px"
                                                              update="@form"
                                                              ajax="true"
@@ -277,7 +278,7 @@
                                 </h:outputScript>
 
                                 <h:outputScript>
-                                    
+
                                 </h:outputScript>
                             </h:panelGroup>
 
@@ -300,6 +301,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

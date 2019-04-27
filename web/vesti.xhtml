@@ -13,6 +13,7 @@
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -280,12 +281,12 @@
                                                     <div class="news-text">
                                                         <h:outputText value="#{vest.getTekstShortRezultatPretrage()}" styleClass="news-text" />
                                                     </div> <br/>
-                                                    <b:button styleClass="read-more-button" value="Pročitaj još" />
+                                                    <b:button styleClass="read-more-button read-more-button-responsive" value="Pročitaj još" />
                                                     <f:setPropertyActionListener target="#{pretragaVesti.vest}" value="#{vest}" />
                                                 </b:commandLink>
                                                 <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == vest.korisnici.korisnickoIme}">
                                                     <div style="display: inline-block;">
-                                                        <b:commandButton styleClass="read-more-button" 
+                                                        <b:commandButton styleClass="read-more-button read-more-button-responsive" 
                                                                          value="#{vest.arhivirana == 1 ? 'Vest je arhivirana' : 'Arhiviraj'}"
                                                                          ajax="true"
                                                                          update="@form" 
@@ -298,7 +299,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == vest.korisnici.korisnickoIme}">
                                                     <div style="display: inline-block;">
-                                                        <b:commandButton styleClass="read-more-button" 
+                                                        <b:commandButton styleClass="read-more-button read-more-button-responsive" 
                                                                          value="#{vest.zahtevBrisanje ? 'Obriši - poslat zahtev' : 'Obriši'}"
                                                                          ajax="true"
                                                                          update="@form" 
@@ -311,7 +312,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                                     <div style="display: inline-block;">
-                                                        <b:commandButton styleClass="read-more-button" 
+                                                        <b:commandButton styleClass="read-more-button read-more-button-responsive" 
                                                                          value="#{vest.arhivirana == 1 ? 'Vest je arhivirana' : 'Arhiviraj'}"
                                                                          ajax="true"
                                                                          update="@form" 
@@ -324,7 +325,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                                     <div style="display: inline-block;">
-                                                        <b:commandButton styleClass="read-more-button" 
+                                                        <b:commandButton styleClass="read-more-button read-more-button-responsive" 
                                                                          value="Obriši"
                                                                          ajax="true"
                                                                          update="@form" 
@@ -403,6 +404,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

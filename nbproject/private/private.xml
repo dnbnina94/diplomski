@@ -13,13 +13,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/organizacija.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/RezultatiAnkete.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/PretragaAnketa.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/oglas.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/PopunjavanjeAnkete.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Prijava.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/anketa_rezultati.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/AnketeHelper.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/templates/header.xhtml</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/ankete.xhtml</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/dogadjaj.xhtml</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/KreiranjeIzvestaja.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Admin.java</file>
+            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/resources/css/style.css</file>
         </group>
     </open-files>
 </project-private>

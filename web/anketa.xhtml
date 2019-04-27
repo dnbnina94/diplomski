@@ -13,6 +13,7 @@
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -41,11 +42,11 @@
                             <h:panelGroup id="popunjavanje_ankete" style="margin-top: 0px">
 
                                 <h:outputScript library="js" name="customCheckbox.js" />
-                                
+
                                 <div style="margin-top: 20px">
                                     <h:panelGroup styleClass="#{pretragaAnketa.anketa.zatvorena() ? 'expired' : ''}">
                                         <h:outputText styleClass="news-title-news-page" value="#{pretragaAnketa.anketa.naziv}" />
-                                        
+
                                         <div style="font-size: 14px; color: #4C4C4C; margin-top: 5px">
                                             <h:outputText value="#{pretragaAnketa.anketa.opis}" />
                                             <br/>
@@ -194,6 +195,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

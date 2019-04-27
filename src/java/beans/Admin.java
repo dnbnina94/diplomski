@@ -1075,6 +1075,7 @@ public class Admin {
     }
 
     public void redirectToAnkete() {
+        adminStrana = 4;
         pageAnkete = 1;
         numOfShowedItems = 0;
         numOfTotalItems = 0;
@@ -1099,6 +1100,10 @@ public class Admin {
         numOfShowedItems = obavestenja.size();
         currentPage++;
 
+    }
+    
+    public void redirectToIzvestaji() {
+        adminStrana = 5;
     }
 
     public long getBrNovihObavestenja() {

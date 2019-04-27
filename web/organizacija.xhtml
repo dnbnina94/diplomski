@@ -13,6 +13,7 @@
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
@@ -119,26 +120,26 @@
                                 <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                     <div style="margin-top: 20px; text-align: right">
                                         <h:panelGroup rendered="#{!organizacijaBean.organizacija.korisnici.odobren}">
-                                            <div data-target="#izmena_podataka\:amodal_prihvatanje" 
-                                                 data-toggle="modal"
-                                                 style="display: inline-block">
+                                            <div style="display: inline-block">
                                                 <b:commandButton value="Prihvati korisnika"
                                                                  icon="ok"
                                                                  styleClass="form-step-button-sm"
                                                                  style="background-color: #28A745 !important; margin-right: 5px"
-                                                                 ajax="true">
+                                                                 update="@form"
+                                                                 ajax="true"
+                                                                 oncomplete="$('#izmena_podataka\\:amodal_prihvatanje').modal('show');">
                                                     <f:setPropertyActionListener target="#{admin.selektovanKorisnikPrihvatanje}" value="#{organizacijaBean.organizacija.korisnici}" />
                                                 </b:commandButton>
                                             </div>
                                         </h:panelGroup>
-                                        <div data-target="#izmena_podataka\:amodal_brisanje" 
-                                             data-toggle="modal"
-                                             style="display: inline-block">
+                                        <div style="display: inline-block">
                                             <b:commandButton value="Obriši korisnika"
                                                              icon="trash"
                                                              styleClass="form-step-button-sm"
                                                              style="background-color: orangered !important"
-                                                             ajax="true">
+                                                             update="@form"
+                                                             ajax="true"
+                                                             oncomplete="$('#izmena_podataka\\:amodal_brisanje').modal('show');">
                                                 <f:setPropertyActionListener target="#{admin.selektovanKorisnikBrisanje}" value="#{organizacijaBean.organizacija.korisnici}" />
                                             </b:commandButton>
                                         </div>
@@ -1110,6 +1111,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

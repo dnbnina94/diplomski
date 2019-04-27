@@ -13,12 +13,13 @@
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:event type="preRenderView" listener="#{pretragaOglasa.proveriPostojanostOglasa()}" />
 
         <div class="content">
@@ -91,7 +92,7 @@
                                             <h:graphicImage library="img" name="arhivirano.png" style="width: 150px" />
                                         </div>
                                     </h:panelGroup>
-                                    
+
                                     <h:panelGroup styleClass="#{pretragaOglasa.oglas.arhiviran ? 'expired' : ''}">
                                         <h:outputText styleClass="news-title-news-page" value="#{pretragaOglasa.oglas.naslov}" />
 
@@ -127,7 +128,7 @@
                                 <h:panelGroup rendered="#{korisnikBean.korisnik.korisnickoIme == pretragaOglasa.oglas.korisnici.korisnickoIme}">
                                     <div style="margin-top: 20px;">
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              ajax="true"
                                                              style="background-color: #ccc !important;"
                                                              value="#{pretragaOglasa.oglas.zahtevBrisanje ? 'Obriši oglas - poslat zahtev' : 'Obriši oglas'}"
@@ -142,20 +143,23 @@
                                 <h:panelGroup rendered="#{korisnikBean.korisnik.tip == 1}">
                                     <div style="margin-top: 20px;">
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              style="background-color: orangered !important;" 
                                                              value="Izmeni oglas"
                                                              action="izmena_oglasa?faces-redirect=true"
                                                              ajax="true" >
                                                 <f:setPropertyActionListener target="#{izmenaOglasa.naslov}" value="#{pretragaOglasa.oglas.naslov}" />
+                                                <f:setPropertyActionListener target="#{izmenaOglasa.naslovGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaOglasa.tekst}" value="#{pretragaOglasa.oglas.tekst}" />
+                                                <f:setPropertyActionListener target="#{izmenaOglasa.tekstGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaOglasa.datumIsticanja}" value="#{pretragaOglasa.oglas.datumIsticanja}" />
+                                                <f:setPropertyActionListener target="#{izmenaOglasa.datumIsticanjaGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaOglasa.oglas}" value="#{pretragaOglasa.oglas}" />
                                             </b:commandButton>
                                         </div>
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              ajax="true"
                                                              style="background-color: #ccc !important;"
                                                              value="Obriši oglas"
@@ -190,6 +194,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

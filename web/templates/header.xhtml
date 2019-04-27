@@ -13,7 +13,7 @@ and open the template in the editor.
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
 
     <h:body>
-        
+
         <nav id="top-nav">
             <div class="container">
                 <div class="pull-left">
@@ -48,7 +48,7 @@ and open the template in the editor.
                                         <li>
                                             <b:commandLink action="adminObavestenja?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
-                                                           style="font-weight: normal"
+                                                           style="font-weight: normal #{admin.adminStrana == 3 ? 'text-decoration: underline !important' : ''}"
                                                            onclick="ajax:admin.redirectToObavestenja()"
                                                            ajax="true">
                                                 <h:outputText value="Obaveštenja " />
@@ -61,7 +61,7 @@ and open the template in the editor.
                                         <li>
                                             <b:commandLink action="adminSifarnici?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
-                                                           style="font-weight: normal"
+                                                           style="font-weight: normal #{admin.adminStrana == 2 ? 'text-decoration: underline !important' : ''}"
                                                            ajax="true"
                                                            onclick="ajax:admin.redirectToSifarnici();">
                                                 <h:outputText value="Šifarnici" />
@@ -70,7 +70,7 @@ and open the template in the editor.
                                         <li>
                                             <b:commandLink action="adminKorisnici?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
-                                                           style="font-weight: normal"
+                                                           style="font-weight: normal #{admin.adminStrana == 1 ? 'text-decoration: underline !important' : ''}"
                                                            ajax="true"
                                                            onclick="ajax:admin.redirectToKorisnici();">
                                                 <h:outputText value="Korisnici" />
@@ -79,14 +79,16 @@ and open the template in the editor.
                                         <li>
                                             <b:commandLink action="kreiranje_izvestaja?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
-                                                           style="font-weight: normal">
+                                                           style="font-weight: normal #{admin.adminStrana == 5 ? 'text-decoration: underline !important' : ''}"
+                                                           ajax="true"
+                                                           onclick="ajax:admin.redirectToIzvestaji();">
                                                 <h:outputText value="Izveštaji" />
                                             </b:commandLink>
                                         </li>
                                         <li>
                                             <b:commandLink action="kreiranjeAnkete?faces-redirect=true" 
                                                            styleClass="top-nav-link" 
-                                                           style="font-weight: normal"
+                                                           style="font-weight: normal #{admin.adminStrana == 4 ? 'text-decoration: underline !important' : ''}"
                                                            ajax="true"
                                                            onclick="ajax:admin.redirectToAnkete();">
                                                 <h:outputText value="Ankete" />
@@ -114,7 +116,7 @@ and open the template in the editor.
         </nav>
 
         <h:form id="pretraga_vesti">
-            
+
             <h:outputScript library="js" name="customCheckbox.js" />
 
             <nav id="nav-middle">
@@ -137,7 +139,7 @@ and open the template in the editor.
                             <table style="width: 100%; height: 38px">
                                 <tr>
                                     <td>
-                                        <button type="button" class="filter-button" data-target="#pretraga_vesti\:amodal" data-toggle="modal">Filter</button>
+                                        <button type="button" class="filter-button" onclick="$('#pretraga_vesti\\:amodal').modal('show');">Filter</button>
                                     </td>
                                     <td style="width: 100%">
                                         <b:inputText id="kljucne_reci" value="#{pretragaVesti.kljucneReci}" class="search-input-text" placeholder="Pretraga vesti" />
@@ -237,12 +239,20 @@ and open the template in the editor.
 
         <nav class="navbar navbar-default" role="navigation">
 
-            <div class="collapse navbar-collapse" id="navbar-categories">
-                <h:form id="kategorije_vesti">
-                    <ul class="nav navbar-nav">
-                        <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
-                            <li>
-                               
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-categories"> <span class="sr-only"> Toggle navigation </span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbar-categories">
+                    <h:form id="kategorije_vesti">
+                        <ul class="nav navbar-nav">
+                            <ui:repeat value="#{pretragaVesti.kategorijeVesti}" var="kategorijaVest" >
+                                <li>
+
                                     <b:commandLink action="vesti?faces-redirect=true">
                                         <img src="#{kategorijaVest.getThumbnailSrc()}" class="cultural-icon" />
                                         <br/>
@@ -253,11 +263,11 @@ and open the template in the editor.
                                         <f:setPropertyActionListener target="#{pretragaVesti.numOfShowedItems}" value="0" />
                                         <f:setPropertyActionListener target="#{pretragaVesti.numOfTotalItems}" value="0" />
                                     </b:commandLink>
-                            </li>
-                        </ui:repeat>
-                    </ul>
-                </h:form>
-            </div>
+                                </li>
+                            </ui:repeat>
+                        </ul>
+                    </h:form>
+                </div>
 
         </nav>
 

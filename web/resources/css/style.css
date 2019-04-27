@@ -200,6 +200,22 @@ nav {
     filter: brightness(0) invert(1);
 }
 
+.navbar-header {
+    background-color: orangered !important;
+}
+
+.navbar-toggle {
+    background-color: #eee !important;
+    border-radius: 0px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    border-color: #eee !important;
+}
+
+.icon-bar {
+    background-color: #4C4C4C !important;
+}
+
 .input-group-addon {
     background-color: #aaa !important;
     border-color: #aaa !important;
@@ -1421,10 +1437,12 @@ table.dataTable {
     color: white;
     font-family: BebasNeueRegular;
     background-color: orangered;
-    padding: 6px 12px;
     border-radius: 0px;
     font-size: 14px !important;
     font-weight: bold;
+    line-height: 32px !important;
+    margin-right: 5px;
+    max-height: 32px;
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -1442,7 +1460,6 @@ table.dataTable {
     border: none !important;
     color: white !important;
     margin-top: -25px !important;
-    margin-left: 5px !important;
     padding-left: 9px !important;
     padding-right: 9px !important;
     display: inline-block !important;
@@ -1645,7 +1662,8 @@ table.dataTable {
 }
 
 .expired {
-    opacity: 0.4;
+    opacity: 0.4 !important;
+    -webkit-opacity: 0.4 !important;
 }
 
 #pretraga_dogadjaja\:datum_dogadjaja > .ui-datepicker {

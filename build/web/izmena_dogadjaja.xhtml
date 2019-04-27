@@ -14,14 +14,15 @@
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
         <h:outputStylesheet library="css" name="quill.snow.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:event type="preRenderView" listener="#{korisnikBean.proveriAdminPrivilegije()}" />
-        
+
         <div class="content">
 
             <ui:insert name="header">
@@ -294,18 +295,15 @@
                                         </ui:repeat>
                                     </h:panelGroup>
                                     <div style="height: 5px"></div>
-                                    <b:selectOneMenu id="karakteristikaProstora" value="#{izmenaDogadjaja.karakteristikaProstora}" styleClass="place-select" select2="true">
+                                    <b:selectOneMenu id="karakteristikaProstora" 
+                                                     value="#{izmenaDogadjaja.karakteristikaProstora}" 
+                                                     styleClass="place-select" 
+                                                     select2="true"
+                                                     ajax="true"
+                                                     update="karakteristikaProstora karakteristikeProstoraWrapper novDogadjajValidacija karakteristikeProstoraGreskaWrapper"
+                                                     onchange="ajax:izmenaDogadjaja.addKarakteristika();" >
                                         <f:selectItem itemLabel="Izaberite karakteristike prostora" itemValue="#{null}" />
                                         <f:selectItems value="#{kategorijeSifarnika.karakteristikeProstora}" var="karakteristika" itemLabel="#{karakteristika.naziv}" itemValue="#{karakteristika}" />
-                                        <f:facet name="append">
-                                            <b:commandButton id="plusButton"
-                                                             icon="plus" 
-                                                             styleClass="add-field-button" 
-                                                             ajax="true" 
-                                                             update="karakteristikaProstora karakteristikeProstoraGreskaWrapper novDogadjajValidacija karakteristikeProstoraWrapper" 
-                                                             onclick="ajax:izmenaDogadjaja.addKarakteristika();" 
-                                                             style="border: 1px solid #4c4c4c; #{izmenaDogadjaja.karakteristikeProstoraGreska == '' ? 'margin-top: 0px' : ''}" />
-                                        </f:facet>
                                     </b:selectOneMenu>
                                     <h:panelGroup id="karakteristikeProstoraGreskaWrapper" >
                                         <div id="karakteristikeProstoraGreska" class="#{izmenaDogadjaja.karakteristikeProstoraGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
@@ -325,7 +323,7 @@
                                 </div>
                             </div>
 
-                            <div class="row form-step-buttons-row">
+                            <div class="row form-step-buttons-row form-step-buttons-row-izmena">
                                 <div class="col-md-6">
                                     <b:carouselControl >
                                         <b:commandButton value="Nazad na događaj"
@@ -385,6 +383,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>

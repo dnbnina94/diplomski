@@ -13,12 +13,13 @@
         <h:outputStylesheet library="css" name="bootstrap.css"  />
         <h:outputStylesheet library="css" name="style.css"  />
         <h:outputStylesheet library="css" name="media_queries.css"  />
+        <h:outputStylesheet library="css" name="responsive.css"  />
         <h:outputScript library="js" name="jquery-3.2.1.min.js" />
         <h:outputScript library="js" name="datepickerMonths.js" />
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
+
         <f:event type="preRenderView" listener="#{pretragaVesti.proveriPostojanostVesti()}" />
 
         <div class="content">
@@ -177,7 +178,7 @@
                                     <div style="margin-top: 20px;">
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              ajax="true"
                                                              style="background-color: #4C4C4C !important;" 
                                                              value="#{pretragaVesti.vest.arhivirana == 0 ? 'Arhiviraj vest' : 'Vest je arhivirana'}"
@@ -189,7 +190,7 @@
                                         </div>
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              style="background-color: #ccc !important;" 
                                                              value="#{pretragaVesti.vest.zahtevBrisanje ? 'Obriši vest - poslat zahtev' : 'Obriši vest'}"
                                                              ajax="true"
@@ -207,22 +208,26 @@
                                     <div style="margin-top: 20px;">
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              style="background-color: orangered !important;" 
                                                              value="Izmeni vest"
                                                              action="izmena_vesti?faces-redirect=true"
                                                              ajax="true" >
                                                 <f:setPropertyActionListener target="#{izmenaVesti.kategorija}" value="#{pretragaVesti.vest.kategorija}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.kategorijaGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaVesti.naslov}" value="#{pretragaVesti.vest.naslov}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.naslovGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaVesti.tekst}" value="#{pretragaVesti.vest.tekst}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.tekstGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaVesti.thumbnailName}" value="#{pretragaVesti.vest.thumbnail}" />
+                                                <f:setPropertyActionListener target="#{izmenaVesti.thumbnailGreska}" value="" />
                                                 <f:setPropertyActionListener target="#{izmenaVesti.menjanThumbnail}" value="#{false}" />
                                                 <f:setPropertyActionListener target="#{izmenaVesti.vest}" value="#{pretragaVesti.vest}" />
                                             </b:commandButton>
                                         </div>
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              ajax="true"
                                                              style="background-color: #4C4C4C !important;" 
                                                              value="#{pretragaVesti.vest.arhivirana == 0 ? 'Arhiviraj vest' : 'Vest je arhivirana'}"
@@ -234,7 +239,7 @@
                                         </div>
 
                                         <div style="display: inline-block">
-                                            <b:commandButton class="read-more-button" 
+                                            <b:commandButton class="read-more-button read-more-button-responsive" 
                                                              style="background-color: #ccc !important;" 
                                                              value="Obriši vest"
                                                              ajax="true"
@@ -270,6 +275,8 @@
         <ui:insert name = "footer" >
             <ui:include src = "templates/footer.xhtml" />
         </ui:insert>
+
+        <h:outputScript library="js" name="bootstrap.min.js" />
 
     </h:body>
 </html>
