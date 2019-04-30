@@ -8,6 +8,7 @@ package beans;
 import db.SifarniciIzvestaj;
 import db.StavkeIzvestaj;
 import db.helpers.StavkeIzvestajHelper;
+import helpers.EmailHelper;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,9 +65,7 @@ public class KreiranjeIzvestaja {
     private String email = "";
     private String emailGreska = "";
 
-    private String mailToLink = "#";
-
-    private String mailToScript = "";
+    private EmailHelper emailHelper = new EmailHelper();
 
     public KreiranjeIzvestaja() {
         sifarniciIzvestaj = stavkeIzvestajHelper.getSviSifarniciIzvestaj();
@@ -276,7 +275,6 @@ public class KreiranjeIzvestaja {
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 
             //Writer writer = new FileWriter(file);
-
             try {
                 writer.write(text);
             } finally {
@@ -397,29 +395,22 @@ public class KreiranjeIzvestaja {
         }
 
         if (valid) {
-            mailToLink = "mailto:" + email + "?subject=Izvestaj&body=http://localhost:8080/izvestaji/" + selectedIzvestajSlanje;
-            mailToScript = "window.location.href = '" + mailToLink + "';";
+
+            File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("izvestaji"));
+            File file = new File(uploads, selectedIzvestajSlanje);
+            
+            emailHelper.reportSend(email, file);
+            
+            email="";
+            emailGreska="";
+            
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Uspešno ste poslali izveštaj", null);
+            FacesContext.getCurrentInstance().addMessage("kreiranje_izvestaja:growl-success-slanje", message);
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         } else {
-            mailToLink = "#";
-            mailToScript = "";
+            
         }
 
-    }
-
-    public String getMailToLink() {
-        return mailToLink;
-    }
-
-    public void setMailToLink(String mailToLink) {
-        this.mailToLink = mailToLink;
-    }
-
-    public String getMailToScript() {
-        return mailToScript;
-    }
-
-    public void setMailToScript(String mailToScript) {
-        this.mailToScript = mailToScript;
     }
 
 }

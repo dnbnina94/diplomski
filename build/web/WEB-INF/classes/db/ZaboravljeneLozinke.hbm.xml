@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2019 10:11:57 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.ZaboravljeneLozinke" table="zaboravljene_lozinke" catalog="diplomski" optimistic-lock="version">
+        <id name="korisnickoIme" type="string">
+            <column name="korisnicko_ime" length="50" />
+            <generator class="foreign">
+                <param name="property">korisnici</param>
+            </generator>
+        </id>
+        <one-to-one name="korisnici" class="db.Korisnici" constrained="true"></one-to-one>
+        <property name="datum" type="timestamp">
+            <column name="datum" length="19" not-null="true" />
+        </property>
+        <property name="novaLozinka" type="binary">
+            <column name="nova_lozinka" />
+        </property>
+        <property name="salt" type="binary">
+            <column name="salt" />
+        </property>
+    </class>
+</hibernate-mapping>

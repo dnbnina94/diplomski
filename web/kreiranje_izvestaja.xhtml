@@ -75,7 +75,9 @@
 
                                     <h:panelGroup id="email_input">
                                         <div style="margin-top: 20px; margin-bottom: 20px">
-
+                                            
+                                            <b:messages id="growl-success-slanje" severity="info" styleClass="custom-messages" />
+                                            
                                             <h:outputText value="Izveštaj:" styleClass="login-form-label" />
                                             <br/>
                                             <b:icon value="file" style="color: orangered" />
@@ -95,10 +97,6 @@
                                                     <h:outputText value="#{kreiranjeIzvestaja.emailGreska}" />
                                                 </div>
                                             </h:panelGroup>
-
-                                            <h:outputScript>
-                                                #{kreiranjeIzvestaja.mailToScript}
-                                            </h:outputScript>
 
                                         </div>
                                     </h:panelGroup>

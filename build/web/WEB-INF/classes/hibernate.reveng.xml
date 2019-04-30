@@ -57,4 +57,5 @@ Contributor(s):
   <table-filter match-name="pitanja" />
   <table-filter match-name="ponudjeni_odgovori" />
   <table-filter match-name="popunjene_ankete" />
+  <table-filter match-name="zaboravljene_lozinke"/>
 </hibernate-reverse-engineering>

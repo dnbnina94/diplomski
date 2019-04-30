@@ -57,5 +57,6 @@
             <one-to-many class="db.PopunjeneAnkete" />
         </set>
         <one-to-one name="organizacije" class="db.Organizacije"></one-to-one>
+        <one-to-one name="zaboravljeneLozinke" class="db.ZaboravljeneLozinke"></one-to-one>
     </class>
 </hibernate-mapping>

@@ -23,6 +23,7 @@ public class Korisnici  implements java.io.Serializable {
      private Set popunjeneAnketes = new HashSet(0);
      private Set obavestenjas = new HashSet(0);
      private Set anketes = new HashSet(0);
+     private ZaboravljeneLozinke zaboravljeneLozinke;
 
     public Korisnici() {
     }
@@ -36,7 +37,7 @@ public class Korisnici  implements java.io.Serializable {
         this.odobren = odobren;
     }
     
-    public Korisnici(String korisnickoIme, byte[] lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis, Set popunjeneAnketes, Set obavestenjas, Set anketes) {
+    public Korisnici(String korisnickoIme, byte[] lozinka, int tip, Set vestis, Set dogadjajis, Set oglasis, Set popunjeneAnketes, Set obavestenjas, Set anketes, ZaboravljeneLozinke zaboravljeneLozinke) {
        this.korisnickoIme = korisnickoIme;
        this.lozinka = lozinka;
        this.tip = tip;
@@ -46,6 +47,7 @@ public class Korisnici  implements java.io.Serializable {
        this.popunjeneAnketes = popunjeneAnketes;
        this.anketes = anketes;
        this.obavestenjas = obavestenjas;
+       this.zaboravljeneLozinke = zaboravljeneLozinke;
     }
    
     public String getKorisnickoIme() {
@@ -139,6 +141,14 @@ public class Korisnici  implements java.io.Serializable {
 
     public void setAnketes(Set anketes) {
         this.anketes = anketes;
+    }
+
+    public ZaboravljeneLozinke getZaboravljeneLozinke() {
+        return zaboravljeneLozinke;
+    }
+
+    public void setZaboravljeneLozinke(ZaboravljeneLozinke zaboravljeneLozinke) {
+        this.zaboravljeneLozinke = zaboravljeneLozinke;
     }
     
 }

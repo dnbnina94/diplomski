@@ -720,6 +720,8 @@ public class KorisniciHelper {
             
             session.delete(korisnik.getOrganizacije());
             
+            session.delete(korisnik.getZaboravljeneLozinke());
+            
             /*hqlUpdate = "Delete Korisnici c where c.korisnickoIme = :korisnickoIme";
             updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();*/
             
@@ -802,6 +804,27 @@ public class KorisniciHelper {
             session.getTransaction().commit();
             
             return l;
+            
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public void updateKorisnik(Korisnici korisnik) {
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+        } catch (HibernateException ex) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        try {
+            session.getTransaction().begin();
+            
+            session.update(korisnik);
+            
+            session.getTransaction().commit();
             
         } catch (RuntimeException e) {
             session.getTransaction().rollback();

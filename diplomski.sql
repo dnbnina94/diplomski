@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2019 at 05:32 PM
+-- Generation Time: Apr 30, 2019 at 01:46 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -166,7 +166,9 @@ INSERT INTO `admin_log` (`id_log`, `tekst`, `datum`) VALUES
 (127, 'Izmenjen naziv organizacije arsCreativa', '2019-04-27 04:12:57'),
 (128, 'Izmenjen naziv organizacije arsCreativa', '2019-04-27 04:13:00'),
 (129, 'Odobren korisnik test', '2019-04-27 04:13:41'),
-(130, 'Odbijen korisnik test', '2019-04-27 04:16:13');
+(130, 'Odbijen korisnik test', '2019-04-27 04:16:13'),
+(131, 'Odobren korisnik testNina', '2019-04-29 21:21:37'),
+(132, 'Obrisan korisnik testNina', '2019-04-30 01:16:43');
 
 -- --------------------------------------------------------
 
@@ -946,7 +948,9 @@ INSERT INTO `stavke_izvestaj` (`id_stavka`, `naziv`, `datum`, `id_sifarnik`) VAL
 (219, 'asdf', '2019-04-27 04:14:47', 9),
 (220, 'asdf', '2019-04-27 04:15:18', 13),
 (221, 'asdf', '2019-04-27 04:15:35', 14),
-(222, 'test', '2019-04-27 04:16:13', 2);
+(222, 'test', '2019-04-27 04:16:13', 2),
+(223, 'testNina', '2019-04-29 21:21:05', 1),
+(224, 'testNina', '2019-04-30 01:16:43', 3);
 
 -- --------------------------------------------------------
 
@@ -1050,6 +1054,19 @@ INSERT INTO `vesti` (`id_vest`, `korisnicko_ime`, `kategorija`, `naslov`, `tekst
 (15, 'TobOrg', 6, 'Upoznaj Srbiju, svrati na Zlatibor!', '<p>Većina domaćih turista je posetila Zlatibor makar jednom u životu, uglavnom tokom školovanja, u okviru rekreativnih nastava i ekskurzija. Međutim, sve je veći broj srpskih turista koji se Zlatiboru vraćaju iznova smatrajući sebe tamo već domaćim.</p><p>Ukoliko niste dugo bili na Zlatiboru, verujte, imaćete šta novo da vidite. Ovo je srpska planina&nbsp;na kojoj se najviše gradi. Čak i ukoliko ste bili prošle ili pre dve godine iznenadiće vas koliko novih hotela, restorana, ali i avanturističkih sadržaja je niklo dok ste bili odsutni.</p><h3>Šta je to što Zlatibor nudi, a nije centar?</h3><p>Zlatibor ima mnogo toga da ponudi svojim posetiocima bilo da su u pitanju domaći ili strani turisti. Bitno je jedno –&nbsp;<strong><em>Zlatibor nije samo centar!</em></strong></p><p>Oni koji često borave na jednoj od najpopularnijih planina u Srbiji vole da kažu kako poznaju Zlatibor kao svoj džep, međutim, taj džep je samo mali deo ogromne putne torbe u koju staju suveniri i uspomene koje traju zauvek.</p>', '2019-04-17 18:54:23', '91d6eb70-ab31-4674-a776-5afe8d2e3f2c.jpg', 0, 0),
 (16, 'TobOrg', 6, 'Vikend van Beograda: Zašto baš Niš?', '<p>„Što ideš južnije, to je srcu toplije“&nbsp;– tako bi trebalo da glasi slogan juga naše zemlje. Ovoga puta naš predlog za vikend van Beograda je – Niš.Ako prevlačite prstom po karti Srbije ka jugu, zaustavite ga na tački obeleženoj imenom Niš. Mnogo je razloga zbog kojih bi trebalo to da učinite, a mi ćemo se potruditi da vas u to uverimo u narednim redovima.</p><p>Sigurno ste više puta gledali domaće filmove poput „Zone Zamfirove“, „Ivkove slave“, čitali dela Stevana Sremca koji oslikavaju južnjački mentalitet.</p><p>Mnogima smo se smejali do suza, mnogi su nas rastužili, ali zasigurno je da nas ništa od navedenog nije ostavilo ravnodušnim. Sve je to Niš. Isken osmeh i suze, šala, graja, muzika i odlična hrana, a povrh svega veliki kultnurno-istorijski značaj.</p>', '2019-04-17 18:55:05', '95c9c7c1-d8d3-48eb-af78-f4ea21a9f4ad.jpg', 0, 0),
 (17, 'TobOrg', 6, 'Udobno i atraktivno krstarenje Drinom', '<p>Plovidba Drinom ne mora da bude adrenalinska avantura – turistima je na raspolaganju i pravo krstarenje, odnedavno jednim lepim plovilom, turističkim brodom „Grizzly“.</p><p>Ture su na relaciji Perućac – Višegrad – Perućac, duže ili kraće, po izboru. Plovidba do Višegrada, na dužini od 52 kilometra, odvija se najlepšim delom kanjona Drine, onim u kojem se zelenilo četinara spaja sa nestvarnim zelenilom vode, a kamene litice uzdižu i do hiljadu metara u nebo.</p><p>Organizovane su posete Andrićgradu, Višegradu, i čuvenom mostu na Drini kojeg je proslavio Andrićev roman „Na Drini ćuprija“, uz pratnju vodiča, po želji.</p><p>U ponudi je, na primer, i veoma atraktivna plovidba do hidroelektrane „Bajina Bašta“, trasom u dužini od 24 km u jednom pravcu.</p><p>„Grizzly“ je brod katamaranskog tipa, na dva nivoa, kapaciteta 140 mesta. Sve je podređeno uživanju, pa možete da izaberete boravak na palubi ili u zatvorenom salonu, uz laganu muziku, prezentacije na video bimu, napitak, piće, snek, obrok…</p>', '2019-04-17 18:55:42', 'dafe60a8-bff8-4f18-b0fb-5876f9c247c8.jpg', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `zaboravljene_lozinke`
+--
+
+CREATE TABLE `zaboravljene_lozinke` (
+  `korisnicko_ime` varchar(50) NOT NULL,
+  `datum` datetime NOT NULL,
+  `nova_lozinka` binary(64) NOT NULL,
+  `salt` binary(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -1184,6 +1201,12 @@ ALTER TABLE `vesti`
   ADD KEY `korisnicko_ime` (`korisnicko_ime`);
 
 --
+-- Indexes for table `zaboravljene_lozinke`
+--
+ALTER TABLE `zaboravljene_lozinke`
+  ADD PRIMARY KEY (`korisnicko_ime`);
+
+--
 -- Constraints for dumped tables
 --
 
@@ -1278,6 +1301,12 @@ ALTER TABLE `stavke_sifarnika`
 ALTER TABLE `vesti`
   ADD CONSTRAINT `FK_autor_vest` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`),
   ADD CONSTRAINT `FK_kategorija_vest` FOREIGN KEY (`kategorija`) REFERENCES `stavke_sifarnika` (`id_stavka`);
+
+--
+-- Constraints for table `zaboravljene_lozinke`
+--
+ALTER TABLE `zaboravljene_lozinke`
+  ADD CONSTRAINT `FK_korisnik_zaboravljena_lozinka` FOREIGN KEY (`korisnicko_ime`) REFERENCES `korisnici` (`korisnicko_ime`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

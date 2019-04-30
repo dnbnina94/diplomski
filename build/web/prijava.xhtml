@@ -61,29 +61,85 @@
                                             </div>
                                             <div class="container-w-red-header-content">
                                                 <h:form id="prijava">
-                                                    <b:messages id="growl-error" severity="error" styleClass="custom-messages" />
-                                                    <h:outputText value="Korisničko ime:" styleClass="login-form-label" />
-                                                    <b:inputText id="korIme" 
-                                                                 value="#{prijava.korIme}"
-                                                                 styleClass="#{prijava.korImeGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
-                                                                 style="margin-bottom: 5px" />
-                                                    <div id="korImeGreska" class="#{prijava.korImeGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
-                                                        <h:outputText value="#{prijava.korImeGreska}" />
-                                                    </div>
-                                                    <h:outputText value="Lozinka:" styleClass="login-form-label" />
-                                                    <b:inputSecret id="lozinka"
-                                                                   value="#{prijava.lozinka}"
-                                                                   styleClass="#{prijava.lozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" />
-                                                    <div id="lozinkaGreska" class="#{prijava.lozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
-                                                         style="margin-bottom: 0px">
-                                                        <h:outputText value="#{prijava.lozinkaGreska}" />
-                                                    </div>
-                                                    <b:commandButton styleClass="login-form-submit" value="Prijava"
-                                                                     onclick="ajax:prijava.login();"
-                                                                     update="prijava" />
+                                                    <h:panelGroup>
+                                                        <b:modal id="amodal_lozinka" styleClass="modalPseudoClass">
 
-                                                    <h:panelGroup id="prijavaValidacija">
-                                                        <h:outputScript library="js" name="prijavaValidacija.js" />
+                                                            <div class="stripe-line-header">
+                                                                <div class="stripe-line-header-content">Resetovanje lozinke</div>
+                                                            </div>
+
+                                                            <h:panelGroup id="reset-password-panel">
+
+                                                                <div style="margin-top: 15px; margin-bottom: 15px">
+                                                                    <b:messages id="growl-success" severity="info" styleClass="custom-messages" />
+                                                                    <h:outputText value="Email adresa:" styleClass="login-form-label" />
+                                                                    <b:inputText id="email" 
+                                                                                 value="#{prijava.email}"
+                                                                                 styleClass="#{prijava.emailGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                                 style="margin-bottom: 5px" />
+                                                                    <div id="emailGreska" class="#{prijava.emailGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                                        <h:outputText value="#{prijava.emailGreska}" />
+                                                                    </div>
+                                                                </div>
+
+                                                            </h:panelGroup>
+
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $("#prijava\\:amodal_lozinka").removeAttr("tabindex");
+                                                                });
+                                                            </script>
+
+                                                            <f:facet name="footer">
+                                                                <div class="row modal-buttons-wrapper">
+                                                                    <div class="col-md-6">
+                                                                        <b:commandLink value="Resetuj lozinku" 
+                                                                                       look="primary" 
+                                                                                       styleClass="big-red-button"
+                                                                                       ajax="true"
+                                                                                       update="reset-password-panel"
+                                                                                       onclick="ajax:prijava.resetPassword();"
+                                                                                       oncomplete='return false;'
+                                                                                       style='padding-top: 9px !important' />
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <b:button value="Odustani" look="primary" dismiss="modal" styleClass="big-red-button" style="background-color: #ccc !important" />
+                                                                    </div>
+                                                                </div>
+                                                            </f:facet>
+                                                        </b:modal>
+                                                    </h:panelGroup>
+
+                                                    <h:panelGroup id="prijava_panel">
+                                                        <b:messages id="growl-error" severity="error" styleClass="custom-messages" />
+                                                        <h:outputText value="Korisničko ime:" styleClass="login-form-label" />
+                                                        <b:inputText id="korIme" 
+                                                                     value="#{prijava.korIme}"
+                                                                     styleClass="#{prijava.korImeGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}"
+                                                                     style="margin-bottom: 5px" />
+                                                        <div id="korImeGreska" class="#{prijava.korImeGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}">
+                                                            <h:outputText value="#{prijava.korImeGreska}" />
+                                                        </div>
+                                                        <h:outputText value="Lozinka:" styleClass="login-form-label" />
+                                                        <b:inputSecret id="lozinka"
+                                                                       value="#{prijava.lozinka}"
+                                                                       styleClass="#{prijava.lozinkaGreska == '' ? 'login-form-input' : 'login-form-input login-form-input-error'}" />
+                                                        <div id="lozinkaGreska" class="#{prijava.lozinkaGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                                             style="margin-bottom: 0px">
+                                                            <h:outputText value="#{prijava.lozinkaGreska}" />
+                                                        </div>
+
+                                                        <a id="forgotten-password-a" onclick="$('#prijava\\:amodal_lozinka').modal('show');">
+                                                            Zaboravili ste lozinku?
+                                                        </a>
+
+                                                        <b:commandButton styleClass="login-form-submit" value="Prijava"
+                                                                         onclick="ajax:prijava.login();"
+                                                                         update="prijava" />
+
+                                                        <h:panelGroup id="prijavaValidacija">
+                                                            <h:outputScript library="js" name="prijavaValidacija.js" />
+                                                        </h:panelGroup>
                                                     </h:panelGroup>
                                                 </h:form>
                                             </div>
