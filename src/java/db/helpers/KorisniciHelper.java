@@ -720,7 +720,8 @@ public class KorisniciHelper {
             
             session.delete(korisnik.getOrganizacije());
             
-            session.delete(korisnik.getZaboravljeneLozinke());
+            if (korisnik.getZaboravljeneLozinke() != null)
+                session.delete(korisnik.getZaboravljeneLozinke());
             
             /*hqlUpdate = "Delete Korisnici c where c.korisnickoIme = :korisnickoIme";
             updatedEntities = session.createQuery(hqlUpdate).setString("korisnickoIme", korisnik.getKorisnickoIme()).executeUpdate();*/
