@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2019 at 01:46 AM
+-- Generation Time: May 31, 2019 at 01:17 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -168,7 +168,12 @@ INSERT INTO `admin_log` (`id_log`, `tekst`, `datum`) VALUES
 (129, 'Odobren korisnik test', '2019-04-27 04:13:41'),
 (130, 'Odbijen korisnik test', '2019-04-27 04:16:13'),
 (131, 'Odobren korisnik testNina', '2019-04-29 21:21:37'),
-(132, 'Obrisan korisnik testNina', '2019-04-30 01:16:43');
+(132, 'Obrisan korisnik testNina', '2019-04-30 01:16:43'),
+(133, 'Obrisana vest asdadsda', '2019-04-30 15:46:04'),
+(134, 'Obrisana vest asdfd', '2019-04-30 15:46:19'),
+(135, 'Izmenjen naziv organizacije ticketVision', '2019-05-02 20:01:22'),
+(136, 'Izmenjen naziv organizacije ticketVision', '2019-05-02 20:01:33'),
+(137, 'Obrisana anketa asdf', '2019-05-30 21:11:06');
 
 -- --------------------------------------------------------
 
@@ -182,6 +187,7 @@ CREATE TABLE `ankete` (
   `naziv` varchar(256) NOT NULL,
   `opis` varchar(256) NOT NULL,
   `nivo_vidljivosti` int(11) NOT NULL,
+  `javni_rezultati` int(11) NOT NULL,
   `datum_isticanja` datetime NOT NULL,
   `datum_kreiranja` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -190,14 +196,15 @@ CREATE TABLE `ankete` (
 -- Dumping data for table `ankete`
 --
 
-INSERT INTO `ankete` (`id_anketa`, `kreator`, `naziv`, `opis`, `nivo_vidljivosti`, `datum_isticanja`, `datum_kreiranja`) VALUES
-(1, 'kisobran', 'Bolje kišobran žurke', 'Pomozite nam da narednu kišobran žurku učinimo još energičnijom!', 1, '2019-05-17 23:59:59', '2019-04-25 01:31:49'),
-(2, 'kisobran', 'Popularnost kišobran žurki', 'Pomozite nam da ocenimo popularnost kišobran žurki na društvenim mrežama!', 1, '2019-05-15 23:59:59', '2019-04-25 01:40:12'),
-(3, 'TobOrg', 'Najbolji Italijanski sladoled u Beogradu', 'Rezultati ove ankete pokazaće gde se može pronaći najukusniji italijanski sladoled u Beogradu.', 1, '2019-05-10 23:59:59', '2019-04-25 01:47:17'),
-(4, 'admin', 'Kvalitet pretrage', 'Pomozite nam da poboljšamo kvalitet pretrage na portalu.', 1, '2019-05-31 23:59:59', '2019-04-25 01:57:26'),
-(5, 'admin', 'Iskustvo sa administratorom', 'Pomozite nam da ocenimo iskustvo korisnika sa administratorom portala.', 2, '2019-05-24 23:59:59', '2019-04-25 02:06:31'),
-(6, 'admin', 'Korisnički interfejs portala', 'Pomozite nam da poboljšamo korisnički interfejs portala.', 2, '2019-05-18 23:59:59', '2019-04-25 02:10:59'),
-(7, 'kisobran', 'Ocena sadržaja kišobran organizacije', 'Pomozite nam da unapredimo kvalitet sadržaja načih vesti i događaja.', 2, '2019-06-15 23:59:59', '2019-04-25 02:18:21');
+INSERT INTO `ankete` (`id_anketa`, `kreator`, `naziv`, `opis`, `nivo_vidljivosti`, `javni_rezultati`, `datum_isticanja`, `datum_kreiranja`) VALUES
+(1, 'kisobran', 'Bolje kišobran žurke', 'Pomozite nam da narednu kišobran žurku učinimo još energičnijom!', 1, 1, '2019-06-07 23:59:59', '2019-04-25 01:31:49'),
+(2, 'kisobran', 'Popularnost kišobran žurki', 'Pomozite nam da ocenimo popularnost kišobran žurki na društvenim mrežama!', 1, 1, '2019-05-15 23:59:59', '2019-04-25 01:40:12'),
+(3, 'TobOrg', 'Najbolji Italijanski sladoled u Beogradu', 'Rezultati ove ankete pokazaće gde se može pronaći najukusniji italijanski sladoled u Beogradu.', 1, 1, '2019-06-07 23:59:59', '2019-04-25 01:47:17'),
+(4, 'admin', 'Kvalitet pretrage', 'Pomozite nam da poboljšamo kvalitet pretrage na portalu.', 1, 1, '2019-05-31 23:59:59', '2019-04-25 01:57:26'),
+(5, 'admin', 'Iskustvo sa administratorom', 'Pomozite nam da ocenimo iskustvo korisnika sa administratorom portala.', 2, 1, '2019-05-24 23:59:59', '2019-04-25 02:06:31'),
+(6, 'admin', 'Korisnički interfejs portala', 'Pomozite nam da poboljšamo korisnički interfejs portala.', 2, 1, '2019-05-18 23:59:59', '2019-04-25 02:10:59'),
+(7, 'kisobran', 'Ocena sadržaja kišobran organizacije', 'Pomozite nam da unapredimo kvalitet sadržaja načih vesti i događaja.', 2, 1, '2019-06-15 23:59:59', '2019-04-25 02:18:21'),
+(8, 'kisobran', 'asdf', 'asdf', 1, 1, '2019-05-31 23:59:59', '2019-05-30 21:18:57');
 
 -- --------------------------------------------------------
 
@@ -291,6 +298,7 @@ CREATE TABLE `korisnici` (
 INSERT INTO `korisnici` (`korisnicko_ime`, `lozinka`, `salt`, `tip`, `odobren`) VALUES
 ('admin', 0xe53197da3a954069670e74083f305c3f541e71ce662c959c8abf014ab628f6a8d5cce06cb57963b9e276353548d3d7c9f87cafae04349b1fd80f384768c56006, 0xb77185db910f62b15a3d6bcf252e2ff4, 1, 1),
 ('arsCreativa', 0x68d9c4a32b63d14eae33bc971cdca748f9f2d98f6b8376e34a96c1b5b8aa3928b562cc5fed57822a20c35d17e412a1df51492da686273b621a2e569659c31876, 0x54b63c7ab18989590bcf15d678167253, 2, 1),
+('asdf', 0xd5fe7958368924cef286293ffc5c817752fd79b64caa9309fa9432996a09bd6b10df008f6ab9bebaba98575d8bec4973ab14c7c6cb00c4ebe8ba93c73f176030, 0x94038cabfb5983255ac953e409dd77b3, 2, 0),
 ('kisobran', 0xd3e7abbff0f11a999c174ccc5a5d953a9179659f57121a4a42c0dd715166954dfaaf5331a832cc87dea12a7fcf767e2bb9a8db86a3c7a70f57f1c35c5402b24b, 0xb6b6fe5aaa8c70d4048342ed740be2fc, 2, 1),
 ('ORCA', 0x3f1de813bbf0a21b027dbc3ad70aff29eda79b460ed7ebb76643eeeda50d9852e4892f7ead55e4101e601cf5eea6f407a89aa264de83d457140d5cbbdeac89d2, 0x7274449dd454ae9b1d3472b202aa42cd, 2, 0),
 ('ticketVision', 0x3922fddfbdfa8039dfb9648382f66fa3edd155a88a5e71684beb02afa57db6b387510758deba33dda9309c27ce05446d92ad3468ce13091138a5f4a63db4aae6, 0xc0e9bcbb4cd6d84c2f759b4d4f23928e, 2, 1),
@@ -388,7 +396,15 @@ INSERT INTO `odgovori` (`id_odgovor`, `id_popunjena_anketa`, `id_ponudjeni_odgov
 (49, 10, 72),
 (50, 10, 77),
 (51, 10, 67),
-(52, 10, 57);
+(52, 10, 57),
+(53, 11, 86),
+(54, 11, 89),
+(55, 11, 84),
+(56, 12, 68),
+(57, 12, 79),
+(58, 12, 64),
+(59, 12, 59),
+(60, 12, 74);
 
 -- --------------------------------------------------------
 
@@ -441,6 +457,7 @@ CREATE TABLE `organizacije` (
 
 INSERT INTO `organizacije` (`korisnicko_ime`, `naziv`, `kontakt_osoba`, `email`, `tekst`, `oblast_delovanja`, `web_adresa`, `mesto`, `ulica`, `telefoni`) VALUES
 ('arsCreativa', 'Ars Creativa', 'Amina Lagumdžija', 'office@arscreativa.org', 'ARS CREATIVA istražuje, pruža podršku i prezentuje nastupe, podstičući saradnju umetnosti, prirodnih i društvenih nauka. Sarađuje sa umetnicima i institucijama – organizatorima prostora za nastupe, predstavljaući radionice, edukativne programe kao i saradnju u okviru multidisciplinarnih projekata.\nARS CREATIVA je nevladina, nestranačka, samostalna i neprofitna organizacija, koja ima za cilj da proširi granice pristupačnosti vremenski ograničenog rada, te da stvori nove mogućnosti za saradnju medju umetnicima svih branši.', 32, 'http://arscreativa.org', 15, 33, '0113067038'),
+('asdf', 'asdf', 'Nina Grujic', 'org@mojaorg.com', 'asdf', 26, 'http://www.mojaorg.com', 15, 29, '0601844595'),
 ('kisobran', 'Kišobran orhanizacija', 'Marko Filipović', 'info@kisobran.org', 'Kišobran je organizacija koja se bavi promocijom nezavisne kulture i umetnosti.\nTo zvuči baš rogobatno, zar ne? Zapravo mi smo grupa dobrih drugara koja od 2008. organizuje žurke indie i alternativne muzike, eksperimentiše sa vj-ingom i fotografijom, organizuje koncerte i promoviše art projekte koji nam se dopadaju.', 34, 'http://kisobran.org', 15, 35, '062262734'),
 ('ORCA', 'ORCA', 'Dragana Tar', 'info@orca.rs', 'ORCA je organizacija civilnog društva koja pomaže ljudima u Srbiji i na Zapadnom Balkanu da brinu o prirodi i dobrobiti životinja kako bi ostvarili lični, ekonomski i društveni razvoj. Svoju misiju ostvarujemo kroz javno zastupanje, istraživanje, obrazovanje i praćenje primene politika i propisa. Kroz javno zastupanje, utičemo na usvajanje boljih zakona, njihovo sprovođenje i promenu kulture društva u odnosu na prirodu i životinje.', 26, 'https://www.orca.rs', 15, 27, '0601844595'),
 ('ticketVision', 'Ticket Vision d.o.o.', 'Pavle Leverda', 'office@tickets.rs', 'Ticket Vision d.o.o. je registrovano preduzeće za elektronsko štampanje, distribuciju i prodaju ulaznica zasve vrste događaja putem interneta i mreže prodajnih mesta, prisutno na srpskom tržištu od 2005. godine.\nU ovom trenutku Ticket Vision d.o.o. ima mrežu sa više od 150 prodajnih mesta širom Srbije sa glavnim blagajnama u Beogradu – TC Ušće, blagajna u Domu omladine Beograda, blagajna Beogradske Arene i Bilet centar, prodaju putem webshopa na portalu tickets.rs, call center 0900 11 00 11 (cena poziva iz fiksne i mobilne mreže MTS-a iznosi 48,00 din/min. Porez je uračunat u cenu poziva).\nTicket Vision d.o.o. sistem za prodaju ulaznica je sveobuhvatan, sa jednostavnim i funkcionalnim prikazom prodaje i rezervacije ulaznica za muzičke, sportske, kulturne i druge događaje.', 28, 'https://www.tickets.rs', 15, 29, '0900110011'),
@@ -489,7 +506,8 @@ INSERT INTO `pitanja` (`id_pitanje`, `id_anketa`, `pitanje`, `tip`) VALUES
 (23, 7, 'Da li smatrate da našem timu nedostaju profesionalniji novinari?', 1),
 (24, 7, 'Ocenite kvalitet naših vesti u odnosu na vaše?', 1),
 (25, 7, 'Da li biste zaposlili nekoga iz našeg tima?', 1),
-(26, 7, 'Koliko ste bili iskreni u popunjavanju ove ankete?', 1);
+(26, 7, 'Koliko ste bili iskreni u popunjavanju ove ankete?', 1),
+(27, 8, 'asdf', 1);
 
 -- --------------------------------------------------------
 
@@ -621,7 +639,9 @@ INSERT INTO `ponudjeni_odgovori` (`id_odgovor`, `id_pitanje`, `odgovor`) VALUES
 (111, 26, '4'),
 (112, 26, '3'),
 (113, 26, '2'),
-(114, 26, '1');
+(114, 26, '1'),
+(115, 27, 'a'),
+(116, 27, 'v');
 
 -- --------------------------------------------------------
 
@@ -651,7 +671,9 @@ INSERT INTO `popunjene_ankete` (`id_popunjena_anketa`, `id_anketa`, `korisnicko_
 (7, 3, 'admin', NULL, '2019-04-25 01:53:00'),
 (8, 2, 'admin', NULL, '2019-04-25 01:53:29'),
 (9, 1, 'admin', NULL, '2019-04-25 01:53:58'),
-(10, 4, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 02:19:21');
+(10, 4, NULL, '1bc7ce88-4ba6-44cd-a65e-471859153e36', '2019-04-25 02:19:21'),
+(11, 5, 'kisobran', NULL, '2019-04-30 15:34:20'),
+(12, 4, NULL, '9c669dfe-8dc6-42f9-ac1e-a594d850ffe5', '2019-05-26 02:42:41');
 
 -- --------------------------------------------------------
 
@@ -950,7 +972,19 @@ INSERT INTO `stavke_izvestaj` (`id_stavka`, `naziv`, `datum`, `id_sifarnik`) VAL
 (221, 'asdf', '2019-04-27 04:15:35', 14),
 (222, 'test', '2019-04-27 04:16:13', 2),
 (223, 'testNina', '2019-04-29 21:21:05', 1),
-(224, 'testNina', '2019-04-30 01:16:43', 3);
+(224, 'testNina', '2019-04-30 01:16:43', 3),
+(225, 'Iskustvo sa administratorom', '2019-04-30 15:34:20', 14),
+(226, 'asdfd', '2019-04-30 15:40:12', 4),
+(227, 'asdfd', '2019-04-30 15:40:19', 5),
+(228, 'asdadsda', '2019-04-30 15:45:21', 4),
+(229, 'asdadsda', '2019-04-30 15:45:27', 5),
+(230, 'asdadsda', '2019-04-30 15:46:04', 6),
+(231, 'asdfd', '2019-04-30 15:46:19', 6),
+(232, 'Kvalitet pretrage', '2019-05-26 02:42:41', 14),
+(233, 'asdf', '2019-05-30 01:40:10', 1),
+(234, 'asdf', '2019-05-30 21:10:25', 13),
+(235, 'asdf', '2019-05-30 21:11:06', 15),
+(236, 'asdf', '2019-05-30 21:18:57', 13);
 
 -- --------------------------------------------------------
 
