@@ -42,6 +42,7 @@ public class VestiHelper {
 
             Criteria c = session.createCriteria(Vesti.class);
             c.addOrder(Order.desc("datum"));
+            c.add(Restrictions.eq("arhivirana", 0));
             c.setMaxResults(5);
             List l = c.list();
             //Query q = session.createQuery("FROM Vesti order by date(datum) desc");

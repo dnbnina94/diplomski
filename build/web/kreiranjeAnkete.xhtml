@@ -113,6 +113,28 @@
                                     </c:if>
 
                                     <div style="height: 10px"></div>
+                                    <h:outputText value="Vidljivost rezultata ankete:" styleClass="login-form-label" />
+                                    <div style="height: 5px"></div>
+                                    <b:selectOneMenu id="javniRezultati" value="#{kreiranjeAnkete.javniRezultati}" styleClass="place-select" select2="true">
+                                        <f:selectItem itemLabel="Izaberite vidljivost rezultata ankete" itemValue="0" />
+                                        <f:selectItem itemLabel="Rezultati su javni" itemValue="1" />
+                                        <f:selectItem itemLabel="Rezultati nisu javni" itemValue="2" />
+                                    </b:selectOneMenu>
+                                    <h:panelGroup id="javniRezultatiGreskaWrapper">
+                                        <div id="javniRezultatiGreska" class="#{kreiranjeAnkete.javniRezultatiGreska == '' ? 'input-error-message input-error-message-hidden' : 'input-error-message'}"
+                                             style="margin-top: 5px; margin-bottom: 0px">
+                                            <h:outputText value="#{kreiranjeAnkete.javniRezultatiGreska}" />
+                                        </div>
+                                    </h:panelGroup>
+                                    <c:if test="#{kreiranjeAnkete.javniRezultatiGreska != ''}">
+                                        <style>
+                                            #nova_anketa\:javniRezultati {
+                                                border: 1px solid #DC3545;
+                                            }
+                                        </style>
+                                    </c:if>
+
+                                    <div style="height: 10px"></div>
                                     <h:outputText value="Datum zatvaranja ankete: " styleClass="login-form-label" />
                                     <div style="height: 5px"></div>
                                     <b:datepicker id="datumIsticanja"

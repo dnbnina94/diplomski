@@ -17,6 +17,7 @@ public class Ankete  implements java.io.Serializable {
      private String naziv;
      private String opis;
      private int nivoVidljivosti;
+     private int javniRezultati;
      private Date datumIsticanja;
      private Date datumKreiranja;
      private Set popunjeneAnketes = new HashSet(0);
@@ -26,21 +27,23 @@ public class Ankete  implements java.io.Serializable {
     }
 
 	
-    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, int javniRezultati, Date datumIsticanja, Date datumKreiranja) {
         this.idAnketa = idAnketa;
         this.korisnici = korisnici;
         this.naziv = naziv;
         this.opis = opis;
         this.nivoVidljivosti = nivoVidljivosti;
+        this.javniRezultati = javniRezultati;
         this.datumIsticanja = datumIsticanja;
         this.datumKreiranja = datumKreiranja;
     }
-    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, Date datumIsticanja, Date datumKreiranja, Set pitanjas, Set popunjeneAnketes) {
+    public Ankete(int idAnketa, Korisnici korisnici, String naziv, String opis, int nivoVidljivosti, int javniRezultati, Date datumIsticanja, Date datumKreiranja, Set pitanjas, Set popunjeneAnketes) {
        this.idAnketa = idAnketa;
        this.korisnici = korisnici;
        this.naziv = naziv;
        this.opis = opis;
        this.nivoVidljivosti = nivoVidljivosti;
+       this.javniRezultati = javniRezultati;
        this.datumIsticanja = datumIsticanja;
        this.datumKreiranja = datumKreiranja;
        this.pitanjas = pitanjas;
@@ -131,6 +134,14 @@ public class Ankete  implements java.io.Serializable {
         return opis.substring(0, Math.min(opis.length(), 150))+"...";
     }
 
+    public int getJavniRezultati() {
+        return javniRezultati;
+    }
+
+    public void setJavniRezultati(int javniRezultati) {
+        this.javniRezultati = javniRezultati;
+    }
+    
 }
 
 

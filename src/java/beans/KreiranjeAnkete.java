@@ -40,6 +40,9 @@ public class KreiranjeAnkete {
 
     private int nivoVidljivosti;
     private String nivoVidljivostiGreska = "";
+    
+    private int javniRezultati;
+    private String javniRezultatiGreska = "";
 
     private Date datumIsticanja;
     private String datumIsticanjaGreska = "";
@@ -298,6 +301,16 @@ public class KreiranjeAnkete {
         nivoVidljivostiGreska = "";
         return true;
     }
+    
+    public boolean javniRezultatiValidacija() {
+        if (javniRezultati != 1 && javniRezultati != 2) {
+            javniRezultatiGreska = "Polje 'Vidljivost rezultata ankete' ne sme ostati prazno.";
+            return false;
+        }
+        
+        javniRezultatiGreska = "";
+        return true;
+    }
 
     public boolean datumIsticanjaValidacija() {
         if (datumIsticanja == null) {
@@ -345,6 +358,9 @@ public class KreiranjeAnkete {
         if (!nivoVidljivostiValidacija()) {
             valid = false;
         }
+        if (!javniRezultatiValidacija()) {
+            valid = false;
+        }
         if (!datumIsticanjaValidacija()) {
             valid = false;
         }
@@ -358,6 +374,7 @@ public class KreiranjeAnkete {
             anketa.setNaziv(naziv);
             anketa.setOpis(opis);
             anketa.setNivoVidljivosti(nivoVidljivosti);
+            anketa.setJavniRezultati(javniRezultati);
             anketa.setDatumIsticanja(datumIsticanja);
             anketa.setDatumKreiranja(new Date());
 
@@ -411,6 +428,8 @@ public class KreiranjeAnkete {
             datumIsticanjaGreska = "";
             nivoVidljivosti = 0;
             nivoVidljivostiGreska = "";
+            javniRezultati = 0;
+            javniRezultatiGreska = "";
             pitanje = "";
             pitanjeGreska = "";
             tipPitanja = 0;
@@ -488,6 +507,22 @@ public class KreiranjeAnkete {
 
     public void setOpisGreska(String opisGreska) {
         this.opisGreska = opisGreska;
+    }
+
+    public int getJavniRezultati() {
+        return javniRezultati;
+    }
+
+    public void setJavniRezultati(int javniRezultati) {
+        this.javniRezultati = javniRezultati;
+    }
+
+    public String getJavniRezultatiGreska() {
+        return javniRezultatiGreska;
+    }
+
+    public void setJavniRezultatiGreska(String javniRezultatiGreska) {
+        this.javniRezultatiGreska = javniRezultatiGreska;
     }
 
 }

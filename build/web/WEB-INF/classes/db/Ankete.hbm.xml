@@ -20,6 +20,9 @@
         <property name="nivoVidljivosti" type="int">
             <column name="nivo_vidljivosti" not-null="true" />
         </property>
+        <property name="javniRezultati" type="int">
+            <column name="javni_rezultati" not-null="true" />
+        </property>
         <property name="datumIsticanja" type="timestamp">
             <column name="datum_isticanja" length="19" not-null="true" />
         </property>

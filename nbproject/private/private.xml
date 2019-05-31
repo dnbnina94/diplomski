@@ -12,13 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/prijava.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/web/kreiranje_izvestaja.xhtml</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/KreiranjeIzvestaja.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/helpers/EmailHelper.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Admin.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/beans/Prijava.java</file>
-            <file>file:/C:/Users/Nina/Desktop/Diplomski/diplomski/src/java/db/helpers/KorisniciHelper.java</file>
+            <file>file:/C:/Nina/Faks/diplomski/src/java/beans/KreiranjeAnkete.java</file>
         </group>
     </open-files>
 </project-private>
