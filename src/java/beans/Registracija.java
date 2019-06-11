@@ -464,7 +464,10 @@ public class Registracija {
 
                     StavkeSifarnika mesto = stavkeHelper.getStavkaByNaziv(mestoOrg);
                     if (mesto == null) {
-                        mesto = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, stavkeHelper.getStavkeByIdSifarnik(3), mestoOrg, null);
+                        mesto = new StavkeSifarnika(stavkeHelper.getMaxId() + 1, 
+                                                    stavkeHelper.getStavkeByIdSifarnik(3), 
+                                                    mestoOrg,
+                                                    null);
                         stavkeHelper.insertStavka(mesto);
                         
                         StavkeIzvestaj stavkeIzvestaj = new StavkeIzvestaj();

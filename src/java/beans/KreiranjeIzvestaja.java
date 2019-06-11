@@ -258,7 +258,9 @@ public class KreiranjeIzvestaja {
 
             for (Map.Entry<SifarniciIzvestaj, Boolean> entry : sifarniciIzvestajCheckMap.entrySet()) {
                 if (entry.getValue()) {
-                    List<StavkeIzvestaj> stavkeIzvestaj = stavkeIzvestajHelper.getStavkeIzvestaj(entry.getKey(), datumPocetka, datumKraja);
+                    List<StavkeIzvestaj> stavkeIzvestaj = stavkeIzvestajHelper.getStavkeIzvestaj(entry.getKey(), 
+                                                                                                 datumPocetka, 
+                                                                                                 datumKraja);
                     text += "-- " + entry.getKey().getNaziv() + ": " + stavkeIzvestaj.size() + "\n";
 
                     for (StavkeIzvestaj stavka : stavkeIzvestaj) {
@@ -274,7 +276,6 @@ public class KreiranjeIzvestaja {
 
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 
-            //Writer writer = new FileWriter(file);
             try {
                 writer.write(text);
             } finally {

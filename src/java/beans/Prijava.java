@@ -118,8 +118,7 @@ public class Prijava {
                 MessageDigest md = MessageDigest.getInstance("SHA-512");
                 md.update(korisnik.getSalt());
                 byte[] hashedPassword = md.digest(lozinka.getBytes(StandardCharsets.UTF_8));
-
-                //if (!(new String(hashedPassword)).equals(korisnik.getLozinka())) {
+                
                 if (!Arrays.equals(hashedPassword, korisnik.getLozinka())) {
 
                     ZaboravljeneLozinke request = zaboravljeneLozinkeHelper.getRequest(korIme);
@@ -225,11 +224,11 @@ public class Prijava {
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
 
                 if (minutes < 30) {
-                    emailGreska = "Novi zahtev za resetovanje lozinke možete poslati nakon 30 minuta od slanja poslednjeg zahteva.";
+                    emailGreska = "Novi zahtev za resetovanje lozinke možete poslati "
+                            + "nakon 30 minuta od slanja poslednjeg zahteva.";
                     return false;
                 }
             }
-
         }
 
         emailGreska = "";

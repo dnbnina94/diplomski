@@ -288,15 +288,25 @@ public class PretragaVesti {
 
     public void currentPageIncrement() {
         if (tipPretrage == 1) {
-            vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, currentPage, pageLength, numOfShowedItems));
+            vesti.addAll(vestiHelper.getVestiByKategorija(kategorijaVesti, 
+                                                          currentPage, 
+                                                          pageLength, 
+                                                          numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         if (tipPretrage == 2) {
-            vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), currentPage, pageLength, numOfShowedItems));
+            vesti.addAll(vestiHelper.getVestiByKorisnik(organizacija.getKorisnici(), 
+                                                        currentPage, 
+                                                        pageLength, 
+                                                        numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         if (tipPretrage == 3) {
-            vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, checkMap, kreatorVesti, sortiranje, datum, currentPage, pageLength, numOfShowedItems));
+            vesti.addAll(vestiHelper.pretragaVesti(kljucneReci, 
+                                                   checkMap,    
+                                                   kreatorVesti, sortiranje, 
+                                                   datum, currentPage, pageLength, 
+                                                   numOfShowedItems));
             numOfShowedItems = vesti.size();
         }
         currentPage++;
@@ -346,7 +356,6 @@ public class PretragaVesti {
                 return;
             }
         }
-        
     }
 
 }

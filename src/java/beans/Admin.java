@@ -803,12 +803,16 @@ public class Admin {
             switch (selectedStavkaSifarnikaBrisanje.getSifarnici().getIdSifarnik()) {
                 case 1: {
                     postojeEntiteti = !vestiHelper.getVestiByKategorija(selectedStavkaSifarnikaBrisanje).isEmpty();
-                    postojeEntitetiPoruka = postojeEntiteti ? "Postoje vesti sa selektovanom kategorijom. Brisanjem ove stavke brišete i sve vesti koje pripadaju selektovanoj kategoriji." : "";
+                    postojeEntitetiPoruka = postojeEntiteti ? "Postoje vesti sa selektovanom kategorijom. "
+                                                            + "Brisanjem ove stavke brišete i sve vesti koje "
+                                                            + "pripadaju selektovanoj kategoriji." : "";
                     break;
                 }
                 case 2: {
                     postojeEntiteti = !dogadjajiHelper.getDogadjajiByKategorija2(selectedStavkaSifarnikaBrisanje).isEmpty();
-                    postojeEntitetiPoruka = postojeEntiteti ? "Postoje događaji sa selektovanom kategorijom. Brisanjem ove stavke brišete i sve događaje koji pripadaju selektovanoj kategoriji." : "";
+                    postojeEntitetiPoruka = postojeEntiteti ? "Postoje događaji sa selektovanom kategorijom. "
+                                                            + "Brisanjem ove stavke brišete i sve događaje koji pripadaju "
+                                                            + "selektovanoj kategoriji." : "";
                     break;
                 }
                 case 3: {

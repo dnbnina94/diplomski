@@ -199,7 +199,8 @@ public class NovaVest {
                     thumbnailName += submittedThumbnail.getSubmittedFileName().substring(i + 1);
                 }
 
-                File uploads = new File(FacesContext.getCurrentInstance().getExternalContext().getInitParameter("thumbnailsVesti"));
+                File uploads = new File(FacesContext.getCurrentInstance().
+                                   getExternalContext().getInitParameter("thumbnailsVesti"));
                 File file = new File(uploads, thumbnailName);
 
                 try (InputStream input = submittedThumbnail.getInputStream()) {
@@ -222,7 +223,10 @@ public class NovaVest {
 
             novaVest.setKategorija(kategorija);
             novaVest.setNaslov(naslov);
-            novaVest.setTekst(Jsoup.clean(tekst, "", Whitelist.basic().addTags("h1", "h2", "h3"), new OutputSettings().prettyPrint(false)));
+            novaVest.setTekst(Jsoup.clean(tekst, 
+                                          "", 
+                                          Whitelist.basic().addTags("h1", "h2", "h3"), 
+                                          new OutputSettings().prettyPrint(false)));
             novaVest.setDatum(new Date());
             novaVest.setArhivirana(0);
 
